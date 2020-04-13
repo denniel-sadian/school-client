@@ -31,9 +31,13 @@
         <span>Or</span>
         <hr />
       </div>
-      <button class="w3-button w3-light-blue" :disabled="disabled">
+      <nuxt-link
+        to="/check-permission-code"
+        class="w3-button w3-light-blue"
+        :disabled="disabled"
+      >
         Register
-      </button>
+      </nuxt-link>
     </div>
   </header>
 </template>
