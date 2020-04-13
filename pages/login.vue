@@ -6,29 +6,71 @@
       <hr />
       <div class="inpt">
         <label for="username">Username:</label>
-        <input type="text" name="username" />
+        <input type="text" v-model="username" />
       </div>
       <div class="inpt">
         <label for="password">Password:</label>
-        <input type="password" name="password" />
+        <input type="password" @keypress.enter="login()" v-model="password" />
       </div>
-      <p class="w3-small w3-text-green w3-center">Logging in...</p>
-      <p class="w3-small w3-text-red w3-center">Wrong credentials</p>
+      <p class="w3-small w3-text-green w3-center" v-show="disabled">
+        Logging in...
+      </p>
+      <p class="w3-small w3-text-red w3-center" v-show="no_such_account">
+        Wrong credentials.
+      </p>
       <hr />
-      <button class="w3-button w3-light-green">Login</button>
+      <button
+        @click="login()"
+        :disabled="disabled"
+        class="w3-button w3-light-green"
+      >
+        Login
+      </button>
       <div class="or">
         <hr />
         <span>Or</span>
         <hr />
       </div>
-      <button class="w3-button w3-light-blue">Register</button>
+      <button class="w3-button w3-light-blue" :disabled="disabled">
+        Register
+      </button>
     </div>
   </header>
 </template>
 
 <script>
 export default {
-  layout: 'full_height_body'
+  layout: 'full_height_body',
+  data() {
+    return {
+      username: '',
+      password: '',
+      no_such_account: false,
+      disabled: false
+    }
+  },
+  methods: {
+    async login() {
+      this.disabled = true
+      await this.$axios
+        .post('accounts/obtain-token/', {
+          username: this.username,
+          password: this.password
+        })
+        .then((res) => {
+          localStorage.setItem('school_access_token', res.data.access)
+          localStorage.setItem('school_refresh_token', res.data.refresh)
+          this.$router.push('/')
+        })
+        .catch(() => {
+          this.no_such_account = true
+          this.disabled = false
+          setInterval(() => {
+            this.no_such_account = false
+          }, 5000)
+        })
+    }
+  }
 }
 </script>
 
