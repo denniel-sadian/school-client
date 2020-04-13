@@ -3,8 +3,8 @@
     <nav>
       <a href="#">
         <div class="main">
-          <div id="user-img"></div>
-          <span>Denniel luis Sadian</span>
+          <img id="user-img" :src="photo" />
+          <span>{{ fullname }}</span>
         </div>
       </a>
       <div class="toggle" @click="showLinks = !showLinks"></div>
@@ -16,6 +16,7 @@
         <a href="#">Grading Sheets</a>
         <a @click="logout">Logout</a>
       </div>
+      {{ $store.state.user.profile }}
     </nav>
     <nuxt />
   </div>
@@ -27,6 +28,16 @@ export default {
   data() {
     return {
       showLinks: false
+    }
+  },
+  computed: {
+    fullname() {
+      const f = this.$store.state.user.user.user.first_name
+      const l = this.$store.state.user.user.user.last_name
+      return f + ' ' + l
+    },
+    photo() {
+      return '/favicon.ico'
     }
   },
   methods: {

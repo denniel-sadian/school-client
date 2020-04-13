@@ -1,5 +1,3 @@
-import axios from '~/plugins/axios'
-
 export const state = () => ({
   user: {}
 })
