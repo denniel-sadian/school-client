@@ -32,7 +32,7 @@
         <hr />
       </div>
       <nuxt-link
-        to="/check-permission-code"
+        to="/registration/check-code"
         class="w3-button w3-light-blue"
         :disabled="disabled"
       >
