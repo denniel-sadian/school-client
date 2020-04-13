@@ -31,9 +31,7 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.clear()
-      this.$store.commit('user/SET_USER', {})
-      this.$router.push('/login')
+      this.$store.dispatch('user/logout')
     }
   }
 }
