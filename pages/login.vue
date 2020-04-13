@@ -52,14 +52,13 @@ export default {
   methods: {
     async login() {
       this.disabled = true
-      await this.$axios
-        .post('accounts/obtain-token/', {
+      this.no_such_account = false
+      await this.$store
+        .dispatch('user/login', {
           username: this.username,
           password: this.password
         })
-        .then((res) => {
-          localStorage.setItem('school_access_token', res.data.access)
-          localStorage.setItem('school_refresh_token', res.data.refresh)
+        .then(() => {
           this.$router.push('/')
         })
         .catch(() => {
