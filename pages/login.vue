@@ -20,7 +20,7 @@
       </p>
       <hr />
       <button
-        @click="login()"
+        @click="login"
         :disabled="disabled"
         class="w3-button w3-light-green"
       >

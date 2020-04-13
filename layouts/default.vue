@@ -14,7 +14,7 @@
         <a href="#">Students</a>
         <a href="#">Permissions</a>
         <a href="#">Grading Sheets</a>
-        <a @click="logout()">Logout</a>
+        <a @click="logout">Logout</a>
       </div>
     </nav>
     <nuxt />
