@@ -1,5 +1,5 @@
 export const state = () => ({
-  user: JSON.parse(localStorage.getItem('school_user') || {})
+  user: JSON.parse(localStorage.getItem('school_user') || '{}')
 })
 
 export const mutations = {
