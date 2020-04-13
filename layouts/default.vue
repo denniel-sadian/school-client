@@ -26,7 +26,7 @@ export default {
   middleware: 'auth',
   data() {
     return {
-      showLinks: true
+      showLinks: false
     }
   },
   methods: {
