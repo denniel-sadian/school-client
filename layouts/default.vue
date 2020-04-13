@@ -4,6 +4,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  middleware: 'auth'
+}
+</script>
+
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
