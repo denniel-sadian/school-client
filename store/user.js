@@ -22,5 +22,9 @@ export const actions = {
           commit('SET_USER', res.data)
         })
       })
+  },
+  logout({ commit }) {
+    localStorage.clear()
+    commit('SET_USER', {})
   }
 }
