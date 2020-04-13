@@ -33,7 +33,7 @@ export default {
     logout() {
       localStorage.clear()
       this.$store.commit('user/SET_USER', {})
-      this.$router.push('/')
+      this.$router.push('/login')
     }
   }
 }
