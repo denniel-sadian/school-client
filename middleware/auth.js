@@ -5,10 +5,6 @@ export default async function({ app, store, redirect }) {
     localStorage.getItem('school_refresh_token') !== null
   ) {
     app.$axios.setToken(localStorage.getItem('school_access_token'), 'Bearer')
-    app.$axios.setRefreshToken(
-      localStorage.getItem('school_access_token'),
-      'Bearer'
-    )
     app.$axios.setHeader(
       'Authorization',
       'Bearer ' + localStorage.getItem('school_access_token')
