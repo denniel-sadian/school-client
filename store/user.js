@@ -1,10 +1,11 @@
 export const state = () => ({
-  user: {}
+  user: JSON.parse(localStorage.getItem('school_user') || {})
 })
 
 export const mutations = {
   SET_USER(state, user) {
     state.user = user
+    localStorage.setItem('school_user', JSON.stringify(user))
   }
 }
 
