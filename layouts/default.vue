@@ -16,7 +16,6 @@
         <a href="#">Grading Sheets</a>
         <a @click="logout">Logout</a>
       </div>
-      {{ $store.state.user.profile }}
     </nav>
     <nuxt />
   </div>
@@ -37,6 +36,8 @@ export default {
       return f + ' ' + l
     },
     photo() {
+      if (this.$store.state.user.user.profile.photo !== null)
+        return this.$store.state.user.user.profile.photo
       return '/favicon.ico'
     }
   },
@@ -88,6 +89,8 @@ nav .main {
 nav .main #user-img {
   min-width: 40px;
   min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
   border-radius: 100%;
   background: #9e9e9e;
 }
