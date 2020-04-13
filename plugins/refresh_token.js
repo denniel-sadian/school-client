@@ -4,8 +4,6 @@ export default function({ $axios, redirect }) {
 
     if (rToken === null) return
 
-    console.log('Refreshing the token.')
-
     $axios
       .post('accounts/refresh-token/', {
         refresh: rToken
