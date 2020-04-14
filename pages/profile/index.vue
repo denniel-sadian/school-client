@@ -6,9 +6,9 @@
           <img :src="photo" alt="Avatar" />
         </div>
         <div id="profile-info">
-          <h1>{{ firstName }} {{ lastName }}</h1>
+          <h1>{{ user.first_name }} {{ user.last_name }}</h1>
           <p>
-            username: <b>{{ username }}</b>
+            username: <b>{{ user.username }}</b>
           </p>
           <p>
             role: <b>{{ profile.role }}</b>
@@ -84,6 +84,9 @@ export default {
     }
   },
   computed: {
+    user() {
+      return this.$store.state.user.user.user
+    },
     profile() {
       return this.$store.state.user.user.profile
     },
@@ -109,7 +112,6 @@ export default {
         id_number: this.idNumber,
         department: this.department
       }
-      console.log(payload)
       await this.$axios
         .post('accounts/profile/', payload)
         .then(async () => {
