@@ -6,11 +6,21 @@
         Good day, <b>{{ addressing }} {{ fullname }}</b
         >! You have been permitted by admin {{ fromWho }} to register an account
         on the system.
+        <span class="w3-opacity"
+          >Not you?
+          <nuxt-link class="w3-text-blue" to="/registration/check-code"
+            >Go back</nuxt-link
+          >.</span
+        >
       </p>
       <hr />
       <div class="inpt">
         <label>Username:</label>
         <input type="text" v-model="username" />
+      </div>
+      <div class="inpt">
+        <label>ID Number:</label>
+        <input type="text" v-model="idNumber" />
       </div>
       <div class="inpt">
         <label>Email:</label>
@@ -24,8 +34,10 @@
         <label>Password Again:</label>
         <input type="password" v-model="password1" />
       </div>
-      <p class="w3-small w3-text-green" v-show="registering">Registering...</p>
-      <p class="w3-small w3-red" v-show="wrong">
+      <p class="w3-small w3-text-green w3-center" v-show="registering">
+        Registering...
+      </p>
+      <p class="w3-small w3-text-red w3-center" v-show="wrong">
         There was something wrong. Perhaps, your username is already taken or
         your passwords did not match.
       </p>
@@ -56,6 +68,7 @@ export default {
   data() {
     return {
       username: '',
+      idNumber: '',
       email: '',
       password: '',
       password1: '',
@@ -80,8 +93,44 @@ export default {
     }
   },
   methods: {
-    register() {
-      if (this.username && this.email && this.password && this.password1) {
+    async register() {
+      if (
+        this.username &&
+        this.idNumber &&
+        this.email &&
+        this.password &&
+        this.password1
+      ) {
+        this.registering = true
+        this.disabled = true
+        const payload = {
+          code: this.creds.code,
+          username: this.username,
+          id_number: this.idNumber,
+          email: this.email,
+          password: this.password,
+          password1: this.password1
+        }
+        await this.$axios
+          .post('accounts/register/', payload)
+          .then(async (res) => {
+            await this.$store
+              .dispatch('user/login', {
+                username: this.username,
+                password: this.password
+              })
+              .then(() => {
+                this.$router.push('/')
+              })
+          })
+          .catch(() => {
+            this.wrong = true
+            this.registering = false
+            this.disabled = false
+            setTimeout(() => {
+              this.wrong = false
+            }, 10000)
+          })
       }
     }
   }
