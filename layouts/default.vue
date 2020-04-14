@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     fullname() {
-      if (this.$store.state.user.user !== {}) {
+      if (this.$store.state.user.user) {
         const f = this.$store.state.user.user.user.first_name
         const l = this.$store.state.user.user.user.last_name
         return f + ' ' + l
@@ -43,7 +43,7 @@ export default {
       return 'user'
     },
     photo() {
-      if (this.$store.state.user.user !== {}) {
+      if (this.$store.state.user.user) {
         if (this.$store.state.user.user.profile.photo !== null)
           return this.$store.state.user.user.profile.photo
         return '/anon_avatar.png'
@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch('user/logout')
       this.$router.push('/login')
     }
   }
