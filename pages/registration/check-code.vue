@@ -57,6 +57,7 @@ export default {
           this.noCode = false
           this.checking = false
           this.$store.commit('registration/SET_CREDENTIALS', data)
+          this.$router.push('/registration/register')
         })
         .catch(() => {
           this.checking = false
