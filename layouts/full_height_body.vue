@@ -14,6 +14,29 @@ body,
   padding: 0px;
   margin: 0px;
 }
+
+header {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+header > div {
+  border: 1px solid #9e9e9e;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 4px;
+  max-width: 400px;
+  width: 100%;
+  padding: 16px;
+}
+
+header h2 {
+  text-align: center;
+}
+
 .inpt {
   width: 100%;
   display: flex;
