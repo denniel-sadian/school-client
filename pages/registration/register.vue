@@ -30,7 +30,11 @@
         your passwords did not match.
       </p>
       <hr />
-      <button @click="register" class="w3-button w3-light-green">
+      <button
+        @click="register"
+        :disabled="disabled"
+        class="w3-button w3-light-green"
+      >
         Register
       </button>
       <div class="or">
@@ -38,7 +42,9 @@
         <span>Or</span>
         <hr />
       </div>
-      <nuxt-link to="/login" class="w3-button w3-light-blue">Login</nuxt-link>
+      <button @click="$router.push('/login')" class="w3-button w3-light-blue">
+        Login
+      </button>
     </div>
   </header>
 </template>
@@ -54,7 +60,8 @@ export default {
       password: '',
       password1: '',
       registering: false,
-      wrong: false
+      wrong: false,
+      disabled: false
     }
   },
   computed: {
