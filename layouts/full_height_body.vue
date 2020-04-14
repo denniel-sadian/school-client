@@ -20,7 +20,9 @@ body,
   padding: 0px;
   margin: 0px;
 }
+</style>
 
+<style scoped>
 header {
   height: 100%;
   display: flex;
