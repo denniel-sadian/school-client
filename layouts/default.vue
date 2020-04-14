@@ -61,6 +61,7 @@ body,
   padding: unset;
   margin: unset;
 }
+
 body {
   padding-top: 53px !important;
 }
@@ -109,6 +110,7 @@ nav .main #user-img {
 
 nav .main span {
   padding: 0px 18px 0px 8px;
+  text-transform: uppercase;
 }
 
 nav > div:last-child {
