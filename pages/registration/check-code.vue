@@ -22,6 +22,18 @@
         <button @click="checkCode" class="w3-button w3-light-green w3-round">
           Check Code
         </button>
+        <div class="or">
+          <hr />
+          <span>Or</span>
+          <hr />
+        </div>
+        <nuxt-link
+          to="/login"
+          class="w3-button w3-light-blue w3-round"
+          :disabled="disabled"
+        >
+          Login
+        </nuxt-link>
       </div>
     </header>
   </header>
@@ -115,5 +127,21 @@ header h2 {
 
 .w3-button {
   width: 100%;
+}
+
+.or {
+  display: flex;
+  align-items: center;
+  padding: 8px 0px;
+}
+
+.or hr {
+  width: 100%;
+  margin: 0px;
+  border: 0.5px solid gray;
+}
+
+.or span {
+  padding: 0px 16px;
 }
 </style>
