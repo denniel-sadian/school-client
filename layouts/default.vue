@@ -60,15 +60,23 @@ body,
   height: unset;
   padding: unset;
   margin: unset;
+}
+body {
+  padding-top: 53px !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   font-family: 'Nunito';
 }
 </style>
 
 <style scoped>
-body {
-  padding-top: 53px;
-}
-
 nav {
   position: fixed;
   top: 0px;
@@ -81,6 +89,7 @@ nav {
 
 nav a {
   text-decoration: none;
+  font-family: 'Nunito';
 }
 
 nav .main {
@@ -113,7 +122,6 @@ nav > div:last-child > a {
   padding: 0px 16px;
   margin: 0px 4px;
   border: 1px solid #f1f1f1;
-  color: #9e9e9e;
   height: 100%;
   display: flex;
   align-items: center;
@@ -123,7 +131,6 @@ nav > div:last-child > a {
 nav > div:last-child > a:hover {
   border: 1px solid #9e9e9e;
   background: #fff;
-  color: black;
   transition: 0.3s;
 }
 
