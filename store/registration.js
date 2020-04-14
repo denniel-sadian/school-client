@@ -6,6 +6,9 @@ export const state = () => ({
 export const mutations = {
   SET_CODE(state, code) {
     state.code = code
+  },
+  SET_CREDENTIALS(state, cred) {
+    state.credentials = cred
   }
 }
 
