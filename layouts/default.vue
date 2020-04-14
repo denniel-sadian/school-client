@@ -12,6 +12,7 @@
         <i class="fas fa-times" v-else></i>
       </div>
       <div id="links" :class="{ 'w3-show': showLinks }" class="w3-animate-top">
+        <nuxt-link to="/">Home</nuxt-link>
         <a href="#">Departments</a>
         <a href="#">Sections</a>
         <a href="#">Students</a>
