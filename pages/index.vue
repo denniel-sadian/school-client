@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="w3-container w3-light-gray">
+    <header class="w3-container">
       <div class="w3-content">
         <h1>Welcome to the shool management system</h1>
         <p>
@@ -11,9 +11,17 @@
         </p>
       </div>
     </header>
-    <article class="w3-container">
-      <div class="w3-content">
-        Hello
+    <article class="w3-container w3-margin-top">
+      <div class="w3-content" id="first-grid">
+        <div>
+          <h3><i class="fas fa-school"></i><br />Departments</h3>
+        </div>
+        <div>
+          <h3><i class="fas fa-building"></i><br />Sections</h3>
+        </div>
+        <div>
+          <h3><i class="fas fa-portrait"></i><br />Students</h3>
+        </div>
       </div>
     </article>
   </div>
@@ -51,5 +59,16 @@ header h1 {
 
 .fullname {
   text-transform: capitalize;
+}
+
+#first-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+#first-grid > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 </style>
