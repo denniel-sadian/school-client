@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div>
+    <div class="w3-animate-zoom">
       <h2>Credentials</h2>
       <p class="w3-small w3-center">Please, enter your credentials to login.</p>
       <hr />

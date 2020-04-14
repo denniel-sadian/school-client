@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div>
+    <div class="w3-animate-zoom">
       <h2>Registration</h2>
       <p class="w3-small w3-center">
         Good day, <b>{{ addressing }} {{ fullname }}</b
