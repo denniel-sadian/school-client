@@ -39,7 +39,7 @@ export default {
     photo() {
       if (this.$store.state.user.user.profile.photo !== null)
         return this.$store.state.user.user.profile.photo
-      return '/favicon.ico'
+      return '/anon_avatar.png'
     }
   },
   methods: {
