@@ -41,6 +41,7 @@ header > div {
 
 header h2 {
   text-align: center;
+  font-family: 'Nunito' !important;
 }
 
 .inpt {

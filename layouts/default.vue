@@ -60,6 +60,7 @@ body,
   height: unset;
   padding: unset;
   margin: unset;
+  font-family: 'Nunito';
 }
 </style>
 
@@ -85,6 +86,7 @@ nav a {
 nav .main {
   display: flex;
   align-items: center;
+  font-weight: 800;
 }
 
 nav .main #user-img {
