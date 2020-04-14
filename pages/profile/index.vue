@@ -73,6 +73,31 @@
           <span>Or</span>
           <hr />
         </div>
+        <form @submit.prevent="updatePhoto" enctype="multipart/form-data">
+          <div class="inpt">
+            <label>Photo:</label>
+            <input
+              type="file"
+              ref="file"
+              v-on:change="handleFileUpload"
+              required
+            />
+          </div>
+          <p v-show="updatingFile" class="w3-small w3-text-green w3-center">
+            Updating you profile picture...
+          </p>
+          <p v-show="errorFile" class="w3-small w3-text-red w3-center">
+            There was something wrong with the photo you were trying to upload.
+            Please choose another one.
+          </p>
+          <button
+            :disabled="updatingFile"
+            type="submit"
+            class="w3-button w3-green"
+          >
+            Update Profile Picture
+          </button>
+        </form>
       </div>
     </article>
   </div>
@@ -90,7 +115,11 @@ export default {
       idNumber: this.$store.state.user.user.profile.id_number,
       department: this.$store.state.user.user.profile.department,
       updating: false,
-      error: false
+      error: false,
+
+      file: '',
+      updatingFile: false,
+      errorFile: false
     }
   },
   computed: {
@@ -110,6 +139,38 @@ export default {
     }
   },
   methods: {
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0]
+    },
+    async updatePhoto() {
+      this.updatingFile = true
+      this.errorFile = false
+      let formData = new FormData()
+      formData.append('photo', this.file)
+      await this.$axios
+        .post('accounts/change-dp/', formData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              'school_access_token'
+            )}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(async () => {
+          await this.$store.dispatch('user/getUser').then(() => {
+            this.updatingFile = false
+            this.errorFile = false
+            this.$router.push('/profile')
+          })
+        })
+        .catch(() => {
+          this.errorFile = true
+          this.updatingFile = false
+          setTimeout(() => {
+            this.errorFile = false
+          }, 10000)
+        })
+    },
     async update() {
       this.updating = true
       this.error = false
