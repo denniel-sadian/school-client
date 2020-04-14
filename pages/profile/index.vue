@@ -17,53 +17,63 @@
       </div>
     </header>
     <article class="w3-container">
-      <form @submit.prevent="update" class="w3-content" :disabled="updating">
-        <div class="inpt">
-          <label>Username:</label>
-          <input type="text" v-model="username" required />
+      <div class="w3-content">
+        <form @submit.prevent="update" :disabled="updating">
+          <div class="inpt">
+            <label>Username:</label>
+            <input type="text" v-model="username" required />
+          </div>
+          <div class="inpt">
+            <label>First Name:</label>
+            <input type="text" v-model="firstName" required />
+          </div>
+          <div class="inpt">
+            <label>Last Name:</label>
+            <input type="text" v-model="lastName" required />
+          </div>
+          <div class="inpt">
+            <label>Gender:</label>
+            <select v-model="gender" required>
+              <option value="f">Female</option>
+              <option value="m">Male</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>ID Number:</label>
+            <input type="text" v-model="idNumber" required />
+          </div>
+          <div class="inpt">
+            <label>Email:</label>
+            <input type="text" v-model="email" required />
+          </div>
+          <div class="inpt">
+            <label>Department:</label>
+            <select v-model="department" required>
+              <option
+                v-for="dep in departments"
+                :value="dep.id"
+                :key="dep.id"
+                >{{ dep.name }}</option
+              >
+            </select>
+          </div>
+          <p v-show="updating" class="w3-small w3-text-green w3-center">
+            Updating...
+          </p>
+          <p v-show="error" class="w3-small w3-text-red w3-center">
+            There was something wrong. Perhaps you are trying to specify values
+            that were already taken by other users.
+          </p>
+          <button :disabled="updating" type="submit" class="w3-button w3-green">
+            Update Profile
+          </button>
+        </form>
+        <div class="or">
+          <hr />
+          <span>Or</span>
+          <hr />
         </div>
-        <div class="inpt">
-          <label>First Name:</label>
-          <input type="text" v-model="firstName" required />
-        </div>
-        <div class="inpt">
-          <label>Last Name:</label>
-          <input type="text" v-model="lastName" required />
-        </div>
-        <div class="inpt">
-          <label>Gender:</label>
-          <select v-model="gender" required>
-            <option value="f">Female</option>
-            <option value="m">Male</option>
-          </select>
-        </div>
-        <div class="inpt">
-          <label>ID Number:</label>
-          <input type="text" v-model="idNumber" required />
-        </div>
-        <div class="inpt">
-          <label>Email:</label>
-          <input type="text" v-model="email" required />
-        </div>
-        <div class="inpt">
-          <label>Department:</label>
-          <select v-model="department" required>
-            <option v-for="dep in departments" :value="dep.id" :key="dep.id">{{
-              dep.name
-            }}</option>
-          </select>
-        </div>
-        <p v-show="updating" class="w3-small w3-text-green w3-center">
-          Updating...
-        </p>
-        <p v-show="error" class="w3-small w3-text-red w3-center">
-          There was something wrong. Perhaps you are trying to specify values
-          that were already taken by other users.
-        </p>
-        <button :disabled="updating" type="submit" class="w3-button w3-green">
-          Update Profile
-        </button>
-      </form>
+      </div>
     </article>
   </div>
 </template>
@@ -172,25 +182,6 @@ header {
   margin: 0px;
 }
 
-@media (max-width: 900px) {
-  #profile-header {
-    flex-direction: column;
-    justify-content: center;
-  }
-  #profile-photo img {
-    max-width: 80px;
-    max-height: 80px;
-    min-width: 80px;
-    min-height: 80px;
-  }
-  #profile-info,
-  #profile-photo {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-}
-
 .inpt {
   width: 100%;
   display: flex;
@@ -218,5 +209,40 @@ header {
 .w3-button {
   width: 100%;
   border-radius: 4px;
+}
+
+.or {
+  display: flex;
+  align-items: center;
+  padding: 8px 0px;
+}
+
+.or hr {
+  width: 100%;
+  margin: 0px;
+  border: 0.5px solid gray;
+}
+
+.or span {
+  padding: 0px 16px;
+}
+
+@media (max-width: 900px) {
+  #profile-header {
+    flex-direction: column;
+    justify-content: center;
+  }
+  #profile-photo img {
+    max-width: 80px;
+    max-height: 80px;
+    min-width: 80px;
+    min-height: 80px;
+  }
+  #profile-info,
+  #profile-photo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }
 </style>
