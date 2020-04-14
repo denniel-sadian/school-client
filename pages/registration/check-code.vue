@@ -38,7 +38,23 @@ export default {
     }
   },
   methods: {
-    checkCode() {}
+    async checkCode() {
+      this.checking = true
+      this.noCode = false
+      await this.$store
+        .dispatch('registration/checkCode', this.code)
+        .then(() => {
+          this.noCode = false
+          this.checking = false
+        })
+        .catch(() => {
+          this.checking = false
+          this.noCode = true
+          setInterval(() => {
+            this.noCode = false
+          }, 5000)
+        })
+    }
   }
 }
 </script>
