@@ -1,12 +1,12 @@
 <template>
   <div>
     <nav>
-      <a href="#">
+      <nuxt-link to="/profile">
         <div class="main">
           <img id="user-img" :src="photo" />
           <span>{{ fullname }}</span>
         </div>
-      </a>
+      </nuxt-link>
       <div class="toggle" @click="showLinks = !showLinks">
         <i class="fas fa-bars" v-if="!showLinks"></i>
         <i class="fas fa-times" v-else></i>
