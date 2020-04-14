@@ -43,9 +43,11 @@ export default {
       this.noCode = false
       await this.$store
         .dispatch('registration/checkCode', this.code)
-        .then(() => {
+        .then(({ data }) => {
           this.noCode = false
           this.checking = false
+          this.$store.commit('registration/SET_CODE', this.code)
+          this.$store.commit('registration/SET_CREDENTIALS', data)
         })
         .catch(() => {
           this.checking = false
