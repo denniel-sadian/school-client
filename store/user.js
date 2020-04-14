@@ -13,10 +13,13 @@ export const actions = {
   login({ commit }, credentials) {
     return this.$axios
       .post('accounts/obtain-token/', credentials)
-      .then((res) => {
+      .then(async (res) => {
         localStorage.setItem('school_access_token', res.data.access)
         localStorage.setItem('school_refresh_token', res.data.refresh)
         this.$axios.setToken(res.data.access, 'Bearer')
+        await this.$axios.get('accounts/profile/').then(({ data }) => {
+          commit('SET_USER', data)
+        })
       })
   },
   getUser({ commit }) {
