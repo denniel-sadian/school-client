@@ -18,7 +18,11 @@
         There is no permission with this code.
       </p>
       <hr />
-      <button @click="checkCode" class="w3-button w3-light-green">
+      <button
+        @click="checkCode"
+        :disabled="disabled"
+        class="w3-button w3-light-green"
+      >
         Check Code
       </button>
       <div class="or">
@@ -26,11 +30,7 @@
         <span>Or</span>
         <hr />
       </div>
-      <nuxt-link
-        to="/login"
-        class="w3-button w3-light-blue"
-        :disabled="disabled"
-      >
+      <nuxt-link to="/login" class="w3-button w3-light-blue">
         Login
       </nuxt-link>
     </div>
@@ -44,13 +44,15 @@ export default {
     return {
       code: '',
       noCode: false,
-      checking: false
+      checking: false,
+      disabled: false
     }
   },
   methods: {
     async checkCode() {
       this.checking = true
       this.noCode = false
+      this.disabled = true
       await this.$store
         .dispatch('registration/checkCode', this.code)
         .then(({ data }) => {
@@ -61,6 +63,7 @@ export default {
         })
         .catch(() => {
           this.checking = false
+          this.disabled = false
           this.noCode = true
           this.$store.commit('registration/SET_CREDENTIALS', {})
           setTimeout(() => {

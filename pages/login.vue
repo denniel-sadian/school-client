@@ -55,6 +55,7 @@ export default {
   },
   methods: {
     async login() {
+      if (!this.username || !this.password) return
       this.disabled = true
       this.no_such_account = false
       await this.$store

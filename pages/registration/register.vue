@@ -1,8 +1,8 @@
 <template>
   <header>
     <div>
-      <h2>Credentials</h2>
-      <p class="w3-small">
+      <p class="w3-small w3-center">
+        Hi, {{ addressing }} {{ fullname }}! You have
         {{ creds }}
       </p>
       <hr />
@@ -28,13 +28,15 @@
         your passwords did not match.
       </p>
       <hr />
-      <button @click="register" class="btn w3-light-green">Register</button>
+      <button @click="register" class="w3-button w3-light-green">
+        Register
+      </button>
       <div class="or">
         <hr />
         <span>Or</span>
         <hr />
       </div>
-      <nuxt-link to="/login" class="btn w3-light-blue">Login</nuxt-link>
+      <nuxt-link to="/login" class="w3-button w3-light-blue">Login</nuxt-link>
     </div>
   </header>
 </template>
@@ -56,7 +58,15 @@ export default {
   computed: {
     creds() {
       return this.$store.state.registration.credentials
-    }
+    },
+    addressing() {
+      if (this.creds.gender === 'f') return 'miss'
+      return 'mister'
+    },
+    fullname() {
+      return `${this.creds.first_name} ${this.creds.last_name}`
+    },
+    fromWho() {}
   },
   methods: {
     register() {
