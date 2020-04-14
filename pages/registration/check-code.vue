@@ -15,7 +15,7 @@
         Checking code...
       </p>
       <p v-show="noCode" class="w3-small w3-center w3-text-red">
-        There is no permission with this code.
+        Permission with this code does not exist or it has been used already.
       </p>
       <hr />
       <button
@@ -54,6 +54,7 @@ export default {
   },
   methods: {
     async checkCode() {
+      if (!this.code) return
       this.checking = true
       this.noCode = false
       this.disabled = true
@@ -70,7 +71,7 @@ export default {
           this.$store.commit('registration/SET_CREDENTIALS', {})
           setTimeout(() => {
             this.noCode = false
-          }, 5000)
+          }, 10000)
         })
     }
   }
