@@ -7,7 +7,10 @@
           <span>{{ fullname }}</span>
         </div>
       </a>
-      <div class="toggle" @click="showLinks = !showLinks"></div>
+      <div class="toggle" @click="showLinks = !showLinks">
+        <i class="fas fa-bars" v-if="!showLinks"></i>
+        <i class="fas fa-times" v-else></i>
+      </div>
       <div id="links" :class="{ 'w3-show': showLinks }" class="w3-animate-top">
         <a href="#">Departments</a>
         <a href="#">Sections</a>
