@@ -32,14 +32,20 @@ export default {
   },
   computed: {
     fullname() {
-      const f = this.$store.state.user.user.user.first_name
-      const l = this.$store.state.user.user.user.last_name
-      return f + ' ' + l
+      if (this.$store.state.user.user !== {}) {
+        const f = this.$store.state.user.user.user.first_name
+        const l = this.$store.state.user.user.user.last_name
+        return f + ' ' + l
+      }
+      return 'user'
     },
     photo() {
-      if (this.$store.state.user.user.profile.photo !== null)
-        return this.$store.state.user.user.profile.photo
-      return '/anon_avatar.png'
+      if (this.$store.state.user.user !== {}) {
+        if (this.$store.state.user.user.profile.photo !== null)
+          return this.$store.state.user.user.profile.photo
+        return '/anon_avatar.png'
+      }
+      return ''
     }
   },
   methods: {
