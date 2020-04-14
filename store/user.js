@@ -22,6 +22,11 @@ export const actions = {
         })
       })
   },
+  getUser({ commit }) {
+    return this.$axios.get('accounts/profile/').then(({ data }) => {
+      commit('SET_USER', data)
+    })
+  },
   logout({ commit }) {
     localStorage.clear()
     commit('SET_USER', {})
