@@ -24,6 +24,7 @@
 <script>
 export default {
   middleware: 'auth',
+  transition: 'page',
   data() {
     return {
       showLinks: false
