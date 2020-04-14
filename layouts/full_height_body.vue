@@ -20,8 +20,4 @@ body,
   padding: 0px;
   margin: 0px;
 }
-
-body {
-  padding-top: unset !important;
-}
 </style>

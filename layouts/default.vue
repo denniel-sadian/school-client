@@ -62,10 +62,6 @@ body,
   margin: unset;
 }
 
-body {
-  padding-top: 53px !important;
-}
-
 h1,
 h2,
 h3,
