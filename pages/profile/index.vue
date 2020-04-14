@@ -17,7 +17,7 @@
       </div>
     </header>
     <article class="w3-container">
-      <form @submit.prevent="update" class="w3-content">
+      <form @submit.prevent="update" class="w3-content" :disabled="updating">
         <div class="inpt">
           <label>Username:</label>
           <input type="text" v-model="username" required />
@@ -53,7 +53,14 @@
             }}</option>
           </select>
         </div>
-        <button type="submit" class="w3-button w3-green">
+        <p v-show="updating" class="w3-small w3-text-green w3-center">
+          Updating...
+        </p>
+        <p v-show="error" class="w3-small w3-text-red w3-center">
+          There was something wrong. Perhaps you are trying to specify values
+          that were already taken by other users.
+        </p>
+        <button :disabled="updating" type="submit" class="w3-button w3-green">
           Update Profile
         </button>
       </form>
@@ -71,7 +78,9 @@ export default {
       gender: this.$store.state.user.user.profile.gender,
       email: this.$store.state.user.user.user.email,
       idNumber: this.$store.state.user.user.profile.id_number,
-      department: this.$store.state.user.user.profile.department
+      department: this.$store.state.user.user.profile.department,
+      updating: false,
+      error: false
     }
   },
   computed: {
@@ -89,16 +98,34 @@ export default {
   },
   methods: {
     async update() {
+      this.updating = true
+      this.error = false
       const payload = {
         username: this.username,
         first_name: this.firstName,
         last_name: this.lastName,
         gender: this.gender,
         email: this.email,
-        id_number: this.id_number,
+        id_number: this.idNumber,
         department: this.department
       }
-      await this.$axios.post('accounts/profile', payload).then(() => {})
+      console.log(payload)
+      await this.$axios
+        .post('accounts/profile/', payload)
+        .then(async () => {
+          await this.$store.dispatch('user/getUser').then(() => {
+            this.updating = false
+            this.error = false
+            this.$router.push('/profile')
+          })
+        })
+        .catch(() => {
+          this.error = true
+          this.updating = false
+          setTimeout(() => {
+            this.error = false
+          }, 10000)
+        })
     }
   }
 }
