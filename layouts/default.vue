@@ -145,7 +145,6 @@ nav .toggle {
   width: 40px;
   height: 40px;
   background: #f1f1f1;
-  border: 1px solid #9e9e9e;
   border-radius: 100%;
   display: none;
   cursor: pointer;
