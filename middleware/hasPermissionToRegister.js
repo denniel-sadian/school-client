@@ -1,6 +1,6 @@
 export default function({ store, redirect }) {
   // Check if there's the token
-  if (store.registration.credentials === {}) {
+  if (store.state.registration.credentials === {}) {
     return redirect({ name: 'login' })
   }
 }
