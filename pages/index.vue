@@ -1,15 +1,21 @@
 <template>
   <div>
-    <header class="w3-container">
+    <header class="w3-container w3-light-gray">
       <div class="w3-content">
         <h1>Welcome to the shool management system</h1>
         <p>
-          <i class="fa fa-home"></i> Good day,
+          <i class="fas fa-hand-sparkles"></i> Good day,
           <span class="fullname">{{ addressing }} {{ fullname }}</span
-          >.
+          >, one of the {{ role }}s of the system. Here, you can find the
+          summary of the system's data.
         </p>
       </div>
     </header>
+    <article class="w3-container">
+      <div class="w3-content">
+        Hello
+      </div>
+    </article>
   </div>
 </template>
 
@@ -24,6 +30,9 @@ export default {
     addressing() {
       if (this.$store.state.user.user.profile.gender === 'f') return 'miss'
       return 'mister'
+    },
+    role() {
+      return this.$store.state.user.user.profile.role
     }
   }
 }
