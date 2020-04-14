@@ -31,13 +31,13 @@
         <span>Or</span>
         <hr />
       </div>
-      <nuxt-link
-        to="/registration/check-code"
+      <button
+        @click="$router.push('/registration/check-code')"
         class="w3-button w3-light-blue"
         :disabled="disabled"
       >
         Register
-      </nuxt-link>
+      </button>
     </div>
   </header>
 </template>
