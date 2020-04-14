@@ -30,9 +30,13 @@
         <span>Or</span>
         <hr />
       </div>
-      <nuxt-link to="/login" class="w3-button w3-light-blue">
+      <button
+        @click="$router.push('/login')"
+        :disabled="disabled"
+        class="w3-button w3-light-blue"
+      >
         Login
-      </nuxt-link>
+      </button>
     </div>
   </header>
 </template>

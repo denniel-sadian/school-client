@@ -1,9 +1,11 @@
 <template>
   <header>
     <div>
+      <h2>Registration</h2>
       <p class="w3-small w3-center">
-        Hi, {{ addressing }} {{ fullname }}! You have
-        {{ creds }}
+        Good day, <b>{{ addressing }} {{ fullname }}</b
+        >! You have been permitted by admin {{ fromWho }} to register an account
+        on the system.
       </p>
       <hr />
       <div class="inpt">
@@ -66,7 +68,9 @@ export default {
     fullname() {
       return `${this.creds.first_name} ${this.creds.last_name}`
     },
-    fromWho() {}
+    fromWho() {
+      return `${this.creds.from_who.first_name} ${this.creds.from_who.last_name}`
+    }
   },
   methods: {
     register() {
@@ -76,3 +80,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+header > div {
+  overflow-y: auto;
+}
+</style>
