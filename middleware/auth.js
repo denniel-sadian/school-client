@@ -8,4 +8,5 @@ export default function({ app, store, redirect }) {
       name: 'login'
     })
   }
+  store.dispatch('information/getInformation')
 }

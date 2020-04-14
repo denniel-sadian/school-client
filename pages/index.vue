@@ -15,6 +15,7 @@
       <div class="w3-content" id="first-grid">
         <div>
           <h3><i class="fas fa-school"></i><br />Departments</h3>
+          <p>{{ information }}</p>
         </div>
         <div>
           <h3><i class="fas fa-building"></i><br />Sections</h3>
@@ -41,6 +42,9 @@ export default {
     },
     role() {
       return this.$store.state.user.user.profile.role
+    },
+    information() {
+      return this.$store.state.information.departments
     }
   }
 }
