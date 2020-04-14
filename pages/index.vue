@@ -4,7 +4,8 @@
       <div class="w3-content">
         <h1>Welcome to the shool management system</h1>
         <p>
-          Good day, <span class="fullname">{{ addressing }} {{ fullname }}</span
+          <i class="fa fa-home"></i> Good day,
+          <span class="fullname">{{ addressing }} {{ fullname }}</span
           >.
         </p>
       </div>

@@ -19,7 +19,8 @@ export default {
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Nunito'
-      }
+      },
+      { rel: 'stylesheet', href: '/css/all.css' }
     ]
   },
   /*
