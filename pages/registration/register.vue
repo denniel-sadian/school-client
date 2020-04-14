@@ -32,7 +32,7 @@
       </div>
       <div class="inpt">
         <label>Password Again:</label>
-        <input type="password" v-model="password1" />
+        <input type="password" v-model="password1" @keypress.enter="register" />
       </div>
       <p class="w3-small w3-text-green w3-center" v-show="registering">
         Registering...
