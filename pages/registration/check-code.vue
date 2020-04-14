@@ -60,8 +60,6 @@ export default {
       await this.$store
         .dispatch('registration/checkCode', this.code)
         .then(({ data }) => {
-          this.noCode = false
-          this.checking = false
           this.$store.commit('registration/SET_CREDENTIALS', data)
           this.$router.push('/registration/register')
         })
