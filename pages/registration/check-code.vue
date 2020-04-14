@@ -58,13 +58,13 @@ export default {
         .then(({ data }) => {
           this.noCode = false
           this.checking = false
-          this.$store.commit('registration/SET_CODE', this.code)
           this.$store.commit('registration/SET_CREDENTIALS', data)
         })
         .catch(() => {
           this.checking = false
           this.noCode = true
-          setInterval(() => {
+          this.$store.commit('registration/SET_CREDENTIALS', {})
+          setTimeout(() => {
             this.noCode = false
           }, 5000)
         })
