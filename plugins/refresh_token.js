@@ -1,9 +1,9 @@
-export default function({ $axios, $store }) {
+export default function({ $axios, app }) {
   const refresher = () => {
-    if ($store.state.user.canRefreshToken) {
+    if (app.store.state.user.canRefreshToken) {
       const rToken = localStorage.getItem('school_refresh_token')
 
-      if (rToken === null) return
+      if (rToken === null || !app.store.state.user.canRefreshToken) return
 
       $axios
         .post('accounts/refresh-token/', {
@@ -15,5 +15,5 @@ export default function({ $axios, $store }) {
         })
     }
   }
-  setInterval(refresher, 60000)
+  setInterval(refresher, 10000)
 }
