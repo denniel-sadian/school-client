@@ -334,38 +334,6 @@ header {
   margin: 0px;
 }
 
-.inpt {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  margin-bottom: 16px;
-}
-
-.inpt label {
-  font-size: 12px;
-  font-weight: bold;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-.inpt input,
-.inpt select {
-  background: white;
-  border-radius: 4px;
-  border: 1px solid gray;
-  height: 40px;
-  transition: 0.3s;
-  padding: 0px 8px;
-}
-
-.inpt input[type='file'] {
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  height: unset;
-  padding: 0px;
-}
-
 .w3-button {
   width: 100%;
   border-radius: 4px;
