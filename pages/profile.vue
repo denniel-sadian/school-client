@@ -103,6 +103,42 @@
             <span v-else>Update Profile Picture</span>
           </button>
         </form>
+        <div class="or">
+          <hr />
+          <span>Or</span>
+          <hr />
+        </div>
+        <form @submit.prevent="updatePassword">
+          <div class="inpt">
+            <label>Current Password:</label>
+            <input type="password" v-model="password" required />
+          </div>
+          <div class="inpt">
+            <label>New Password:</label>
+            <input type="password" v-model="password1" required />
+          </div>
+          <div class="inpt">
+            <label>Confirm Password:</label>
+            <input type="password" v-model="password2" required />
+          </div>
+          <p v-show="errorPassword" class="w3-small w3-text-red w3-center">
+            Something was wrong. Perhaps, your current password was incorrect,
+            or your new password was not confirmed correctly.
+          </p>
+          <p v-show="updatedPassword" class="w3-small w3-text-green w3-center">
+            Your password has been updated.
+          </p>
+          <button
+            :disabled="updatingPassword"
+            type="submit"
+            class="w3-button w3-green"
+          >
+            <span v-if="updatingPassword"
+              ><i class="fas fa-spinner w3-spin"></i> Updating...</span
+            >
+            <span v-else>Update Your Password</span>
+          </button>
+        </form>
       </div>
     </article>
   </div>
@@ -129,7 +165,10 @@ export default {
 
       password: '',
       password1: '',
-      password2: ''
+      password2: '',
+      updatingPassword: false,
+      errorPassword: false,
+      updatedPassword: false
     }
   },
   computed: {
@@ -152,9 +191,41 @@ export default {
     handleFileUpload() {
       this.file = this.$refs.file.files[0]
     },
+    async updatePassword() {
+      this.updatingPassword = true
+      this.errorPassword = false
+      const payload = {
+        password: this.password,
+        password1: this.password1,
+        password2: this.password2
+      }
+      await this.$axios
+        .put('accounts/change-password/', payload)
+        .then(async () => {
+          await this.$store.dispatch('user/getUser').then(() => {
+            this.updatingPassword = false
+            this.errorPassword = false
+            this.updatePassword = true
+            this.password = ''
+            this.password1 = ''
+            this.password2 = ''
+            setTimeout(() => {
+              this.updatedPassword = false
+            }, 10000)
+          })
+        })
+        .catch(() => {
+          this.errorPassword = true
+          this.updatingPassword = false
+          setTimeout(() => {
+            this.errorPassword = false
+          }, 10000)
+        })
+    },
     async updatePhoto() {
       this.updatingFile = true
       this.errorFile = false
+      this.updatePhoto = false
       let formData = new FormData()
       formData.append('photo', this.file)
       this.$store.dispatch('user/toogleRefresh')
@@ -176,9 +247,6 @@ export default {
             setTimeout(() => {
               this.updated = false
             }, 8000)
-            setTimeout(() => {
-              this.$router.push('/profile')
-            }, 10000)
           })
         })
         .catch(() => {
@@ -208,7 +276,6 @@ export default {
           await this.$store.dispatch('user/getUser').then(() => {
             this.updating = false
             this.error = false
-            this.$router.push('/profile')
           })
         })
         .catch(() => {
@@ -304,6 +371,7 @@ header {
   display: flex;
   align-items: center;
   padding: 8px 0px;
+  margin: 64px 0px;
 }
 
 .or hr {
