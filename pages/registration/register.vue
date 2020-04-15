@@ -4,8 +4,9 @@
       <h2>Registration</h2>
       <p class="w3-small w3-center">
         Good day, <b>{{ addressing }} {{ fullname }}</b
-        >! You have been permitted by admin {{ fromWho }} to register an account
-        on the system.
+        >! You have been permitted by admin {{ fromWho }} to register for
+        {{ creds.role === 'admin' ? "an admin's" : "a teacher's" }} account on
+        the system.
         <span class="w3-opacity"
           >Not you?
           <nuxt-link class="w3-text-blue" to="/registration/check-code"
