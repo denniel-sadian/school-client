@@ -10,10 +10,7 @@
       </div>
     </header>
     <article class="w3-container">
-      <form
-        @submit.prevent="createPermission"
-        class="w3-content w3-round w3-border"
-      >
+      <form @submit.prevent="createPermission" class="w3-content">
         <h2><i class="fas fa-plus-circle"></i> Create permisson</h2>
         <div class="inpt">
           <label>Role:</label>
@@ -187,6 +184,8 @@ header h1 {
 
 form {
   padding: 16px;
+  border-radius: 4px;
+  border: 1px solid black;
 }
 
 .w3-button {
