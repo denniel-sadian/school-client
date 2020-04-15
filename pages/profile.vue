@@ -125,7 +125,11 @@ export default {
       file: '',
       updatingFile: false,
       errorFile: false,
-      updated: false
+      updated: false,
+
+      password: '',
+      password1: '',
+      password2: ''
     }
   },
   computed: {
@@ -281,6 +285,14 @@ header {
   height: 40px;
   transition: 0.3s;
   padding: 0px 8px;
+}
+
+.inpt input[type='file'] {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  height: unset;
+  padding: 0px;
 }
 
 .w3-button {
