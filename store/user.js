@@ -1,11 +1,15 @@
 export const state = () => ({
-  user: JSON.parse(localStorage.getItem('school_user') || '{}')
+  user: JSON.parse(localStorage.getItem('school_user') || '{}'),
+  canRefreshToken: true
 })
 
 export const mutations = {
   SET_USER(state, user) {
     state.user = user
     localStorage.setItem('school_user', JSON.stringify(user))
+  },
+  TOGGLE_CAN_REFRESH(state) {
+    state.canRefreshToken = !state.canRefreshToken
   }
 }
 
