@@ -34,5 +34,8 @@ export const actions = {
   logout({ commit }) {
     localStorage.clear()
     commit('SET_USER', {})
+  },
+  toogleRefresh({ commit }) {
+    commit('TOGGLE_CAN_REFRESH')
   }
 }
