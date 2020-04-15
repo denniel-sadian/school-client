@@ -73,7 +73,12 @@
         </div>
         <div v-else>
           <h2 class="w3-center">List of Permissions</h2>
-          <RegPerm v-for="perm in permissions" :perm="perm" :key="perm.id" />
+          <RegPerm
+            v-for="perm in permissions"
+            :perm="perm"
+            :deps="departments"
+            :key="perm.id"
+          />
         </div>
       </div>
     </article>
