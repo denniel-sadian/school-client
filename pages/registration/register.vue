@@ -54,7 +54,11 @@
         <span>Or</span>
         <hr />
       </div>
-      <button @click="$router.push('/login')" class="w3-button w3-light-blue">
+      <button
+        :disabled="disabled"
+        @click="$router.push('/login')"
+        class="w3-button w3-light-blue"
+      >
         Login
       </button>
     </div>
