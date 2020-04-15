@@ -30,7 +30,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['~/assets/w3.css', '~/assets/transitions.css'],
+  css: ['~/assets/w3.css', '~/assets/global.css', '~/assets/transitions.css'],
   /*
    ** Plugins to load before mounting the App
    */
