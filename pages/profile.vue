@@ -61,10 +61,6 @@
             There was something wrong. Perhaps you are trying to specify values
             that were already taken by other users.
           </p>
-          <p v-show="updated" class="w3-small w3-text-green w3-center">
-            Your profile picture has been updated. It would take a few moments
-            to display your new photo depending on your connection.
-          </p>
           <button :disabled="updating" type="submit" class="w3-button w3-green">
             <span v-if="updating"
               ><i class="fas fa-spinner w3-spin"></i> Updating...</span
@@ -89,7 +85,12 @@
           </div>
           <p v-show="errorFile" class="w3-small w3-text-red w3-center">
             There was something wrong with the photo you were trying to upload.
-            Please choose a photo that has smaller size and filename.
+            Please choose a photo that has smaller size and filename, or you can
+            rename the filename of this photo.
+          </p>
+          <p v-show="updated" class="w3-small w3-text-green w3-center">
+            Your profile picture has been updated. It would take a few moments
+            to display your new photo depending on your connection.
           </p>
           <button
             :disabled="updatingFile"
@@ -182,7 +183,7 @@ export default {
           this.updatingFile = false
           setTimeout(() => {
             this.errorFile = false
-          }, 10000)
+          }, 15000)
         })
     },
     async update() {
