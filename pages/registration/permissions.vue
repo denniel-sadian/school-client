@@ -119,7 +119,6 @@ export default {
       await this.$axios
         .post('accounts/permissions/', payload)
         .then(({ data }) => {
-          this.creating = false
           this.$store.commit('user/PUSH_PERM', data)
         })
         .catch(() => {
@@ -127,6 +126,9 @@ export default {
           setTimeout(() => {
             this.error = false
           }, 10000)
+        })
+        .finally(() => {
+          this.creating = false
         })
     }
   },
