@@ -7,21 +7,61 @@
           This page can only be accessed by the admins. Before anyone creates an
           account, an admin must provide a permission first.
         </p>
-        <p>
-          <button @click="showModal = true" class="w3-button w3-round w3-green">
-            <i class="fas fa-plus-circle"></i> Create Permission
-          </button>
-        </p>
       </div>
     </header>
-    <div class="w3-modal" :class="{ 'w3-show': showModal }">
-      <div class="w3-modal-content">
-        <div class="w3-green w3-padding">
-          <h2>Create permission</h2>
+    <article class="w3-container">
+      <form
+        @submit.prevent="createPermission"
+        class="w3-content w3-round w3-border"
+      >
+        <h2><i class="fas fa-plus-circle"></i> Create permisson</h2>
+        <div class="inpt">
+          <label>Role:</label>
+          <select v-model="role" required>
+            <option value="admin">As an Admin</option>
+            <option value="teacher">As a Teacher</option>
+          </select>
         </div>
-        <div class="w3-padding"></div>
-      </div>
-    </div>
+        <div class="inpt">
+          <label>First Name:</label>
+          <input type="text" v-model="fName" required />
+        </div>
+        <div class="inpt">
+          <label>Last Name:</label>
+          <input type="text" v-model="lName" required />
+        </div>
+        <div class="inpt">
+          <label>Gender:</label>
+          <select v-model="gender" required>
+            <option value="f">Female</option>
+            <option value="m">Male</option>
+          </select>
+        </div>
+        <div class="inpt">
+          <label>Code:</label>
+          <input type="text" v-model="code" required />
+        </div>
+        <div class="inpt">
+          <label>Department:</label>
+          <select v-model="dep" required>
+            <option v-for="dep in departments" :value="dep.id" :key="dep.id">{{
+              dep.name
+            }}</option>
+          </select>
+        </div>
+        <hr />
+        <p class="w3-center w3-text-red w3-small" v-show="error">
+          Something was wrong. Perhaps, there is already a permission that holds
+          the code you gave. Please, provide a unique code.
+        </p>
+        <button class="w3-button w3-green w3-round">
+          <span v-if="creating"
+            ><i class="fas fa-spinner w3-spin"></i> Creating</span
+          >
+          <span v-else>Create Permission</span>
+        </button>
+      </form>
+    </article>
     <article class="w3-container">
       <p v-if="loadingPerms" class="w3-center">
         <i class="fas fa-spinner w3-spin"></i>
@@ -47,12 +87,47 @@ export default {
   data() {
     return {
       loadingPerms: true,
-      showModal: false
+      creating: false,
+      error: false,
+      role: '',
+      fName: '',
+      lName: '',
+      gender: '',
+      code: '',
+      dep: ''
     }
   },
   computed: {
     permissions() {
       return this.$store.state.user.permissions
+    },
+    departments() {
+      return this.$store.state.information.departments
+    }
+  },
+  methods: {
+    async createPermission() {
+      this.creating = true
+      this.error = false
+      const payload = {
+        role: this.role,
+        first_name: this.fName,
+        last_name: this.lName,
+        gender: this.gender,
+        department: this.dep
+      }
+      await this.$axios
+        .post('accounts/permissions/', payload)
+        .then(({ data }) => {
+          this.creating = false
+          this.$store.commit('user/PUSH_PERM', data)
+        })
+        .catch(() => {
+          this.error = true
+          setTimeout(() => {
+            this.error = false
+          }, 10000)
+        })
     }
   },
   async mounted() {
@@ -74,6 +149,10 @@ header h1 {
   text-transform: capitalize;
 }
 
+.w3-content {
+  max-width: 600px;
+}
+
 .inpt {
   width: 100%;
   display: flex;
@@ -88,11 +167,25 @@ header h1 {
   font-family: 'Courier New', Courier, monospace;
 }
 
-.inpt input {
+.inpt input,
+.inpt select {
   border-radius: 4px;
   border: 1px solid gray;
   height: 40px;
   transition: 0.3s;
   padding: 0px 8px;
+  background: white;
+}
+
+form {
+  padding: 16px;
+}
+
+.w3-button {
+  width: 100%;
+}
+
+article {
+  margin: 20px 0px;
 }
 </style>
