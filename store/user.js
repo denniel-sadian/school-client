@@ -1,5 +1,6 @@
 export const state = () => ({
   user: JSON.parse(localStorage.getItem('school_user') || '{}'),
+  permissions: [],
   canRefreshToken: true
 })
 
@@ -7,6 +8,9 @@ export const mutations = {
   SET_USER(state, user) {
     state.user = user
     localStorage.setItem('school_user', JSON.stringify(user))
+  },
+  SET_PERMISSIONS(state, perms) {
+    state.perms = perms
   },
   TOGGLE_CAN_REFRESH(state) {
     state.canRefreshToken = !state.canRefreshToken
@@ -27,8 +31,13 @@ export const actions = {
       })
   },
   getUser({ commit }) {
-    return this.$axios.get('accounts/profile/').then(({ data }) => {
+    return this.$axios.get('accounts/permissions/').then(({ data }) => {
       commit('SET_USER', data)
+    })
+  },
+  getPerms({ commit }) {
+    return this.$axios.get('accounts/profile/').then(({ data }) => {
+      commit('SET_PERMISSIONS', data)
     })
   },
   logout({ commit }) {
