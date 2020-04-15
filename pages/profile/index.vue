@@ -57,15 +57,15 @@
               >
             </select>
           </div>
-          <p v-show="updating" class="w3-small w3-text-green w3-center">
-            Updating...
-          </p>
           <p v-show="error" class="w3-small w3-text-red w3-center">
             There was something wrong. Perhaps you are trying to specify values
             that were already taken by other users.
           </p>
           <button :disabled="updating" type="submit" class="w3-button w3-green">
-            Update Profile
+            <span v-if="updating"
+              ><i class="fas fa-spinner w3-spin"></i> Updating...</span
+            >
+            <span v-else>Update Profile</span>
           </button>
         </form>
         <div class="or">
@@ -83,9 +83,6 @@
               required
             />
           </div>
-          <p v-show="updatingFile" class="w3-small w3-text-green w3-center">
-            Updating you profile picture...
-          </p>
           <p v-show="errorFile" class="w3-small w3-text-red w3-center">
             There was something wrong with the photo you were trying to upload.
             Please choose another one.
@@ -95,7 +92,10 @@
             type="submit"
             class="w3-button w3-green"
           >
-            Update Profile Picture
+            <span v-if="updatingFile"
+              ><i class="fas fa-spinner w3-spin"></i> Updating...</span
+            >
+            <span v-else>Update Profile Picture</span>
           </button>
         </form>
       </div>
