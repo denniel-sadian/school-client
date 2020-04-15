@@ -4,7 +4,7 @@
       <h2>Registration</h2>
       <p class="w3-small w3-center">
         Good day, <b>{{ addressing }} {{ fullname }}</b
-        >! You have been permitted by admin {{ fromWho }} to register for
+        >! You have been permitted by admin {{ fromWho }} to register
         {{ creds.role === 'admin' ? "an admin's" : "a teacher's" }} account on
         the system.
         <span class="w3-opacity"
