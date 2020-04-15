@@ -229,6 +229,7 @@ header {
   min-width: 150px;
   min-height: 150px;
   border-radius: 100%;
+  object-fit: cover;
 }
 #profile-info {
   padding: 16px;
