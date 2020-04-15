@@ -147,6 +147,7 @@ export default {
       this.errorFile = false
       let formData = new FormData()
       formData.append('photo', this.file)
+      this.$store.dispatch('user/toogleRefresh')
       await this.$axios
         .post('accounts/change-dp/', formData, {
           headers: {
@@ -157,6 +158,7 @@ export default {
           }
         })
         .then(async () => {
+          this.$store.dispatch('user/toogleRefresh')
           await this.$store.dispatch('user/getUser').then(() => {
             this.updatingFile = false
             this.errorFile = false
@@ -164,6 +166,7 @@ export default {
           })
         })
         .catch(() => {
+          this.$store.dispatch('user/toogleRefresh')
           this.errorFile = true
           this.updatingFile = false
           setTimeout(() => {
