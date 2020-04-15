@@ -85,7 +85,7 @@
           </div>
           <p v-show="errorFile" class="w3-small w3-text-red w3-center">
             There was something wrong with the photo you were trying to upload.
-            Please choose another one.
+            Please choose a photo that has smaller size.
           </p>
           <button
             :disabled="updatingFile"
