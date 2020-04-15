@@ -11,9 +11,6 @@
         <label for="code">Permission Code:</label>
         <input type="text" v-model="code" @keypress.enter="checkCode" />
       </div>
-      <p v-show="checking" class="w3-small w3-center w3-text-green">
-        Checking code...
-      </p>
       <p v-show="noCode" class="w3-small w3-center w3-text-red">
         Permission with this code does not exist or it has been used already.
       </p>
@@ -23,7 +20,10 @@
         :disabled="disabled"
         class="w3-button w3-light-green"
       >
-        Check Code
+        <span v-if="checking">
+          <i class="fas fa-spinner w3-spin"></i> Checking code...
+        </span>
+        <span v-else>Check Code</span>
       </button>
       <div class="or">
         <hr />
@@ -144,5 +144,4 @@ header h2 {
 .or span {
   padding: 0px 16px;
 }
-
 </style>
