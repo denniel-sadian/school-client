@@ -127,6 +127,12 @@ export default {
       await this.$axios
         .post('accounts/permissions/', payload)
         .then(({ data }) => {
+          this.code = ''
+          this.role = ''
+          this.fName = ''
+          this.lName = ''
+          this.gender = ''
+          this.dep = ''
           this.$store.commit('user/PUSH_PERM', data)
         })
         .catch(() => {
