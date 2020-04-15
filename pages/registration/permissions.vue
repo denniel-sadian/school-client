@@ -169,30 +169,6 @@ header h1 {
   max-width: 600px;
 }
 
-.inpt {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  margin-bottom: 16px;
-}
-
-.inpt label {
-  font-size: 12px;
-  font-weight: bold;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-.inpt input,
-.inpt select {
-  border-radius: 4px;
-  border: 1px solid gray;
-  height: 40px;
-  transition: 0.3s;
-  padding: 0px 8px;
-  background: white;
-}
-
 form {
   padding: 16px;
   border-radius: 4px;

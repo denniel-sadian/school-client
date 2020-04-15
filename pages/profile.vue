@@ -339,23 +339,6 @@ header {
   border-radius: 4px;
 }
 
-.or {
-  display: flex;
-  align-items: center;
-  padding: 8px 0px;
-  margin: 64px 0px;
-}
-
-.or hr {
-  width: 100%;
-  margin: 0px;
-  border: 0.5px solid gray;
-}
-
-.or span {
-  padding: 0px 16px;
-}
-
 @media (max-width: 900px) {
   #profile-header {
     flex-direction: column;
