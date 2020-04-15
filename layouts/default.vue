@@ -16,7 +16,6 @@
         <a href="#">Departments</a>
         <a href="#">Sections</a>
         <a href="#">Students</a>
-        <a href="#">Permissions</a>
         <a href="#">Grading Sheets</a>
         <a @click="logout">Logout</a>
       </div>
