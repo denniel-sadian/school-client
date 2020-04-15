@@ -111,6 +111,7 @@ nav .main #user-img {
   max-height: 40px;
   border-radius: 100%;
   background: #9e9e9e;
+  object-fit: cover;
 }
 
 nav .main span {
