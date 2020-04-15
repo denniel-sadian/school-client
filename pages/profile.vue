@@ -181,7 +181,10 @@ export default {
     },
     photo() {
       if (this.profile.photo !== null)
-        return this.$store.state.user.user.profile.photo
+        return (
+          'https://school.pythonanywhere.com/' +
+          this.$store.state.user.user.profile.photo
+        )
       return '/anon_avatar.png'
     },
     departments() {
