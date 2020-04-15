@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="w3-container">
-      <div class="w3-content" id="profile-header">
+      <div id="profile-header">
         <div id="profile-photo">
           <img :src="photo" alt="Avatar" />
         </div>
