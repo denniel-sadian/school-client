@@ -226,7 +226,7 @@ export default {
     async updatePhoto() {
       this.updatingFile = true
       this.errorFile = false
-      this.updatePhoto = false
+      this.updated = false
       let formData = new FormData()
       formData.append('photo', this.file)
       this.$store.dispatch('user/toogleRefresh')
