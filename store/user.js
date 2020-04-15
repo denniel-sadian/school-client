@@ -10,10 +10,15 @@ export const mutations = {
     localStorage.setItem('school_user', JSON.stringify(user))
   },
   SET_PERMISSIONS(state, perms) {
-    state.permissions = perms
+    state.permissions = perms.sort((a, b) => {
+      return b.id - a.id
+    })
   },
   PUSH_PERM(state, perm) {
     state.permissions.push(perm)
+    state.permissions = state.permissions.sort((a, b) => {
+      return b.id - a.id
+    })
   },
   TOGGLE_CAN_REFRESH(state) {
     state.canRefreshToken = !state.canRefreshToken
