@@ -1,7 +1,5 @@
 <template>
-  <div>
-    {{ perm }}
-  </div>
+  <div class="cont"></div>
 </template>
 
 <script>
@@ -12,4 +10,11 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.cont {
+  padding: 16px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 16px 0px;
+}
+</style>
