@@ -39,7 +39,7 @@ export const actions = {
       })
   },
   getUser({ commit }) {
-    return this.$axios.get('accounts/permissions/').then(({ data }) => {
+    return this.$axios.get('accounts/profile/').then(({ data }) => {
       commit('SET_USER', data)
     })
   },
