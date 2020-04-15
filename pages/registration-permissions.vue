@@ -11,7 +11,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+  middleware: 'isAdmin'
+}
 </script>
 
 <style scoped>
