@@ -12,9 +12,6 @@
         <label for="password">Password:</label>
         <input type="password" @keypress.enter="login()" v-model="password" />
       </div>
-      <p class="w3-small w3-text-green w3-center" v-show="disabled">
-        Logging in...
-      </p>
       <p class="w3-small w3-text-red w3-center" v-show="no_such_account">
         Wrong credentials.
       </p>
@@ -24,7 +21,10 @@
         :disabled="disabled"
         class="w3-button w3-light-green"
       >
-        Login
+        <span v-if="disabled"
+          ><i class="fas fa-spinner w3-spin"></i> Logging in...</span
+        >
+        <span v-else>Login</span>
       </button>
       <div class="or">
         <hr />
