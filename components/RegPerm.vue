@@ -1,5 +1,8 @@
 <template>
-  <div class="cont">
+  <div
+    class="cont"
+    :class="{ 'w3-border-green': perm.used, 'w3-hide': deleting }"
+  >
     <div class="display" v-if="!editing">
       <h3 :class="{ 'w3-text-green': perm.used }">
         <i class="fas fa-key"></i> {{ perm.code }}
@@ -10,21 +13,33 @@
           >{{ perm.gender === 'm' ? 'Mister' : 'Miss' }} {{ perm.first_name }}
           {{ perm.last_name }}</b
         >
-        by {{ perm.from_who.first_name }} {{ perm.from_who.last_name }} to
-        create
+        by <span v-if="perm.from_who.username === username">you</span
+        ><span v-else
+          >admin {{ perm.from_who.first_name }}
+          {{ perm.from_who.last_name }}</span
+        >
+        to create
         {{ perm.role === 'admin' ? "an admin's" : "a teacher's" }} account on
         the system.
-        <span v-show="perm.used" class="w3-opacity"
+        <span v-if="perm.used" class="w3-text-green"
           >This permission has been used already.</span
         >
+        <span v-else>This permission is not yet used.</span>
       </p>
       <p class="w3-small">{{ new Date(perm.date).toDateString() }}</p>
       <div class="btn" v-show="perm.from_who.username === username">
         <button
           @click="editing = true"
+          v-show="!perm.used"
           class="w3-button w3-round w3-small w3-border w3-border-black"
         >
           <i class="fas fa-pencil-alt"></i>
+        </button>
+        <button
+          @click="deletePerm"
+          class="w3-button w3-text-red w3-round w3-small w3-border w3-border-red"
+        >
+          <i class="fas fa-trash-alt"></i>
         </button>
       </div>
     </div>
@@ -67,13 +82,21 @@
       <p v-show="error" class="w3-small w3-text-red w3-center">
         Please provide a unique code.
       </p>
-      <button type="submit" class="w3-button w3-green w3-round">
+      <button
+        type="submit"
+        :disabled="updating"
+        class="w3-button w3-light-green w3-round w3-small w3"
+      >
         <span v-if="updating"
           ><i class="fas fa-spinner w3-spin"></i> Updating...</span
         >
         <span v-else>Update Permission</span>
       </button>
-      <button class="w3-red w3-round w3-button" @click="editing = false">
+      <button
+        :disabled="updating"
+        class="w3-pink w3-round w3-button w3-small"
+        @click="editing = false"
+      >
         Cancel
       </button>
     </form>
@@ -90,6 +113,7 @@ export default {
     return {
       editing: false,
       updating: false,
+      deleting: false,
       error: false,
       role: this.perm.role,
       fName: this.perm.first_name,
@@ -105,6 +129,14 @@ export default {
     }
   },
   methods: {
+    async deletePerm() {
+      this.deleting = true
+      await this.$axios
+        .delete(`accounts/permissions/${this.perm.id}/`)
+        .then(() => {
+          this.$store.dispatch('user/getPerms')
+        })
+    },
     async update() {
       this.updating = true
       this.error = false
@@ -117,11 +149,10 @@ export default {
         department: this.dep
       }
       await this.$axios
-        .put(`accounts/permissions/${perm.id}/`, payload)
+        .put(`accounts/permissions/${this.perm.id}/`, payload)
         .then(({ data }) => {
           this.editing = false
-          this.error = false
-          this.$store.commit('user/UPDATE_PERM', data)
+          this.$store.dispatch('user/getPerms')
         })
         .catch(() => {
           this.error = true
@@ -161,6 +192,7 @@ h3 {
   justify-content: center;
   align-items: center;
   border-radius: 100%;
+  margin-left: 16px;
 }
 
 .w3-button {
