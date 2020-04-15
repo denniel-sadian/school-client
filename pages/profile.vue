@@ -207,7 +207,7 @@ export default {
 <style scoped>
 header {
   margin-top: 53px;
-  padding-top: 64px;
+  padding: 64px 0px;
 }
 
 .w3-content {
