@@ -5,7 +5,8 @@
       <p>
         This permission was given to
         {{ perm.gender === 'm' ? 'Mister' : 'Miss' }} {{ perm.first_name }}
-        {{ perm.last_name }} to create
+        {{ perm.last_name }} by {{ perm.from_who.first_name }}
+        {{ perm.from_who.last_name }} to create
         {{ perm.role === 'admin' ? "an admin's" : "a teacher's" }} account on
         the system.
         <span v-show="perm.used" class="w3-opacity"
