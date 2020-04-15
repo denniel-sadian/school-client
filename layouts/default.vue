@@ -45,7 +45,10 @@ export default {
     photo() {
       if (this.$store.state.user.user) {
         if (this.$store.state.user.user.profile.photo !== null)
-          return this.$store.state.user.user.profile.photo
+          return (
+            'https://school.pythonanywhere.com' +
+            this.$store.state.user.user.profile.photo
+          )
         return '/anon_avatar.png'
       }
       return ''
