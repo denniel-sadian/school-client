@@ -13,5 +13,5 @@ export default function({ $axios, redirect }) {
         $axios.setToken(res.data.access, 'Bearer')
       })
   }
-  setInterval(refresher, 30000)
+  setInterval(refresher, 60000)
 }
