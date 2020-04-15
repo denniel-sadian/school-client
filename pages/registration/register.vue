@@ -34,9 +34,6 @@
         <label>Password Again:</label>
         <input type="password" v-model="password1" @keypress.enter="register" />
       </div>
-      <p class="w3-small w3-text-green w3-center" v-show="registering">
-        Registering...
-      </p>
       <p class="w3-small w3-text-red w3-center" v-show="wrong">
         There was something wrong. Perhaps, your username is already taken or
         your passwords did not match.
@@ -47,7 +44,10 @@
         :disabled="disabled"
         class="w3-button w3-light-green"
       >
-        Register
+        <span v-if="registering">
+          <i class="fas fa-spinner w3-spin"></i> Registering...
+        </span>
+        <span v-else>Register</span>
       </button>
       <div class="or">
         <hr />
