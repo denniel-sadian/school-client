@@ -54,7 +54,7 @@
           Something was wrong. Perhaps, there is already a permission that holds
           the code you gave. Please, provide a unique code.
         </p>
-        <button class="w3-button w3-green w3-round">
+        <button type="submit" :disabled="creating" class="w3-button w3-green w3-round">
           <span v-if="creating"
             ><i class="fas fa-spinner w3-spin"></i> Creating</span
           >
