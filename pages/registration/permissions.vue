@@ -54,7 +54,11 @@
           Something was wrong. Perhaps, there is already a permission that holds
           the code you gave. Please, provide a unique code.
         </p>
-        <button type="submit" :disabled="creating" class="w3-button w3-green w3-round">
+        <button
+          type="submit"
+          :disabled="creating"
+          class="w3-button w3-green w3-round"
+        >
           <span v-if="creating"
             ><i class="fas fa-spinner w3-spin"></i> Creating</span
           >
@@ -71,6 +75,7 @@
           <h4>There are no permissions yet.</h4>
         </div>
         <div v-else>
+          <h2 class="w3-center">List of Permissions</h2>
           <RegPerm v-for="perm in permissions" :perm="perm" :key="perm.id" />
         </div>
       </div>
