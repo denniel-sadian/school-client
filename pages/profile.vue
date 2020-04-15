@@ -8,11 +8,12 @@
         <div id="profile-info">
           <h1>{{ user.first_name }} {{ user.last_name }}</h1>
           <p>
-            username: <b>{{ user.username }}</b>
+            <strong>@{{ user.username }}</strong>
           </p>
-          <p>
-            role: <b>{{ profile.role }}</b>
+          <p v-if="profile.role === 'admin'">
+            Your role is one of the admins of this system.
           </p>
+          <p v-else>Your role is a teacher.</p>
         </div>
       </div>
     </header>
@@ -298,7 +299,7 @@ header {
 
 .w3-content {
   max-width: 500px;
-  padding: 16px;
+  padding: 16px 0px;
 }
 
 #profile-header {
