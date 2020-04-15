@@ -61,6 +61,10 @@
             There was something wrong. Perhaps you are trying to specify values
             that were already taken by other users.
           </p>
+          <p v-show="updated" class="w3-small w3-text-green w3-center">
+            Your profile picture has been updated. It would take a few moments
+            to display your new photo depending on your connection.
+          </p>
           <button :disabled="updating" type="submit" class="w3-button w3-green">
             <span v-if="updating"
               ><i class="fas fa-spinner w3-spin"></i> Updating...</span
@@ -119,7 +123,8 @@ export default {
 
       file: '',
       updatingFile: false,
-      errorFile: false
+      errorFile: false,
+      updated: false
     }
   },
   computed: {
@@ -162,7 +167,13 @@ export default {
           await this.$store.dispatch('user/getUser').then(() => {
             this.updatingFile = false
             this.errorFile = false
-            this.$router.push('/profile')
+            this.updated = true
+            setTimeout(() => {
+              this.updated = false
+            }, 8000)
+            setTimeout(() => {
+              this.$router.push('/profile')
+            }, 10000)
           })
         })
         .catch(() => {
