@@ -12,6 +12,9 @@ export const mutations = {
   SET_PERMISSIONS(state, perms) {
     state.permissions = perms
   },
+  PUSH_PERM(state, perm) {
+    state.permissions.push(perm)
+  },
   TOGGLE_CAN_REFRESH(state) {
     state.canRefreshToken = !state.canRefreshToken
   }
