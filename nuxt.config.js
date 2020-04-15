@@ -54,7 +54,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'https://api-school-management.herokuapp.com'
+    baseURL: 'https://school.pythonanywhere.com'
   },
   /*
    ** Build configuration
