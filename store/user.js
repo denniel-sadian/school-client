@@ -10,7 +10,7 @@ export const mutations = {
     localStorage.setItem('school_user', JSON.stringify(user))
   },
   SET_PERMISSIONS(state, perms) {
-    state.perms = perms
+    state.permissions = perms
   },
   TOGGLE_CAN_REFRESH(state) {
     state.canRefreshToken = !state.canRefreshToken
@@ -36,7 +36,7 @@ export const actions = {
     })
   },
   getPerms({ commit }) {
-    return this.$axios.get('accounts/profile/').then(({ data }) => {
+    return this.$axios.get('accounts/permissions/').then(({ data }) => {
       commit('SET_PERMISSIONS', data)
     })
   },

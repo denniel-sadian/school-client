@@ -7,12 +7,25 @@
         account, an admin must provide a permission first.
       </p>
     </header>
+    <article class="w3-container">
+      <div class="w3-content">
+        {{ permissions }}
+      </div>
+    </article>
   </div>
 </template>
 
 <script>
 export default {
-  middleware: 'isAdmin'
+  middleware: 'isAdmin',
+  computed: {
+    permissions() {
+      return this.$store.state.user.permissions
+    }
+  },
+  mounted() {
+    this.$store.dispatch('user/getPerms')
+  }
 }
 </script>
 
