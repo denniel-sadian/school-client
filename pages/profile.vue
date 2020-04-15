@@ -136,7 +136,7 @@
             <span v-if="updatingPassword"
               ><i class="fas fa-spinner w3-spin"></i> Updating...</span
             >
-            <span v-else>Update Your Password</span>
+            <span v-else>Update Password</span>
           </button>
         </form>
       </div>
