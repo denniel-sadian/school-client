@@ -50,6 +50,7 @@ export const actions = {
   },
   logout({ commit }) {
     localStorage.clear()
+    this.$axios.setToken(false)
     commit('SET_USER', {})
   },
   toogleRefresh({ commit }) {
