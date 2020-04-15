@@ -110,6 +110,7 @@ export default {
       this.creating = true
       this.error = false
       const payload = {
+        code: this.code,
         role: this.role,
         first_name: this.fName,
         last_name: this.lName,
