@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="w3-container">
-      <div class="w3-content">
+      <div class="w3-content w3-padding">
         <h1>Welcome to the shool management system</h1>
         <p>
           <i class="fas fa-hand-sparkles"></i> Good day,
@@ -12,18 +12,24 @@
       </div>
     </header>
     <article class="w3-container w3-margin-top">
-      <div class="w3-content" id="first-grid">
-        <div>
-          <h3><i class="fas fa-school"></i><br />Departments</h3>
-          <h2>{{ departments }}</h2>
-        </div>
-        <div>
-          <h3><i class="fas fa-building"></i><br />Sections</h3>
-          <h2>{{ sections }}</h2>
-        </div>
-        <div>
-          <h3><i class="fas fa-portrait"></i><br />Students</h3>
-          <h2>{{ students }}</h2>
+      <div class="w3-content">
+        <div id="first-grid">
+          <div @click="$router.push('/departments')">
+            <h3><i class="fas fa-school"></i><br />Departments</h3>
+            <h2>{{ departments }}</h2>
+          </div>
+          <div @click="$router.push('/sections')">
+            <h3><i class="fas fa-building"></i><br />Sections</h3>
+            <h2>{{ sections }}</h2>
+          </div>
+          <div @click="$router.push('/students')">
+            <h3><i class="fas fa-portrait"></i><br />Students</h3>
+            <h2>{{ students }}</h2>
+          </div>
+          <div @click="$router.push('/sheets')">
+            <h3><i class="fas fa-file-excel"></i><br />Grading Sheets</h3>
+            <h2>{{ students }}</h2>
+          </div>
         </div>
       </div>
     </article>
@@ -75,8 +81,7 @@ header h1 {
 
 #first-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 16px 16px;
+  grid-template-columns: 50% 50%;
 }
 #first-grid > div {
   display: flex;
@@ -90,6 +95,7 @@ header h1 {
   border: 1px solid black;
   cursor: pointer;
   transition: 0.3s;
+  margin: 8px;
 }
 #first-grid > div:hover {
   background: #8bc34a;
@@ -100,5 +106,11 @@ header h1 {
 }
 #first-grid > div > h2 {
   font-weight: 800;
+}
+
+@media (max-width: 425px) {
+  #first-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
