@@ -1,5 +1,5 @@
 <template>
-  <div class="cont" v-show="!hide">
+  <div class="cont" :class="{ 'w3-opacity': deleting }" v-show="!hide">
     <div class="display" v-if="!editing">
       <div class="content">
         <div class="img-cont">

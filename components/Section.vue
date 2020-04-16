@@ -1,5 +1,5 @@
 <template>
-  <div class="cont" v-show="!hide">
+  <div class="cont" :class="{ 'w3-opacity': deleting }" v-show="!hide">
     <div class="display" v-if="!editing">
       <h3><i class="fas fa-building"></i> {{ sec.name }}</h3>
       <p class="w3-center w3-small w3-text-red" v-show="errorDelete">
