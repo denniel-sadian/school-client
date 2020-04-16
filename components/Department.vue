@@ -1,5 +1,5 @@
 <template>
-  <div class="cont" :class="{ 'w3-hide': deleting }">
+  <div class="cont" v-show="!hide">
     <div class="display" v-if="!editing">
       <h3><i class="fas fa-school"></i> {{ dep.name }}</h3>
       <p class="w3-center w3-small w3-text-red" v-show="errorDelete">
@@ -17,7 +17,8 @@
           @click="deleteDep"
           class="w3-button w3-text-red w3-round w3-small w3-border w3-border-red"
         >
-          <i class="fas fa-trash-alt"></i>
+          <i v-if="!deleting" class="fas fa-trash-alt"></i>
+          <i v-else class="fas fa-spinner w3-spin"></i>
         </button>
       </div>
     </div>
@@ -64,6 +65,7 @@ export default {
       deleting: false,
       error: false,
       errorDelete: false,
+      hide: false,
       name: this.dep.name
     }
   },
@@ -73,6 +75,7 @@ export default {
       await this.$axios
         .delete(`information/departments/${this.dep.id}/`)
         .then(() => {
+          this.hide = true
           this.$store.dispatch('information/getDepartments')
         })
         .catch(() => {
@@ -113,7 +116,7 @@ export default {
 
 <style scoped>
 .cont {
-  padding: 16px 16px 2px 16px;
+  padding: 2px 16px 2px 16px;
   border: 1px solid black;
   border-radius: 4px;
   margin: 30px 0px;
