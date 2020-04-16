@@ -38,7 +38,7 @@
             <h3>
               <i class="fas fa-file-excel"></i><br />Registration Permissions
             </h3>
-            <h2>{{ students }}</h2>
+            <h2>{{ regPerms }}</h2>
           </div>
         </div>
       </div>
@@ -69,6 +69,9 @@ export default {
     },
     students() {
       return this.$store.state.information.students.length
+    },
+    regPerms() {
+      return this.$store.state.user.permissions.length
     }
   },
   async mounted() {
