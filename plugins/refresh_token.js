@@ -17,5 +17,5 @@ export default function({ $axios, app }) {
         })
     }
   }
-  setInterval(refresher, 60000)
+  setInterval(refresher, 30000)
 }
