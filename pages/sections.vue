@@ -17,6 +17,14 @@
           <label>Section Name:</label>
           <input type="text" v-model="name" required :disabled="creating" />
         </div>
+        <div class="inpt">
+          <label>Department:</label>
+          <select v-model="dep" required>
+            <option v-for="dep in departments" :value="dep.url" :key="dep.id">{{
+              dep.name
+            }}</option>
+          </select>
+        </div>
         <hr />
         <p class="w3-center w3-text-red w3-small" v-show="error">
           Please provide a unique name.
@@ -63,10 +71,14 @@ export default {
     return {
       creating: false,
       error: false,
-      name: ''
+      name: '',
+      dep: ''
     }
   },
   computed: {
+    departments() {
+      return this.$store.state.information.departments
+    },
     sections() {
       return this.$store.state.information.sections
     },
@@ -78,10 +90,18 @@ export default {
     async createSection() {
       this.creating = true
       this.error = false
+      console.log({
+        name: this.name,
+        department: this.dep
+      })
       await this.$axios
-        .post('information/sections/', { name: this.name })
+        .post('information/sections/', {
+          name: this.name,
+          department: this.dep
+        })
         .then(({ data }) => {
           this.name = ''
+          this.dep = ''
           this.error = false
           this.$store.commit('information/PUSH_SECTION', data)
         })
