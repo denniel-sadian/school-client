@@ -30,6 +30,16 @@
             <h3><i class="fas fa-file-excel"></i><br />Grading Sheets</h3>
             <h2>{{ students }}</h2>
           </div>
+          <div @click="$router.push('/permissions')">
+            <h3><i class="fas fa-file-excel"></i><br />Viewing Permissions</h3>
+            <h2>{{ students }}</h2>
+          </div>
+          <div @click="$router.push('/registration/permissions')">
+            <h3>
+              <i class="fas fa-file-excel"></i><br />Registration Permissions
+            </h3>
+            <h2>{{ students }}</h2>
+          </div>
         </div>
       </div>
     </article>
@@ -111,6 +121,10 @@ header h1 {
 @media (max-width: 425px) {
   #first-grid {
     grid-template-columns: 1fr;
+  }
+
+  #first-grid > div {
+    margin: 8px 0px;
   }
 }
 </style>
