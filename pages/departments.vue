@@ -39,6 +39,7 @@
         </div>
         <div v-else>
           <h2 class="w3-center">List of Departments</h2>
+          {{ departments }}
         </div>
       </div>
     </article>
@@ -65,12 +66,11 @@ export default {
   methods: {
     async createDepartment() {
       this.creating = true
-      this.error = true
+      this.error = false
       await this.$axios
         .post('information/departments/', { name: this.name })
         .then(({ data }) => {
           this.name = ''
-          this.creating = false
           this.error = false
           this.$store.commit('information/PUSH_DEPARTMENT', data)
         })
