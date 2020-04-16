@@ -6,9 +6,36 @@
           <img src="" alt="" />
         </div>
         <div class="details">
-          <h4></h4>
+          <h4>{{ student.first_name }} {{ student.last_name }}</h4>
           <table>
-            <tr></tr>
+            <tr>
+              <th>ID Number:</th>
+              <td>{{ student.id_number }}</td>
+            </tr>
+            <tr>
+              <th>Phone Number:</th>
+              <td>{{ student.cp_number }}</td>
+            </tr>
+            <tr>
+              <th>Guardian's Phone Number:</th>
+              <td>{{ student.guardian_cp_number }}</td>
+            </tr>
+            <tr>
+              <th>Address:</th>
+              <td>{{ student.address }}</td>
+            </tr>
+            <tr>
+              <th>Grade Level:</th>
+              <td>{{ student.grade_level }}</td>
+            </tr>
+            <tr>
+              <th>Department:</th>
+              <td>{{ department }}</td>
+            </tr>
+            <tr>
+              <th>Section:</th>
+              <td>{{ section }}</td>
+            </tr>
           </table>
         </div>
       </div>
@@ -23,7 +50,7 @@
           <i class="fas fa-pencil-alt"></i>
         </button>
         <button
-          @click="deleteSec"
+          @click="deleteStudent"
           class="w3-button w3-text-red w3-round w3-small w3-border w3-border-red"
         >
           <i v-if="!deleting" class="fas fa-trash-alt"></i>
@@ -33,20 +60,85 @@
     </div>
     <form v-else @submit.prevent="update">
       <div class="inpt">
-        <label>Section Name:</label>
-        <input type="text" v-model="name" required :disabled="updating" />
+        <label>First Name:</label>
+        <input type="text" v-model="fName" required :disabled="creating" />
+      </div>
+      <div class="inpt">
+        <label>Last Name:</label>
+        <input type="text" v-model="lName" required :disabled="creating" />
+      </div>
+      <div class="inpt">
+        <label>ID Number:</label>
+        <input type="text" v-model="idNum" required :disabled="creating" />
+      </div>
+      <div class="inpt">
+        <label>Gender:</label>
+        <select v-model="gender" required>
+          <option value="m">Male</option>
+          <option value="f">Female</option>
+        </select>
+      </div>
+      <div class="inpt">
+        <label>Phone Number:</label>
+        <input type="text" v-model="phone" required :disabled="creating" />
+      </div>
+      <div class="inpt">
+        <label>Guardian's Phone Number:</label>
+        <input
+          type="text"
+          v-model="guardianPhone"
+          required
+          :disabled="creating"
+        />
+      </div>
+      <div class="inpt">
+        <label>Address:</label>
+        <input type="text" v-model="address" required :disabled="creating" />
+      </div>
+      <div class="inpt">
+        <label>Grade Level:</label>
+        <select class="form-control" v-model="grade" required>
+          <option value="1">Grade 1</option>
+          <option value="2">Grade 2</option>
+          <option value="3">Grade 3</option>
+          <option value="4">Grade 4</option>
+          <option value="5">Grade 5</option>
+          <option value="6">Grade 6</option>
+          <option value="7">Grade 7</option>
+          <option value="8">Grade 8</option>
+          <option value="9">Grade 9</option>
+          <option value="10">Grade 10</option>
+          <option value="11">Grade 11</option>
+          <option value="12">Grade 12</option>
+          <option value="c1">First Year College</option>
+          <option value="c2">Second Year College</option>
+          <option value="c3">Third Year College</option>
+          <option value="c4">Fourth Year College</option>
+        </select>
       </div>
       <div class="inpt">
         <label>Department:</label>
-        <select v-model="dep" required :disabled="updating">
+        <select v-model="dep" required>
           <option v-for="d in deps" :value="d.url" :key="d.id">{{
             d.name
           }}</option>
         </select>
       </div>
+      <div class="inpt">
+        <label>Section:</label>
+        <select v-model="sec" required>
+          <option v-for="s in secs" :value="s.url" :key="s.id">{{
+            s.name
+          }}</option>
+        </select>
+      </div>
+      <div class="inpt">
+        <label>Photo: <span class="w3-opacity">Optional</span></label>
+        <input type="file" ref="file" @change="handleFileUpload" required />
+      </div>
       <hr />
       <p v-show="error" class="w3-small w3-text-red w3-center">
-        Please provide a unique section name.
+        Please provide a unique value for the ID number.
       </p>
       <button
         type="submit"
@@ -56,7 +148,7 @@
         <span v-if="updating"
           ><i class="fas fa-spinner w3-spin"></i> Updating...</span
         >
-        <span v-else>Update this Section</span>
+        <span v-else>Update</span>
       </button>
       <button
         :disabled="updating"
@@ -72,9 +164,9 @@
 <script>
 export default {
   props: {
-    sec: Object,
+    student: Object,
     deps: Array,
-    role: String
+    secs: Array
   },
   data() {
     return {
@@ -84,18 +176,41 @@ export default {
       error: false,
       errorDelete: false,
       hide: false,
-      name: this.sec.name,
-      dep: this.sec.department
+      fName: '',
+      lName: '',
+      gender: '',
+      idNum: '',
+      phone: '',
+      guardianPhone: '',
+      address: '',
+      file: '',
+      dep: '',
+      sec: '',
+      grade: ''
+    }
+  },
+  computed: {
+    department() {
+      const dep = this.deps.filter((d) => {
+        d.url === this.student.department.url
+      })[0]
+      return dep.name
+    },
+    section() {
+      const sec = this.secs.filter((s) => {
+        s.url === this.student.section.url
+      })[0]
+      return sec.name
     }
   },
   methods: {
-    async deleteSec() {
+    async deleteStudent() {
       this.deleting = true
       await this.$axios
-        .delete(this.sec.url)
+        .delete(this.student.url)
         .then(() => {
           this.hide = true
-          this.$store.dispatch('information/getSections')
+          this.$store.dispatch('information/getStudents')
         })
         .catch(() => {
           this.errorDelete = true
@@ -107,18 +222,49 @@ export default {
           this.deleting = false
         })
     },
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0]
+    },
     async update() {
       this.updating = true
       this.error = false
-      const payload = {
-        name: this.name,
-        department: this.dep
-      }
+      let formData = new FormData()
+      formData.append('photo', this.file)
+      formData.append('first_name', this.fName)
+      formData.append('last_name', this.lName)
+      formData.append('gender', this.gender)
+      formData.append('id_number', this.idNum)
+      formData.append('cp_number', this.phone)
+      formData.append('guardian_cp_number', this.guardianPhone)
+      formData.append('address', this.address)
+      formData.append('grade_level', this.grade)
+      formData.append('department', this.dep)
+      formData.append('section', this.sec)
       await this.$axios
-        .put(this.sec.url, payload)
-        .then(({ data }) => {
+        .put(this.student.url, formData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              'school_access_token'
+            )}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(() => {
           this.editing = false
-          this.$store.dispatch('information/getSections')
+          this.file = ''
+          this.fName = ''
+          this.lName = ''
+          this.gender = ''
+          this.idNum = ''
+          this.phone = ''
+          this.guardianPhone = ''
+          this.address = ''
+          this.grade = ''
+          this.dep = ''
+          this.sec = ''
+          this.error = false
+          this.$store.dispatch('user/toogleRefresh')
+          this.$store.dispatch('information/getStudents')
         })
         .catch(() => {
           this.error = true
@@ -166,5 +312,15 @@ h3 {
 .w3-button {
   width: 100%;
   margin: 3px 0px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.img-cont,
+.details {
+  padding: 8px;
 }
 </style>
