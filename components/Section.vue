@@ -1,7 +1,7 @@
 <template>
   <div class="cont" v-show="!hide">
     <div class="display" v-if="!editing">
-      <h3><i class="fas fa-school"></i> {{ sec.name }}</h3>
+      <h3><i class="fas fa-building"></i> {{ sec.name }}</h3>
       <p class="w3-center w3-small w3-text-red" v-show="errorDelete">
         You cannot delete this section right now because some objects like
         grading sheets are in this section.
@@ -26,6 +26,14 @@
       <div class="inpt">
         <label>Section Name:</label>
         <input type="text" v-model="name" required :disabled="updating" />
+      </div>
+      <div class="inpt">
+        <label>Department:</label>
+        <select v-model="dep" required :disabled="updating">
+          <option v-for="d in deps" :value="d.url" :key="d.id">{{
+            d.name
+          }}</option>
+        </select>
       </div>
       <hr />
       <p v-show="error" class="w3-small w3-text-red w3-center">
@@ -56,6 +64,7 @@
 export default {
   props: {
     sec: Object,
+    deps: Array,
     role: String
   },
   data() {
@@ -66,14 +75,15 @@ export default {
       error: false,
       errorDelete: false,
       hide: false,
-      name: this.sec.name
+      name: this.sec.name,
+      dep: this.sec.department
     }
   },
   methods: {
     async deleteSec() {
       this.deleting = true
       await this.$axios
-        .delete(`information/sections/${this.sec.id}/`)
+        .delete(this.sec.url)
         .then(() => {
           this.hide = true
           this.$store.dispatch('information/getSections')
@@ -92,10 +102,11 @@ export default {
       this.updating = true
       this.error = false
       const payload = {
-        name: this.name
+        name: this.name,
+        department: this.dep
       }
       await this.$axios
-        .put(`information/sections/${this.sec.id}/`, payload)
+        .put(this.sec.url, payload)
         .then(({ data }) => {
           this.editing = false
           this.$store.dispatch('information/getSections')

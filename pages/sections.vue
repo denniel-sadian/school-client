@@ -51,6 +51,7 @@
           <Section
             v-for="sec in sections"
             :sec="sec"
+            :deps="departments"
             :role="role"
             :key="sec.id"
           />
@@ -90,10 +91,6 @@ export default {
     async createSection() {
       this.creating = true
       this.error = false
-      console.log({
-        name: this.name,
-        department: this.dep
-      })
       await this.$axios
         .post('information/sections/', {
           name: this.name,
