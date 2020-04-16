@@ -29,7 +29,7 @@
       <p class="w3-small">{{ new Date(perm.date).toDateString() }}</p>
       <div class="btn" v-show="perm.from_who.username === username">
         <button
-          @click="editing = true"
+          @click="edit"
           v-show="!perm.used"
           class="w3-button w3-round w3-small w3-border w3-border-black"
         >
@@ -129,6 +129,15 @@ export default {
     }
   },
   methods: {
+    edit() {
+      this.editing = true
+      this.role = this.perm.role
+      this.fName = this.perm.first_name
+      this.lName = this.perm.last_name
+      this.gender = this.perm.gender
+      this.code = this.perm.code
+      this.dep = this.perm.department
+    },
     async deletePerm() {
       this.deleting = true
       await this.$axios
