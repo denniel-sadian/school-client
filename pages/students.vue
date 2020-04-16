@@ -111,6 +111,13 @@
         </div>
         <div v-else>
           <h2 class="w3-center">List of Students</h2>
+          <Student
+            v-for="s in students"
+            :student="s"
+            :deps="departments"
+            :secs="sections"
+            :key="s.id"
+          />
         </div>
       </div>
     </article>
@@ -118,7 +125,10 @@
 </template>
 
 <script>
+import Student from '~/components/Student.vue'
+
 export default {
+  components: { Student },
   data() {
     return {
       creating: false,
