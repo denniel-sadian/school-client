@@ -292,7 +292,7 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('information/getDeps')
+    await this.$store.dispatch('information/getDepartments')
     await this.$store.dispatch('user/getUser')
   }
 }

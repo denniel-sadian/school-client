@@ -98,7 +98,7 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('information/getDeps')
+    await this.$store.dispatch('information/getDepartments')
   }
 }
 </script>
