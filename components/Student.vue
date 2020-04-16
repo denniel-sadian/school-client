@@ -52,12 +52,14 @@
       <div class="btn">
         <button
           @click="edit"
+          :disabled="deleting"
           class="w3-button w3-round w3-small w3-border w3-border-black"
         >
           <i class="fas fa-pencil-alt"></i>
         </button>
         <button
           @click="deleteStudent"
+          :disabled="deleting"
           class="w3-button w3-text-red w3-round w3-small w3-border w3-border-red"
         >
           <i v-if="!deleting" class="fas fa-trash-alt"></i>
