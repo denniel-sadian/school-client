@@ -25,6 +25,18 @@ export const mutations = {
     state.departments = state.departments.sort((a, b) => {
       return b.id - a.id
     })
+  },
+  PUSH_SECTION(state, sec) {
+    state.sections.push(sec)
+    state.sections = state.sections.sort((a, b) => {
+      return b.id - a.id
+    })
+  },
+  PUSH_STUDENT(state, s) {
+    state.students.push(s)
+    state.students = state.students.sort((a, b) => {
+      return b.id - a.id
+    })
   }
 }
 
