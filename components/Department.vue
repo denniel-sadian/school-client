@@ -50,7 +50,8 @@
 <script>
 export default {
   props: {
-    dep: Array
+    dep: Array,
+    role: String
   },
   data() {
     return {
@@ -59,11 +60,6 @@ export default {
       deleting: false,
       error: false,
       name: this.perm.name
-    }
-  },
-  computed: {
-    role() {
-      return this.$store.state.user.user.profile.role
     }
   },
   methods: {
