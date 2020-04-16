@@ -26,7 +26,7 @@
           class="w3-button"
           :class="{ current: pageName === 'index' }"
         >
-          Home
+          <i class="fas fa-home"></i> Home
         </button>
         <button
           @click="
@@ -36,7 +36,7 @@
           class="w3-button"
           :class="{ current: pageName === 'departments' }"
         >
-          Departments
+          <i class="fas fa-school"></i> Departments
         </button>
         <button
           @click="
@@ -46,7 +46,7 @@
           class="w3-button"
           :class="{ current: pageName === 'sections' }"
         >
-          Sections
+          <i class="fas fa-building"></i> Sections
         </button>
         <button
           @click="
@@ -56,7 +56,7 @@
           class="w3-button"
           :class="{ current: pageName === 'students' }"
         >
-          Students
+          <i class="fas fa-portrait"></i> Students
         </button>
         <button
           @click="
@@ -66,7 +66,7 @@
           class="w3-button"
           :class="{ current: pageName === 'sheets' }"
         >
-          Grading Sheets
+          <i class="fas fa-file-excel"></i> Grading Sheets
         </button>
         <button
           @click="
@@ -75,7 +75,7 @@
           "
           class="w3-button"
         >
-          Logout
+          <i class="fas fa-sign-out-alt"></i> Logout
         </button>
       </div>
     </nav>
@@ -191,10 +191,15 @@ nav .main span {
   padding: 0px 16px;
   margin: 0px 4px;
   border: 1px solid #f1f1f1;
+  color: #9e9e9e;
   height: 100%;
   display: flex;
   align-items: center;
   border-radius: 32px;
+}
+
+#links button i {
+  margin-right: 8px;
 }
 
 #links button:hover {
@@ -212,7 +217,7 @@ nav .toggle {
   cursor: pointer;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1045px) {
   nav {
     display: flex;
     flex-direction: column;
@@ -246,7 +251,6 @@ nav .toggle {
     border-radius: unset;
     width: 100%;
     height: 40px;
-    justify-content: center;
     color: black;
     border: 1px solid #f1f1f1;
   }
@@ -255,5 +259,6 @@ nav .toggle {
 .current {
   background: #fff;
   border: 1px solid black !important;
+  color: black !important;
 }
 </style>
