@@ -212,6 +212,9 @@ export default {
           this.creating = false
         })
     }
+  },
+  async mounted() {
+    await this.$store.dispatch('information/getInformation')
   }
 }
 </script>
