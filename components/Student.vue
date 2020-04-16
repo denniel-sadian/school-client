@@ -150,7 +150,6 @@
           type="file"
           ref="file"
           @change="handleFileUpload"
-          required
           :disabled="updating"
         />
       </div>

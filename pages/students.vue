@@ -86,7 +86,7 @@
         </div>
         <div class="inpt">
           <label>Photo: <span class="w3-opacity">Optional</span></label>
-          <input type="file" ref="file" @change="handleFileUpload" required />
+          <input type="file" ref="file" @change="handleFileUpload" />
         </div>
         <hr />
         <p class="w3-center w3-text-red w3-small" v-show="error">
