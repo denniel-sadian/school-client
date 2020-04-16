@@ -92,7 +92,7 @@ header {
 }
 
 header > div {
-  border: 2px solid #9e9e9e;
+  border: 1.5px solid #9e9e9e;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 4px;
   max-width: 400px;
