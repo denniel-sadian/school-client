@@ -9,14 +9,14 @@
 .inpt label {
   font-size: 12px;
   font-weight: bold;
-  font-family: 'Nunito';
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .inpt input,
 .inpt select {
   background: white;
   border-radius: 4px;
-  border: 1.5px solid black;
+  border: 1.5px solid #9e9e9e;
   height: 40px;
   transition: 0.3s;
   padding: 0px 8px;
