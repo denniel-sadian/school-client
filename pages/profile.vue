@@ -290,6 +290,10 @@ export default {
           }, 10000)
         })
     }
+  },
+  async mounted() {
+    await this.$store.dispatch('information/getDeps')
+    await this.$store.dispatch('user/getUser')
   }
 }
 </script>
