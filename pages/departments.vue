@@ -72,7 +72,7 @@ export default {
           this.name = ''
           this.creating = false
           this.error = false
-          this.$store.commit('information/PUSH_DEP', data)
+          this.$store.commit('information/PUSH_DEPARTMENT', data)
         })
         .catch(() => {
           this.error = true
