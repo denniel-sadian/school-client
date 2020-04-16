@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="w3-container">
-      <div class="w3-content w3-center">
+      <div class="w3-content w3-padding w3-center">
         <h1>Account Registration Permissions</h1>
         <p>
           This page can only be accessed by the admins. Before anyone creates an

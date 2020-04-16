@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="w3-container">
-      <div class="w3-content w3-center">
+      <div class="w3-content w3-padding w3-center">
         <h1>The Departments</h1>
         <p>
           Both teachers and admins can view this page, but only the admins can
