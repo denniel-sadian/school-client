@@ -5,7 +5,9 @@
         <h1>The Departments</h1>
         <p>
           Both teachers and admins can view this page, but only the admins can
-          modify the departments.
+          modify the departments. If you are an admin, please refrain from
+          deleting departments, especially if some users (admins or teachers)
+          are using them in this profile.
         </p>
       </div>
     </header>
