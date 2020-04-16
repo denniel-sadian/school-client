@@ -14,7 +14,7 @@ export const mutations = {
   SET_STUDENTS(state, students) {
     state.students = students
   },
-  PUSH_DEP(state, dep) {
+  PUSH_DEPARTMENT(state, dep) {
     state.departments.push(dep)
     state.departments = state.departments.sort((a, b) => {
       return b.id - a.id
@@ -23,14 +23,23 @@ export const mutations = {
 }
 
 export const actions = {
-  getInformation({ commit }) {
-    this.$axios.get('information/departments/').then(({ data }) => {
+  getInformation({ dispatch }) {
+    dispatch('getDepartments')
+    dispatch('getSections')
+    dispatch('getStudents')
+  },
+  getDepartments({ commit }) {
+    return this.$axios.get('information/departments/').then(({ data }) => {
       commit('SET_DEPARTMENTS', data)
     })
-    this.$axios.get('information/sections/').then(({ data }) => {
+  },
+  getSections({ commit }) {
+    return this.$axios.get('information/sections/').then(({ data }) => {
       commit('SET_SECTIONS', data)
     })
-    this.$axios.get('information/students/').then(({ data }) => {
+  },
+  getStudents({ commit }) {
+    return this.$axios.get('information/students/').then(({ data }) => {
       commit('SET_STUDENTS', data)
     })
   }
