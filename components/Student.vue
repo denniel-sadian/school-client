@@ -226,7 +226,6 @@ export default {
       this.phone = this.student.cp_number
       this.guardianPhone = this.student.guardian_cp_number
       this.address = this.student.address
-      this.file = this.student.photo
       this.dep = this.student.department
       this.sec = this.student.section
       this.grade = this.student.grade_level
@@ -256,7 +255,7 @@ export default {
       this.updating = true
       this.error = false
       let formData = new FormData()
-      formData.append('photo', this.file)
+      if (this.file !== '') formData.append('photo', this.file)
       formData.append('first_name', this.fName)
       formData.append('last_name', this.lName)
       formData.append('gender', this.gender)
@@ -267,6 +266,7 @@ export default {
       formData.append('grade_level', this.grade)
       formData.append('department', this.dep)
       formData.append('section', this.sec)
+      this.$store.dispatch('user/toogleRefresh')
       await this.$axios
         .put(this.student.url, formData, {
           headers: {
@@ -281,7 +281,7 @@ export default {
           this.$store.dispatch('user/toogleRefresh')
           this.$store.dispatch('information/getStudents')
         })
-        .catch(() => {
+        .catch((err) => {
           this.error = true
           setTimeout(() => {
             this.error = false
