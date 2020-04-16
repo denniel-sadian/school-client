@@ -190,6 +190,7 @@ export default {
           this.dep = ''
           this.sec = ''
           this.error = false
+          this.$store.dispatch('user/toogleRefresh')
           this.$store.commit('information/PUSH_STUDENT', data)
         })
         .catch(() => {
