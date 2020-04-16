@@ -39,7 +39,12 @@
         </div>
         <div v-else>
           <h2 class="w3-center">List of Departments</h2>
-          <RegPerm v-for="dep in departments" :dep="dep" :key="dep.id" />
+          <RegPerm
+            v-for="dep in departments"
+            :dep="dep"
+            :role="role"
+            :key="dep.id"
+          />
         </div>
       </div>
     </article>
