@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     edit() {
-      this.editing = false
+      this.editing = true
       this.name = this.sec.name
       this.dep = this.sec.department
     },
