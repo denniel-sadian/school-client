@@ -314,12 +314,13 @@ header {
   display: flex;
 }
 #profile-photo img {
-  max-width: 150px;
-  max-height: 150px;
-  min-width: 150px;
-  min-height: 150px;
+  max-width: 200px;
+  max-height: 200px;
+  min-width: 200px;
+  min-height: 200px;
   border-radius: 100%;
   object-fit: cover;
+  border: 2px solid #9e9e9e;
 }
 #profile-info {
   padding: 16px;
@@ -339,16 +340,20 @@ header {
   border-radius: 4px;
 }
 
+.or {
+  margin: 64px 0px;
+}
+
 @media (max-width: 900px) {
   #profile-header {
     flex-direction: column;
     justify-content: center;
   }
   #profile-photo img {
-    max-width: 80px;
-    max-height: 80px;
-    min-width: 80px;
-    min-height: 80px;
+    max-width: 100px;
+    max-height: 100px;
+    min-width: 100px;
+    min-height: 100px;
   }
   #profile-info,
   #profile-photo {
