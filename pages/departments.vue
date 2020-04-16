@@ -9,12 +9,12 @@
         </p>
       </div>
     </header>
-    <article class="w3-container">
+    <article class="w3-container" v-show="role === 'admin'">
       <form @submit.prevent="createDepartment" class="w3-content">
         <h2><i class="fas fa-plus-circle"></i> Add a Department</h2>
         <div class="inpt">
           <label>Department Name:</label>
-          <input type="text" v-model="name" required />
+          <input type="text" v-model="name" required :disabled="creating" />
         </div>
         <hr />
         <p class="w3-center w3-text-red w3-small" v-show="error">
@@ -47,9 +47,42 @@
 
 <script>
 export default {
+  data() {
+    return {
+      creating: false,
+      error: false,
+      name: ''
+    }
+  },
   computed: {
     departments() {
       return this.$store.state.information.departments
+    },
+    role() {
+      return this.$store.state.user.user.profile.role
+    }
+  },
+  methods: {
+    async createDepartment() {
+      this.creating = true
+      this.error = true
+      await this.$axios
+        .post('information/departments/', { name: this.name })
+        .then(({ data }) => {
+          this.name = ''
+          this.creating = false
+          this.error = false
+          this.$store.commit('information/PUSH_DEP', data)
+        })
+        .catch(() => {
+          this.error = true
+          setTimeout(() => {
+            this.error = false
+          }, 10000)
+        })
+        .finally(() => {
+          this.creating = false
+        })
     }
   }
 }
