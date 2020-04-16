@@ -1,23 +1,77 @@
 <template>
   <div>
     <nav>
-      <nuxt-link to="/profile">
-        <div class="main">
+      <div>
+        <div
+          @click="
+            $router.push('/profile')
+            showLinks = false
+          "
+          class="main"
+        >
           <img id="user-img" :src="photo" />
           <span>{{ fullname }}</span>
         </div>
-      </nuxt-link>
+      </div>
       <div class="toggle" @click="showLinks = !showLinks">
         <i class="fas fa-bars" v-if="!showLinks"></i>
         <i class="fas fa-times" v-else></i>
       </div>
       <div id="links" :class="{ 'w3-show': showLinks }" class="w3-animate-top">
-        <nuxt-link to="/">Home</nuxt-link>
-        <a href="#">Departments</a>
-        <a href="#">Sections</a>
-        <a href="#">Students</a>
-        <a href="#">Grading Sheets</a>
-        <a @click="logout">Logout</a>
+        <button
+          @click="
+            $router.push('/')
+            showLinks = false
+          "
+          class="w3-button"
+        >
+          Home
+        </button>
+        <button
+          @click="
+            $router.push('/departments')
+            showLinks = false
+          "
+          class="w3-button"
+        >
+          Departments
+        </button>
+        <button
+          @click="
+            $router.push('/sections')
+            showLinks = false
+          "
+          class="w3-button"
+        >
+          Sections
+        </button>
+        <button
+          @click="
+            $router.push('/students')
+            showLinks = false
+          "
+          class="w3-button"
+        >
+          Students
+        </button>
+        <button
+          @click="
+            $router.push('/sheets')
+            showLinks = false
+          "
+          class="w3-button"
+        >
+          Grading Sheets
+        </button>
+        <button
+          @click="
+            $router.push('/login')
+            showLinks = false
+          "
+          class="w3-button"
+        >
+          Logout
+        </button>
       </div>
     </nav>
     <nuxt />
@@ -52,11 +106,6 @@ export default {
         return '/anon_avatar.png'
       }
       return ''
-    }
-  },
-  methods: {
-    logout() {
-      this.$router.push('/login')
     }
   }
 }
@@ -95,7 +144,7 @@ nav {
   background: #f1f1f1;
 }
 
-nav a {
+nav {
   text-decoration: none;
   font-family: 'Nunito';
 }
@@ -104,6 +153,7 @@ nav .main {
   display: flex;
   align-items: center;
   font-weight: 800;
+  cursor: pointer;
 }
 
 nav .main #user-img {
@@ -119,16 +169,17 @@ nav .main #user-img {
 nav .main span {
   padding: 0px 18px 0px 8px;
   text-transform: uppercase;
+  font-weight: 800;
 }
 
-nav > div:last-child {
+#links {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   width: 100%;
 }
 
-nav > div:last-child > a {
+#links button {
   padding: 0px 16px;
   margin: 0px 4px;
   border: 1px solid #f1f1f1;
@@ -138,9 +189,9 @@ nav > div:last-child > a {
   border-radius: 32px;
 }
 
-nav > div:last-child > a:hover {
+#links button:hover {
   border: 1px solid #9e9e9e;
-  background: #fff;
+  background: #fff !important;
   transition: 0.3s;
 }
 
@@ -174,12 +225,12 @@ nav .toggle {
     right: 8px;
   }
 
-  nav > div:last-child {
+  #links {
     flex-direction: column;
     display: none;
   }
 
-  nav > div:last-child > a {
+  #links button {
     margin: 0px;
     height: 30px;
     background: #f1f1f1;
@@ -190,10 +241,6 @@ nav .toggle {
     justify-content: center;
     color: black;
     border: 1px solid #f1f1f1;
-  }
-
-  nav > div:last-child > a:hover {
-    background: #fff;
   }
 }
 </style>
