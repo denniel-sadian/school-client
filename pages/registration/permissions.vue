@@ -57,7 +57,7 @@
           class="w3-button w3-green w3-round"
         >
           <span v-if="creating"
-            ><i class="fas fa-spinner w3-spin"></i> Creating</span
+            ><i class="fas fa-spinner w3-spin"></i> Creating...</span
           >
           <span v-else>Create Permission</span>
         </button>
@@ -69,7 +69,7 @@
       </p>
       <div v-else class="w3-content">
         <div v-if="permissions.length === 0" class="w3-center">
-          <h4>There are no permissions yet.</h4>
+          <h4>There is no permission yet.</h4>
         </div>
         <div v-else>
           <h2 class="w3-center">List of Permissions</h2>
