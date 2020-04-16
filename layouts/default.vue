@@ -34,6 +34,7 @@
             showLinks = false
           "
           class="w3-button"
+          :class="{ current: pageName === 'departments' }"
         >
           Departments
         </button>
@@ -43,6 +44,7 @@
             showLinks = false
           "
           class="w3-button"
+          :class="{ current: pageName === 'sections' }"
         >
           Sections
         </button>
@@ -52,6 +54,7 @@
             showLinks = false
           "
           class="w3-button"
+          :class="{ current: pageName === 'students' }"
         >
           Students
         </button>
@@ -61,6 +64,7 @@
             showLinks = false
           "
           class="w3-button"
+          :class="{ current: pageName === 'sheets' }"
         >
           Grading Sheets
         </button>
