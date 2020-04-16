@@ -8,7 +8,7 @@
       </p>
       <div class="btn" v-show="role === 'admin'">
         <button
-          @click="editing = true"
+          @click="edit"
           class="w3-button w3-round w3-small w3-border w3-border-black"
         >
           <i class="fas fa-pencil-alt"></i>
@@ -75,11 +75,16 @@ export default {
       error: false,
       errorDelete: false,
       hide: false,
-      name: this.sec.name,
-      dep: this.sec.department
+      name: '',
+      dep: ''
     }
   },
   methods: {
+    edit() {
+      this.editing = false
+      this.name = this.sec.name
+      this.dep = this.sec.department
+    },
     async deleteSec() {
       this.deleting = true
       await this.$axios
