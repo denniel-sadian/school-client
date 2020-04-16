@@ -1,0 +1,135 @@
+<template>
+  <div class="cont" :class="{ 'w3-hide': deleting }">
+    <div class="display" v-if="!editing">
+      <h3><i class="fas fa-school"></i> {{ dep.name }}</h3>
+      <div class="btn" v-show="role === 'admin'">
+        <button
+          @click="editing = true"
+          class="w3-button w3-round w3-small w3-border w3-border-black"
+        >
+          <i class="fas fa-pencil-alt"></i>
+        </button>
+        <button
+          @click="deleteDep"
+          class="w3-button w3-text-red w3-round w3-small w3-border w3-border-red"
+        >
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+    </div>
+    <form v-else @submit.prevent="update">
+      <div class="inpt">
+        <label>Department Name:</label>
+        <input type="text" v-model="name" required />
+      </div>
+      <hr />
+      <p v-show="error" class="w3-small w3-text-red w3-center">
+        Please provide a unique department name.
+      </p>
+      <button
+        type="submit"
+        :disabled="updating"
+        class="w3-button w3-light-green w3-round w3-small w3"
+      >
+        <span v-if="updating"
+          ><i class="fas fa-spinner w3-spin"></i> Updating...</span
+        >
+        <span v-else>Update this Department</span>
+      </button>
+      <button
+        :disabled="updating"
+        class="w3-pink w3-round w3-button w3-small"
+        @click="editing = false"
+      >
+        Cancel
+      </button>
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    dep: Array
+  },
+  data() {
+    return {
+      editing: false,
+      updating: false,
+      deleting: false,
+      error: false,
+      name: this.perm.name
+    }
+  },
+  computed: {
+    role() {
+      return this.$store.state.user.user.profile.role
+    }
+  },
+  methods: {
+    async deleteDep() {
+      this.deleting = true
+      await this.$axios
+        .delete(`information/departments/${this.dep.id}/`)
+        .then(() => {
+          this.$store.dispatch('user/getDepartments')
+        })
+    },
+    async update() {
+      this.updating = true
+      this.error = false
+      const payload = {
+        name: this.name
+      }
+      await this.$axios
+        .put(`inforamtion/departments/${this.dep.id}/`, payload)
+        .then(({ data }) => {
+          this.editing = false
+          this.$store.dispatch('user/getDepartments')
+        })
+        .catch(() => {
+          this.error = true
+          setTimeout(() => {
+            this.error = false
+          }, 10000)
+        })
+        .finally(() => {
+          this.updating = false
+        })
+    }
+  }
+}
+</script>
+
+<style scoped>
+.cont {
+  padding: 16px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 16px 0px;
+}
+
+h3 {
+  font-weight: 800;
+}
+
+.btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn button {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  margin-left: 16px;
+}
+
+.w3-button {
+  width: 100%;
+  margin: 3px 0px;
+}
+</style>
