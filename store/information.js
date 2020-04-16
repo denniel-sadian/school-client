@@ -13,6 +13,12 @@ export const mutations = {
   },
   SET_STUDENTS(state, students) {
     state.students = students
+  },
+  PUSH_DEP(state, dep) {
+    state.departments.push(dep)
+    state.departments = state.departments.sort((a, b) => {
+      return b.id - a.id
+    })
   }
 }
 
