@@ -6,13 +6,19 @@ export const state = () => ({
 
 export const mutations = {
   SET_DEPARTMENTS(state, deps) {
-    state.departments = deps
+    state.departments = deps.sort((a, b) => {
+      return b.id - a.id
+    })
   },
   SET_SECTIONS(state, sections) {
-    state.sections = sections
+    state.sections = sections.sort((a, b) => {
+      return b.id - a.id
+    })
   },
   SET_STUDENTS(state, students) {
-    state.students = students
+    state.students = students.sort((a, b) => {
+      return b.id - a.id
+    })
   },
   PUSH_DEPARTMENT(state, dep) {
     state.departments.push(dep)
