@@ -20,7 +20,7 @@
     <form v-else @submit.prevent="update">
       <div class="inpt">
         <label>Department Name:</label>
-        <input type="text" v-model="name" required />
+        <input type="text" v-model="name" required :disabled="updating" />
       </div>
       <hr />
       <p v-show="error" class="w3-small w3-text-red w3-center">
@@ -50,7 +50,7 @@
 <script>
 export default {
   props: {
-    dep: Array,
+    dep: Object,
     role: String
   },
   data() {
@@ -59,7 +59,7 @@ export default {
       updating: false,
       deleting: false,
       error: false,
-      name: this.perm.name
+      name: this.dep.name
     }
   },
   methods: {
@@ -68,7 +68,7 @@ export default {
       await this.$axios
         .delete(`information/departments/${this.dep.id}/`)
         .then(() => {
-          this.$store.dispatch('user/getDepartments')
+          this.$store.dispatch('information/getDepartments')
         })
     },
     async update() {
@@ -78,10 +78,10 @@ export default {
         name: this.name
       }
       await this.$axios
-        .put(`inforamtion/departments/${this.dep.id}/`, payload)
+        .put(`information/departments/${this.dep.id}/`, payload)
         .then(({ data }) => {
           this.editing = false
-          this.$store.dispatch('user/getDepartments')
+          this.$store.dispatch('information/getDepartments')
         })
         .catch(() => {
           this.error = true
@@ -99,10 +99,10 @@ export default {
 
 <style scoped>
 .cont {
-  padding: 16px;
+  padding: 16px 16px 2px 16px;
   border: 1px solid black;
   border-radius: 4px;
-  margin: 16px 0px;
+  margin: 30px 0px;
 }
 
 h3 {
@@ -112,6 +112,8 @@ h3 {
 .btn {
   display: flex;
   justify-content: flex-end;
+  border-top: 1px solid #9e9e9e;
+  padding-top: 2px;
 }
 
 .btn button {
