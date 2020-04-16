@@ -39,7 +39,7 @@
         </div>
         <div v-else>
           <h2 class="w3-center">List of Departments</h2>
-          {{ departments }}
+          <RegPerm v-for="dep in departments" :dep="dep" :key="dep.id" />
         </div>
       </div>
     </article>
@@ -47,7 +47,12 @@
 </template>
 
 <script>
+import Department from '~/components/Department.vue'
+
 export default {
+  components: {
+    Department
+  },
   data() {
     return {
       creating: false,
