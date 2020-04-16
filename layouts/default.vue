@@ -24,6 +24,7 @@
             showLinks = false
           "
           class="w3-button"
+          :class="{ current: pageName === 'index' }"
         >
           Home
         </button>
@@ -88,6 +89,9 @@ export default {
     }
   },
   computed: {
+    pageName() {
+      return this.$route.name
+    },
     fullname() {
       if (this.$store.state.user.user) {
         const f = this.$store.state.user.user.user.first_name
@@ -242,5 +246,10 @@ nav .toggle {
     color: black;
     border: 1px solid #f1f1f1;
   }
+}
+
+.current {
+  background: #fff;
+  border: 1px solid black !important;
 }
 </style>
