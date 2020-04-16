@@ -3,21 +3,28 @@
     <div class="display" v-if="!editing">
       <div class="content">
         <div class="img-cont">
-          <img src="" alt="" />
+          <img v-if="student.photo" :src="student.photo" alt="" />
+          <img v-else src="/anon_avatar.png" alt="" />
         </div>
         <div class="details">
-          <h4>{{ student.first_name }} {{ student.last_name }}</h4>
+          <h4 class="w3-text-green">
+            {{ student.first_name }} {{ student.last_name }}
+          </h4>
           <table>
             <tr>
               <th>ID Number:</th>
               <td>{{ student.id_number }}</td>
             </tr>
             <tr>
+              <th>Gender:</th>
+              <td>{{ student.gender === 'm' ? 'Male' : 'Female' }}</td>
+            </tr>
+            <tr>
               <th>Phone Number:</th>
               <td>{{ student.cp_number }}</td>
             </tr>
             <tr>
-              <th>Guardian's Phone Number:</th>
+              <th>Guardian's:</th>
               <td>{{ student.guardian_cp_number }}</td>
             </tr>
             <tr>
@@ -61,26 +68,26 @@
     <form v-else @submit.prevent="update">
       <div class="inpt">
         <label>First Name:</label>
-        <input type="text" v-model="fName" required :disabled="creating" />
+        <input type="text" v-model="fName" required :disabled="updating" />
       </div>
       <div class="inpt">
         <label>Last Name:</label>
-        <input type="text" v-model="lName" required :disabled="creating" />
+        <input type="text" v-model="lName" required :disabled="updating" />
       </div>
       <div class="inpt">
         <label>ID Number:</label>
-        <input type="text" v-model="idNum" required :disabled="creating" />
+        <input type="text" v-model="idNum" required :disabled="updating" />
       </div>
       <div class="inpt">
         <label>Gender:</label>
-        <select v-model="gender" required>
+        <select v-model="gender" required :disabled="updating">
           <option value="m">Male</option>
           <option value="f">Female</option>
         </select>
       </div>
       <div class="inpt">
         <label>Phone Number:</label>
-        <input type="text" v-model="phone" required :disabled="creating" />
+        <input type="text" v-model="phone" required :disabled="updating" />
       </div>
       <div class="inpt">
         <label>Guardian's Phone Number:</label>
@@ -88,16 +95,21 @@
           type="text"
           v-model="guardianPhone"
           required
-          :disabled="creating"
+          :disabled="updating"
         />
       </div>
       <div class="inpt">
         <label>Address:</label>
-        <input type="text" v-model="address" required :disabled="creating" />
+        <input type="text" v-model="address" required :disabled="updating" />
       </div>
       <div class="inpt">
         <label>Grade Level:</label>
-        <select class="form-control" v-model="grade" required>
+        <select
+          class="form-control"
+          v-model="grade"
+          required
+          :disabled="updating"
+        >
           <option value="1">Grade 1</option>
           <option value="2">Grade 2</option>
           <option value="3">Grade 3</option>
@@ -118,7 +130,7 @@
       </div>
       <div class="inpt">
         <label>Department:</label>
-        <select v-model="dep" required>
+        <select v-model="dep" required :disabled="updating">
           <option v-for="d in deps" :value="d.url" :key="d.id">{{
             d.name
           }}</option>
@@ -126,7 +138,7 @@
       </div>
       <div class="inpt">
         <label>Section:</label>
-        <select v-model="sec" required>
+        <select v-model="sec" required :disabled="updating">
           <option v-for="s in secs" :value="s.url" :key="s.id">{{
             s.name
           }}</option>
@@ -134,7 +146,13 @@
       </div>
       <div class="inpt">
         <label>Photo: <span class="w3-opacity">Optional</span></label>
-        <input type="file" ref="file" @change="handleFileUpload" required />
+        <input
+          type="file"
+          ref="file"
+          @change="handleFileUpload"
+          required
+          :disabled="updating"
+        />
       </div>
       <hr />
       <p v-show="error" class="w3-small w3-text-red w3-center">
@@ -176,30 +194,26 @@ export default {
       error: false,
       errorDelete: false,
       hide: false,
-      fName: '',
-      lName: '',
-      gender: '',
-      idNum: '',
-      phone: '',
-      guardianPhone: '',
-      address: '',
-      file: '',
-      dep: '',
-      sec: '',
-      grade: ''
+      fName: this.student.first_name,
+      lName: this.student.last_name,
+      gender: this.student.gender,
+      idNum: this.student.id_number,
+      phone: this.student.cp_number,
+      guardianPhone: this.student.guardian_cp_number,
+      address: this.student.address,
+      file: this.student.photo,
+      dep: this.student.department,
+      sec: this.student.section,
+      grade: this.student.grade_level
     }
   },
   computed: {
     department() {
-      const dep = this.deps.filter((d) => {
-        d.url === this.student.department.url
-      })[0]
+      const dep = this.deps.filter((d) => d.url === this.student.department)[0]
       return dep.name
     },
     section() {
-      const sec = this.secs.filter((s) => {
-        s.url === this.student.section.url
-      })[0]
+      const sec = this.secs.filter((s) => s.url === this.student.section)[0]
       return sec.name
     }
   },
@@ -282,7 +296,7 @@ export default {
 
 <style scoped>
 .cont {
-  padding: 2px 16px 2px 16px;
+  padding: 2px 5px;
   border: 1px solid black;
   border-radius: 4px;
   margin: 30px 0px;
@@ -322,5 +336,25 @@ h3 {
 .img-cont,
 .details {
   padding: 8px;
+}
+
+img {
+  min-width: 50px;
+  min-height: 50px;
+  max-width: 50px;
+  max-height: 50px;
+  object-fit: cover;
+  border-radius: 100%;
+  background: #9e9e9e;
+  border: 1px solid black;
+}
+
+h4 {
+  font-weight: 800;
+}
+
+th {
+  text-align: left;
+  font-family: 'Courier New', Courier, monospace;
 }
 </style>
