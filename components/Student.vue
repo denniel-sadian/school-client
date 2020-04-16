@@ -51,7 +51,7 @@
       </p>
       <div class="btn">
         <button
-          @click="editing = true"
+          @click="edit"
           class="w3-button w3-round w3-small w3-border w3-border-black"
         >
           <i class="fas fa-pencil-alt"></i>
@@ -193,17 +193,17 @@ export default {
       error: false,
       errorDelete: false,
       hide: false,
-      fName: this.student.first_name,
-      lName: this.student.last_name,
-      gender: this.student.gender,
-      idNum: this.student.id_number,
-      phone: this.student.cp_number,
-      guardianPhone: this.student.guardian_cp_number,
-      address: this.student.address,
-      file: this.student.photo,
-      dep: this.student.department,
-      sec: this.student.section,
-      grade: this.student.grade_level
+      fName: '',
+      lName: '',
+      gender: '',
+      idNum: '',
+      phone: '',
+      guardianPhone: '',
+      address: '',
+      file: '',
+      dep: '',
+      sec: '',
+      grade: ''
     }
   },
   computed: {
@@ -217,6 +217,20 @@ export default {
     }
   },
   methods: {
+    edit() {
+      this.editing = true
+      this.fName = this.student.first_name
+      this.lName = this.student.last_name
+      this.gender = this.student.gender
+      this.idNum = this.student.id_number
+      this.phone = this.student.cp_number
+      this.guardianPhone = this.student.guardian_cp_number
+      this.address = this.student.address
+      this.file = this.student.photo
+      this.dep = this.student.department
+      this.sec = this.student.section
+      this.grade = this.student.grade_level
+    },
     async deleteStudent() {
       this.deleting = true
       await this.$axios
@@ -264,18 +278,6 @@ export default {
         })
         .then(() => {
           this.editing = false
-          this.file = ''
-          this.fName = ''
-          this.lName = ''
-          this.gender = ''
-          this.idNum = ''
-          this.phone = ''
-          this.guardianPhone = ''
-          this.address = ''
-          this.grade = ''
-          this.dep = ''
-          this.sec = ''
-          this.error = false
           this.$store.dispatch('user/toogleRefresh')
           this.$store.dispatch('information/getStudents')
         })
