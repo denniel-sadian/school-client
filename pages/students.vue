@@ -176,7 +176,6 @@ export default {
       formData.append('grade_level', this.grade)
       formData.append('department', this.dep)
       formData.append('section', this.sec)
-      console.log(formData)
       this.$store.dispatch('user/toogleRefresh')
       await this.$axios
         .post('information/students/', formData, {
