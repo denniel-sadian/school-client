@@ -115,6 +115,9 @@ export default {
       }
       return ''
     }
+  },
+  async mounted() {
+    await this.$store.dispatch('user/getUser')
   }
 }
 </script>
