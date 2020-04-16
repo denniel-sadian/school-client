@@ -9,12 +9,14 @@
       <div class="btn" v-show="role === 'admin'">
         <button
           @click="edit"
+          :disabled="deleting"
           class="w3-button w3-round w3-small w3-border w3-border-black"
         >
           <i class="fas fa-pencil-alt"></i>
         </button>
         <button
           @click="deleteDep"
+          :disabled="deleting"
           class="w3-button w3-text-red w3-round w3-small w3-border w3-border-red"
         >
           <i v-if="!deleting" class="fas fa-trash-alt"></i>
