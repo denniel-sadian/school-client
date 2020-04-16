@@ -6,9 +6,11 @@ export default function({ $axios, app }) {
       if (rToken === null || !app.store.state.user.canRefreshToken) return
 
       $axios
-        .post('accounts/refresh-token/', {
-          refresh: rToken
-        })
+        .post(
+          'accounts/refresh-token/',
+          { refresh: rToken },
+          { progress: false }
+        )
         .then((res) => {
           localStorage.setItem('school_access_token', res.data.access)
           $axios.setToken(res.data.access, 'Bearer')
