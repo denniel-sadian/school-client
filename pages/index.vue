@@ -70,6 +70,10 @@ export default {
     students() {
       return this.$store.state.information.students.length
     }
+  },
+  async mounted() {
+    await this.$store.dispatch('information/getInformation')
+    await this.$store.dispatch('user/getPerms')
   }
 }
 </script>
