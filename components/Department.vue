@@ -73,7 +73,7 @@ export default {
     async deleteDep() {
       this.deleting = true
       await this.$axios
-        .delete(`information/departments/${this.dep.id}/`)
+        .delete(dep.url)
         .then(() => {
           this.hide = true
           this.$store.dispatch('information/getDepartments')
@@ -95,7 +95,7 @@ export default {
         name: this.name
       }
       await this.$axios
-        .put(`information/departments/${this.dep.id}/`, payload)
+        .put(dep.url, payload)
         .then(({ data }) => {
           this.editing = false
           this.$store.dispatch('information/getDepartments')
