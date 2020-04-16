@@ -112,6 +112,10 @@ export default {
           this.creating = false
         })
     }
+  },
+  async mounted() {
+    await this.$store.dispatch('information/getDepartments')
+    await this.$store.dispatch('information/getSections')
   }
 }
 </script>
