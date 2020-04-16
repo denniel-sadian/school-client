@@ -2,6 +2,10 @@
   <div class="cont" :class="{ 'w3-hide': deleting }">
     <div class="display" v-if="!editing">
       <h3><i class="fas fa-school"></i> {{ dep.name }}</h3>
+      <p class="w3-center w3-small w3-text-red" v-show="errorDelete">
+        You cannot delete this department right now because some objects like
+        grading sheets or sections are in this department.
+      </p>
       <div class="btn" v-show="role === 'admin'">
         <button
           @click="editing = true"
@@ -59,6 +63,7 @@ export default {
       updating: false,
       deleting: false,
       error: false,
+      errorDelete: false,
       name: this.dep.name
     }
   },
@@ -69,6 +74,15 @@ export default {
         .delete(`information/departments/${this.dep.id}/`)
         .then(() => {
           this.$store.dispatch('information/getDepartments')
+        })
+        .catch(() => {
+          this.errorDelete = true
+          setTimeout(() => {
+            this.errorDelete = false
+          }, 10000)
+        })
+        .finally(() => {
+          this.deleting = false
         })
     },
     async update() {
