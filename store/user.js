@@ -14,6 +14,9 @@ export const mutations = {
       return b.id - a.id
     })
   },
+  SET_REFRESHING_TRUE(state) {
+    state.canRefreshToken = true
+  },
   PUSH_PERM(state, perm) {
     state.permissions.push(perm)
     state.permissions = state.permissions.sort((a, b) => {
@@ -53,6 +56,8 @@ export const actions = {
     localStorage.clear()
     this.$axios.setToken(false)
     commit('SET_USER', {})
+    commit('SET_PERMISSIONS', [])
+    commit('SET_REFRESHING_TRUE')
   },
   toogleRefresh({ commit }) {
     commit('TOGGLE_CAN_REFRESH')
