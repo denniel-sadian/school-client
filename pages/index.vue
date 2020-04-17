@@ -120,23 +120,24 @@ header h1 {
   text-align: center;
   background: #f1f1f1;
   border-radius: 4px;
-  border: 1.5px solid #8bc34a;
+  border: 1.5px solid #4caf50;
   cursor: pointer;
   transition: 0.3s;
   margin: 8px;
 }
 #first-grid > div:hover {
-  background: #8bc34a;
+  background: #4caf50;
 }
 #first-grid > div > h3 {
   margin: 0px;
   font-size: 50px;
   font-weight: 800;
   font-family: 'Courier New', Courier, monospace;
+  color: #4caf50;
 }
 #first-grid > div > p {
   margin: 0px;
-  background: #8bc34a;
+  background: #4caf50;
   padding: 8px;
 }
 @media (max-width: 425px) {
