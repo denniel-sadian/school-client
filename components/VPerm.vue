@@ -2,6 +2,8 @@
   <div class="cont" :class="{ 'w3-opacity': deleting }" v-show="!hide">
     <div class="display" v-if="!editing">
       <h3><i class="fas fa-key"></i> {{ perm.code }}</h3>
+      <p>Permission for <b>{{ section }}</b>.</p>
+      <p class="w3-small">{{ new Date(perm.date).toDateString() }}</p>
       <div class="btn" v-show="role === 'admin'">
         <button
           @click="edit"
@@ -74,6 +76,12 @@ export default {
       hide: false,
       code: '',
       sec: ''
+    }
+  },
+  computed: {
+    section() {
+      const sec = this.secs.filter((s) => s.url === this.perm.section)[0]
+      return sec.name
     }
   },
   methods: {
