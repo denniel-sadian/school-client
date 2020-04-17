@@ -32,6 +32,31 @@ export const mutations = {
       return b.id - a.id
     })
   },
+  MODIFY_DEP(state, dep) {
+    state.permissions.filter((e) => e.id === dep.id)[0].name = dep.name
+  },
+  MODIFY_SEC(state, sec) {
+    state.sections.filter((e) => e.id === sec.id)[0].name = sec.name
+    state.sections.filter((e) => e.id === sec.id)[0].department = sec.department
+  },
+  MODIFY_SUB(state, sub) {
+    state.subjects.filter((e) => e.id === sub.id)[0].name = sub.name
+  },
+  MODIFY_STU(state, stu) {
+    state.students.filter((e) => e.id === stu.id)[0].first_name = stu.first_name
+    state.students.filter((e) => e.id === stu.id)[0].last_name = stu.last_name
+    state.students.filter((e) => e.id === stu.id)[0].gender = stu.gender
+    state.students.filter((e) => e.id === stu.id)[0].id_number = stu.id_number
+    state.students.filter((e) => e.id === stu.id)[0].cp_number = stu.cp_number
+    state.students.filter((e) => e.id === stu.id)[0].guardian_cp_number =
+      stu.guardian_cp_number
+    state.students.filter((e) => e.id === stu.id)[0].address = stu.address
+    state.students.filter((e) => e.id === stu.id)[0].photo = stu.photo
+    state.students.filter((e) => e.id === stu.id)[0].department = stu.department
+    state.students.filter((e) => e.id === stu.id)[0].grade_level =
+      stu.grade_level
+    state.students.filter((e) => e.id === stu.id)[0].section = stu.section
+  },
   PUSH_DEPARTMENT(state, dep) {
     state.departments.push(dep)
     state.departments = state.departments.sort((a, b) => {
