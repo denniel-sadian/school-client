@@ -143,7 +143,7 @@ export default {
       await this.$axios
         .delete(`accounts/permissions/${this.perm.id}/`)
         .then(() => {
-          this.$store.dispatch('user/getPerms')
+          this.$store.commit('user/DELETE_PERM', this.perm.id)
         })
     },
     async update() {
