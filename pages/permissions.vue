@@ -18,15 +18,15 @@
         </div>
         <div class="inpt">
           <label>For Section:</label>
-          <select v-model="dep" required>
-            <option v-for="dep in departments" :value="dep.url" :key="dep.id">{{
-              dep.name
+          <select v-model="sec" required>
+            <option v-for="s in sections" :value="dep.url" :key="s.id">{{
+              s.name
             }}</option>
           </select>
         </div>
         <hr />
         <p class="w3-center w3-text-red w3-small" v-show="error">
-          Please provide a unique name.
+          Please provide a unique code.
         </p>
         <button
           type="submit"
@@ -36,23 +36,22 @@
           <span v-if="creating"
             ><i class="fas fa-spinner w3-spin"></i> Adding...</span
           >
-          <span v-else>Add This Section</span>
+          <span v-else>Add Permission</span>
         </button>
       </form>
     </article>
     <article class="w3-container">
       <div class="w3-content">
-        <div v-if="sections.length === 0" class="w3-center">
-          <h4>There is no section yet.</h4>
+        <div v-if="permissions.length === 0" class="w3-center">
+          <h4>There is no permission yet.</h4>
         </div>
         <div v-else>
-          <h2 class="w3-center">List of Sections</h2>
-          <Section
-            v-for="sec in sections"
-            :sec="sec"
-            :deps="departments"
+          <h2 class="w3-center">List of Permissions</h2>
+          <VPerm
+            v-for="perm in permissions"
+            :perm="perm"
             :role="role"
-            :key="sec.id"
+            :key="perm.id"
           />
         </div>
       </div>
@@ -61,24 +60,21 @@
 </template>
 
 <script>
-import Section from '~/components/Section.vue'
+import VPerm from '~/components/VPerm.vue'
 
 export default {
   components: {
-    Section
+    VPerm
   },
   data() {
     return {
       creating: false,
       error: false,
-      name: '',
-      dep: ''
+      code: '',
+      sec: ''
     }
   },
   computed: {
-    departments() {
-      return this.$store.state.information.departments
-    },
     sections() {
       return this.$store.state.information.sections
     },
@@ -87,19 +83,19 @@ export default {
     }
   },
   methods: {
-    async createSection() {
+    async createPerm() {
       this.creating = true
       this.error = false
       await this.$axios
-        .post('information/sections/', {
-          name: this.name,
-          department: this.dep
+        .post('information/permissions/', {
+          code: this.code,
+          section: this.sec
         })
         .then(({ data }) => {
-          this.name = ''
-          this.dep = ''
+          this.code = ''
+          this.sec = ''
           this.error = false
-          this.$store.commit('information/PUSH_SECTION', data)
+          this.$store.commit('information/PUSH_V', data)
         })
         .catch(() => {
           this.error = true
