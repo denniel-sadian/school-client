@@ -34,7 +34,10 @@
             <h3><i class="fas fa-file-excel"></i><br />Viewing Permissions</h3>
             <h2>{{ students }}</h2>
           </div>
-          <div @click="$router.push('/registration/permissions')">
+          <div
+            @click="$router.push('/registration/permissions')"
+            v-show="regPerms"
+          >
             <h3>
               <i class="fas fa-file-excel"></i><br />Registration Permissions
             </h3>
