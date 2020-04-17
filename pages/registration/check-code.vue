@@ -7,36 +7,43 @@
         gave you.
       </p>
       <hr />
-      <div class="inpt">
-        <label for="code">Permission Code:</label>
-        <input type="text" v-model="code" @keypress.enter="checkCode" />
-      </div>
-      <p v-show="noCode" class="w3-small w3-center w3-text-red">
-        Permission with this code does not exist or it has been used already.
-      </p>
-      <hr />
-      <button
-        @click="checkCode"
-        :disabled="disabled"
-        class="w3-button w3-light-green"
-      >
-        <span v-if="checking">
-          <i class="fas fa-spinner w3-spin"></i> Checking code...
-        </span>
-        <span v-else>Check Code</span>
-      </button>
-      <div class="or">
+      <form @submit.prevent="checkCode">
+        <div class="inpt">
+          <label for="code">Permission Code:</label>
+          <input
+            type="text"
+            v-model="code"
+            @keypress.enter="checkCode"
+            :disabled="disabled"
+          />
+        </div>
+        <p v-show="noCode" class="w3-small w3-center w3-text-red">
+          Permission with this code does not exist or it has been used already.
+        </p>
         <hr />
-        <span>Or</span>
-        <hr />
-      </div>
-      <button
-        @click="$router.push('/login')"
-        :disabled="disabled"
-        class="w3-button w3-light-blue"
-      >
-        Login
-      </button>
+        <button
+          type="submit"
+          :disabled="disabled"
+          class="w3-button w3-light-green"
+        >
+          <span v-if="checking">
+            <i class="fas fa-spinner w3-spin"></i> Checking code...
+          </span>
+          <span v-else>Check Code</span>
+        </button>
+        <div class="or">
+          <hr />
+          <span>Or</span>
+          <hr />
+        </div>
+        <button
+          @click="$router.push('/login')"
+          :disabled="disabled"
+          class="w3-button w3-light-blue"
+        >
+          Login
+        </button>
+      </form>
     </div>
   </header>
 </template>
