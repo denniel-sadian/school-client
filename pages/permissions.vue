@@ -26,7 +26,7 @@
         </div>
         <hr />
         <p class="w3-center w3-text-red w3-small" v-show="error">
-          Please provide a unique code.
+          The code and section must be a unique combination.
         </p>
         <button
           type="submit"
@@ -95,7 +95,7 @@ export default {
           this.code = ''
           this.sec = ''
           this.error = false
-          this.$store.commit('information/PUSH_V', data)
+          this.$store.commit('information/PUSH_PERM', data)
         })
         .catch(() => {
           this.error = true

@@ -57,6 +57,7 @@ export const actions = {
     dispatch('getDepartments')
     dispatch('getSections')
     dispatch('getStudents')
+    dispatch('getPerms')
   },
   getDepartments({ commit }) {
     return this.$axios.get('information/departments/').then(({ data }) => {
