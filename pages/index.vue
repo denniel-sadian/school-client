@@ -80,7 +80,6 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('information/getInformation')
-    await this.$store.dispatch('user/getVPerms')
     if (this.role === 'admin') {
       await this.$store.dispatch('user/getPerms')
     }
