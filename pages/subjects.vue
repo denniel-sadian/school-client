@@ -7,27 +7,46 @@
       </div>
     </header>
     <article class="w3-container">
-      <form @submit.prevent="createSubject" class="w3-content">
-        <h2><i class="fas fa-plus-circle"></i> Add a Subject</h2>
-        <div class="inpt">
-          <label>Subject Name:</label>
-          <input type="text" v-model="name" required :disabled="creating" />
-        </div>
-        <hr />
-        <p class="w3-center w3-text-red w3-small" v-show="error">
-          Please provide a unique subject name.
-        </p>
+      <div class="w3-content">
         <button
-          type="submit"
-          :disabled="creating"
-          class="w3-button w3-green w3-round"
+          @click="showForm = true"
+          v-show="!showForm"
+          class="w3-button w3-light-green w3-round"
         >
-          <span v-if="creating"
-            ><i class="fas fa-spinner w3-spin"></i> Adding...</span
-          >
-          <span v-else>Add This Subject</span>
+          Show Form
         </button>
-      </form>
+        <form
+          @submit.prevent="createSubject"
+          v-show="showForm"
+          class="w3-content w3-animate-top"
+        >
+          <h2><i class="fas fa-plus-circle"></i> Add a Subject</h2>
+          <div class="inpt">
+            <label>Subject Name:</label>
+            <input type="text" v-model="name" required :disabled="creating" />
+          </div>
+          <hr />
+          <p class="w3-center w3-text-red w3-small" v-show="error">
+            Please provide a unique subject name.
+          </p>
+          <button
+            type="submit"
+            :disabled="creating"
+            class="w3-button w3-green w3-round"
+          >
+            <span v-if="creating"
+              ><i class="fas fa-spinner w3-spin"></i> Adding...</span
+            >
+            <span v-else>Add This Subject</span>
+          </button>
+          <button
+            class="w3-button w3-round w3-pink w3-margin-top"
+            @click="showForm = false"
+          >
+            Hide Form
+          </button>
+        </form>
+      </div>
     </article>
     <article class="w3-container">
       <div class="w3-content">
@@ -52,6 +71,7 @@ export default {
     return {
       creating: false,
       error: false,
+      showForm: false,
       name: ''
     }
   },
