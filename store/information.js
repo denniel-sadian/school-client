@@ -57,6 +57,10 @@ export const mutations = {
       stu.grade_level
     state.students.filter((e) => e.id === stu.id)[0].section = stu.section
   },
+  MODIFY_PERM(state, perm) {
+    state.permissions.filter((e) => e.id === perm.id)[0].code = perm.code
+    state.permissions.filter((e) => e.id === perm.id)[0].section = perm.section
+  },
   PUSH_DEPARTMENT(state, dep) {
     state.departments.push(dep)
     state.departments = state.departments.sort((a, b) => {
