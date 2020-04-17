@@ -82,7 +82,7 @@ export default {
         .delete(this.dep.url)
         .then(() => {
           this.hide = true
-          this.$store.dispatch('information/getDepartments')
+          this.$store.commit('information/DELETE_DEP', this.dep.id)
         })
         .catch(() => {
           this.errorDelete = true
@@ -104,7 +104,7 @@ export default {
         .put(this.dep.url, payload)
         .then(({ data }) => {
           this.editing = false
-          this.$store.dispatch('information/getDepartments')
+          this.$store.commit('information/MODIFY_DEP', data)
         })
         .catch(() => {
           this.error = true
