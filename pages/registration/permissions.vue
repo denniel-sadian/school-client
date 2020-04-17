@@ -147,6 +147,7 @@ export default {
     }
   },
   async mounted() {
+    await this.$store.dispatch('information/getDepartments')
     await this.$store.dispatch('user/getPerms').then(() => {
       this.loadingPerms = false
     })
