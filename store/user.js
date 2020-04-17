@@ -23,8 +23,15 @@ export const mutations = {
       return b.id - a.id
     })
   },
-  MODIFY_PERM(state, perm) {
-    state.permissions.filter((p) => p.id === perm.id)[0] = perm
+  MODIFY_PERM(state, p) {
+    state.permissions.filter((pe) => pe.id === p.id)[0].role = p.role
+    state.permissions.filter((pe) => pe.id === p.id)[0].first_name =
+      p.first_name
+    state.permissions.filter((pe) => pe.id === p.id)[0].last_name = p.last_name
+    state.permissions.filter((pe) => pe.id === p.id)[0].gender = p.gender
+    state.permissions.filter((pe) => pe.id === p.id)[0].code = p.code
+    state.permissions.filter((pe) => pe.id === p.id)[0].department =
+      p.department
   },
   TOGGLE_CAN_REFRESH(state) {
     state.canRefreshToken = !state.canRefreshToken
