@@ -23,6 +23,9 @@ export const mutations = {
       return b.id - a.id
     })
   },
+  MODIFY_PERM(state, perm) {
+    state.permissions.filter((p) => p.id === perm.id)[0] = perm
+  },
   TOGGLE_CAN_REFRESH(state) {
     state.canRefreshToken = !state.canRefreshToken
   }
