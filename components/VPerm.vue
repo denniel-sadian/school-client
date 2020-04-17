@@ -1,7 +1,7 @@
 <template>
   <div class="cont" :class="{ 'w3-opacity': deleting }" v-show="!hide">
     <div class="display" v-if="!editing">
-      <h3><i class="fas fa-key-alt"></i> {{ perm.code }}</h3>
+      <h3><i class="fas fa-key"></i> {{ perm.code }}</h3>
       <div class="btn" v-show="role === 'admin'">
         <button
           @click="edit"
@@ -78,6 +78,7 @@ export default {
   },
   methods: {
     edit() {
+      alert(this.perm.code)
       this.editing = true
       this.code = this.perm.code
       this.sec = this.perm.section
