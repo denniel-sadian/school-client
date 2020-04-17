@@ -281,7 +281,7 @@ export default {
         .then(({ data }) => {
           this.editing = false
           this.$store.dispatch('user/toogleRefresh')
-          this.$store.dispatch('information/MODIFY_STU', data)
+          this.$store.commit('information/MODIFY_STU', data)
         })
         .catch((err) => {
           this.error = true
