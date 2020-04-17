@@ -161,7 +161,7 @@ export default {
         .put(`accounts/permissions/${this.perm.id}/`, payload)
         .then(({ data }) => {
           this.editing = false
-          this.$store.dispatch('user/getPerms')
+          this.$store.commit('user/MODIFY_PERM', data)
         })
         .catch(() => {
           this.error = true
