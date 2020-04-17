@@ -122,6 +122,7 @@
           <button
             class="w3-button w3-round w3-pink w3-margin-top"
             @click="showForm = false"
+            :disabled="creating"
           >
             Hide Form
           </button>
