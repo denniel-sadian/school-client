@@ -2,6 +2,7 @@ export const state = () => ({
   departments: [],
   sections: [],
   students: [],
+  subjects: [],
   permissions: []
 })
 
