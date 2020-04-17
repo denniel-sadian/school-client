@@ -238,7 +238,7 @@ export default {
         .delete(this.student.url)
         .then(() => {
           this.hide = true
-          this.$store.dispatch('information/DELETE_STU', this.student.id)
+          this.$store.commit('information/DELETE_STU', this.student.id)
         })
         .catch(() => {
           this.errorDelete = true
@@ -268,7 +268,7 @@ export default {
       formData.append('grade_level', this.grade)
       formData.append('department', this.dep)
       formData.append('section', this.sec)
-      this.$store.dispatch('user/toogleRefresh')
+      this.$store.commit('user/toogleRefresh')
       await this.$axios
         .put(this.student.url, formData, {
           headers: {
