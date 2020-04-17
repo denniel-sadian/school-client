@@ -7,7 +7,7 @@
       <form @submit.prevent="login">
         <div class="inpt">
           <label for="username">Username:</label>
-          <input type="text" v-model="username" :disabled="disabled" required />
+          <input type="text" v-model="username" :disabled="disabled" />
         </div>
         <div class="inpt">
           <label for="password">Password:</label>
@@ -16,7 +16,6 @@
             @keypress.enter="login()"
             v-model="password"
             :disabled="disabled"
-            required
           />
         </div>
         <p class="w3-small w3-text-red w3-center" v-show="no_such_account">
@@ -63,6 +62,7 @@ export default {
   },
   methods: {
     async login() {
+      if (!this.username || !this.password) return
       this.disabled = true
       this.no_such_account = false
       await this.$store
