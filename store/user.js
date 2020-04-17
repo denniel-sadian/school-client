@@ -33,6 +33,9 @@ export const mutations = {
     state.permissions.filter((pe) => pe.id === p.id)[0].department =
       p.department
   },
+  DELETE_PERM(state, p) {
+    delete state.permissions.filter((pe) => pe.id === p.id)[0]
+  },
   TOGGLE_CAN_REFRESH(state) {
     state.canRefreshToken = !state.canRefreshToken
   }
