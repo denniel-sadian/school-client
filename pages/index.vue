@@ -22,6 +22,10 @@
             <h3>{{ sections }}</h3>
             <p>Sections</p>
           </div>
+          <div @click="$router.push('/subjects')">
+            <h3>{{ subjects }}</h3>
+            <p>Subjects</p>
+          </div>
           <div @click="$router.push('/students')">
             <h3>{{ students }}</h3>
             <p>Students</p>
@@ -67,6 +71,9 @@ export default {
     },
     sections() {
       return this.$store.state.information.sections.length
+    },
+    subjects() {
+      return this.$store.state.information.subjects.length
     },
     students() {
       return this.$store.state.information.students.length
