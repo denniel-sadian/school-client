@@ -15,53 +15,60 @@
         >
       </p>
       <hr />
-      <div class="inpt">
-        <label>Username:</label>
-        <input type="text" v-model="username" />
-      </div>
-      <div class="inpt">
-        <label>ID Number:</label>
-        <input type="text" v-model="idNumber" />
-      </div>
-      <div class="inpt">
-        <label>Email:</label>
-        <input type="email" v-model="email" />
-      </div>
-      <div class="inpt">
-        <label>Password:</label>
-        <input type="password" v-model="password" />
-      </div>
-      <div class="inpt">
-        <label>Password Again:</label>
-        <input type="password" v-model="password1" @keypress.enter="register" />
-      </div>
-      <p class="w3-small w3-text-red w3-center" v-show="wrong">
-        There was something wrong. Perhaps, your username is already taken or
-        your passwords did not match.
-      </p>
-      <hr />
-      <button
-        @click="register"
-        :disabled="disabled"
-        class="w3-button w3-light-green"
-      >
-        <span v-if="registering">
-          <i class="fas fa-spinner w3-spin"></i> Registering...
-        </span>
-        <span v-else>Register</span>
-      </button>
-      <div class="or">
+      <form @submit.prevent="register">
+        <div class="inpt">
+          <label>Username:</label>
+          <input type="text" v-model="username" :disabled="disabled" />
+        </div>
+        <div class="inpt">
+          <label>ID Number:</label>
+          <input type="text" v-model="idNumber" :disabled="disabled" />
+        </div>
+        <div class="inpt">
+          <label>Email:</label>
+          <input type="email" v-model="email" :disabled="disabled" />
+        </div>
+        <div class="inpt">
+          <label>Password:</label>
+          <input type="password" v-model="password" :disabled="disabled" />
+        </div>
+        <div class="inpt">
+          <label>Password Again:</label>
+          <input
+            type="password"
+            v-model="password1"
+            @keypress.enter="register"
+            :disabled="disabled"
+          />
+        </div>
+        <p class="w3-small w3-text-red w3-center" v-show="wrong">
+          There was something wrong. Perhaps, your username is already taken or
+          your passwords did not match.
+        </p>
         <hr />
-        <span>Or</span>
-        <hr />
-      </div>
-      <button
-        :disabled="disabled"
-        @click="$router.push('/login')"
-        class="w3-button w3-light-blue"
-      >
-        Login
-      </button>
+        <button
+          type="submit"
+          :disabled="disabled"
+          class="w3-button w3-light-green"
+        >
+          <span v-if="registering">
+            <i class="fas fa-spinner w3-spin"></i> Registering...
+          </span>
+          <span v-else>Register</span>
+        </button>
+        <div class="or">
+          <hr />
+          <span>Or</span>
+          <hr />
+        </div>
+        <button
+          :disabled="disabled"
+          @click="$router.push('/login')"
+          class="w3-button w3-light-blue"
+        >
+          Login
+        </button>
+      </form>
     </div>
   </header>
 </template>
