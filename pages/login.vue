@@ -4,40 +4,47 @@
       <h2>Credentials</h2>
       <p class="w3-small w3-center">Please, enter your credentials to login.</p>
       <hr />
-      <div class="inpt">
-        <label for="username">Username:</label>
-        <input type="text" v-model="username" />
-      </div>
-      <div class="inpt">
-        <label for="password">Password:</label>
-        <input type="password" @keypress.enter="login()" v-model="password" />
-      </div>
-      <p class="w3-small w3-text-red w3-center" v-show="no_such_account">
-        Wrong credentials.
-      </p>
-      <hr />
-      <button
-        @click="login"
-        :disabled="disabled"
-        class="w3-button w3-light-green"
-      >
-        <span v-if="disabled"
-          ><i class="fas fa-spinner w3-spin"></i> Logging in...</span
+      <form @submit.prevent="login">
+        <div class="inpt">
+          <label for="username">Username:</label>
+          <input type="text" v-model="username" :disabled="disabled" />
+        </div>
+        <div class="inpt">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            @keypress.enter="login()"
+            v-model="password"
+            :disabled="disabled"
+          />
+        </div>
+        <p class="w3-small w3-text-red w3-center" v-show="no_such_account">
+          Wrong credentials.
+        </p>
+        <hr />
+        <button
+          type="submit"
+          :disabled="disabled"
+          class="w3-button w3-light-green"
         >
-        <span v-else>Login</span>
-      </button>
-      <div class="or">
-        <hr />
-        <span>Or</span>
-        <hr />
-      </div>
-      <button
-        @click="$router.push('/registration/check-code')"
-        class="w3-button w3-light-blue"
-        :disabled="disabled"
-      >
-        Register
-      </button>
+          <span v-if="disabled"
+            ><i class="fas fa-spinner w3-spin"></i> Logging in...</span
+          >
+          <span v-else>Login</span>
+        </button>
+        <div class="or">
+          <hr />
+          <span>Or</span>
+          <hr />
+        </div>
+        <button
+          @click="$router.push('/registration/check-code')"
+          class="w3-button w3-light-blue"
+          :disabled="disabled"
+        >
+          Register
+        </button>
+      </form>
     </div>
   </header>
 </template>
