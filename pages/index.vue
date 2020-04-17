@@ -15,33 +15,31 @@
       <div class="w3-content">
         <div id="first-grid">
           <div @click="$router.push('/departments')">
-            <h3><i class="fas fa-school"></i><br />Departments</h3>
-            <h2>{{ departments }}</h2>
+            <h3>{{ departments }}</h3>
+            <p>Departments</p>
           </div>
           <div @click="$router.push('/sections')">
-            <h3><i class="fas fa-building"></i><br />Sections</h3>
-            <h2>{{ sections }}</h2>
+            <h3>{{ sections }}</h3>
+            <p>Sections</p>
           </div>
           <div @click="$router.push('/students')">
-            <h3><i class="fas fa-portrait"></i><br />Students</h3>
-            <h2>{{ students }}</h2>
+            <h3>{{ students }}</h3>
+            <p>Students</p>
           </div>
           <div @click="$router.push('/sheets')">
-            <h3><i class="fas fa-file-excel"></i><br />Grading Sheets</h3>
-            <h2>{{ students }}</h2>
+            <h3>{{ students }}</h3>
+            <p>Grading Sheets</p>
           </div>
           <div @click="$router.push('/permissions')">
-            <h3><i class="fas fa-file-excel"></i><br />Viewing Permissions</h3>
-            <h2>{{ vPerms }}</h2>
+            <h3>{{ vPerms }}</h3>
+            <p>Grading Sheets Viewing Permissions</p>
           </div>
           <div
             @click="$router.push('/registration/permissions')"
             v-show="role === 'admin'"
           >
-            <h3>
-              <i class="fas fa-file-excel"></i><br />Registration Permissions
-            </h3>
-            <h2>{{ regPerms }}</h2>
+            <h3>{{ regPerms }}</h3>
+            <p>Registration Permissions</p>
           </div>
         </div>
       </div>
@@ -107,18 +105,16 @@ header h1 {
 
 #first-grid {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 #first-grid > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
   text-align: center;
   background: #f1f1f1;
-  padding: 8px;
   border-radius: 4px;
-  border: 1px solid black;
+  border: 1.5px solid #8bc34a;
   cursor: pointer;
   transition: 0.3s;
   margin: 8px;
@@ -126,14 +122,17 @@ header h1 {
 #first-grid > div:hover {
   background: #8bc34a;
 }
-#first-grid > div > h2,
 #first-grid > div > h3 {
   margin: 0px;
-}
-#first-grid > div > h2 {
+  font-size: 50px;
   font-weight: 800;
+  font-family: 'Courier New', Courier, monospace;
 }
-
+#first-grid > div > p {
+  margin: 0px;
+  background: #8bc34a;
+  padding: 8px;
+}
 @media (max-width: 425px) {
   #first-grid {
     grid-template-columns: 1fr;
