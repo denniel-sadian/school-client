@@ -63,6 +63,7 @@ export const actions = {
     dispatch('getDepartments')
     dispatch('getSections')
     dispatch('getStudents')
+    dispatch('getSubjects')
     dispatch('getPerms')
   },
   getDepartments({ commit }) {
