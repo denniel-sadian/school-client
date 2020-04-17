@@ -80,7 +80,7 @@ export default {
         .delete(this.subj.url)
         .then(() => {
           this.hide = true
-          this.$store.dispatch('information/getSubjects')
+          this.$store.commit('information/DELETE_SUB', this.subj.id)
         })
         .catch(() => {
           this.errorDelete = true
@@ -97,9 +97,9 @@ export default {
       this.error = false
       await this.$axios
         .put(this.subj.url, { name: this.name })
-        .then(() => {
+        .then(({data}) => {
           this.editing = false
-          this.$store.dispatch('information/getSubjects')
+          this.$store.commit('information/MODIFY_SUB', data)
         })
         .catch((err) => {
           this.error = true
