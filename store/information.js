@@ -80,6 +80,11 @@ export const actions = {
       commit('SET_STUDENTS', data)
     })
   },
+  getSubjects({ commit }) {
+    return this.$axios.get('information/subjects/').then(({ data }) => {
+      commit('SET_SUBJECTS', data)
+    })
+  },
   getPerms({ commit }) {
     return this.$axios.get('information/permissions/').then(({ data }) => {
       commit('SET_PERMISSIONS', data)
