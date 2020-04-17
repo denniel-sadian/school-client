@@ -33,7 +33,7 @@ export const mutations = {
     })
   },
   MODIFY_DEP(state, dep) {
-    state.permissions.filter((e) => e.id === dep.id)[0].name = dep.name
+    state.departments.filter((e) => e.id === dep.id)[0].name = dep.name
   },
   MODIFY_SEC(state, sec) {
     state.sections.filter((e) => e.id === sec.id)[0].name = sec.name
