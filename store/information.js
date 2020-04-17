@@ -100,6 +100,9 @@ export const mutations = {
   DELETE_SEC(state, id) {
     delete state.sections.filter((e) => e.id === id)[0]
   },
+  DELETE_SUB(state, id) {
+    delete state.subjects.filter((e) => e.id === id)[0]
+  },
   DELETE_STU(state, id) {
     delete state.students.filter((e) => e.id === id)[0]
   }
