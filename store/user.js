@@ -57,7 +57,6 @@ export const actions = {
     this.$axios.setToken(false)
     commit('SET_USER', {})
     commit('SET_PERMISSIONS', [])
-    commit('SET_VIEWING_PERMISSIONS', [])
     commit('SET_REFRESHING_TRUE')
   },
   toogleRefresh({ commit }) {
