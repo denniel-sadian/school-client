@@ -18,7 +18,7 @@
         <form
           @submit.prevent="createSubject"
           v-show="showForm"
-          class="w3-content w3-animate-zoom"
+          class="w3-animate-zoom"
         >
           <h2><i class="fas fa-plus-circle"></i> Add a Subject</h2>
           <div class="inpt">
