@@ -19,7 +19,7 @@
         <div class="inpt">
           <label>For Section:</label>
           <select v-model="sec" required>
-            <option v-for="s in sections" :value="dep.url" :key="s.id">{{
+            <option v-for="s in sections" :value="s.url" :key="s.id">{{
               s.name
             }}</option>
           </select>
@@ -50,6 +50,7 @@
           <VPerm
             v-for="perm in permissions"
             :perm="perm"
+            :secs="sections"
             :role="role"
             :key="perm.id"
           />
@@ -75,6 +76,9 @@ export default {
     }
   },
   computed: {
+    permissions() {
+      return this.$store.state.information.permissions
+    },
     sections() {
       return this.$store.state.information.sections
     },

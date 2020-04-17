@@ -75,7 +75,7 @@ export default {
       return this.$store.state.user.permissions.length
     },
     vPerms() {
-      return this.$store.state.user.viewingPermissions.length
+      return this.$store.state.information.permissions.length
     }
   },
   async mounted() {
