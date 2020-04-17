@@ -1,7 +1,7 @@
 <template>
   <div class="cont" :class="{ 'w3-opacity': deleting }" v-show="!hide">
     <div class="display" v-if="!editing">
-      <h2>{{ subj.name }}</h2>
+      <h3><i class="fas fa-percentage"></i> {{ subj.name }}</h3>
       <p class="w3-center w3-small w3-text-red" v-show="errorDelete">
         You cannot delete this subject now becuase it has grading sheets in it.
       </p>
