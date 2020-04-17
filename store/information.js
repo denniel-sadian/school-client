@@ -50,6 +50,12 @@ export const mutations = {
       return b.id - a.id
     })
   },
+  PUSH_SUBJECT(state, s) {
+    state.subjects.push(s)
+    state.subjects = state.subjects.sort((a, b) => {
+      return b.id - a.id
+    })
+  },
   PUSH_PERM(state, perm) {
     state.permissions.push(perm)
     state.permissions = state.permissions.sort((a, b) => {
