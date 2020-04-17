@@ -2,7 +2,10 @@
   <div class="cont" :class="{ 'w3-opacity': deleting }" v-show="!hide">
     <div class="display" v-if="!editing">
       <h3><i class="fas fa-key"></i> {{ perm.code }}</h3>
-      <p>Permission for <b>{{ section }}</b>.</p>
+      <p>
+        Permission for <b>{{ section }}</b
+        >.
+      </p>
       <p class="w3-small">{{ new Date(perm.date).toDateString() }}</p>
       <div class="btn" v-show="role === 'admin'">
         <button
@@ -94,7 +97,7 @@ export default {
       this.deleting = true
       await this.$axios.delete(this.perm.url).then(() => {
         this.hide = true
-        this.$store.dispatch('information/getPerms')
+        this.$store.commit('information/DELETE_PERM', this.perm.id)
       })
     },
     async update() {
@@ -108,7 +111,7 @@ export default {
         .put(this.perm.url, payload)
         .then(({ data }) => {
           this.editing = false
-          this.$store.dispatch('information/getPerms')
+          this.$store.commit('information/MODIFY_PERM', data)
         })
         .catch(() => {
           this.error = true
