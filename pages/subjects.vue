@@ -67,6 +67,7 @@ export default {
       await this.$axios
         .post('information/subjects/', { name: this.name })
         .then(({ data }) => {
+          this.name = ''
           this.$store.commit('information/PUSH_SUBJECT', data)
         })
         .catch(() => {
