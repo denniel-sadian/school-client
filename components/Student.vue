@@ -1,5 +1,9 @@
 <template>
-  <div class="cont" :class="{ 'w3-opacity': deleting }" v-show="!hide">
+  <div
+    class="cont w3-animate-zoom"
+    :class="{ 'w3-opacity': deleting }"
+    v-show="!hide"
+  >
     <div class="display" v-if="!editing">
       <div class="content">
         <div>
