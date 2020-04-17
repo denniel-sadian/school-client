@@ -29,6 +29,10 @@
           <input type="email" v-model="email" :disabled="disabled" />
         </div>
         <div class="inpt">
+          <label>Photo: <span class="w3-opacity">Optional</span></label>
+          <input type="file" ref="file" v-on:change="handleFileUpload" />
+        </div>
+        <div class="inpt">
           <label>Password:</label>
           <input type="password" v-model="password" :disabled="disabled" />
         </div>
@@ -84,6 +88,7 @@ export default {
       email: '',
       password: '',
       password1: '',
+      file: '',
       registering: false,
       wrong: false,
       disabled: false
@@ -105,6 +110,9 @@ export default {
     }
   },
   methods: {
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0]
+    },
     async register() {
       if (
         this.username &&
@@ -115,16 +123,16 @@ export default {
       ) {
         this.registering = true
         this.disabled = true
-        const payload = {
-          code: this.creds.code,
-          username: this.username,
-          id_number: this.idNumber,
-          email: this.email,
-          password: this.password,
-          password1: this.password1
-        }
+        let formData = new FormData()
+        if (this.file !== '') formData.append('photo', this.file)
+        formData.append('code', this.creds.code)
+        formData.append('username', this.username)
+        formData.append('id_number', this.idNumber)
+        formData.append('email', this.email)
+        formData.append('password', this.password)
+        formData.append('password1', this.password1)
         await this.$axios
-          .post('accounts/register/', payload)
+          .post('accounts/register/', formData)
           .then(async (res) => {
             await this.$store
               .dispatch('user/login', {
