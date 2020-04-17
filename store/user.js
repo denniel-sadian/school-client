@@ -43,7 +43,8 @@ export const actions = {
       commit('SET_USER', data)
     })
   },
-  getPerms({ commit }) {
+  getPerms({ commit, state }) {
+    if (state.user.profile.role !== 'admin') return
     return this.$axios.get('accounts/permissions/').then(({ data }) => {
       commit('SET_PERMISSIONS', data)
     })
