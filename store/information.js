@@ -27,6 +27,11 @@ export const mutations = {
       return b.id - a.id
     })
   },
+  SET_SUBJECTS(state, subjs) {
+    state.subjects = subjs.sort((a, b) => {
+      return b.id - a.id
+    })
+  },
   PUSH_DEPARTMENT(state, dep) {
     state.departments.push(dep)
     state.departments = state.departments.sort((a, b) => {
