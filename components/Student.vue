@@ -238,7 +238,7 @@ export default {
         .delete(this.student.url)
         .then(() => {
           this.hide = true
-          this.$store.dispatch('information/getStudents')
+          this.$store.dispatch('information/DELETE_STU', this.student.id)
         })
         .catch(() => {
           this.errorDelete = true
@@ -278,10 +278,10 @@ export default {
             'Content-Type': 'multipart/form-data'
           }
         })
-        .then(() => {
+        .then(({ data }) => {
           this.editing = false
           this.$store.dispatch('user/toogleRefresh')
-          this.$store.dispatch('information/getStudents')
+          this.$store.dispatch('information/MODIFY_STU', data)
         })
         .catch((err) => {
           this.error = true
