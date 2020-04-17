@@ -20,8 +20,8 @@
         <div class="inpt">
           <label>Department:</label>
           <select v-model="dep" required>
-            <option v-for="dep in departments" :value="dep.url" :key="dep.id">{{
-              dep.name
+            <option v-for="d in departments" :value="d.url" :key="d.id">{{
+              d.name
             }}</option>
           </select>
         </div>
