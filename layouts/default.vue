@@ -50,6 +50,16 @@
         </button>
         <button
           @click="
+            $router.push('/subjects')
+            showLinks = false
+          "
+          class="w3-button"
+          :class="{ current: pageName === 'subjects' }"
+        >
+          <i class="fas fa-percentage"></i> Subjects
+        </button>
+        <button
+          @click="
             $router.push('/students')
             showLinks = false
           "
@@ -220,7 +230,7 @@ nav .toggle {
   cursor: pointer;
 }
 
-@media (max-width: 1045px) {
+@media (max-width: 1145px) {
   nav {
     display: flex;
     flex-direction: column;
