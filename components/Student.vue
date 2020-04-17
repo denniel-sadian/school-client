@@ -209,10 +209,12 @@ export default {
   computed: {
     department() {
       const dep = this.deps.filter((d) => d.url === this.student.department)[0]
+      if (!dep) return
       return dep.name
     },
     section() {
       const sec = this.secs.filter((s) => s.url === this.student.section)[0]
+      if (!sec) return
       return sec.name
     }
   },
