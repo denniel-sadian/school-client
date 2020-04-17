@@ -23,7 +23,7 @@
     <form v-else @submit.prevent="update">
       <div class="inpt">
         <label>Code:</label>
-        <input type="text" v-model="name" required :disabled="updating" />
+        <input type="text" v-model="code" required :disabled="updating" />
       </div>
       <div class="inpt">
         <label>For Section:</label>
@@ -78,7 +78,6 @@ export default {
   },
   methods: {
     edit() {
-      alert(this.perm.code)
       this.editing = true
       this.code = this.perm.code
       this.sec = this.perm.section
