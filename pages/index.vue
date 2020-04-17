@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="w3-container">
+    <header class="w3-container w3-green">
       <div class="w3-content w3-padding">
         <h1>Welcome to the shool management system</h1>
         <p>
