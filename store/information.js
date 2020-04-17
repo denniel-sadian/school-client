@@ -90,6 +90,18 @@ export const mutations = {
     state.permissions = state.permissions.sort((a, b) => {
       return b.id - a.id
     })
+  },
+  DELETE_PERM(state, id) {
+    delete state.permissions.filter((e) => e.id === id)[0]
+  },
+  DELETE_DEP(state, id) {
+    delete state.departments.filter((e) => e.id === id)[0]
+  },
+  DELETE_SEC(state, id) {
+    delete state.sections.filter((e) => e.id === id)[0]
+  },
+  DELETE_STU(state, id) {
+    delete state.students.filter((e) => e.id === id)[0]
   }
 }
 
