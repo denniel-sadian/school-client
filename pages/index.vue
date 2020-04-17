@@ -30,13 +30,13 @@
             <h3><i class="fas fa-file-excel"></i><br />Grading Sheets</h3>
             <h2>{{ students }}</h2>
           </div>
-          <div @click="$router.push('/permissions')" v-show="vPerms">
+          <div @click="$router.push('/permissions')">
             <h3><i class="fas fa-file-excel"></i><br />Viewing Permissions</h3>
             <h2>{{ vPerms }}</h2>
           </div>
           <div
             @click="$router.push('/registration/permissions')"
-            v-show="regPerms"
+            v-show="role === 'admin'"
           >
             <h3>
               <i class="fas fa-file-excel"></i><br />Registration Permissions
@@ -82,7 +82,10 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('information/getInformation')
-    await this.$store.dispatch('user/getPerms')
+    await this.$store.dispatch('user/getVPerms')
+    if (this.role === 'admin') {
+      await this.$store.dispatch('user/getPerms')
+    }
   }
 }
 </script>
