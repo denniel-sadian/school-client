@@ -1,7 +1,6 @@
 export const state = () => ({
   user: JSON.parse(localStorage.getItem('school_user') || '{}'),
   permissions: [],
-  viewingPermissions: [],
   canRefreshToken: true
 })
 
@@ -15,23 +14,12 @@ export const mutations = {
       return b.id - a.id
     })
   },
-  SET_VIEWING_PERMISSIONS(state, perms) {
-    state.viewingPermissions = perms.sort((a, b) => {
-      return b.id - a.id
-    })
-  },
   SET_REFRESHING_TRUE(state) {
     state.canRefreshToken = true
   },
   PUSH_PERM(state, perm) {
     state.permissions.push(perm)
     state.permissions = state.permissions.sort((a, b) => {
-      return b.id - a.id
-    })
-  },
-  PUSH_VPERM(state, perm) {
-    state.viewingPermissions.push(perm)
-    state.viewingPermissions = state.viewingPermissions.sort((a, b) => {
       return b.id - a.id
     })
   },
@@ -62,12 +50,6 @@ export const actions = {
     if (state.user.profile.role !== 'admin') return
     return this.$axios.get('accounts/permissions/').then(({ data }) => {
       commit('SET_PERMISSIONS', data)
-    })
-  },
-  getVPerms({ commit, state }) {
-    if (state.user.profile.role !== 'admin') return
-    return this.$axios.get('information/permissions/').then(({ data }) => {
-      commit('SET_VIEWING_PERMISSIONS', data)
     })
   },
   logout({ commit }) {

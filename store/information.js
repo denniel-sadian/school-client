@@ -1,7 +1,8 @@
 export const state = () => ({
   departments: [],
   sections: [],
-  students: []
+  students: [],
+  permissions: []
 })
 
 export const mutations = {
@@ -20,6 +21,11 @@ export const mutations = {
       return b.id - a.id
     })
   },
+  SET_PERMISSIONS(state, perms) {
+    state.permissions = perms.sort((a, b) => {
+      return b.id - a.id
+    })
+  },
   PUSH_DEPARTMENT(state, dep) {
     state.departments.push(dep)
     state.departments = state.departments.sort((a, b) => {
@@ -35,6 +41,12 @@ export const mutations = {
   PUSH_STUDENT(state, s) {
     state.students.push(s)
     state.students = state.students.sort((a, b) => {
+      return b.id - a.id
+    })
+  },
+  PUSH_PERM(state, perm) {
+    state.permissions.push(perm)
+    state.permissions = state.permissions.sort((a, b) => {
       return b.id - a.id
     })
   }
@@ -59,6 +71,11 @@ export const actions = {
   getStudents({ commit }) {
     return this.$axios.get('information/students/').then(({ data }) => {
       commit('SET_STUDENTS', data)
+    })
+  },
+  getPerms({ commit }) {
+    return this.$axios.get('information/permissions/').then(({ data }) => {
+      commit('SET_PERMISSIONS', data)
     })
   }
 }
