@@ -30,9 +30,9 @@
             <h3><i class="fas fa-file-excel"></i><br />Grading Sheets</h3>
             <h2>{{ students }}</h2>
           </div>
-          <div @click="$router.push('/permissions')">
+          <div @click="$router.push('/permissions')" v-show="vPerms">
             <h3><i class="fas fa-file-excel"></i><br />Viewing Permissions</h3>
-            <h2>{{ students }}</h2>
+            <h2>{{ vPerms }}</h2>
           </div>
           <div
             @click="$router.push('/registration/permissions')"
@@ -75,6 +75,9 @@ export default {
     },
     regPerms() {
       return this.$store.state.user.permissions.length
+    },
+    vPerms() {
+      return this.$store.state.user.viewingPermissions.length
     }
   },
   async mounted() {
