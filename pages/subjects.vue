@@ -61,7 +61,7 @@ export default {
     }
   },
   methods: {
-    async createStudent() {
+    async createSubject() {
       this.creating = true
       this.error = false
       await this.$axios
