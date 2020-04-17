@@ -208,7 +208,6 @@ nav .main span {
   height: 100%;
   display: flex;
   align-items: center;
-  border-radius: 32px;
 }
 
 #links button i {
@@ -270,8 +269,7 @@ nav .toggle {
 }
 
 .current {
-  background: #fff;
-  border: 1px solid black !important;
+  border-bottom: 1px solid black !important;
   color: black !important;
 }
 </style>
