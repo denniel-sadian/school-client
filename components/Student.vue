@@ -2,49 +2,47 @@
   <div class="cont" :class="{ 'w3-opacity': deleting }" v-show="!hide">
     <div class="display" v-if="!editing">
       <div class="content">
-        <div class="img-cont">
+        <div>
           <img v-if="student.photo" :src="student.photo" alt="" />
           <img v-else src="/anon_avatar.png" alt="" />
-        </div>
-        <div class="details">
           <h4 class="w3-text-green">
             {{ student.first_name }} {{ student.last_name }}
           </h4>
-          <table>
-            <tr>
-              <th>ID Number:</th>
-              <td>{{ student.id_number }}</td>
-            </tr>
-            <tr>
-              <th>Gender:</th>
-              <td>{{ student.gender === 'm' ? 'Male' : 'Female' }}</td>
-            </tr>
-            <tr>
-              <th>Phone Number:</th>
-              <td>{{ student.cp_number }}</td>
-            </tr>
-            <tr>
-              <th>Guardian's:</th>
-              <td>{{ student.guardian_cp_number }}</td>
-            </tr>
-            <tr>
-              <th>Address:</th>
-              <td>{{ student.address }}</td>
-            </tr>
-            <tr>
-              <th>Grade Level:</th>
-              <td>{{ student.grade_level }}</td>
-            </tr>
-            <tr>
-              <th>Department:</th>
-              <td>{{ department }}</td>
-            </tr>
-            <tr>
-              <th>Section:</th>
-              <td>{{ section }}</td>
-            </tr>
-          </table>
         </div>
+        <table>
+          <tr>
+            <th>ID Number:</th>
+            <td>{{ student.id_number }}</td>
+          </tr>
+          <tr>
+            <th>Gender:</th>
+            <td>{{ student.gender === 'm' ? 'Male' : 'Female' }}</td>
+          </tr>
+          <tr>
+            <th>Phone Number:</th>
+            <td>{{ student.cp_number }}</td>
+          </tr>
+          <tr>
+            <th>Guardian's:</th>
+            <td>{{ student.guardian_cp_number }}</td>
+          </tr>
+          <tr>
+            <th>Address:</th>
+            <td>{{ student.address }}</td>
+          </tr>
+          <tr>
+            <th>Grade Level:</th>
+            <td>{{ student.grade_level }}</td>
+          </tr>
+          <tr>
+            <th>Department:</th>
+            <td>{{ department }}</td>
+          </tr>
+          <tr>
+            <th>Section:</th>
+            <td>{{ section }}</td>
+          </tr>
+        </table>
       </div>
       <p class="w3-center w3-small w3-text-red" v-show="errorDelete">
         You cannot delete a student that has records.
@@ -268,7 +266,7 @@ export default {
       formData.append('grade_level', this.grade)
       formData.append('department', this.dep)
       formData.append('section', this.sec)
-      this.$store.commit('user/toogleRefresh')
+      this.$store.dispatch('user/toogleRefresh')
       await this.$axios
         .put(this.student.url, formData, {
           headers: {
@@ -299,7 +297,7 @@ export default {
 
 <style scoped>
 .cont {
-  padding: 2px 5px;
+  padding: 5px 5px 2px 5px;
   border: 1px solid black;
   border-radius: 4px;
   margin: 30px 0px;
@@ -331,14 +329,9 @@ h3 {
   margin: 3px 0px;
 }
 
-.content {
-  display: grid;
-  grid-template-columns: auto 1fr;
-}
-
-.img-cont,
-.details {
-  padding: 8px;
+.content > div {
+  display: flex;
+  align-items: center;
 }
 
 img {
@@ -354,6 +347,7 @@ img {
 
 h4 {
   font-weight: 800;
+  margin-left: 8px;
 }
 
 th {
