@@ -11,14 +11,14 @@
         <button
           @click="showForm = true"
           v-show="!showForm"
-          class="w3-button w3-light-green w3-round"
+          class="w3-button w3-light-green w3-round w3-animate-opacity"
         >
           Show Form
         </button>
         <form
           @submit.prevent="createSubject"
           v-show="showForm"
-          class="w3-content w3-animate-top"
+          class="w3-content w3-animate-zoom"
         >
           <h2><i class="fas fa-plus-circle"></i> Add a Subject</h2>
           <div class="inpt">
