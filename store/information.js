@@ -160,6 +160,13 @@ export const actions = {
         commit('PUSH_SECTION', data)
       })
   },
+  postSub({ commit }, payload) {
+    return this.$axios
+      .post('information/subjects/', payload)
+      .then(({ data }) => {
+        commit('PUSH_SUBJECT', data)
+      })
+  },
   postStu({ commit, dispatch }, payload) {
     dispatch('user/toogleRefresh')
     return this.$axios
