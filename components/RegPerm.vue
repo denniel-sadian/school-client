@@ -153,11 +153,10 @@ export default {
         gender: this.gender,
         department: this.dep
       }
-      await this.$axios
-        .put(`accounts/permissions/${this.perm.id}/`, payload)
-        .then(({ data }) => {
+      await this.$store
+        .dispatch('user/putPerm', this.perm.id, payload)
+        .then(() => {
           this.editing = false
-          this.$store.commit('user/MODIFY_PERM', data)
         })
         .catch(() => {
           this.error = true
