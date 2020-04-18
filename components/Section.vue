@@ -109,14 +109,14 @@ export default {
       this.updating = true
       this.error = false
       const payload = {
+        url: this.sec.url,
         name: this.name,
         department: this.dep
       }
-      await this.$axios
-        .put(this.sec.url, payload)
-        .then(({ data }) => {
+      await this.$store
+        .dispatch('information/putSec', payload)
+        .then(() => {
           this.editing = false
-          this.$store.commit('information/MODIFY_SEC', data)
         })
         .catch(() => {
           this.error = true
