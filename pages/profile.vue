@@ -58,6 +58,9 @@
               >
             </select>
           </div>
+          <p v-show="updated" class="w3-small w3-text-green w3-center">
+            Your profile has been updated.
+          </p>
           <p v-show="error" class="w3-small w3-text-red w3-center">
             There was something wrong. Perhaps you are trying to specify values
             that were already taken by other users.
@@ -89,7 +92,7 @@
             Please choose a photo that has smaller size and filename, or you can
             rename the filename of this photo.
           </p>
-          <p v-show="updated" class="w3-small w3-text-green w3-center">
+          <p v-show="updatedPhoto" class="w3-small w3-text-green w3-center">
             Your profile picture has been updated. It would take a few moments
             to display your new photo depending on your connection.
           </p>
@@ -156,13 +159,14 @@ export default {
       email: this.$store.state.user.user.user.email,
       idNumber: this.$store.state.user.user.profile.id_number,
       department: this.$store.state.user.user.profile.department,
+      updated: false,
       updating: false,
       error: false,
 
       file: '',
       updatingFile: false,
       errorFile: false,
-      updated: false,
+      updatedPhoto: false,
 
       password: '',
       password1: '',
@@ -228,7 +232,7 @@ export default {
     async updatePhoto() {
       this.updatingFile = true
       this.errorFile = false
-      this.updated = false
+      this.updatedPhoto = false
       let formData = new FormData()
       formData.append('photo', this.file)
       this.$store.dispatch('user/toogleRefresh')
@@ -246,9 +250,9 @@ export default {
           await this.$store.dispatch('user/getUser').then(() => {
             this.updatingFile = false
             this.errorFile = false
-            this.updated = true
+            this.updatedPhoto = true
             setTimeout(() => {
-              this.updated = false
+              this.updatedPhoto = false
             }, 8000)
           })
         })
@@ -277,17 +281,19 @@ export default {
         .post('accounts/profile/', payload)
         .then(async () => {
           await this.$store.dispatch('user/getUser').then(() => {
+            this.updated = true
             this.updating = false
             this.error = false
           })
         })
         .catch(() => {
           this.error = true
-          this.updating = false
+          this.updated = false
           setTimeout(() => {
             this.error = false
           }, 10000)
         })
+        .finally(() => (this.updating = false))
     }
   },
   async mounted() {
