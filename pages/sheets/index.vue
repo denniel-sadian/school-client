@@ -1,0 +1,171 @@
+<template>
+  <div>
+    <header class="w3-container">
+      <div class="w3-content w3-padding w3-center">
+        <h1>The Grading Sheets</h1>
+        <p>
+          Both teachers and admins can view this page, but only the teachers can
+          deal with the grading sheets.
+        </p>
+      </div>
+    </header>
+    <div v-if="got < 4">
+      <p class="w3-large w3-text-green w3-center">
+        <i class="fas fa-spinner w3-spin"></i> Loading...
+      </p>
+    </div>
+    <div v-else>
+      <article class="w3-container" v-show="role === 'teacher'">
+        <form @submit.prevent="createDepartment" class="w3-content">
+          <h2><i class="fas fa-plus-circle"></i> Create a Grading Sheet</h2>
+          <div class="inpt">
+            <label>For Department:</label>
+            <select v-model="dep">
+              <option v-for="d in departments" :value="d.url" :key="d.id">{{
+                d.name
+              }}</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>For Section:</label>
+            <select v-model="sec">
+              <option v-for="s in sections" :value="s.url" :key="s.id">{{
+                s.name
+              }}</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>For Subject:</label>
+            <select v-model="sub">
+              <option v-for="s in subjects" :value="s.url" :key="s.id">{{
+                s.name
+              }}</option>
+            </select>
+          </div>
+          <hr />
+          <button
+            type="submit"
+            :disabled="creating"
+            class="w3-button w3-green w3-round"
+          >
+            <span v-if="creating"
+              ><i class="fas fa-spinner w3-spin"></i> Creating...</span
+            >
+            <span v-else>Create</span>
+          </button>
+        </form>
+      </article>
+      <article class="w3-container">
+        <div class="w3-content">
+          <div v-if="departments.length === 0" class="w3-center">
+            <h4>There is no grading sheet yet.</h4>
+          </div>
+          <div v-else>
+            <h2 class="w3-center">List of Grading sheets</h2>
+            <Department
+              v-for="dep in departments"
+              :dep="dep"
+              :role="role"
+              :key="dep.id"
+            />
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</template>
+
+<script>
+import Department from '~/components/Department.vue'
+
+export default {
+  components: {
+    Department
+  },
+  data() {
+    return {
+      got: 0,
+      creating: false,
+      error: false,
+      dep: '',
+      sec: '',
+      sub: ''
+    }
+  },
+  computed: {
+    departments() {
+      return this.$store.state.information.departments
+    },
+    sections() {
+      const sections = this.$store.state.information.sections
+      if (this.dep === '') return sections
+      return sections.filter((e) => e.department === this.dep)
+    },
+    subjects() {
+      return this.$store.state.information.subjects
+    },
+    role() {
+      return this.$store.state.user.user.profile.role
+    }
+  },
+  methods: {
+    async createSheet() {
+      this.creating = true
+      this.error = false
+      const payload = {
+        department: this.dep,
+        section: this.sec,
+        subject: this.sub
+      }
+      await this.$store
+        .dispatch('grading/createSheet', payload)
+        .then(() => {
+          this.dep = ''
+          this.sec = ''
+          this.sub = ''
+        })
+        .finally(() => {
+          this.creating = false
+        })
+    }
+  },
+  async mounted() {
+    await this.$store
+      .dispatch('information/getDepartments')
+      .then(() => this.got++)
+    await this.$store.dispatch('information/getSections').then(() => this.got++)
+    await this.$store.dispatch('information/getSubjects').then(() => this.got++)
+    await this.$store.dispatch('grading/retrieveSheets').then(() => this.got++)
+  }
+}
+</script>
+
+<style scoped>
+header {
+  margin-top: 53px;
+  padding: 64px 0px !important;
+  text-align: center;
+}
+
+header h1 {
+  text-transform: capitalize;
+}
+
+.w3-content {
+  max-width: 600px;
+}
+
+form {
+  padding: 16px;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.w3-button {
+  width: 100%;
+}
+
+article {
+  margin: 20px 0px;
+}
+</style>
