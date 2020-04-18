@@ -304,14 +304,11 @@ export default {
         id_number: this.idNumber,
         department: this.department
       }
-      await this.$axios
-        .post('accounts/profile/', payload)
-        .then(async () => {
-          await this.$store.dispatch('user/getUser').then(() => {
-            this.updated = true
-            this.updating = false
-            this.error = false
-          })
+      await this.$store
+        .dispatch('user/updateProfile', payload)
+        .then(() => {
+          this.updated = true
+          this.error = false
         })
         .catch(() => {
           this.error = true
