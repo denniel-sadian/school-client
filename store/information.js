@@ -214,5 +214,10 @@ export const actions = {
     return this.$axios.put(payload.url, payload).then(({ data }) => {
       commit('MODIFY_PERM', data)
     })
+  },
+  deleteDep({ commit }, url) {
+    return this.$axios.delete(url).then(() => {
+      commit('DELETE_PERM', url)
+    })
   }
 }
