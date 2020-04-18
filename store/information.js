@@ -150,7 +150,14 @@ export const actions = {
     return this.$axios
       .post('information/departments/', payload)
       .then(({ data }) => {
-        this.$store.commit('PUSH_DEPARTMENT', data)
+        commit('PUSH_DEPARTMENT', data)
+      })
+  },
+  postSec({ commit }, payload) {
+    return this.$axios
+      .post('information/sections/', payload)
+      .then(({ data }) => {
+        commit('PUSH_SECTION', data)
       })
   }
 }
