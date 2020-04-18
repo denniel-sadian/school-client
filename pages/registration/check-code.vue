@@ -67,15 +67,13 @@ export default {
       this.disabled = true
       await this.$store
         .dispatch('registration/checkCode', this.code)
-        .then(({ data }) => {
-          this.$store.commit('registration/SET_CREDENTIALS', data)
+        .then(() => {
           this.$router.push('/registration/register')
         })
         .catch(() => {
           this.checking = false
           this.disabled = false
           this.noCode = true
-          this.$store.commit('registration/SET_CREDENTIALS', {})
           setTimeout(() => {
             this.noCode = false
           }, 10000)
