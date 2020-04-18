@@ -159,5 +159,12 @@ export const actions = {
       .then(({ data }) => {
         commit('PUSH_SECTION', data)
       })
+  },
+  postStu({ commit }, payload) {
+    return this.$axios
+      .post('information/students/', payload)
+      .then(({ data }) => {
+        commit('PUSH_STUDENT', data)
+      })
   }
 }
