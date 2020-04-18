@@ -206,9 +206,8 @@ export default {
       await this.$axios
         .put('accounts/change-password/', payload)
         .then(() => {
-          this.updatingPassword = false
           this.errorPassword = false
-          this.updatePassword = true
+          this.updatedPassword = true
           this.password = ''
           this.password1 = ''
           this.password2 = ''
@@ -223,6 +222,7 @@ export default {
             this.errorPassword = false
           }, 10000)
         })
+        .finally(() => (this.updatingPassword = false))
     },
     async updatePhoto() {
       this.updatingFile = true
