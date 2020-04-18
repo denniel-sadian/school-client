@@ -9,79 +9,86 @@
         </p>
       </div>
     </header>
-    <article class="w3-container">
-      <form @submit.prevent="createPermission" class="w3-content">
-        <h2><i class="fas fa-plus-circle"></i> Create permisson</h2>
-        <div class="inpt">
-          <label>Role:</label>
-          <select v-model="role" required>
-            <option value="admin">As an Admin</option>
-            <option value="teacher">As a Teacher</option>
-          </select>
-        </div>
-        <div class="inpt">
-          <label>First Name:</label>
-          <input type="text" v-model="fName" required />
-        </div>
-        <div class="inpt">
-          <label>Last Name:</label>
-          <input type="text" v-model="lName" required />
-        </div>
-        <div class="inpt">
-          <label>Gender:</label>
-          <select v-model="gender" required>
-            <option value="f">Female</option>
-            <option value="m">Male</option>
-          </select>
-        </div>
-        <div class="inpt">
-          <label>Code:</label>
-          <input type="text" v-model="code" required />
-        </div>
-        <div class="inpt">
-          <label>Department:</label>
-          <select v-model="dep" required>
-            <option v-for="dep in departments" :value="dep.id" :key="dep.id">{{
-              dep.name
-            }}</option>
-          </select>
-        </div>
-        <hr />
-        <p class="w3-center w3-text-red w3-small" v-show="error">
-          Something was wrong. Perhaps, there is already a permission that holds
-          the code you gave. Please, provide a unique code.
-        </p>
-        <button
-          type="submit"
-          :disabled="creating"
-          class="w3-button w3-green w3-round"
-        >
-          <span v-if="creating"
-            ><i class="fas fa-spinner w3-spin"></i> Creating...</span
-          >
-          <span v-else>Create Permission</span>
-        </button>
-      </form>
-    </article>
-    <article class="w3-container">
-      <p v-if="loadingPerms" class="w3-center">
-        <i class="fas fa-spinner w3-spin"></i>
+    <div v-if="got < 1">
+      <p class="w3-large w3-text-green w3-center">
+        <i class="fas fa-spinner w3-spin"></i> Loading...
       </p>
-      <div v-else class="w3-content">
-        <div v-if="permissions.length === 0" class="w3-center">
-          <h4>There is no permission yet.</h4>
+    </div>
+    <div v-else>
+      <article class="w3-container">
+        <form @submit.prevent="createPermission" class="w3-content">
+          <h2><i class="fas fa-plus-circle"></i> Create permisson</h2>
+          <div class="inpt">
+            <label>Role:</label>
+            <select v-model="role" required>
+              <option value="admin">As an Admin</option>
+              <option value="teacher">As a Teacher</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>First Name:</label>
+            <input type="text" v-model="fName" required />
+          </div>
+          <div class="inpt">
+            <label>Last Name:</label>
+            <input type="text" v-model="lName" required />
+          </div>
+          <div class="inpt">
+            <label>Gender:</label>
+            <select v-model="gender" required>
+              <option value="f">Female</option>
+              <option value="m">Male</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>Code:</label>
+            <input type="text" v-model="code" required />
+          </div>
+          <div class="inpt">
+            <label>Department:</label>
+            <select v-model="dep" required>
+              <option
+                v-for="dep in departments"
+                :value="dep.id"
+                :key="dep.id"
+                >{{ dep.name }}</option
+              >
+            </select>
+          </div>
+          <hr />
+          <p class="w3-center w3-text-red w3-small" v-show="error">
+            Something was wrong. Perhaps, there is already a permission that
+            holds the code you gave. Please, provide a unique code.
+          </p>
+          <button
+            type="submit"
+            :disabled="creating"
+            class="w3-button w3-green w3-round"
+          >
+            <span v-if="creating"
+              ><i class="fas fa-spinner w3-spin"></i> Creating...</span
+            >
+            <span v-else>Create Permission</span>
+          </button>
+        </form>
+      </article>
+      <article class="w3-container">
+        <div class="w3-content">
+          <div v-if="permissions.length === 0" class="w3-center">
+            <h4>There is no permission yet.</h4>
+          </div>
+          <div v-else>
+            <h2 class="w3-center">List of Permissions</h2>
+            <RegPerm
+              v-for="perm in permissions"
+              :perm="perm"
+              :deps="departments"
+              :key="perm.id"
+            />
+          </div>
         </div>
-        <div v-else>
-          <h2 class="w3-center">List of Permissions</h2>
-          <RegPerm
-            v-for="perm in permissions"
-            :perm="perm"
-            :deps="departments"
-            :key="perm.id"
-          />
-        </div>
-      </div>
-    </article>
+      </article>
+    </div>
   </div>
 </template>
 
@@ -93,7 +100,7 @@ export default {
   components: { RegPerm },
   data() {
     return {
-      loadingPerms: true,
+      got: 0,
       creating: false,
       error: false,
       role: '',
@@ -146,10 +153,7 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('information/getDepartments')
-    await this.$store.dispatch('user/getPerms').then(() => {
-      this.loadingPerms = false
-    })
+    await this.$store.dispatch('user/getPerms').then(() => this.got++)
   }
 }
 </script>
