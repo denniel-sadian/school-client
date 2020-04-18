@@ -281,6 +281,7 @@ export default {
       formData.append('grade_level', this.grade)
       formData.append('department', this.dep)
       formData.append('section', this.sec)
+      this.$store.dispatch('user/toogleRefresh')
       await this.$store
         .dispatch('information/postStu', formData)
         .then(() => {
@@ -305,6 +306,7 @@ export default {
         })
         .finally(() => {
           this.creating = false
+          this.$store.dispatch('user/toogleRefresh')
         })
     }
   },
