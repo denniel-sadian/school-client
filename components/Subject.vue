@@ -104,7 +104,7 @@ export default {
         .then(() => {
           this.editing = false
         })
-        .catch( => {
+        .catch(() => {
           this.error = true
           setTimeout(() => {
             this.error = false
