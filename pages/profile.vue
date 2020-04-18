@@ -205,18 +205,16 @@ export default {
       }
       await this.$axios
         .put('accounts/change-password/', payload)
-        .then(async () => {
-          await this.$store.dispatch('user/getUser').then(() => {
-            this.updatingPassword = false
-            this.errorPassword = false
-            this.updatePassword = true
-            this.password = ''
-            this.password1 = ''
-            this.password2 = ''
-            setTimeout(() => {
-              this.updatedPassword = false
-            }, 10000)
-          })
+        .then(() => {
+          this.updatingPassword = false
+          this.errorPassword = false
+          this.updatePassword = true
+          this.password = ''
+          this.password1 = ''
+          this.password2 = ''
+          setTimeout(() => {
+            this.updatedPassword = false
+          }, 10000)
         })
         .catch(() => {
           this.errorPassword = true
