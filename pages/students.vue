@@ -8,7 +8,11 @@
         </p>
       </div>
     </header>
-    <article class="w3-container">
+    <div v-if="got < 4">
+      <p class="w3-large w3-text-green w3-center"><i class="fas fa-spinner w3-spin"></i> Loading...</p>
+    </div>
+    <div v-else>
+      <article class="w3-container">
       <form @submit.prevent="createStudent" class="w3-animate-zoom w3-content">
         <h2><i class="fas fa-plus-circle"></i> Add a Student</h2>
         <div class="inpt">
@@ -189,6 +193,7 @@
         </div>
       </div>
     </article>
+    </div>
   </div>
 </template>
 
@@ -199,6 +204,7 @@ export default {
   components: { Student },
   data() {
     return {
+      got: 0,
       creating: false,
       error: false,
 
@@ -311,10 +317,12 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('information/getDepartments')
-    await this.$store.dispatch('information/getSections')
-    await this.$store.dispatch('information/getSubjects')
-    await this.$store.dispatch('information/getStudents')
+    await this.$store
+      .dispatch('information/getDepartments')
+      .then(() => this.got++)
+    await this.$store.dispatch('information/getSections').then(() => this.got++)
+    await this.$store.dispatch('information/getSubjects').then(() => this.got++)
+    await this.$store.dispatch('information/getStudents').then(() => this.got++)
   }
 }
 </script>
