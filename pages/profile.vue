@@ -273,7 +273,7 @@ export default {
       formData.append('photo', this.file)
       this.$store.dispatch('user/toogleRefresh')
       await this.$store
-        .dispatch('user/updatePhoto')
+        .dispatch('user/updatePhoto', formData)
         .then(() => {
           this.errorFile = false
           this.updatedPhoto = true
