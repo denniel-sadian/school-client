@@ -95,13 +95,16 @@ export default {
     async update() {
       this.updating = true
       this.error = false
-      await this.$axios
-        .put(this.subj.url, { name: this.name })
-        .then(({data}) => {
+      const payload = {
+        url: this.subj.url,
+        name: this.name
+      }
+      await this.$store
+        .dispatch('information/putSub', payload)
+        .then(() => {
           this.editing = false
-          this.$store.commit('information/MODIFY_SUB', data)
         })
-        .catch((err) => {
+        .catch( => {
           this.error = true
           setTimeout(() => {
             this.error = false
