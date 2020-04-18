@@ -185,5 +185,34 @@ export const actions = {
     return this.$axios.put(payload.url, payload).then(({ data }) => {
       commit('MODIFY_DEP', data)
     })
+  },
+  putSec({ commit }, payload) {
+    return this.$axios.put(payload.url, payload).then(({ data }) => {
+      commit('MODIFY_SEC', data)
+    })
+  },
+  putStu({ commit }, payload) {
+    return this.$axios
+      .put(payload.get('url'), payload, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem(
+            'school_access_token'
+          )}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(({ data }) => {
+        commit('MODIFY_STU', data)
+      })
+  },
+  putSub({ commit }, payload) {
+    return this.$axios.put(payload.url, payload).then(({ data }) => {
+      commit('MODIFY_SUB', data)
+    })
+  },
+  putPerm({ commit }, payload) {
+    return this.$axios.put(payload.url, payload).then(({ data }) => {
+      commit('MODIFY_PERM', data)
+    })
   }
 }
