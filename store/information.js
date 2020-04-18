@@ -91,20 +91,20 @@ export const mutations = {
       return b.id - a.id
     })
   },
-  DELETE_PERM(state, id) {
-    delete state.permissions.filter((e) => e.id === id)[0]
+  DELETE_PERM(state, url) {
+    delete state.permissions.filter((e) => e.url === url)[0]
   },
-  DELETE_DEP(state, id) {
-    delete state.departments.filter((e) => e.id === id)[0]
+  DELETE_DEP(state, url) {
+    delete state.departments.filter((e) => e.url === url)[0]
   },
-  DELETE_SEC(state, id) {
-    delete state.sections.filter((e) => e.id === id)[0]
+  DELETE_SEC(state, url) {
+    delete state.sections.filter((e) => e.url === url)[0]
   },
-  DELETE_SUB(state, id) {
-    delete state.subjects.filter((e) => e.id === id)[0]
+  DELETE_SUB(state, url) {
+    delete state.subjects.filter((e) => e.url === url)[0]
   },
-  DELETE_STU(state, id) {
-    delete state.students.filter((e) => e.id === id)[0]
+  DELETE_STU(state, url) {
+    delete state.students.filter((e) => e.url === url)[0]
   }
 }
 
@@ -217,7 +217,7 @@ export const actions = {
   },
   deleteDep({ commit }, url) {
     return this.$axios.delete(url).then(() => {
-      commit('DELETE_PERM', url)
+      commit('DELETE_DEP', url)
     })
   }
 }
