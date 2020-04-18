@@ -272,33 +272,25 @@ export default {
       let formData = new FormData()
       formData.append('photo', this.file)
       this.$store.dispatch('user/toogleRefresh')
-      await this.$axios
-        .post('accounts/change-dp/', formData, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              'school_access_token'
-            )}`,
-            'Content-Type': 'multipart/form-data'
-          }
-        })
-        .then(async () => {
-          this.$store.dispatch('user/toogleRefresh')
-          await this.$store.dispatch('user/getUser').then(() => {
-            this.updatingFile = false
-            this.errorFile = false
-            this.updatedPhoto = true
-            setTimeout(() => {
-              this.updatedPhoto = false
-            }, 8000)
-          })
+      await this.$store
+        .dispatch('user/updatePhoto')
+        .then(() => {
+          this.errorFile = false
+          this.updatedPhoto = true
+          setTimeout(() => {
+            this.updatedPhoto = false
+          }, 8000)
         })
         .catch(() => {
-          this.$store.dispatch('user/toogleRefresh')
           this.errorFile = true
           this.updatingFile = false
           setTimeout(() => {
             this.errorFile = false
           }, 15000)
+        })
+        .finally(() => {
+          this.updatingFile = false
+          this.$store.dispatch('user/toogleRefresh')
         })
     },
     async update() {
