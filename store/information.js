@@ -140,5 +140,10 @@ export const actions = {
     return this.$axios.get('information/permissions/').then(({ data }) => {
       commit('SET_PERMISSIONS', data)
     })
+  },
+  postPerm({ commit }, payload) {
+    return this.$axios
+      .post('information/permissions/', payload)
+      .then(({ data }) => commit('PUSH_PERM', data))
   }
 }
