@@ -238,11 +238,10 @@ export default {
     },
     async deleteStudent() {
       this.deleting = true
-      await this.$axios
-        .delete(this.student.url)
+      await this.$store
+        .dispatch('information/deleteStu', this.student.url)
         .then(() => {
           this.hide = true
-          this.$store.commit('information/DELETE_STU', this.student.id)
         })
         .catch(() => {
           this.errorDelete = true

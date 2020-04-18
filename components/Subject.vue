@@ -76,11 +76,10 @@ export default {
     },
     async deleteSubject() {
       this.deleting = true
-      await this.$axios
-        .delete(this.subj.url)
+      await this.$store
+        .dispatch('information/deleteSub', this.subj.url)
         .then(() => {
           this.hide = true
-          this.$store.commit('information/DELETE_SUB', this.subj.id)
         })
         .catch(() => {
           this.errorDelete = true

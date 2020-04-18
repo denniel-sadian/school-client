@@ -89,11 +89,10 @@ export default {
     },
     async deleteSec() {
       this.deleting = true
-      await this.$axios
-        .delete(this.sec.url)
+      await this.$store
+        .dispatch('information/deleteSec', this.sec.url)
         .then(() => {
           this.hide = true
-          this.$store.commit('information/DELETE_SEC', this.sec.id)
         })
         .catch(() => {
           this.errorDelete = true

@@ -95,10 +95,11 @@ export default {
     },
     async deletePerm() {
       this.deleting = true
-      await this.$axios.delete(this.perm.url).then(() => {
-        this.hide = true
-        this.$store.commit('information/DELETE_PERM', this.perm.id)
-      })
+      await this.$store
+        .dispatch('information/deletePerm', this.perm.url)
+        .then(() => {
+          this.hide = true
+        })
     },
     async update() {
       this.updating = true

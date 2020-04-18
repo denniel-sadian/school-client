@@ -78,11 +78,10 @@ export default {
     },
     async deleteDep() {
       this.deleting = true
-      await this.$axios
-        .delete(this.dep.url)
+      await this.$store
+        .dispatch('information/deleteDep', this.dep.url)
         .then(() => {
           this.hide = true
-          this.$store.commit('information/DELETE_DEP', this.dep.id)
         })
         .catch(() => {
           this.errorDelete = true
