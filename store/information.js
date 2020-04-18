@@ -160,11 +160,20 @@ export const actions = {
         commit('PUSH_SECTION', data)
       })
   },
-  postStu({ commit }, payload) {
+  postStu({ commit, dispatch }, payload) {
+    dispatch('user/toogleRefresh')
     return this.$axios
-      .post('information/students/', payload)
+      .post('information/students/', payload, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem(
+            'school_access_token'
+          )}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
       .then(({ data }) => {
         commit('PUSH_STUDENT', data)
       })
+      .finally(() => dispatch('user/toogleRefresh'))
   }
 }

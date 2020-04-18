@@ -281,16 +281,8 @@ export default {
       formData.append('grade_level', this.grade)
       formData.append('department', this.dep)
       formData.append('section', this.sec)
-      this.$store.dispatch('user/toogleRefresh')
-      await this.$axios
-        .post('information/students/', formData, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              'school_access_token'
-            )}`,
-            'Content-Type': 'multipart/form-data'
-          }
-        })
+      await this.$store
+        .dispatch('information/postStu', formData)
         .then(({ data }) => {
           this.file = ''
           this.fName = ''
@@ -304,8 +296,6 @@ export default {
           this.dep = ''
           this.sec = ''
           this.error = false
-          this.$store.dispatch('user/toogleRefresh')
-          this.$store.commit('information/PUSH_STUDENT', data)
         })
         .catch(() => {
           this.error = true
