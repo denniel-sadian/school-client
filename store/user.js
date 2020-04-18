@@ -69,7 +69,7 @@ export const actions = {
     return this.$axios
       .post('accounts/permissions/', payload)
       .then(({ data }) => {
-        commit('user/PUSH_PERM', data)
+        commit('PUSH_PERM', data)
       })
   },
   logout({ commit }) {
