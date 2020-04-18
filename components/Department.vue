@@ -101,7 +101,7 @@ export default {
         url: this.dep.url,
         name: this.name
       }
-      await this.$axios
+      await this.$store
         .dispatch('information/putDep', payload)
         .then(() => {
           this.editing = false
