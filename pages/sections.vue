@@ -91,16 +91,16 @@ export default {
     async createSection() {
       this.creating = true
       this.error = false
-      await this.$axios
-        .post('information/sections/', {
-          name: this.name,
-          department: this.dep
-        })
-        .then(({ data }) => {
+      const payload = {
+        name: this.name,
+        department: this.dep
+      }
+      await this.$store
+        .dispatch('information/postSec', payload)
+        .then(() => {
           this.name = ''
           this.dep = ''
           this.error = false
-          this.$store.commit('information/PUSH_SECTION', data)
         })
         .catch(() => {
           this.error = true
