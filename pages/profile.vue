@@ -218,6 +218,7 @@ export default {
         .catch(() => {
           this.errorPassword = true
           this.updatingPassword = false
+          this.updatedPassword = false
           setTimeout(() => {
             this.errorPassword = false
           }, 10000)
