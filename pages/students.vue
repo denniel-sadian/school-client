@@ -311,7 +311,10 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('information/getInformation')
+    await this.$store.dispatch('information/getDepartments')
+    await this.$store.dispatch('information/getSections')
+    await this.$store.dispatch('information/getSubjects')
+    await this.$store.dispatch('information/getStudents')
   }
 }
 </script>
