@@ -72,9 +72,9 @@ export const actions = {
         commit('PUSH_PERM', data)
       })
   },
-  putPerm({ commit }, id, payload) {
+  putPerm({ commit }, payload) {
     return this.$axios
-      .put(`accounts/permissions/${id}/`, payload)
+      .put(`accounts/permissions/${payload.id}/`, payload)
       .then(({ data }) => {
         commit('MODIFY_PERM', data)
       })

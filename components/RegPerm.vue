@@ -146,6 +146,7 @@ export default {
       this.updating = true
       this.error = false
       const payload = {
+        id: this.perm.id,
         code: this.code,
         role: this.role,
         first_name: this.fName,
@@ -154,7 +155,7 @@ export default {
         department: this.dep
       }
       await this.$store
-        .dispatch('user/putPerm', this.perm.id, payload)
+        .dispatch('user/putPerm', payload)
         .then(() => {
           this.editing = false
         })
