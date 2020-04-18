@@ -91,6 +91,11 @@ export const actions = {
       })
       .then(() => dispatch('getUser'))
   },
+  updateProfile({ dispatch }, payload) {
+    return this.$axios
+      .post('accounts/profile/', payload)
+      .then(() => dispatch('getUser'))
+  },
   deletePerm({ commit }, id) {
     return this.$axios.delete(`accounts/permissions/${id}/`).then(() => {
       commit('DELETE_PERM', id)
