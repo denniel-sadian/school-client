@@ -136,15 +136,30 @@
         <form @submit.prevent="updatePassword">
           <div class="inpt">
             <label>Current Password:</label>
-            <input type="password" v-model="password" required />
+            <input
+              type="password"
+              v-model="password"
+              :disabled="updatingPassword"
+              required
+            />
           </div>
           <div class="inpt">
             <label>New Password:</label>
-            <input type="password" v-model="password1" required />
+            <input
+              type="password"
+              v-model="password1"
+              :disabled="updatingPassword"
+              required
+            />
           </div>
           <div class="inpt">
             <label>Confirm Password:</label>
-            <input type="password" v-model="password2" required />
+            <input
+              type="password"
+              v-model="password2"
+              :disabled="updatingPassword"
+              required
+            />
           </div>
           <p v-show="errorPassword" class="w3-small w3-text-red w3-center">
             Something was wrong. Perhaps, your current password was incorrect,
