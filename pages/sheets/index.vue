@@ -16,7 +16,7 @@
     </div>
     <div v-else>
       <article class="w3-container" v-show="role === 'teacher'">
-        <form @submit.prevent="createDepartment" class="w3-content">
+        <form @submit.prevent="createSheet" class="w3-content">
           <h2><i class="fas fa-plus-circle"></i> Create a Grading Sheet</h2>
           <div class="inpt">
             <label>For Department:</label>
