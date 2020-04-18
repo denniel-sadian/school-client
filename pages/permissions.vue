@@ -94,7 +94,8 @@ export default {
         code: this.code,
         section: this.sec
       }
-      await this.dispatch('information/postPerm', payload)
+      await this.$store
+        .dispatch('information/postPerm', payload)
         .then(() => {
           this.code = ''
           this.sec = ''
