@@ -90,16 +90,15 @@ export default {
     async createPerm() {
       this.creating = true
       this.error = false
-      await this.$axios
-        .post('information/permissions/', {
-          code: this.code,
-          section: this.sec
-        })
-        .then(({ data }) => {
+      const payload = {
+        code: this.code,
+        section: this.sec
+      }
+      await this.dispatch('information/postPerm', payload)
+        .then(() => {
           this.code = ''
           this.sec = ''
           this.error = false
-          this.$store.commit('information/PUSH_PERM', data)
         })
         .catch(() => {
           this.error = true
