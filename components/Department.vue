@@ -98,13 +98,13 @@ export default {
       this.updating = true
       this.error = false
       const payload = {
+        url: this.dep.url,
         name: this.name
       }
       await this.$axios
-        .put(this.dep.url, payload)
-        .then(({ data }) => {
+        .dispatch('information/putDep', payload)
+        .then(() => {
           this.editing = false
-          this.$store.commit('information/MODIFY_DEP', data)
         })
         .catch(() => {
           this.error = true
