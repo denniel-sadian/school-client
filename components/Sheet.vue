@@ -35,6 +35,7 @@ export default {
   border: 2px solid #9e9e9e;
   border-radius: 4px;
   padding: 8px;
+  margin: 16px 0px;
 }
 
 h3 {
