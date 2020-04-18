@@ -114,7 +114,7 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('information/getSections')
-    await this.$store.dispatch('information/getPerm')
+    await this.$store.dispatch('information/getPerms')
   }
 }
 </script>
