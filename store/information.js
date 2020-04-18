@@ -167,8 +167,7 @@ export const actions = {
         commit('PUSH_SUBJECT', data)
       })
   },
-  postStu({ commit, dispatch }, payload) {
-    dispatch('user/toogleRefresh')
+  postStu({ commit }, payload) {
     return this.$axios
       .post('information/students/', payload, {
         headers: {
@@ -181,6 +180,5 @@ export const actions = {
       .then(({ data }) => {
         commit('PUSH_STUDENT', data)
       })
-      .finally(() => dispatch('user/toogleRefresh'))
   }
 }
