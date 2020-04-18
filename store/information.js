@@ -145,5 +145,12 @@ export const actions = {
     return this.$axios
       .post('information/permissions/', payload)
       .then(({ data }) => commit('PUSH_PERM', data))
+  },
+  postDep({ commit }, payload) {
+    return this.$axios
+      .post('information/departments/', payload)
+      .then(({ data }) => {
+        this.$store.commit('PUSH_DEPARTMENT', data)
+      })
   }
 }
