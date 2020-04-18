@@ -283,7 +283,6 @@ export default {
         })
         .catch(() => {
           this.errorFile = true
-          this.updatingFile = false
           setTimeout(() => {
             this.errorFile = false
           }, 15000)
