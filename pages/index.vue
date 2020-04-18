@@ -126,7 +126,7 @@ header h1 {
   margin: 8px;
 }
 #first-grid > div:hover {
-  background: #4caf50;
+  background: #8bc34a;
 }
 #first-grid > div > h3 {
   margin: 0px;
