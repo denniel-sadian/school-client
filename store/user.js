@@ -79,6 +79,18 @@ export const actions = {
         commit('MODIFY_PERM', data)
       })
   },
+  updatePhoto({ dispatch }, payload) {
+    return this.$axios
+      .post('accounts/change-dp/', payload, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem(
+            'school_access_token'
+          )}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(() => dispatch('getUser'))
+  },
   deletePerm({ commit }, id) {
     return this.$axios.delete(`accounts/permissions/${id}/`).then(() => {
       commit('DELETE_PERM', id)
