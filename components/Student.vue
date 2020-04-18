@@ -262,6 +262,7 @@ export default {
       this.error = false
       let formData = new FormData()
       if (this.file !== '') formData.append('photo', this.file)
+      formData.append('url', this.student.url)
       formData.append('first_name', this.fName)
       formData.append('last_name', this.lName)
       formData.append('gender', this.gender)
@@ -273,19 +274,10 @@ export default {
       formData.append('department', this.dep)
       formData.append('section', this.sec)
       this.$store.dispatch('user/toogleRefresh')
-      await this.$axios
-        .put(this.student.url, formData, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              'school_access_token'
-            )}`,
-            'Content-Type': 'multipart/form-data'
-          }
-        })
-        .then(({ data }) => {
+      await this.$store
+        .dispatch('information/putStu', formData)
+        .then(() => {
           this.editing = false
-          this.$store.dispatch('user/toogleRefresh')
-          this.$store.commit('information/MODIFY_STU', data)
         })
         .catch((err) => {
           this.error = true
@@ -295,6 +287,7 @@ export default {
         })
         .finally(() => {
           this.updating = false
+          this.$store.dispatch('user/toogleRefresh')
         })
     }
   }
