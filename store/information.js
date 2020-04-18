@@ -219,5 +219,25 @@ export const actions = {
     return this.$axios.delete(url).then(() => {
       commit('DELETE_DEP', url)
     })
+  },
+  deleteSec({ commit }, url) {
+    return this.$axios.delete(url).then(() => {
+      commit('DELETE_SEC', url)
+    })
+  },
+  deleteStu({ commit }, url) {
+    return this.$axios.delete(url).then(() => {
+      commit('DELETE_STU', url)
+    })
+  },
+  deleteSub({ commit }, url) {
+    return this.$axios.delete(url).then(() => {
+      commit('DELETE_SUB', url)
+    })
+  },
+  deletePerm({ commit }, url) {
+    return this.$axios.delete(url).then(() => {
+      commit('DELETE_PERM', url)
+    })
   }
 }
