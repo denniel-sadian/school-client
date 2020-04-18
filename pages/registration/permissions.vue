@@ -124,16 +124,15 @@ export default {
         gender: this.gender,
         department: this.dep
       }
-      await this.$axios
-        .post('accounts/permissions/', payload)
-        .then(({ data }) => {
+      await this.$store
+        .dispatch('user/postPerm', payload)
+        .then(() => {
           this.code = ''
           this.role = ''
           this.fName = ''
           this.lName = ''
           this.gender = ''
           this.dep = ''
-          this.$store.commit('user/PUSH_PERM', data)
         })
         .catch(() => {
           this.error = true
