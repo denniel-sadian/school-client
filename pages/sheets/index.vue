@@ -62,11 +62,11 @@
           </div>
           <div v-else>
             <h2 class="w3-center">List of Grading sheets</h2>
-            <Department
-              v-for="dep in departments"
-              :dep="dep"
+            <Sheet
+              v-for="s in sheets"
+              :sheet="s"
               :role="role"
-              :key="dep.id"
+              :key="s.id"
             />
           </div>
         </div>
@@ -76,12 +76,10 @@
 </template>
 
 <script>
-import Department from '~/components/Department.vue'
+import Sheet from '~/components/Sheet.vue'
 
 export default {
-  components: {
-    Department
-  },
+  components: { Sheet },
   data() {
     return {
       got: 0,
@@ -103,6 +101,9 @@ export default {
     },
     subjects() {
       return this.$store.state.information.subjects
+    },
+    sheets() {
+        return this.$store.state.grading.sheets
     },
     role() {
       return this.$store.state.user.user.profile.role
