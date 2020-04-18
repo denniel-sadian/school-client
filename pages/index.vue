@@ -31,7 +31,7 @@
             <p>Students</p>
           </div>
           <div @click="$router.push('/sheets')">
-            <h3>{{ students }}</h3>
+            <h3>{{ sheets }}</h3>
             <p>Grading Sheets</p>
           </div>
           <div @click="$router.push('/permissions')">
@@ -81,12 +81,16 @@ export default {
     regPerms() {
       return this.$store.state.user.permissions.length
     },
+    sheets() {
+      return this.$store.state.grading.sheets.length
+    },
     vPerms() {
       return this.$store.state.information.permissions.length
     }
   },
   async mounted() {
     await this.$store.dispatch('information/getInformation')
+    await this.$store.dispatch('grading/retrieveSheets')
     if (this.role === 'admin') {
       await this.$store.dispatch('user/getPerms')
     }
