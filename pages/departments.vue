@@ -79,12 +79,12 @@ export default {
     async createDepartment() {
       this.creating = true
       this.error = false
-      await this.$axios
-        .post('information/departments/', { name: this.name })
-        .then(({ data }) => {
+      const payload = { name: this.name }
+      await this.$store
+        .dispatch('information/postDep', payload)
+        .then(() => {
           this.name = ''
           this.error = false
-          this.$store.commit('information/PUSH_DEPARTMENT', data)
         })
         .catch(() => {
           this.error = true
