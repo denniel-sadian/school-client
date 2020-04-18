@@ -65,19 +65,17 @@ export default {
       this.checking = true
       this.noCode = false
       this.disabled = true
-      await this.$store
-        .dispatch('registration/checkCode', this.code)
-        .then(() => {
-          this.$router.push('/registration/register')
-        })
-        .catch(() => {
-          this.checking = false
-          this.disabled = false
-          this.noCode = true
-          setTimeout(() => {
-            this.noCode = false
-          }, 10000)
-        })
+      await this.$store.dispatch('registration/checkCode', this.code)
+      if (this.$store.state.registration.credentials !== null)
+        this.$router.push('/registration/register')
+      else {
+        this.checking = false
+        this.disabled = false
+        this.noCode = true
+        setTimeout(() => {
+          this.noCode = false
+        }, 10000)
+      }
     }
   }
 }
