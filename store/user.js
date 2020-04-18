@@ -72,6 +72,11 @@ export const actions = {
         commit('PUSH_PERM', data)
       })
   },
+  deletePerm({ commit }, id) {
+    return this.$axios.delete(`accounts/permissions/${id}/`).then(() => {
+      commit('DELETE_PERM', id)
+    })
+  },
   logout({ commit }) {
     localStorage.clear()
     this.$axios.setToken(false)
