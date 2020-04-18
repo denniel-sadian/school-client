@@ -19,37 +19,57 @@
     </header>
     <article class="w3-container">
       <div class="w3-content">
-        <form @submit.prevent="update" :disabled="updating">
+        <form @submit.prevent="update">
           <div class="inpt">
             <label>Username:</label>
-            <input type="text" v-model="username" required />
+            <input
+              type="text"
+              v-model="username"
+              :disabled="updating"
+              required
+            />
           </div>
           <div class="inpt">
             <label>First Name:</label>
-            <input type="text" v-model="firstName" required />
+            <input
+              type="text"
+              v-model="firstName"
+              :disabled="updating"
+              required
+            />
           </div>
           <div class="inpt">
             <label>Last Name:</label>
-            <input type="text" v-model="lastName" required />
+            <input
+              type="text"
+              v-model="lastName"
+              :disabled="updating"
+              required
+            />
           </div>
           <div class="inpt">
             <label>Gender:</label>
-            <select v-model="gender" required>
+            <select v-model="gender" :disabled="updating" required>
               <option value="f">Female</option>
               <option value="m">Male</option>
             </select>
           </div>
           <div class="inpt">
             <label>ID Number:</label>
-            <input type="text" v-model="idNumber" required />
+            <input
+              type="text"
+              v-model="idNumber"
+              :disabled="updating"
+              required
+            />
           </div>
           <div class="inpt">
             <label>Email:</label>
-            <input type="text" v-model="email" required />
+            <input type="text" v-model="email" :disabled="updating" required />
           </div>
           <div class="inpt">
             <label>Department:</label>
-            <select v-model="department" required>
+            <select v-model="department" :disabled="updating" required>
               <option
                 v-for="dep in departments"
                 :value="dep.id"
