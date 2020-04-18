@@ -103,6 +103,7 @@
             <input
               type="file"
               ref="file"
+              :disabled="updatingFile"
               v-on:change="handleFileUpload"
               required
             />
