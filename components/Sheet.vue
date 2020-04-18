@@ -1,6 +1,37 @@
 <template>
   <div class="cont">
     <h3>{{ subject }}</h3>
+    <table>
+      <tr>
+        <th>Department:</th>
+        <td>{{ department }}</td>
+      </tr>
+      <tr>
+        <th>Section:</th>
+        <td>{{ section }}</td>
+      </tr>
+      <tr>
+        <th>Teacher:</th>
+        <td>{{ sheet.teacher.first_name }} {{ sheet.teacher.last_name }}</td>
+      </tr>
+      <tr>
+        <th>Date:</th>
+        <td>{{ new Date(sheet.date).toDateString() }}</td>
+      </tr>
+      <tr>
+        <th>Published:</th>
+        <td>
+          <i class="fas fa-check-circle w3-text-green" v-if="sheet.publish"></i>
+          <i class="fas fa-times-circle w3-text-red" v-else></i>
+        </td>
+      </tr>
+    </table>
+
+    <div>
+      <nuxt-link id="view-link" to="#">
+        <i class="fas fa-long-arrow-alt-right"></i> View
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -42,4 +73,42 @@ h3 {
   font-weight: 800;
   color: #4caf50;
 }
+
+th {
+  font-family: 'Courier New', Courier, monospace;
+  text-align: left;
+}
+
+td {
+  font-family: 'Nunito', Verdana;
+  border-left: 1px solid #9e9e9e;
+}
+
+table {
+  width: 100%;
+}
+
+th,
+td {
+  vertical-align: baseline;
+  border-top: 1px solid #9e9e9e;
+}
+
+.cont > div:last-child {
+  padding-top: 8px;
+  border-top: 1px solid #9e9e9e;
+  display: flex;
+  justify-content: flex-end;
+}
+
+a {
+  text-decoration: none;
+  background: #9e9e9e;
+  border-radius: 32px;
+  padding: 2px 4px;
+}
+
+/*
+You were styling the link
+*/
 </style>
