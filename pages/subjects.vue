@@ -6,40 +6,50 @@
         <p>Both teachers and admins can view and modify the subjects.</p>
       </div>
     </header>
-    <article class="w3-container">
-      <form @submit.prevent="createSubject" class="w3-animate-zoom w3-content">
-        <h2><i class="fas fa-plus-circle"></i> Add a Subject</h2>
-        <div class="inpt">
-          <label>Subject Name:</label>
-          <input type="text" v-model="name" required :disabled="creating" />
-        </div>
-        <hr />
-        <p class="w3-center w3-text-red w3-small" v-show="error">
-          Please provide a unique subject name.
-        </p>
-        <button
-          type="submit"
-          :disabled="creating"
-          class="w3-button w3-green w3-round"
+    <div v-if="got < 1">
+      <p class="w3-large w3-text-green w3-center">
+        <i class="fas fa-spinner w3-spin"></i> Loading...
+      </p>
+    </div>
+    <div v-else>
+      <article class="w3-container">
+        <form
+          @submit.prevent="createSubject"
+          class="w3-animate-zoom w3-content"
         >
-          <span v-if="creating"
-            ><i class="fas fa-spinner w3-spin"></i> Adding...</span
+          <h2><i class="fas fa-plus-circle"></i> Add a Subject</h2>
+          <div class="inpt">
+            <label>Subject Name:</label>
+            <input type="text" v-model="name" required :disabled="creating" />
+          </div>
+          <hr />
+          <p class="w3-center w3-text-red w3-small" v-show="error">
+            Please provide a unique subject name.
+          </p>
+          <button
+            type="submit"
+            :disabled="creating"
+            class="w3-button w3-green w3-round"
           >
-          <span v-else>Add This Subject</span>
-        </button>
-      </form>
-    </article>
-    <article class="w3-container">
-      <div class="w3-content">
-        <div v-if="subjects.length === 0" class="w3-center">
-          <h4>There is no subject yet.</h4>
+            <span v-if="creating"
+              ><i class="fas fa-spinner w3-spin"></i> Adding...</span
+            >
+            <span v-else>Add This Subject</span>
+          </button>
+        </form>
+      </article>
+      <article class="w3-container">
+        <div class="w3-content">
+          <div v-if="subjects.length === 0" class="w3-center">
+            <h4>There is no subject yet.</h4>
+          </div>
+          <div v-else>
+            <h2 class="w3-center">List of Subjects</h2>
+            <Subject v-for="s in subjects" :subj="s" :key="s.id" />
+          </div>
         </div>
-        <div v-else>
-          <h2 class="w3-center">List of Subjects</h2>
-          <Subject v-for="s in subjects" :subj="s" :key="s.id" />
-        </div>
-      </div>
-    </article>
+      </article>
+    </div>
   </div>
 </template>
 
@@ -50,6 +60,7 @@ export default {
   components: { Subject },
   data() {
     return {
+      got: 0,
       creating: false,
       error: false,
       name: ''
@@ -82,7 +93,7 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('information/getSubjects')
+    await this.$store.dispatch('information/getSubjects').then(() => this.got++)
   }
 }
 </script>
