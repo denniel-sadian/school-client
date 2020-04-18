@@ -10,54 +10,61 @@
         </p>
       </div>
     </header>
-    <article class="w3-container" v-show="role === 'admin'">
-      <form @submit.prevent="createSection" class="w3-content">
-        <h2><i class="fas fa-plus-circle"></i> Add a Section</h2>
-        <div class="inpt">
-          <label>Section Name:</label>
-          <input type="text" v-model="name" required :disabled="creating" />
-        </div>
-        <div class="inpt">
-          <label>Department:</label>
-          <select v-model="dep" required>
-            <option v-for="d in departments" :value="d.url" :key="d.id">{{
-              d.name
-            }}</option>
-          </select>
-        </div>
-        <hr />
-        <p class="w3-center w3-text-red w3-small" v-show="error">
-          Please provide a unique name.
-        </p>
-        <button
-          type="submit"
-          :disabled="creating"
-          class="w3-button w3-green w3-round"
-        >
-          <span v-if="creating"
-            ><i class="fas fa-spinner w3-spin"></i> Adding...</span
+    <div v-if="got < 2">
+      <p class="w3-large w3-text-green w3-center">
+        <i class="fas fa-spinner w3-spin"></i> Loading...
+      </p>
+    </div>
+    <div v-else>
+      <article class="w3-container" v-show="role === 'admin'">
+        <form @submit.prevent="createSection" class="w3-content">
+          <h2><i class="fas fa-plus-circle"></i> Add a Section</h2>
+          <div class="inpt">
+            <label>Section Name:</label>
+            <input type="text" v-model="name" required :disabled="creating" />
+          </div>
+          <div class="inpt">
+            <label>Department:</label>
+            <select v-model="dep" required>
+              <option v-for="d in departments" :value="d.url" :key="d.id">{{
+                d.name
+              }}</option>
+            </select>
+          </div>
+          <hr />
+          <p class="w3-center w3-text-red w3-small" v-show="error">
+            Please provide a unique name.
+          </p>
+          <button
+            type="submit"
+            :disabled="creating"
+            class="w3-button w3-green w3-round"
           >
-          <span v-else>Add This Section</span>
-        </button>
-      </form>
-    </article>
-    <article class="w3-container">
-      <div class="w3-content">
-        <div v-if="sections.length === 0" class="w3-center">
-          <h4>There is no section yet.</h4>
+            <span v-if="creating"
+              ><i class="fas fa-spinner w3-spin"></i> Adding...</span
+            >
+            <span v-else>Add This Section</span>
+          </button>
+        </form>
+      </article>
+      <article class="w3-container">
+        <div class="w3-content">
+          <div v-if="sections.length === 0" class="w3-center">
+            <h4>There is no section yet.</h4>
+          </div>
+          <div v-else>
+            <h2 class="w3-center">List of Sections</h2>
+            <Section
+              v-for="sec in sections"
+              :sec="sec"
+              :deps="departments"
+              :role="role"
+              :key="sec.id"
+            />
+          </div>
         </div>
-        <div v-else>
-          <h2 class="w3-center">List of Sections</h2>
-          <Section
-            v-for="sec in sections"
-            :sec="sec"
-            :deps="departments"
-            :role="role"
-            :key="sec.id"
-          />
-        </div>
-      </div>
-    </article>
+      </article>
+    </div>
   </div>
 </template>
 
@@ -70,6 +77,7 @@ export default {
   },
   data() {
     return {
+      got: 0,
       creating: false,
       error: false,
       name: '',
@@ -114,8 +122,10 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('information/getDepartments')
-    await this.$store.dispatch('information/getSections')
+    await this.$store
+      .dispatch('information/getDepartments')
+      .then(() => this.got++)
+    await this.$store.dispatch('information/getSections').then(() => this.got++)
   }
 }
 </script>
