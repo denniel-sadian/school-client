@@ -20,7 +20,7 @@
           <h2><i class="fas fa-plus-circle"></i> Create a Grading Sheet</h2>
           <div class="inpt">
             <label>For Department:</label>
-            <select v-model="dep">
+            <select v-model="dep" :disabled="creating">
               <option v-for="d in departments" :value="d.url" :key="d.id">{{
                 d.name
               }}</option>
@@ -28,7 +28,7 @@
           </div>
           <div class="inpt">
             <label>For Section:</label>
-            <select v-model="sec">
+            <select v-model="sec" :disabled="creating">
               <option v-for="s in sections" :value="s.url" :key="s.id">{{
                 s.name
               }}</option>
@@ -36,7 +36,7 @@
           </div>
           <div class="inpt">
             <label>For Subject:</label>
-            <select v-model="sub">
+            <select v-model="sub" :disabled="creating">
               <option v-for="s in subjects" :value="s.url" :key="s.id">{{
                 s.name
               }}</option>
@@ -62,12 +62,7 @@
           </div>
           <div v-else>
             <h2 class="w3-center">List of Grading sheets</h2>
-            <Sheet
-              v-for="s in sheets"
-              :sheet="s"
-              :role="role"
-              :key="s.id"
-            />
+            <Sheet v-for="s in sheets" :sheet="s" :role="role" :key="s.id" />
           </div>
         </div>
       </article>
@@ -103,7 +98,7 @@ export default {
       return this.$store.state.information.subjects
     },
     sheets() {
-        return this.$store.state.grading.sheets
+      return this.$store.state.grading.sheets
     },
     role() {
       return this.$store.state.user.user.profile.role
