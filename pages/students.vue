@@ -283,7 +283,7 @@ export default {
       formData.append('section', this.sec)
       await this.$store
         .dispatch('information/postStu', formData)
-        .then(({ data }) => {
+        .then(() => {
           this.file = ''
           this.fName = ''
           this.lName = ''

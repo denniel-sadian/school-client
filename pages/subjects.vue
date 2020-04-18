@@ -85,11 +85,11 @@ export default {
     async createSubject() {
       this.creating = true
       this.error = false
-      await this.$axios
-        .post('information/subjects/', { name: this.name })
-        .then(({ data }) => {
+      const payload = { name: this.name }
+      await this.$store
+        .dispatch('information/postSub', payload)
+        .then(() => {
           this.name = ''
-          this.$store.commit('information/PUSH_SUBJECT', data)
         })
         .catch(() => {
           this.error = true
