@@ -104,14 +104,14 @@ export default {
       this.updating = true
       this.error = false
       const payload = {
+        url: this.perm.url,
         code: this.code,
         section: this.sec
       }
-      await this.$axios
-        .put(this.perm.url, payload)
-        .then(({ data }) => {
+      await this.$store
+        .dispatch('information/putPerm', payload)
+        .then(() => {
           this.editing = false
-          this.$store.commit('information/MODIFY_PERM', data)
         })
         .catch(() => {
           this.error = true
