@@ -180,5 +180,10 @@ export const actions = {
       .then(({ data }) => {
         commit('PUSH_STUDENT', data)
       })
+  },
+  putDep({ commit }, payload) {
+    return this.$axios.put(payload.url, payload).then(({ data }) => {
+      commit('MODIFY_DEP', data)
+    })
   }
 }
