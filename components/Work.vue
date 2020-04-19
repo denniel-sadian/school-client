@@ -32,7 +32,7 @@
         </button>
       </div>
     </div>
-    <div id="deleting" v-else-if="deleting">
+    <div id="deleting" v-else-if="deleting && !editing">
       <div v-if="deletingReally">
         <h1><i class="fas fa-spinner w3-spin"></i></h1>
       </div>
@@ -74,16 +74,9 @@
       </div>
       <div class="inpt">
         <label>Highest Score:</label>
-        <input v-model="score" :disabled="updating" required />
+        <input type="number" v-model="score" :disabled="updating" required />
       </div>
       <div>
-        <button
-          @click="editing = false"
-          :disabled="updating"
-          class="w3-button w3-pink w3-round w3-small"
-        >
-          Cancel
-        </button>
         <button
           type="submit"
           :disabled="updating"
@@ -93,6 +86,13 @@
             ><i class="fas fa-spinner w3-spin"></i> Updating...</span
           >
           <span v-else>Update</span>
+        </button>
+        <button
+          @click="editing = false"
+          :disabled="updating"
+          class="w3-button w3-pink w3-round w3-small"
+        >
+          Cancel
         </button>
       </div>
     </form>
@@ -157,6 +157,8 @@ export default {
         .finally(() => (this.deleting = false))
     },
     async update() {
+      this.deleting = false
+      this.editing = true
       this.updating = true
       const payload = {
         url: this.work.url,
@@ -165,10 +167,10 @@ export default {
         work_type: this.type,
         highest_score: this.score
       }
-      await this.$store.dispatch('grading/updateWork', payload).finally(() => {
-        this.updating = false
-        this.editing = false
-      })
+      await this.$store
+        .dispatch('grading/updateWork', payload)
+        .then(() => (this.editing = false))
+        .finally(() => (this.updating = false))
     }
   }
 }
