@@ -103,6 +103,7 @@
                     id="adding-form"
                     @submit.prevent="createWork"
                     v-if="showWorkForm"
+                    class="w3-animate-top"
                   >
                     <h4>Add a Work</h4>
                     <div class="inpt">
