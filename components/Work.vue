@@ -51,7 +51,7 @@ export default {
   border: 1px solid #9e9e9e;
   border-radius: 4px;
   padding: 8px;
-  margin-bottom: 8px;
+  margin: 8px 0px;
 }
 
 h4 {

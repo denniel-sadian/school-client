@@ -29,7 +29,7 @@
               <form @submit.prevent="updateSheet">
                 <div class="inpt">
                   <label>Department:</label>
-                  <select v-model="dep" :disabled="updating">
+                  <select v-model="dep" :disabled="updating" required>
                     <option
                       v-for="d in departments"
                       :value="d.url"
@@ -40,7 +40,7 @@
                 </div>
                 <div class="inpt">
                   <label>Section:</label>
-                  <select v-model="sec" :disabled="updating">
+                  <select v-model="sec" :disabled="updating" required>
                     <option v-for="s in sections" :value="s.url" :key="s.id">{{
                       s.name
                     }}</option>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="inpt">
                   <label>Subject:</label>
-                  <select v-model="sub" :disabled="updating">
+                  <select v-model="sub" :disabled="updating" required>
                     <option v-for="s in subjects" :value="s.url" :key="s.id">{{
                       s.name
                     }}</option>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="inpt">
                   <label>Published:</label>
-                  <select v-model="pub" :disabled="updating">
+                  <select v-model="pub" :disabled="updating" required>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                   </select>
@@ -74,11 +74,70 @@
               </form>
               <hr />
               <div>
+                <button
+                  @click="showWorkForm = true"
+                  v-show="!showWorkForm"
+                  class="w3-button w3-green w3-small w3-round"
+                >
+                  Add a Work
+                </button>
+                <form
+                  id="adding-form"
+                  @submit.prevent="createWork"
+                  v-if="showWorkForm"
+                >
+                  <h4>Add a Work</h4>
+                  <div class="inpt">
+                    <label>Name:</label>
+                    <input
+                      required
+                      type="text"
+                      v-model="wName"
+                      name="wName"
+                      :disabled="creatingWork"
+                    />
+                  </div>
+                  <div class="inpt">
+                    <label>Type:</label>
+                    <select v-model="wType" name="wType" :disabled="creatingWork" required>
+                      <option value="a">Activity</option>
+                      <option value="q">Quiz</option>
+                      <option value="e">Examination</option>
+                      <option value="p">Performance</option>
+                      <option value="c">Extra</option>
+                    </select>
+                  </div>
+                  <div class="inpt">
+                    <label>Name:</label>
+                    <input
+                      required
+                      type="number"
+                      v-model="wScore"
+                      name="wScore"
+                      min="1"
+                      :disabled="creatingWork"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    class="w3-button w3-light-green w3-small w3-round"
+                  >
+                    Add Work
+                  </button>
+                  <button
+                    style="margin-top: 8px;"
+                    type="submit"
+                    class="w3-button w3-pink w3-small w3-round"
+                    @click="showWorkForm = false"
+                  >
+                    Close
+                  </button>
+                </form>
                 <p v-if="!sheet.works" class="w3-small w3-center">
                   There are no works yet.
                 </p>
                 <div v-else>
-                    <Work v-for="w in sheet.works" :work="w" :key="w.id" />
+                  <Work v-for="w in sheet.works" :work="w" :key="w.id" />
                 </div>
               </div>
             </div>
@@ -116,13 +175,18 @@ export default {
     return {
       got: 0,
       showEditingForm: false,
+      showWorkForm: false,
       updating: false,
+      creatingWork: false,
       updated: false,
 
       dep: '',
       sec: '',
       sub: '',
-      pub: ''
+      pub: '',
+      wName: '',
+      wType: '',
+      wScore: ''
     }
   },
   computed: {
@@ -173,6 +237,7 @@ export default {
     }
   },
   methods: {
+    createWork() {},
     updateSheet() {
       this.updating = true
       const payload = {
@@ -221,6 +286,13 @@ header {
   text-transform: capitalize;
 }
 
+#adding-form {
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #9e9e9e;
+  border-radius: 4px;
+}
+
 #edit-sheet-btn {
   display: absolute;
   position: fixed;
@@ -251,11 +323,16 @@ header {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 1fr auto;
-  padding: 8px;
+  padding: 8px 0px 8px 8px;
 }
 
 #editing-modal > div h3 {
   padding: 0px 0px 16px 0px;
+}
+
+.form-inputs {
+  overflow-y: auto;
+  padding-right: 8px;
 }
 
 .form-inputs .w3-button {
@@ -266,7 +343,7 @@ header {
   display: flex;
   justify-content: flex-end;
   border-top: 1px solid #9e9e9e;
-  padding-top: 8px;
+  padding: 8px 8px 0px 0px;
 }
 
 #editing-modal > div .form-bottom-btns * {
