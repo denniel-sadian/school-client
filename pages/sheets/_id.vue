@@ -200,7 +200,7 @@ export default {
       pub: '',
       wName: '',
       wType: '',
-      wScore: ''
+      wScore: 0
     }
   },
   computed: {
