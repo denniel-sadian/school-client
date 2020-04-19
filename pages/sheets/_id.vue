@@ -69,7 +69,10 @@
                   :disabled="updating"
                   class="w3-button w3-green w3-round w3-small"
                 >
-                  Update
+                  <span v-if="updating"
+                    ><i class="fas fa-spinner w3-spin"></i> Updating...</span
+                  >
+                  <span v-else>Update</span>
                 </button>
               </form>
               <hr />
@@ -128,7 +131,11 @@
                     :disabled="creatingWork"
                     class="w3-button w3-light-green w3-small w3-round"
                   >
-                    Add Work
+                    <span v-if="creatingWork"
+                      ><i class="fas fa-spinner w3-spin"></i> Adding
+                      work...</span
+                    >
+                    <span v-else>Add Work</span>
                   </button>
                   <button
                     style="margin-top: 8px;"
