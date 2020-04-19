@@ -110,6 +110,9 @@ export default {
     },
     role() {
       return this.$store.state.user.user.profile.role
+    },
+    newID() {
+      return this.$store.state.grading.sheets[0].id
     }
   },
   methods: {
@@ -124,9 +127,7 @@ export default {
       await this.$store
         .dispatch('grading/createSheet', payload)
         .then(() => {
-          this.dep = ''
-          this.sec = ''
-          this.sub = ''
+          this.$router.push(`/sheets/${this.newID}`)
         })
         .finally(() => {
           this.creating = false
