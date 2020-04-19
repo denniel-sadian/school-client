@@ -1,6 +1,6 @@
 <template>
-  <div class="cont w3-hover-shadow">
-    <div v-if="!editing && !deleting">
+  <div class="cont w3-hover-shadow w3-animate-top">
+    <div v-if="!editing && !deleting" class="w3-animate-opacity">
       <h4 class="w3-text-blue">{{ work.name }}</h4>
       <table>
         <tr>
@@ -32,11 +32,15 @@
         </button>
       </div>
     </div>
-    <div id="deleting" v-else-if="deleting && !editing">
+    <div
+      id="deleting"
+      v-else-if="deleting && !editing"
+      class="w3-animate-opacity"
+    >
       <div v-if="deletingReally">
         <h1><i class="fas fa-spinner w3-spin"></i></h1>
       </div>
-      <div v-else>
+      <div v-else class="w3-animate-zoom w3-yellow w3-padding">
         <h4>
           <i class="fas fa-exclamation-triangle w3-text-red"></i><br />Are you
           sure you want to delete this work?
@@ -57,7 +61,7 @@
         </div>
       </div>
     </div>
-    <form v-else @submit.prevent="update">
+    <form v-else @submit.prevent="update" class="w3-animate-opacity">
       <div class="inpt">
         <label>Name:</label>
         <input v-model="name" :disabled="updating" required />
