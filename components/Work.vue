@@ -15,6 +15,12 @@
         <td>{{ workType }}</td>
       </tr>
     </table>
+
+    <div>
+      <button class="w3-button w3-small w3-light-green">
+        <i class="fas fa-pencil-alt"></i>
+      </button>
+    </div>
   </div>
 </template>
 
