@@ -1,13 +1,27 @@
 <template>
-  <div>
-    <h4>{{ work.name }}</h4>
+  <div class="cont">
+    <h4 class="w3-text-blue">{{ work.name }}</h4>
+    <table>
+      <tr>
+        <th>Highest Score:</th>
+        <td>{{ work.highest_score }}</td>
+      </tr>
+      <tr>
+        <th>Date:</th>
+        <td>{{ new Date(work.date).toDateString() }}</td>
+      </tr>
+      <tr>
+        <th>Type:</th>
+        <td>{{ workType }}</td>
+      </tr>
+    </table>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    work
+    work: Object
   },
   computed: {
     workType() {
@@ -31,5 +45,22 @@ export default {
 <style scoped>
 * {
   font-family: 'Nunito';
+}
+
+.cont {
+  border: 1px solid #9e9e9e;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+h4 {
+  margin: 0px;
+}
+
+th {
+  font-family: 'Courier New', Courier, monospace;
+  vertical-align: baseline;
+  text-align: left;
 }
 </style>

@@ -72,6 +72,15 @@
                   Update
                 </button>
               </form>
+              <hr />
+              <div>
+                <p v-if="!sheet.works" class="w3-small w3-center">
+                  There are no works yet.
+                </p>
+                <div v-else>
+                    <Work v-for="w in sheet.works" :work="w" :key="w.id" />
+                </div>
+              </div>
             </div>
             <div class="form-bottom-btns">
               <button
@@ -97,7 +106,12 @@
 </template>
 
 <script>
+import Work from '~/components/Work.vue'
+
 export default {
+  components: {
+    Work
+  },
   data() {
     return {
       got: 0,
