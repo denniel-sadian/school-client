@@ -92,7 +92,7 @@ export const actions = {
   createWork({ commit }, payload) {
     // Create a work
     return this.$axios
-      .post('grading/sheets', payload)
+      .post('grading/works/', payload)
       .then(({ data }) => commit('ADD_WORK', data))
   },
   updateWork({ commit }, payload) {
@@ -108,7 +108,7 @@ export const actions = {
   createRecord({ commit }, payload) {
     // Create the record
     return this.$axios
-      .post('grading/records', payload)
+      .post('grading/records/', payload)
       .then(({ data }) => commit('ADD_RECORD', data))
   },
   updateRecord({ commit }, payload) {

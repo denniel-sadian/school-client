@@ -99,7 +99,12 @@
                   </div>
                   <div class="inpt">
                     <label>Type:</label>
-                    <select v-model="wType" name="wType" :disabled="creatingWork" required>
+                    <select
+                      v-model="wType"
+                      name="wType"
+                      :disabled="creatingWork"
+                      required
+                    >
                       <option value="a">Activity</option>
                       <option value="q">Quiz</option>
                       <option value="e">Examination</option>
@@ -108,7 +113,7 @@
                     </select>
                   </div>
                   <div class="inpt">
-                    <label>Name:</label>
+                    <label>Highest Score:</label>
                     <input
                       required
                       type="number"
@@ -120,6 +125,7 @@
                   </div>
                   <button
                     type="submit"
+                    :disabled="creatingWork"
                     class="w3-button w3-light-green w3-small w3-round"
                   >
                     Add Work
@@ -128,6 +134,7 @@
                     style="margin-top: 8px;"
                     type="submit"
                     class="w3-button w3-pink w3-small w3-round"
+                    :disabled="creatingWork"
                     @click="showWorkForm = false"
                   >
                     Close
@@ -237,7 +244,19 @@ export default {
     }
   },
   methods: {
-    createWork() {},
+    createWork() {
+      this.creatingWork = true
+      const payload = {
+        gsheet: this.sheet.url,
+        name: this.wName,
+        highest_score: this.wScore,
+        work_type: this.wType
+      }
+      this.$store
+        .dispatch('grading/createWork', payload)
+        .then(() => (this.showWorkForm = false))
+        .finally(() => (this.creatingWork = false))
+    },
     updateSheet() {
       this.updating = true
       const payload = {
