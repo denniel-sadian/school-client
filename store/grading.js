@@ -58,7 +58,9 @@ export const mutations = {
     )
   },
   DELETE_RECORD(state, url) {
-    delete state.currentSheet.records.filter((e) => e.url === url)[0]
+    state.currentSheet.records = state.currentSheet.records.filter(
+      (e) => e.url !== url
+    )
   }
 }
 
