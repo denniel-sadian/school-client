@@ -264,6 +264,13 @@ export default {
         this.sub = this.sheet.subject
         this.pub = this.sheet.publish
       }
+    },
+    creatingWork(v) {
+      if (!v) {
+        this.wName = ''
+        this.wType = ''
+        this.wScore = ''
+      }
     }
   },
   methods: {
