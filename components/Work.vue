@@ -1,6 +1,6 @@
 <template>
   <div class="cont w3-hover-shadow">
-    <div v-if="!editing">
+    <div v-if="!editing && !deleting">
       <h4 class="w3-text-blue">{{ work.name }}</h4>
       <table>
         <tr>
@@ -17,6 +17,9 @@
         </tr>
       </table>
 
+      <p class="w3-small w3-text-red-w3-center" v-show="errorDelete">
+        You cannot delete this work for now because this has records already.
+      </p>
       <div id="btns">
         <button
           @click="editing = true"
@@ -24,16 +27,75 @@
         >
           <i class="fas fa-pencil-alt"></i>
         </button>
-        <button class="w3-button w3-small w3-pink">
+        <button @click="deleting = true" class="w3-button w3-small w3-pink">
           <i class="fas fa-trash"></i>
         </button>
       </div>
     </div>
-    <div v-else>
-      <div class="inpt">
-        <label>Name:</label>
+    <div id="deleting" v-else-if="deleting">
+      <div v-if="deletingReally">
+        <h1><i class="fas fa-spinner w3-spin"></i></h1>
+      </div>
+      <div v-else>
+        <h4>
+          <i class="fas fa-exclamation-triangle w3-text-red"></i><br />Are you
+          sure you want to delete this work?
+        </h4>
+        <div>
+          <button
+            @click="deleteWork"
+            class="w3-button w3-red w3-round w3-small"
+          >
+            Yes
+          </button>
+          <button
+            @click="deleting = false"
+            class="w3-button w3-green w3-round w3-small"
+          >
+            No
+          </button>
+        </div>
       </div>
     </div>
+    <form v-else @submit.prevent="update">
+      <div class="inpt">
+        <label>Name:</label>
+        <input v-model="name" :disabled="updating" required />
+      </div>
+      <div class="inpt">
+        <label>Type:</label>
+        <select v-model="type" :disabled="updating" required>
+          <option value="a">Activity</option>
+          <option value="q">Quiz</option>
+          <option value="e">Examination</option>
+          <option value="p">Performance</option>
+          <option value="c">Extra</option>
+        </select>
+      </div>
+      <div class="inpt">
+        <label>Highest Score:</label>
+        <input v-model="score" :disabled="updating" required />
+      </div>
+      <div>
+        <button
+          @click="editing = false"
+          :disabled="updating"
+          class="w3-button w3-pink w3-round w3-small"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          :disabled="updating"
+          class="w3-button w3-green w3-round w3-small"
+        >
+          <span v-if="updating"
+            ><i class="fas fa-spinner w3-spin"></i> Updating...</span
+          >
+          <span v-else>Update</span>
+        </button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -45,13 +107,29 @@ export default {
   data() {
     return {
       editing: false,
+      deleting: false,
+      deletingReally: false,
+      errorDelete: false,
+      updating: false,
 
       name: '',
       type: '',
       score: 0
     }
   },
+  watch: {
+    editing(v) {
+      if (v) {
+        this.name = this.work.name
+        this.type = this.work.work_type
+        this.score = this.work.highest_score
+      }
+    }
+  },
   computed: {
+    sheetUrl() {
+      return this.$store.state.grading.currentSheet.url
+    },
     workType() {
       switch (this.work.work_type) {
         case 'a':
@@ -65,6 +143,32 @@ export default {
         case 'c':
           return 'Extra'
       }
+    }
+  },
+  methods: {
+    async deleteWork() {
+      this.deletingReally = true
+      await this.$store
+        .dispatch('grading/deleteWork', this.work.url)
+        .catch(() => {
+          this.errorDelete = true
+          setTimeout(() => (this.errorDelete = false), 5000)
+        })
+        .finally(() => (this.deleting = false))
+    },
+    async update() {
+      this.updating = true
+      const payload = {
+        url: this.work.url,
+        gsheet: this.sheetUrl,
+        name: this.name,
+        work_type: this.type,
+        highest_score: this.score
+      }
+      await this.$store.dispatch('grading/updateWork', payload).finally(() => {
+        this.updating = false
+        this.editing = false
+      })
     }
   }
 }
@@ -108,5 +212,24 @@ th {
   align-items: center;
   margin-left: 8px;
   border-radius: 32px;
+}
+
+form > div:last-child {
+  display: flex;
+  justify-content: flex-end;
+}
+
+form > div:last-child button {
+  margin-left: 8px;
+}
+
+#deleting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+#deleting > * {
+  width: 100%;
 }
 </style>
