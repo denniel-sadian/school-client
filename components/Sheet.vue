@@ -13,7 +13,9 @@
       <tr>
         <th>Teacher:</th>
         <td v-if="sheet.teacher.username === username">You</td>
-        <td v-else>{{ sheet.teacher.first_name }} {{ sheet.teacher.last_name }}</td>
+        <td v-else>
+          {{ sheet.teacher.first_name }} {{ sheet.teacher.last_name }}
+        </td>
       </tr>
       <tr>
         <th>Date:</th>
@@ -29,7 +31,11 @@
     </table>
 
     <div>
-      <nuxt-link id="view-link" to="#" class="w3-button w3-green">
+      <nuxt-link
+        id="view-link"
+        :to="'/sheets/' + sheet.id"
+        class="w3-button w3-green"
+      >
         <i class="fas fa-long-arrow-alt-right"></i> View
       </nuxt-link>
     </div>
