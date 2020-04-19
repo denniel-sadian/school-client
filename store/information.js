@@ -92,19 +92,19 @@ export const mutations = {
     })
   },
   DELETE_PERM(state, url) {
-    delete state.permissions.filter((e) => e.url === url)[0]
+    state.permissions = state.permissions.filter((e) => e.url !== url)
   },
   DELETE_DEP(state, url) {
-    delete state.departments.filter((e) => e.url === url)[0]
+    state.departments = state.departments.filter((e) => e.url !== url)
   },
   DELETE_SEC(state, url) {
-    delete state.sections.filter((e) => e.url === url)[0]
+    state.sections = state.sections.filter((e) => e.url !== url)
   },
   DELETE_SUB(state, url) {
-    delete state.subjects.filter((e) => e.url === url)[0]
+    state.subjects = state.subjects.filter((e) => e.url !== url)
   },
   DELETE_STU(state, url) {
-    delete state.students.filter((e) => e.url === url)[0]
+    state.students = state.students.filter((e) => e.url !== url)
   }
 }
 
