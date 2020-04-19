@@ -12,7 +12,8 @@
       </tr>
       <tr>
         <th>Teacher:</th>
-        <td>{{ sheet.teacher.first_name }} {{ sheet.teacher.last_name }}</td>
+        <td v-if="sheet.teacher.username === username">You</td>
+        <td v-else>{{ sheet.teacher.first_name }} {{ sheet.teacher.last_name }}</td>
       </tr>
       <tr>
         <th>Date:</th>
@@ -28,7 +29,7 @@
     </table>
 
     <div>
-      <nuxt-link id="view-link" to="#">
+      <nuxt-link id="view-link" to="#" class="w3-button w3-green">
         <i class="fas fa-long-arrow-alt-right"></i> View
       </nuxt-link>
     </div>
@@ -39,7 +40,7 @@
 export default {
   props: {
     sheet: Object,
-    role: String
+    username: String
   },
   computed: {
     department() {
@@ -94,6 +95,10 @@ td {
   border-top: 1px solid #9e9e9e;
 }
 
+td {
+  padding-left: 8px;
+}
+
 .cont > div:last-child {
   padding-top: 8px;
   border-top: 1px solid #9e9e9e;
@@ -103,12 +108,7 @@ td {
 
 a {
   text-decoration: none;
-  background: #9e9e9e;
   border-radius: 32px;
-  padding: 2px 4px;
+  padding: 2px 8px;
 }
-
-/*
-You were styling the link
-*/
 </style>

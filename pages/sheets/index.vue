@@ -62,7 +62,12 @@
           </div>
           <div v-else>
             <h2 class="w3-center">List of Grading sheets</h2>
-            <Sheet v-for="s in sheets" :sheet="s" :role="role" :key="s.id" />
+            <Sheet
+              v-for="s in sheets"
+              :sheet="s"
+              :username="username"
+              :key="s.id"
+            />
           </div>
         </div>
       </article>
@@ -99,6 +104,9 @@ export default {
     },
     sheets() {
       return this.$store.state.grading.sheets
+    },
+    username() {
+      return this.$store.state.user.user.user.username
     },
     role() {
       return this.$store.state.user.user.profile.role
