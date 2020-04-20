@@ -31,8 +31,10 @@ export const mutations = {
   },
   ADD_RECORD(state, record) {
     state.currentSheet.records.push(record)
+  },
+  SORT_RECORDS(state) {
     state.currentSheet.records = state.currentSheet.records.sort(
-      (a, b) => b.id - a.id
+      (a, b) => a.id - b.id
     )
   },
   UPDATE_WORK(state, work) {
@@ -105,9 +107,10 @@ export const actions = {
   },
   updateWork({ commit }, payload) {
     // Update the work
-    return this.$axios
-      .put(payload.url, payload)
-      .then(({ data }) => commit('UPDATE_WORK', data))
+    return this.$axios.put(payload.url, payload).then(({ data }) => {
+      commit('ADD_WORK', data)
+      commit('SORT_WORKS')
+    })
   },
   deleteWork({ commit }, url) {
     // Delete the work
@@ -118,14 +121,16 @@ export const actions = {
   },
   createRecord({ commit }, payload) {
     // Create the record
-    return this.$axios
-      .post('grading/records/', payload)
-      .then(({ data }) => commit('ADD_RECORD', data))
+    return this.$axios.post('grading/records/', payload).then(({ data }) => {
+      commit('ADD_RECORD', data)
+      commit('SORT_RECORDS')
+    })
   },
   updateRecord({ commit }, payload) {
     // Update the record
-    return this.$axios
-      .put(payload.url, payload)
-      .then(({ data }) => commit('UPDATE_RECORD', data))
+    return this.$axios.put(payload.url, payload).then(({ data }) => {
+      commit('UPDATE_RECORD', data)
+      commit('SORT_RECORDS')
+    })
   }
 }

@@ -3,8 +3,12 @@
     <td>{{ fullName }}</td>
     <Col as="td" v-for="w in myActivities" :record="w" :key="w.id" />
     <td>{{ totalActivitiesScore }}</td>
-    <td>{{ PS }}</td>
-    <td>{{ WS }}</td>
+    <td>{{ PS1 }}</td>
+    <td>{{ WS1 }}</td>
+    <Col as="td" v-for="p in myPerformances" :record="p" :key="p.id" />
+    <td>{{ totalPerformaceScore }}</td>
+    <td>{{ PS2 }}</td>
+    <td>{{ WS2 }}</td>
   </tr>
 </template>
 
@@ -43,13 +47,21 @@ export default {
         return wt === 'a' || wt === 'q'
       })
     },
-    PS() {
-      return Math.round(
+    PS1() {
+      return this.round(
         (this.totalActivitiesScore * 100) / this.topTotalActScore
       )
     },
-    WS() {
-      return Math.round((this.PS * 20) / 100)
+    WS1() {
+      return this.round((this.PS1 * 20) / 100)
+    },
+    PS2() {
+      return this.round(
+        (this.totalPerformaceScore * 100) / this.topTotalPerfScore
+      )
+    },
+    WS2() {
+      return this.round((this.PS2 * 20) / 100)
     },
     myPerformances() {
       return this.myRecords.filter((r) => {
@@ -65,6 +77,7 @@ export default {
     totalPerformaceScore() {
       let total = 0
       this.myPerformances.forEach((p) => (total += p.score))
+      return total
     },
     myExam() {
       return this.myRecords.filter((r) => {
@@ -88,6 +101,9 @@ export default {
     }
   },
   methods: {
+    round(x) {
+      return Math.round((x + Number.EPSILON) * 100) / 100
+    },
     createRecord() {
       if (this.username !== this.sheetOwner) return
       this.allWorks.forEach((w) => {

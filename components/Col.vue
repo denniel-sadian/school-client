@@ -1,5 +1,5 @@
 <template>
-  <td>
+  <td class="w3-animate-zoom">
     <div v-if="editing && updating">
       <i class="fas fa-spinner w3-spin w3-text-green"></i>
     </div>
@@ -12,7 +12,7 @@
         min="1"
         :max="max"
         v-model="score"
-        autofocus
+        autofocus="autofocus"
         required
       />
       <button class="w3-button w3-green" type="submit">
