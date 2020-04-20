@@ -22,6 +22,12 @@ export default {
     },
     sheetURL() {
       return this.$store.state.grading.currentSheet.url
+    },
+    sheetOwner() {
+      return this.$store.state.grading.currentSheet.teacher.username
+    },
+    username() {
+      return this.$store.state.user.user.user.username
     }
   },
   watch: {
@@ -31,6 +37,7 @@ export default {
   },
   methods: {
     createRecord() {
+      if (this.username !== this.sheetOwner) return
       this.allWorks.forEach((w) => {
         if (
           !this.records.filter(
@@ -47,6 +54,9 @@ export default {
         }
       })
     }
+  },
+  mounted() {
+    this.createRecord()
   }
 }
 </script>
