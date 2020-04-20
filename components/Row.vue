@@ -157,4 +157,8 @@ td {
 .bd-left {
   border-left: 2px solid black;
 }
+
+tr > td:first-child {
+  text-align: left;
+}
 </style>
