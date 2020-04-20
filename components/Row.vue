@@ -65,7 +65,7 @@ export default {
       )
     },
     WS2() {
-      return this.round((this.PS2 * 20) / 100)
+      return this.round((this.PS2 * 60) / 100)
     },
     PS3() {
       const exam = this.allWorks.filter((w) => w.work_type === 'e')[0]
@@ -76,7 +76,7 @@ export default {
       return this.round((this.PS3 * 20) / 100)
     },
     initialGrade() {
-      return this.PS1 + this.PS2 + this.PS3
+      return this.WS1 + this.WS2 + this.WS3
     },
     myPerformances() {
       return this.myRecords.filter((r) => {
