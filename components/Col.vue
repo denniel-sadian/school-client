@@ -106,4 +106,8 @@ button {
   justify-content: center;
   align-items: center;
 }
+
+td:hover {
+  outline: 2px solid green;
+}
 </style>
