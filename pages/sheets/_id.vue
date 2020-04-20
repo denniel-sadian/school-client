@@ -18,6 +18,42 @@
           {{ sheet.teacher.last_name }}
         </p>
       </header>
+      <table id="sheet">
+        <tr>
+          <th rowspan="2">Learners' Names</th>
+          <th :colspan="writtenWorks.length + 3">Written Works (20%)</th>
+          <th :colspan="performances.length + 3">Performance Tasks (60%)</th>
+          <th :colspan="3">Quarterly Assessment Tasks (20%)</th>
+        </tr>
+        <tr>
+          <th v-for="i in writtenWorks.length" :key="'w'+i">{{ i }}</th>
+          <th>Total</th>
+          <th>PS</th>
+          <th>WS</th>
+          <th v-for="i in performances.length" :key="'p'+i">{{ i }}</th>
+          <th>Total</th>
+          <th>PS</th>
+          <th>WS</th>
+          <th>1</th>
+          <th>PS</th>
+          <th>WS</th>
+        </tr>
+        <tr>
+          <th>Highest Possible Score</th>
+          <th v-for="w in writtenWorks" :key="w.id">{{ w.highest_score }}</th>
+          <th>{{ totalWrittenWorksScore }}</th>
+          <th>100.00</th>
+          <th>20%</th>
+          <th v-for="p in performances" :key="p.id">{{ p.highest_score }}</th>
+          <th>{{ totalPerformancesScore }}</th>
+          <th>100.00</th>
+          <th>60%</th>
+          <th>{{ exam.highest_score }}</th>
+          <th>100.00</th>
+          <th>20%</th>
+        </tr>
+      </table>
+
       <div
         id="controls"
         v-show="role === 'teacher' && username === sheet.teacher.username"
@@ -224,6 +260,29 @@ export default {
     sheet() {
       return this.$store.state.grading.currentSheet
     },
+    writtenWorks() {
+      return this.sheet.works.filter(
+        (e) => e.work_type === 'a' || e.work_type === 'q'
+      )
+    },
+    performances() {
+      return this.sheet.works.filter((e) => e.work_type === 'p')
+    },
+    exam() {
+      const exam = this.sheet.works.filter(e=> e.work_type === 'e')[0]
+      if (exam) return exam
+      else return {highest_score: 0}
+    },
+    totalPerformancesScore() {
+      let score = 0
+      this.performances.forEach((w) => (score += w.highest_score))
+      return score
+    },
+    totalWrittenWorksScore() {
+      let score = 0
+      this.writtenWorks.forEach((w) => (score += w.highest_score))
+      return score
+    },
     department() {
       return this.$store.state.information.departments.filter(
         (e) => e.url === this.sheet.department
@@ -412,5 +471,14 @@ header {
 
 .or {
   margin: 30px 0px;
+}
+
+#sheet {
+  width: 100%;
+}
+
+#sheet th,
+#sheet td {
+  border: 1px solid #9e9e9e;
 }
 </style>

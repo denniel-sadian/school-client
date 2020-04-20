@@ -23,6 +23,8 @@ export const mutations = {
   },
   ADD_WORK(state, work) {
     state.currentSheet.works.push(work)
+  },
+  SORT_WORKS(state) {
     state.currentSheet.works = state.currentSheet.works.sort(
       (a, b) => b.id - a.id
     )
@@ -79,9 +81,10 @@ export const actions = {
   },
   retrieveSheet({ commit }, url) {
     // Get the grading sheet
-    return this.$axios
-      .get(url)
-      .then(({ data }) => commit('SET_CURRENT_SHEET', data))
+    return this.$axios.get(url).then(({ data }) => {
+      commit('SET_CURRENT_SHEET', data)
+      commit('SORT_WORKS')
+    })
   },
   updateSheet({ commit }, payload) {
     // Update the grading sheet
@@ -95,9 +98,10 @@ export const actions = {
   },
   createWork({ commit }, payload) {
     // Create a work
-    return this.$axios
-      .post('grading/works/', payload)
-      .then(({ data }) => commit('ADD_WORK', data))
+    return this.$axios.post('grading/works/', payload).then(({ data }) => {
+      commit('ADD_WORK', data)
+      commit('SORT_WORKS')
+    })
   },
   updateWork({ commit }, payload) {
     // Update the work
