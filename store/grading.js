@@ -26,7 +26,7 @@ export const mutations = {
   },
   SORT_WORKS(state) {
     state.currentSheet.works = state.currentSheet.works.sort(
-      (a, b) => b.id - a.id
+      (a, b) => a.id - b.id
     )
   },
   ADD_RECORD(state, record) {
