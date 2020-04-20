@@ -4,14 +4,14 @@
     <Col as="td" v-for="w in myActivities" :record="w" :key="w.id" />
     <td class="w3-animate-zoom">{{ totalActivitiesScore }}</td>
     <td class="w3-animate-zoom">{{ PS1 }}</td>
-    <td class="w3-animate-zoom">{{ WS1 }}</td>
+    <td class="w3-animate-zoom bd-right">{{ WS1 }}</td>
     <Col as="td" v-for="p in myPerformances" :record="p" :key="p.id" />
     <td class="w3-animate-zoom">{{ totalPerformaceScore }}</td>
     <td class="w3-animate-zoom">{{ PS2 }}</td>
-    <td class="w3-animate-zoom">{{ WS2 }}</td>
+    <td class="w3-animate-zoom bd-right">{{ WS2 }}</td>
     <Col as="td" v-if="myExam" :record="myExam" />
     <td class="w3-animate-zoom">{{ PS3 }}</td>
-    <td class="w3-animate-zoom">{{ WS3 }}</td>
+    <td class="w3-animate-zoom bd-right">{{ WS3 }}</td>
     <td>{{ initialGrade }}</td>
   </tr>
 </template>
@@ -150,5 +150,11 @@ td {
   white-space: nowrap;
   border: 1px solid #9e9e9e;
   text-align: center;
+}
+.bd-right {
+  border-right: 2px solid black;
+}
+.bd-left {
+  border-left: 2px solid black;
 }
 </style>
