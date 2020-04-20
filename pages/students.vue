@@ -294,14 +294,16 @@ export default {
           this.file = ''
           this.fName = ''
           this.lName = ''
-          this.gender = ''
           this.idNum = ''
+          /*
+          this.gender = ''
           this.phone = ''
           this.guardianPhone = ''
           this.address = ''
           this.grade = ''
           this.dep = ''
           this.sec = ''
+          */
           this.error = false
         })
         .catch(() => {
