@@ -44,10 +44,12 @@ export default {
       })
     },
     PS() {
-      return (this.totalActivitiesScore * 100) / this.topTotalActScore
+      return Math.round(
+        (this.totalActivitiesScore * 100) / this.topTotalActScore
+      )
     },
     WS() {
-      return (this.PS * 20) / 100
+      return Math.round((this.PS * 20) / 100)
     },
     myPerformances() {
       return this.myRecords.filter((r) => {
