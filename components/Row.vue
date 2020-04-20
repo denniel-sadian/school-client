@@ -1,14 +1,18 @@
 <template>
   <tr>
-    <td>{{ fullName }}</td>
+    <td class="w3-animate-zoom">{{ fullName }}</td>
     <Col as="td" v-for="w in myActivities" :record="w" :key="w.id" />
-    <td>{{ totalActivitiesScore }}</td>
-    <td>{{ PS1 }}</td>
-    <td>{{ WS1 }}</td>
+    <td class="w3-animate-zoom">{{ totalActivitiesScore }}</td>
+    <td class="w3-animate-zoom">{{ PS1 }}</td>
+    <td class="w3-animate-zoom">{{ WS1 }}</td>
     <Col as="td" v-for="p in myPerformances" :record="p" :key="p.id" />
-    <td>{{ totalPerformaceScore }}</td>
-    <td>{{ PS2 }}</td>
-    <td>{{ WS2 }}</td>
+    <td class="w3-animate-zoom">{{ totalPerformaceScore }}</td>
+    <td class="w3-animate-zoom">{{ PS2 }}</td>
+    <td class="w3-animate-zoom">{{ WS2 }}</td>
+    <Col as="td" v-if="myExam" :record="myExam" />
+    <td class="w3-animate-zoom">{{ PS3 }}</td>
+    <td class="w3-animate-zoom">{{ WS3 }}</td>
+    <td>{{ initialGrade }}</td>
   </tr>
 </template>
 
@@ -62,6 +66,17 @@ export default {
     },
     WS2() {
       return this.round((this.PS2 * 20) / 100)
+    },
+    PS3() {
+      const exam = this.allWorks.filter((w) => w.work_type === 'e')[0]
+      if (!exam || !this.myExam) return 0
+      return this.round((this.myExam.score * 100) / exam.highest_score)
+    },
+    WS3() {
+      return this.round((this.PS3 * 20) / 100)
+    },
+    initialGrade() {
+      return this.PS1 + this.PS2 + this.PS3
     },
     myPerformances() {
       return this.myRecords.filter((r) => {

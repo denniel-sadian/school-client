@@ -29,11 +29,11 @@
           <th rowspan="3">Quarterly Grade</th>
         </tr>
         <tr>
-          <th v-for="i in writtenWorks.length" :key="'w' + i">{{ i }}</th>
+          <th v-for="i in writtenWorks.length" :key="'ww' + i + Math.random()">{{ i }}</th>
           <th>Total</th>
           <th>PS</th>
           <th>WS</th>
-          <th v-for="i in performances.length" :key="'p' + i">{{ i }}</th>
+          <th v-for="i in performances.length" :key="'pp' + i + Math.random()">{{ i }}</th>
           <th>Total</th>
           <th>PS</th>
           <th>WS</th>
@@ -43,11 +43,11 @@
         </tr>
         <tr>
           <th>Highest Possible Score</th>
-          <th v-for="w in writtenWorks" :key="w.id">{{ w.highest_score }}</th>
+          <th v-for="w in writtenWorks" :key="w.url">{{ w.highest_score }}</th>
           <th>{{ totalWrittenWorksScore }}</th>
           <th>100.00</th>
           <th>20%</th>
-          <th v-for="p in performances" :key="p.id">{{ p.highest_score }}</th>
+          <th v-for="p in performances" :key="p.url">{{ p.highest_score }}</th>
           <th>{{ totalPerformancesScore }}</th>
           <th>100.00</th>
           <th>60%</th>
@@ -57,11 +57,11 @@
         </tr>
         <tr>
           <th>Male</th>
-          <th v-for="i in writtenWorks.length" :key="'1w' + i"></th>
+          <th v-for="i in writtenWorks.length" :key="'1w' + i+ Math.random()"></th>
           <th></th>
           <th></th>
           <th></th>
-          <th v-for="i in performances.length" :key="'1p' + i"></th>
+          <th v-for="i in performances.length" :key="'1p' + i+ Math.random()"></th>
           <th></th>
           <th></th>
           <th></th>
@@ -74,11 +74,11 @@
         <Row as="tr" v-for="b in boys" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="b" :key="b.url"/>
         <tr>
           <th>Female</th>
-          <th v-for="i in writtenWorks.length" :key="'2w' + i"></th>
+          <th v-for="i in writtenWorks.length" :key="'2w' + i+ Math.random()"></th>
           <th></th>
           <th></th>
           <th></th>
-          <th v-for="i in performances.length" :key="'2p' + i"></th>
+          <th v-for="i in performances.length" :key="'2p' + i+ Math.random()"></th>
           <th></th>
           <th></th>
           <th></th>
@@ -112,7 +112,7 @@
                       <option
                         v-for="d in departments"
                         :value="d.url"
-                        :key="d.id"
+                        :key="d.url"
                         >{{ d.name }}</option
                       >
                     </select>
@@ -123,7 +123,7 @@
                       <option
                         v-for="s in sections"
                         :value="s.url"
-                        :key="s.id"
+                        :key="s.url"
                         >{{ s.name }}</option
                       >
                     </select>
@@ -134,7 +134,7 @@
                       <option
                         v-for="s in subjects"
                         :value="s.url"
-                        :key="s.id"
+                        :key="s.url"
                         >{{ s.name }}</option
                       >
                     </select>
@@ -241,7 +241,7 @@
                     There are no works yet.
                   </p>
                   <div v-else>
-                    <Work v-for="w in sheet.works" :work="w" :key="w.id" />
+                    <Work v-for="w in sheet.works" :work="w" :key="w.url" />
                   </div>
                 </div>
               </div>

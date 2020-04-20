@@ -108,7 +108,7 @@ export const actions = {
   updateWork({ commit }, payload) {
     // Update the work
     return this.$axios.put(payload.url, payload).then(({ data }) => {
-      commit('ADD_WORK', data)
+      commit('UPDATE_WORK', data)
       commit('SORT_WORKS')
     })
   },
