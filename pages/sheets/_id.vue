@@ -335,9 +335,12 @@ export default {
     subjects() {
       return this.$store.state.information.subjects
     },
-    students() {
-      return this.$store.state.information.students.filter((s)=> s.section === this.section)
+    boys() {
+      return this.$store.state.information.students.filter((s)=> s.section === this.section && s.gender === 'm')
     },
+    girls() {
+      return this.$store.state.information.students.filter((s)=> s.section === this.section && s.gender === 'f')
+    }
   },
   watch: {
     showEditingForm(v) {
