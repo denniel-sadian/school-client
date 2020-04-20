@@ -3,7 +3,7 @@
     <div v-if="editing && updating">
       <i class="fas fa-spinner w3-spin w3-text-green"></i>
     </div>
-    <div @click="editing = true" v-else-if="!editing && !updating">
+    <div @click="edit" v-else-if="!editing && !updating">
       {{ record.score }}
     </div>
     <form @submit.prevent="update" v-else class="w3-animate-opacity">
@@ -42,6 +42,12 @@ export default {
       return this.$store.state.grading.currentSheet.works.filter(
         (e) => e.url === this.record.work
       )[0].highest_score
+    },
+    canBeEdited() {
+      return (
+        this.$store.state.user.user.user.username ===
+        this.$store.state.grading.currentSheet.teacher.username
+      )
     }
   },
   watch: {
@@ -50,7 +56,11 @@ export default {
     }
   },
   methods: {
+    edit() {
+      if (this.canBeEdited) this.editing = true
+    },
     async update() {
+      if (!this.canBeEdited) return
       this.updating = true
       const payload = {
         gsheet: this.$store.state.grading.currentSheet.url,
