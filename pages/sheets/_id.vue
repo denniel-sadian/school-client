@@ -18,19 +18,22 @@
           {{ sheet.teacher.last_name }}
         </p>
       </header>
-      <table id="sheet">
+      <div id="sheet-cont">
+        <table id="sheet">
         <tr>
           <th rowspan="2">Learners' Names</th>
           <th :colspan="writtenWorks.length + 3">Written Works (20%)</th>
           <th :colspan="performances.length + 3">Performance Tasks (60%)</th>
           <th :colspan="3">Quarterly Assessment Tasks (20%)</th>
+          <th rowspan="3">Initial Grade</th>
+          <th rowspan="3">Quarterly Grade</th>
         </tr>
         <tr>
-          <th v-for="i in writtenWorks.length" :key="'w'+i">{{ i }}</th>
+          <th v-for="i in writtenWorks.length" :key="'w' + i">{{ i }}</th>
           <th>Total</th>
           <th>PS</th>
           <th>WS</th>
-          <th v-for="i in performances.length" :key="'p'+i">{{ i }}</th>
+          <th v-for="i in performances.length" :key="'p' + i">{{ i }}</th>
           <th>Total</th>
           <th>PS</th>
           <th>WS</th>
@@ -52,7 +55,24 @@
           <th>100.00</th>
           <th>20%</th>
         </tr>
+        <tr>
+          <th>Male</th>
+          <th v-for="i in writtenWorks.length" :key="'1w' + i"></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th v-for="i in performances.length" :key="'1p' + i"></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
       </table>
+      </div>
 
       <div
         id="controls"
@@ -269,9 +289,9 @@ export default {
       return this.sheet.works.filter((e) => e.work_type === 'p')
     },
     exam() {
-      const exam = this.sheet.works.filter(e=> e.work_type === 'e')[0]
+      const exam = this.sheet.works.filter((e) => e.work_type === 'e')[0]
       if (exam) return exam
-      else return {highest_score: 0}
+      else return { highest_score: 0 }
     },
     totalPerformancesScore() {
       let score = 0
@@ -477,8 +497,11 @@ header {
   width: 100%;
 }
 
-#sheet th,
-#sheet td {
-  border: 1px solid #9e9e9e;
+#sheet-cont {
+  overflow-x: auto;
+}
+
+table, th {
+  border: 2px solid black;
 }
 </style>
