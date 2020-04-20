@@ -2,6 +2,8 @@
   <tr>
     <td>{{ fullName }}</td>
     <Col as="td" v-for="w in myActivities" :record="w" :key="w.id" />
+    <td>{{ totalActivitiesScore }}</td>
+    <td>{{ PS }}</td>
   </tr>
 </template>
 
@@ -11,7 +13,15 @@ import Col from '~/components/Col.vue'
 export default {
   components: { Col },
   props: {
-    student: Object
+    student: Object,
+    topTotalActScore: {
+      type: Number,
+      default: 0
+    },
+    topTotalPerfScore: {
+      type: Number,
+      default: 0
+    }
   },
   computed: {
     fullName() {
@@ -32,11 +42,23 @@ export default {
         return wt === 'a' || wt === 'q'
       })
     },
-    myPerformaces() {
+    PS() {
+      return (this.totalActivitiesScore * 100) / this.topTotalActScore
+    },
+    myPerformances() {
       return this.myRecords.filter((r) => {
         const wt = this.allWorks.filter((w) => w.url === r.work)[0].work_type
         return wt === 'p'
       })
+    },
+    totalActivitiesScore() {
+      let total = 0
+      this.myActivities.forEach((a) => (total += a.score))
+      return total
+    },
+    totalPerformaceScore() {
+      let total = 0
+      this.myPerformances.forEach((p) => (total += p.score))
     },
     myExam() {
       return this.myRecords.filter((r) => {
@@ -90,5 +112,6 @@ th,
 td {
   white-space: nowrap;
   border: 1px solid #9e9e9e;
+  text-align: center;
 }
 </style>
