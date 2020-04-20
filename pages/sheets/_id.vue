@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="got < 5" class="loading">
+    <div v-if="got < 6" class="loading">
       <h1 class="w3-text-green w3-center">
         <i class="fas fa-spinner w3-spin"></i> Loading...
       </h1>
@@ -71,6 +71,7 @@
           <th></th>
           <th></th>
         </tr>
+        <Row as="tr" v-for="b in boys" :student="b" :key="b.url"/>
       </table>
       </div>
 
@@ -253,10 +254,12 @@
 
 <script>
 import Work from '~/components/Work.vue'
+import Row from '~/components/Row.vue'
 
 export default {
   components: {
-    Work
+    Work,
+    Row
   },
   data() {
     return {
@@ -336,10 +339,10 @@ export default {
       return this.$store.state.information.subjects
     },
     boys() {
-      return this.$store.state.information.students.filter((s)=> s.section === this.section && s.gender === 'm')
+      return this.$store.state.information.students.filter((s)=> s.section === this.sheet.section && s.gender === 'm')
     },
     girls() {
-      return this.$store.state.information.students.filter((s)=> s.section === this.section && s.gender === 'f')
+      return this.$store.state.information.students.filter((s)=> s.section === this.sheet.section && s.gender === 'f')
     }
   },
   watch: {
@@ -397,6 +400,7 @@ export default {
       .then(() => this.got++)
     await this.$store.dispatch('information/getSections').then(() => this.got++)
     await this.$store.dispatch('information/getSubjects').then(() => this.got++)
+    await this.$store.dispatch('information/getStudents').then(() => this.got++)
     await this.$store
       .dispatch('grading/retrieveSheets', url)
       .then(() => this.got++)
