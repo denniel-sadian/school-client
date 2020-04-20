@@ -17,9 +17,6 @@
         </tr>
       </table>
 
-      <p class="w3-small w3-text-red-w3-center" v-show="errorDelete">
-        You cannot delete this work for now because this has records already.
-      </p>
       <div id="btns">
         <button
           @click="editing = true"
@@ -113,7 +110,6 @@ export default {
       editing: false,
       deleting: false,
       deletingReally: false,
-      errorDelete: false,
       updating: false,
 
       name: '',
@@ -154,10 +150,6 @@ export default {
       this.deletingReally = true
       await this.$store
         .dispatch('grading/deleteWork', this.work.url)
-        .catch(() => {
-          this.errorDelete = true
-          setTimeout(() => (this.errorDelete = false), 5000)
-        })
         .finally(() => (this.deleting = false))
     },
     async update() {
