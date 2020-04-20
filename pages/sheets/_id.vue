@@ -71,7 +71,7 @@
           <th></th>
           <th></th>
         </tr>
-        <Row as="tr" v-for="b in boys" :student="b" :key="b.url"/>
+        <Row as="tr" v-for="b in boys" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="b" :key="b.url"/>
         <tr>
           <th>Female</th>
           <th v-for="i in writtenWorks.length" :key="'2w' + i"></th>
@@ -88,7 +88,7 @@
           <th></th>
           <th></th>
         </tr>
-        <Row as="tr" v-for="g in girls" :student="g" :key="g.url"/>
+        <Row as="tr" v-for="g in girls" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="g" :key="g.url"/>
       </table>
       </div>
 

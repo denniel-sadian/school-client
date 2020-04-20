@@ -4,6 +4,7 @@
     <Col as="td" v-for="w in myActivities" :record="w" :key="w.id" />
     <td>{{ totalActivitiesScore }}</td>
     <td>{{ PS }}</td>
+    <td>{{ WS }}</td>
   </tr>
 </template>
 
@@ -44,6 +45,9 @@ export default {
     },
     PS() {
       return (this.totalActivitiesScore * 100) / this.topTotalActScore
+    },
+    WS() {
+      return (this.PS * 20) / 100
     },
     myPerformances() {
       return this.myRecords.filter((r) => {
