@@ -334,7 +334,10 @@ export default {
     },
     subjects() {
       return this.$store.state.information.subjects
-    }
+    },
+    students() {
+      return this.$store.state.information.students.filter((s)=> s.section === this.section)
+    },
   },
   watch: {
     showEditingForm(v) {
