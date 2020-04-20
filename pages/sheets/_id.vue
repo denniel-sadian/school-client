@@ -188,7 +188,7 @@
           class="w3-green w3-button w3-animate-zoom"
           id="edit-sheet-btn"
         >
-          <i class="fas fa-pencil-alt"></i> Edit
+          <i class="fas fa-pencil-alt"></i> Edit or Add Work
         </button>
       </div>
     </div>
