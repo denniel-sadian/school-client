@@ -59,9 +59,9 @@ export const mutations = {
       (e) => e.url !== url
     )
   },
-  DELETE_RECORD(state, url) {
+  DELETE_RECORDS(state, url) {
     state.currentSheet.records = state.currentSheet.records.filter(
-      (e) => e.url !== url
+      (e) => e.work !== url
     )
   }
 }
@@ -111,7 +111,10 @@ export const actions = {
   },
   deleteWork({ commit }, url) {
     // Delete the work
-    return this.$axios.delete(url).then(() => commit('DELETE_WORK', url))
+    return this.$axios.delete(url).then(() => {
+      commit('DELETE_WORK', url)
+      commit('DELETE_RECORDS', url)
+    })
   },
   createRecord({ commit }, payload) {
     // Create the record
@@ -124,9 +127,5 @@ export const actions = {
     return this.$axios
       .put(payload.url, payload)
       .then(({ data }) => commit('UPDATE_RECORD', data))
-  },
-  deleteRecord({ commit }, url) {
-    // Delete the record
-    return this.$axios.delete(url).then(() => commit('DELETE_RECORD', url))
   }
 }
