@@ -1,5 +1,5 @@
 <template>
-  <td>{{ record.score }} {{ record.work }}</td>
+  <td>{{ record.score }}</td>
 </template>
 
 <script>
@@ -10,4 +10,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+td {
+  text-align: center;
+}
+</style>
