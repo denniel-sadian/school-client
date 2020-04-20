@@ -1,12 +1,15 @@
 <template>
   <tr>
     <td>{{ fullName }}</td>
-    <td>{{ records.length }}</td>
+    <Col as="td" v-for="w in myActivities" :record="w" :key="w.id" />
   </tr>
 </template>
 
 <script>
+import Col from '~/components/Col.vue'
+
 export default {
+  components: { Col },
   props: {
     student: Object
   },
@@ -19,6 +22,27 @@ export default {
     },
     allWorks() {
       return this.$store.state.grading.currentSheet.works
+    },
+    myRecords() {
+      return this.records.filter((r) => r.student === this.student.url)
+    },
+    myActivities() {
+      return this.myRecords.filter((r) => {
+        const wt = this.allWorks.filter((w) => w.url === r.work)[0].work_type
+        return wt === 'a' || wt === 'q'
+      })
+    },
+    myPerformaces() {
+      return this.myRecords.filter((r) => {
+        const wt = this.allWorks.filter((w) => w.url === r.work)[0].work_type
+        return wt === 'p'
+      })
+    },
+    myExam() {
+      return this.myRecords.filter((r) => {
+        const wt = this.allWorks.filter((w) => w.url === r.work)[0].work_type
+        return wt === 'e'
+      })[0]
     },
     sheetURL() {
       return this.$store.state.grading.currentSheet.url

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <td>{{ record.score }}</td>
-  </div>
+  <td>{{ record.score }} {{ record.work }}</td>
 </template>
 
 <script>
