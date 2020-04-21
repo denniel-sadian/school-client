@@ -566,4 +566,8 @@ header {
 table, th {
   border: 2px solid black;
 }
+
+table {
+  margin-bottom: 64px;
+}
 </style>
