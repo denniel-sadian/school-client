@@ -14,7 +14,7 @@
         <p>{{ new Date(sheet.date).toDateString() }}</p>
         <p v-if="sheet.teacher.username === username">Prepared by: You</p>
         <p v-else>
-          Prepared by: {{ sheet.teacher.first_name }}
+          Prepared by: Teacher {{ sheet.teacher.first_name }}
           {{ sheet.teacher.last_name }}
         </p>
       </header>
