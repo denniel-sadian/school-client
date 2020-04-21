@@ -6,10 +6,10 @@
       </h1>
     </div>
     <div v-else>
-      <header class="w3-center">
+      <header class="w3-center w3-green">
         <h1>
-          Grading sheet of <mark>{{ section }}</mark> for
-          <mark>{{ subject }}</mark>
+          Grading sheet of {{ section }} for
+          {{ subject }}
         </h1>
         <p>{{ new Date(sheet.date).toDateString() }}</p>
         <p v-if="sheet.teacher.username === username">Prepared by: You</p>
@@ -451,6 +451,7 @@ export default {
 </script>
 
 <style scoped>
+
 .loading,
 header {
   margin-top: 53px;
