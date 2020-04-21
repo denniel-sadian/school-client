@@ -22,52 +22,52 @@
         <table id="sheet">
         <tr>
           <th rowspan="2">Learners' Names</th>
-          <th :colspan="writtenWorks.length + 3">Written Works (20%)</th>
-          <th :colspan="performances.length + 3">Performance Tasks (60%)</th>
-          <th :colspan="3">Quarterly Assessment Tasks (20%)</th>
+          <th class="w3-orange" :colspan="writtenWorks.length + 3">Written Works (20%)</th>
+          <th class="w3-teal" :colspan="performances.length + 3">Performance Tasks (60%)</th>
+          <th class="w3-purple" :colspan="3">Quarterly Assessment Tasks (20%)</th>
           <th rowspan="3">Initial Grade</th>
           <th rowspan="3">Quarterly Grade</th>
         </tr>
         <tr>
-          <th v-for="i in writtenWorks.length" :key="'ww' + i + Math.random()">{{ i }}</th>
-          <th>Total</th>
-          <th>PS</th>
-          <th>WS</th>
-          <th v-for="i in performances.length" :key="'pp' + i + Math.random()">{{ i }}</th>
-          <th>Total</th>
-          <th>PS</th>
-          <th>WS</th>
-          <th>1</th>
-          <th>PS</th>
-          <th>WS</th>
+          <th class="w3-orange" v-for="i in writtenWorks.length" :key="'ww' + i + Math.random()">{{ i }}</th>
+          <th class="w3-orange">Total</th>
+          <th class="w3-orange">PS</th>
+          <th class="w3-orange">WS</th>
+          <th class="w3-teal" v-for="i in performances.length" :key="'pp' + i + Math.random()">{{ i }}</th>
+          <th class="w3-teal">Total</th>
+          <th class="w3-teal">PS</th>
+          <th class="w3-teal">WS</th>
+          <th class="w3-purple">1</th>
+          <th class="w3-purple">PS</th>
+          <th class="w3-purple">WS</th>
         </tr>
         <tr>
           <th>Highest Possible Score</th>
-          <th v-for="w in writtenWorks" :key="w.url">{{ w.highest_score }}</th>
-          <th>{{ totalWrittenWorksScore }}</th>
-          <th>100.00</th>
-          <th>20%</th>
-          <th v-for="p in performances" :key="p.url">{{ p.highest_score }}</th>
-          <th>{{ totalPerformancesScore }}</th>
-          <th>100.00</th>
-          <th>60%</th>
-          <th>{{ exam.highest_score }}</th>
-          <th>100.00</th>
-          <th>20%</th>
+          <th class="w3-orange" v-for="w in writtenWorks" :key="w.url">{{ w.highest_score }}</th>
+          <th class="w3-orange">{{ totalWrittenWorksScore }}</th>
+          <th class="w3-orange">100.00</th>
+          <th class="w3-orange">20%</th>
+          <th class="w3-teal" v-for="p in performances" :key="p.url">{{ p.highest_score }}</th>
+          <th class="w3-teal">{{ totalPerformancesScore }}</th>
+          <th class="w3-teal">100.00</th>
+          <th class="w3-teal">60%</th>
+          <th class="w3-purple">{{ exam.highest_score }}</th>
+          <th class="w3-purple">100.00</th>
+          <th class="w3-purple">20%</th>
         </tr>
         <tr>
           <th>Male</th>
-          <th v-for="i in writtenWorks.length" :key="'1w' + i+ Math.random()"></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th v-for="i in performances.length" :key="'1p' + i+ Math.random()"></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th class="w3-orange" v-for="i in writtenWorks.length" :key="'1w' + i+ Math.random()"></th>
+          <th class="w3-orange"></th>
+          <th class="w3-orange"></th>
+          <th class="w3-orange"></th>
+          <th class="w3-teal" v-for="i in performances.length" :key="'1p' + i+ Math.random()"></th>
+          <th class="w3-teal"></th>
+          <th class="w3-teal"></th>
+          <th class="w3-teal"></th>
+          <th class="w3-purple"></th>
+          <th class="w3-purple"></th>
+          <th class="w3-purple"></th>
           <th></th>
           <th></th>
         </tr>

@@ -5,9 +5,15 @@
       class="w3-animate-zoom"
       :class="{ 'w3-yellow': hovered }"
     >
-      {{ fullName }}
+      <i
+        class="fas fa-check w3-text-green"
+        v-if="qgColor !== 'w3-pale-red'"
+      ></i>
+      <i class="fas fa-times w3-text-red" v-else></i>
+      <span>{{ fullName }}</span>
     </td>
     <Col
+      class="w3-border w3-border-orange"
       :class="{ 'w3-yellow': hovered }"
       :title="fullName"
       as="td"
@@ -21,25 +27,26 @@
         'w3-pale-blue': totalActivitiesScore !== 0
       }"
       :title="fullName"
-      class="w3-animate-zoom"
+      class="w3-animate-zoom w3-border w3-border-orange"
     >
       {{ totalActivitiesScore }}
     </td>
     <td
       :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS1 !== 0 }"
       :title="fullName"
-      class="w3-animate-zoom"
+      class="w3-animate-zoom w3-border w3-border-orange"
     >
       {{ PS1 }}
     </td>
     <td
       :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS1 !== 0 }"
       :title="fullName"
-      class="w3-animate-zoom"
+      class="w3-animate-zoom w3-border w3-border-orange"
     >
       {{ WS1 }}
     </td>
     <Col
+      class="w3-border w3-border-teal"
       :class="{ 'w3-yellow': hovered }"
       :title="fullName"
       as="td"
@@ -53,25 +60,26 @@
         'w3-pale-blue': totalPerformaceScore !== 0
       }"
       :title="fullName"
-      class="w3-animate-zoom"
+      class="w3-animate-zoom w3-border w3-border-teal"
     >
       {{ totalPerformaceScore }}
     </td>
     <td
       :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS2 !== 0 }"
       :title="fullName"
-      class="w3-animate-zoom"
+      class="w3-animate-zoom w3-border w3-border-teal"
     >
       {{ PS2 }}
     </td>
     <td
       :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS2 !== 0 }"
       :title="fullName"
-      class="w3-animate-zoom"
+      class="w3-animate-zoom w3-border w3-border-teal"
     >
       {{ WS2 }}
     </td>
     <Col
+      class="w3-border w3-border-purple"
       :class="{ 'w3-yellow': hovered }"
       :title="fullName"
       as="td"
@@ -81,14 +89,14 @@
     <td
       :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS3 !== 0 }"
       :title="fullName"
-      class="w3-animate-zoom"
+      class="w3-animate-zoom w3-border w3-border-purple"
     >
       {{ PS3 }}
     </td>
     <td
       :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS3 !== 0 }"
       :title="fullName"
-      class="w3-animate-zoom"
+      class="w3-animate-zoom w3-border w3-border-purple"
     >
       {{ WS3 }}
     </td>
@@ -98,7 +106,7 @@
     >
       {{ initialGrade }}
     </td>
-    <td :class="[qgColor]" :title="fullName">
+    <td :class="{ 'w3-yellow': hovered, [qgColor]: true }">
       {{ quarterlyGrade }}
     </td>
   </tr>
@@ -272,5 +280,10 @@ td {
 
 tr > td:first-child {
   text-align: left;
+}
+
+.w3-yellow {
+  background: #ffeb3b !important;
+  transition: 0.3s;
 }
 </style>

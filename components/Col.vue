@@ -1,5 +1,5 @@
 <template>
-  <td :class="{ 'w3-pale-blue': record.score !== 0 }" class="w3-animate-zoom">
+  <td :class="{ 'pale-blue': record.score !== 0 }" class="w3-animate-zoom">
     <div v-if="editing && updating">
       <i class="fas fa-spinner w3-spin w3-text-green"></i>
     </div>
@@ -83,7 +83,7 @@ export default {
 <style scoped>
 td {
   text-align: center;
-  border: 2px solid black !important;
+  border-width: 2px !important;
 }
 
 form {
@@ -110,7 +110,11 @@ button {
 }
 
 td:hover {
-  outline: 10px solid #4caf50;
+  outline: 10px solid #2196f3;
   background: white !important;
+}
+
+.pale-blue {
+  background: #ddffff;
 }
 </style>
