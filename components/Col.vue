@@ -9,7 +9,7 @@
     <form @submit.prevent="update" v-else class="w3-animate-opacity">
       <input
         type="number"
-        min="1"
+        min="0"
         :max="max"
         v-model="score"
         autofocus="autofocus"
