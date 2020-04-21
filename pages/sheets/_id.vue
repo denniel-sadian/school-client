@@ -105,7 +105,7 @@
                 </h3>
               </div>
               <div class="scrolled">
-                <form @submit.prevent="updateSheet">
+                <form @submit.prevent="updateSheet" v-if="!deleting">
                   <div class="inpt">
                     <label>Department:</label>
                     <select v-model="dep" :disabled="updating" required>
@@ -159,7 +159,20 @@
                     >
                     <span v-else>Update</span>
                   </button>
+                  <button @click="deleting = true" class="w3-button w3-red w3-round w3-small w3-margin-top">Delete Grading Sheet</button>
                 </form>
+                <div v-else class="w3-center w3-khaki w3-padding w3-round">
+                  <div v-if="!reallyDeleting">
+                    <h3><i class="fas fa-exclamation-circle w3-text-red"></i> Are you sure you want to delete this grading sheet?</h3>
+                  <button @click="deleteSheet" class="w3-button w3-round w3-small w3-red">Yes</button>
+                  <button class="w3-button w3-round w3-small w3-green w3-margin-top" @click="deleting = false">No</button>
+                  </div>
+                  <div v-else>
+                    <h1 class="w3-text-yellow">
+                      <i class="fas fa-spinner w3-spin"></i>
+                    </h1>
+                  </div>
+                </div>
                 <div class="or">
                   <hr />
                   <span>Or</span>
@@ -286,6 +299,8 @@ export default {
       updating: false,
       creatingWork: false,
       updated: false,
+      deleting: false,
+      reallyDeleting: false,
 
       dep: '',
       sec: '',
@@ -396,6 +411,10 @@ export default {
     }
   },
   methods: {
+    async deleteSheet() {
+      this.reallyDeleting = true
+      await this.$store.dispatch('grading/deleteSheet', this.sheet.url).finally(()=>this.$router.push('/sheets'))
+    },
     createWork() {
       this.creatingWork = true
       const payload = {
