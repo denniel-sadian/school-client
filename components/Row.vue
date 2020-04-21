@@ -160,7 +160,7 @@ export default {
       return this.round((this.PS3 * 20) / 100)
     },
     initialGrade() {
-      return this.WS1 + this.WS2 + this.WS3
+      return this.round(this.WS1 + this.WS2 + this.WS3)
     },
     quarterlyGrade() {
       const ig = this.initialGrade
