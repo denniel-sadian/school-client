@@ -2,8 +2,7 @@ export const state = () => ({
   departments: [],
   sections: [],
   students: [],
-  subjects: [],
-  permissions: []
+  subjects: []
 })
 
 export const mutations = {
@@ -19,11 +18,6 @@ export const mutations = {
   },
   SET_STUDENTS(state, students) {
     state.students = students.sort((a, b) => {
-      return b.id - a.id
-    })
-  },
-  SET_PERMISSIONS(state, perms) {
-    state.permissions = perms.sort((a, b) => {
       return b.id - a.id
     })
   },
@@ -57,10 +51,6 @@ export const mutations = {
       stu.grade_level
     state.students.filter((e) => e.id === stu.id)[0].section = stu.section
   },
-  MODIFY_PERM(state, perm) {
-    state.permissions.filter((e) => e.id === perm.id)[0].code = perm.code
-    state.permissions.filter((e) => e.id === perm.id)[0].section = perm.section
-  },
   PUSH_DEPARTMENT(state, dep) {
     state.departments.push(dep)
     state.departments = state.departments.sort((a, b) => {
@@ -84,15 +74,6 @@ export const mutations = {
     state.subjects = state.subjects.sort((a, b) => {
       return b.id - a.id
     })
-  },
-  PUSH_PERM(state, perm) {
-    state.permissions.push(perm)
-    state.permissions = state.permissions.sort((a, b) => {
-      return b.id - a.id
-    })
-  },
-  DELETE_PERM(state, url) {
-    state.permissions = state.permissions.filter((e) => e.url !== url)
   },
   DELETE_DEP(state, url) {
     state.departments = state.departments.filter((e) => e.url !== url)
@@ -135,16 +116,6 @@ export const actions = {
     return this.$axios.get('information/subjects/').then(({ data }) => {
       commit('SET_SUBJECTS', data)
     })
-  },
-  getPerms({ commit }) {
-    return this.$axios.get('information/permissions/').then(({ data }) => {
-      commit('SET_PERMISSIONS', data)
-    })
-  },
-  postPerm({ commit }, payload) {
-    return this.$axios
-      .post('information/permissions/', payload)
-      .then(({ data }) => commit('PUSH_PERM', data))
   },
   postDep({ commit }, payload) {
     return this.$axios
