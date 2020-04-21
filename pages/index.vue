@@ -34,10 +34,6 @@
             <h3>{{ sheets }}</h3>
             <p>Grading Sheets</p>
           </div>
-          <div @click="$router.push('/permissions')">
-            <h3>{{ vPerms }}</h3>
-            <p>Grading Sheets Viewing Permissions</p>
-          </div>
           <div
             @click="$router.push('/registration/permissions')"
             v-show="role === 'admin'"
@@ -83,9 +79,6 @@ export default {
     },
     sheets() {
       return this.$store.state.grading.sheets.length
-    },
-    vPerms() {
-      return this.$store.state.information.permissions.length
     }
   },
   async mounted() {
