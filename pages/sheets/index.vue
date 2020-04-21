@@ -57,11 +57,51 @@
       </article>
       <article class="w3-container">
         <div class="w3-content">
-          <div v-if="departments.length === 0" class="w3-center">
+          <div v-if="totalSheets === 0" class="w3-center">
             <h4>There is no grading sheet yet.</h4>
           </div>
           <div v-else>
             <h2 class="w3-center">List of Grading sheets</h2>
+            <div class="filter w3-border w3-border-gray w3-light-gray w3-round">
+              <h3><i class="fas fa-filter"></i> Filter The List</h3>
+              <div class="inpt">
+                <label>Department:</label>
+                <select v-model="depFilter">
+                  <option
+                    v-for="d in departments"
+                    :value="d.url"
+                    :key="d.url"
+                    >{{ d.name }}</option
+                  >
+                </select>
+              </div>
+              <div class="inpt">
+                <label>Section:</label>
+                <select v-model="secFilter">
+                  <option v-for="s in sections" :value="s.url" :key="s.url">{{
+                    s.name
+                  }}</option>
+                </select>
+              </div>
+              <div class="inpt">
+                <label>Subject:</label>
+                <select v-model="subFilter">
+                  <option v-for="s in subjects" :value="s.url" :key="s.url">{{
+                    s.name
+                  }}</option>
+                </select>
+              </div>
+              <div class="inpt">
+                <label>Owner:</label>
+                <select type="text" v-model="ownerFilter">
+                  <option value="me">Me</option>
+                  <option value="any">Anyone</option>
+                </select>
+              </div>
+            </div>
+            <p class="w3-small w3-text-green w3-center">
+              {{ sheets.length }} found with this filter.
+            </p>
             <Sheet
               v-for="s in sheets"
               :sheet="s"
@@ -87,7 +127,11 @@ export default {
       error: false,
       dep: '',
       sec: '',
-      sub: ''
+      sub: '',
+      depFilter: '',
+      secFilter: '',
+      subFilter: '',
+      ownerFilter: 'me'
     }
   },
   computed: {
@@ -102,8 +146,25 @@ export default {
     subjects() {
       return this.$store.state.information.subjects
     },
+    totalSheets() {
+      return this.$store.state.grading.sheets.length
+    },
     sheets() {
       return this.$store.state.grading.sheets
+        .filter((s) => s.department === this.depFilter)
+        .filter((s) => {
+          if (this.secFilter) return s.section === this.secFilter
+          return true
+        })
+        .filter((s) => {
+          if (this.subFilter) return s.subject === this.subFilter
+          return true
+        })
+        .filter((s) => {
+          if (this.ownerFilter === 'me')
+            return s.teacher.username === this.username
+          return true
+        })
     },
     username() {
       return this.$store.state.user.user.user.username
@@ -113,6 +174,13 @@ export default {
     },
     newID() {
       return this.$store.state.grading.sheets[0].id
+    }
+  },
+  watch: {
+    departments(v) {
+      this.depFilter = this.departments.filter(
+        (e) => e.id === this.$store.state.user.user.profile.department
+      )[0].url
     }
   },
   methods: {
@@ -172,5 +240,9 @@ form {
 
 article {
   margin: 20px 0px;
+}
+
+.filter {
+  padding: 8px;
 }
 </style>
