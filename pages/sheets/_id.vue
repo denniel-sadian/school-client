@@ -105,63 +105,14 @@
                 </h3>
               </div>
               <div class="scrolled">
-                <form @submit.prevent="updateSheet" v-if="!deleting">
-                  <div class="inpt">
-                    <label>Done:</label>
-                    <select v-model="pub" :disabled="updating" required>
-                      <option value="true">Yes</option>
-                      <option value="false">No</option>
-                    </select>
-                  </div>
-                  <p class="w3-text-green w3-small w3-center" v-show="updated">
-                    Updated!
-                  </p>
-                  <button
-                    type="submit"
-                    :disabled="updating"
-                    class="w3-button w3-green w3-round w3-small"
-                  >
-                    <span v-if="updating"
-                      ><i class="fas fa-spinner w3-spin"></i> Updating...</span
-                    >
-                    <span v-else>Update</span>
-                  </button>
-                  <button @click="deleting = true" class="w3-button w3-red w3-round w3-small w3-margin-top">Delete Grading Sheet</button>
-                </form>
-                <div v-else class="w3-center w3-khaki w3-padding w3-round">
-                  <div v-if="!reallyDeleting">
-                    <h3><i class="fas fa-exclamation-circle w3-text-red"></i> Are you sure you want to delete this grading sheet?</h3>
-                  <button @click="deleteSheet" class="w3-button w3-round w3-small w3-red">Yes</button>
-                  <button class="w3-button w3-round w3-small w3-green w3-margin-top" @click="deleting = false">No</button>
-                  </div>
-                  <div v-else>
-                    <h1 class="w3-text-yellow">
-                      <i class="fas fa-spinner w3-spin"></i>
-                    </h1>
-                  </div>
-                </div>
-                <div class="or">
-                  <hr />
-                  <span>Or</span>
-                  <hr />
-                </div>
                 <div>
-                  <button
-                    @click="showWorkForm = true"
-                    v-show="!showWorkForm"
-                    class="w3-button w3-green w3-small w3-round"
-                  >
-                    Add a Work
-                  </button>
                   <form
                     id="adding-form"
                     @submit.prevent="createWork"
-                    v-if="showWorkForm"
                     class="w3-animate-top"
                   >
-                    <h4>Add a Work</h4>
                     <div class="inpt">
-                      <label>Name:</label>
+                      <label>Work Name:</label>
                       <input
                         required
                         type="text"
@@ -171,7 +122,7 @@
                       />
                     </div>
                     <div class="inpt">
-                      <label>Type:</label>
+                      <label>Work Type:</label>
                       <select
                         v-model="wType"
                         name="wType"
@@ -206,21 +157,55 @@
                       >
                       <span v-else>Add Work</span>
                     </button>
-                    <button
-                      style="margin-top: 8px;"
-                      type="submit"
-                      class="w3-button w3-pink w3-small w3-round"
-                      :disabled="creatingWork"
-                      @click="showWorkForm = false"
-                    >
-                      Close
-                    </button>
                   </form>
                   <p v-if="!sheet.works" class="w3-small w3-center">
                     There are no works yet.
                   </p>
                   <div v-else>
                     <Work v-for="w in sheet.works" :work="w" :key="w.url" />
+                  </div>
+                </div>
+                <div class="or">
+                  <hr />
+                  <span>Or</span>
+                  <hr />
+                </div>
+                <form @submit.prevent="updateSheet" v-if="!deleting">
+                  <div class="inpt">
+                    <label>Done:</label>
+                    <select v-model="pub" :disabled="updating" required>
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                  </div>
+                  <p class="w3-text-green w3-small w3-center" v-show="updated">
+                    Updated!
+                  </p>
+                  <button
+                    type="submit"
+                    :disabled="updating"
+                    class="w3-button w3-green w3-round w3-small"
+                  >
+                    <span v-if="updating"
+                      ><i class="fas fa-spinner w3-spin"></i> Updating...</span
+                    >
+                    <span v-else>Update</span>
+                  </button>
+                  <button @click="deleting = true" class="w3-button w3-red w3-round w3-small w3-margin-top">Delete Grading Sheet</button>
+                </form>
+                <div v-else class="w3-center w3-khaki w3-padding w3-round w3-animate-zoom">
+                  <div v-if="!reallyDeleting">
+                    <h3><i class="fas fa-exclamation-circle w3-text-red"></i> Warning!</h3>
+                    <p>You cannot bring back the records of this grading sheet once
+                      it's deleted, unless, of course, you start from the top. Are you sure you want to continue?</p>
+                    <hr>
+                  <button @click="deleteSheet" class="w3-button w3-round w3-small w3-red">Yes. I understand.</button>
+                  <button class="w3-button w3-round w3-small w3-green w3-margin-top" @click="deleting = false">No! Take me back.</button>
+                  </div>
+                  <div v-else>
+                    <h1 class="w3-text-yellow">
+                      <i class="fas fa-spinner w3-spin"></i>
+                    </h1>
                   </div>
                 </div>
               </div>
@@ -241,7 +226,7 @@
           class="w3-green w3-button w3-animate-zoom w3-card-4"
           id="edit-sheet-btn"
         >
-          <i class="fas fa-pencil-alt"></i> Add Work
+          <i class="fas fa-pencil-alt"></i> Add Works
         </button>
       </div>
     </div>
@@ -261,7 +246,6 @@ export default {
     return {
       got: 0,
       showEditingForm: false,
-      showWorkForm: false,
       updating: false,
       creatingWork: false,
       updated: false,
@@ -310,16 +294,14 @@ export default {
     role() {
       return this.$store.state.user.user.profile.role
     },
-    departments() {
-      return this.$store.state.information.departments
-    },
-    sections() {
+    section() {
       const sections = this.$store.state.information.sections
-      if (this.dep === '') return sections
-      return sections.filter((e) => e.department === this.dep)
+      return sections.filter((e) => e.url === this.sheet.section)[0].name
     },
-    subjects() {
-      return this.$store.state.information.subjects
+    subject() {
+      return this.$store.state.information.subjects.filter((e) => (
+        e.url === this.sheet.subject
+      ))[0].name
     },
     students() {
       return this.$store.state.information.students.filter((s) => 
@@ -402,7 +384,6 @@ export default {
       await this.$store
         .dispatch('grading/createWork', payload)
         .then(async () => (await this.createRecords()))
-        .then(() => (this.showWorkForm = false))
         .finally(() => (this.creatingWork = false))
     },
     updateSheet() {
@@ -457,10 +438,7 @@ header {
 }
 
 #adding-form {
-  padding: 8px;
   margin-bottom: 8px;
-  border: 1px solid #9e9e9e;
-  border-radius: 4px;
 }
 
 #edit-sheet-btn {
