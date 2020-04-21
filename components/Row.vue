@@ -89,6 +89,9 @@
     <td :class="{ 'w3-yellow': hovered }" :title="fullName">
       {{ initialGrade }}
     </td>
+    <td :class="{ 'w3-yellow': hovered }" :title="fullName">
+      {{ quarterlyGrade }}
+    </td>
   </tr>
 </template>
 
@@ -158,6 +161,50 @@ export default {
     },
     initialGrade() {
       return this.WS1 + this.WS2 + this.WS3
+    },
+    quarterlyGrade() {
+      const ig = this.initialGrade
+      if (ig === 100) return 100
+      else if (ig >= 98.4 && ig <= 99.99) return 99
+      else if (ig >= 96.8 && ig <= 98.39) return 98
+      else if (ig >= 95.2 && ig <= 96.79) return 97
+      else if (ig >= 93.6 && ig <= 95.19) return 96
+      else if (ig >= 92.0 && ig <= 93.59) return 95
+      else if (ig >= 90.4 && ig <= 91.99) return 94
+      else if (ig >= 88.8 && ig <= 90.39) return 93
+      else if (ig >= 87.2 && ig <= 88.79) return 92
+      else if (ig >= 85.6 && ig <= 87.19) return 91
+      else if (ig >= 84.0 && ig <= 85.59) return 90
+      else if (ig >= 82.4 && ig <= 83.99) return 89
+      else if (ig >= 80.8 && ig <= 82.39) return 88
+      else if (ig >= 79.2 && ig <= 80.79) return 87
+      else if (ig >= 77.6 && ig <= 79.19) return 86
+      else if (ig >= 76.0 && ig <= 77.59) return 85
+      else if (ig >= 74.4 && ig <= 75.99) return 84
+      else if (ig >= 72.8 && ig <= 74.39) return 83
+      else if (ig >= 71.2 && ig <= 72.79) return 82
+      else if (ig >= 69.6 && ig <= 71.19) return 81
+      else if (ig >= 68.0 && ig <= 69.59) return 80
+      else if (ig >= 66.4 && ig <= 67.99) return 79
+      else if (ig >= 64.8 && ig <= 66.39) return 78
+      else if (ig >= 63.2 && ig <= 64.79) return 77
+      else if (ig >= 61.6 && ig <= 63.19) return 76
+      else if (ig >= 60.0 && ig <= 61.59) return 75
+      else if (ig >= 56.0 && ig <= 59.99) return 74
+      else if (ig >= 52.0 && ig <= 55.99) return 73
+      else if (ig >= 48.0 && ig <= 51.99) return 72
+      else if (ig >= 44.0 && ig <= 47.99) return 71
+      else if (ig >= 40.0 && ig <= 43.99) return 70
+      else if (ig >= 36.0 && ig <= 39.99) return 69
+      else if (ig >= 32.0 && ig <= 35.99) return 68
+      else if (ig >= 28.0 && ig <= 31.99) return 67
+      else if (ig >= 24.0 && ig <= 27.99) return 66
+      else if (ig >= 20.0 && ig <= 23.99) return 65
+      else if (ig >= 16.0 && ig <= 19.99) return 64
+      else if (ig >= 12.0 && ig <= 15.99) return 63
+      else if (ig >= 8.0 && ig <= 11.99) return 62
+      else if (ig >= 4.0 && ig <= 7.99) return 61
+      else if (ig >= 0 && ig <= 3.99) return 60
     },
     myPerformances() {
       return this.myRecords.filter((r) => {
