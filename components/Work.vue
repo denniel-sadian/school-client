@@ -70,7 +70,6 @@
           <option value="q">Quiz</option>
           <option value="e">Examination</option>
           <option value="p">Performance</option>
-          <option value="c">Extra</option>
         </select>
       </div>
       <div class="inpt">
@@ -140,8 +139,6 @@ export default {
           return 'Examination'
         case 'p':
           return 'Performace'
-        case 'c':
-          return 'Extra'
       }
     }
   },
