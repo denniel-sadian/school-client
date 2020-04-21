@@ -16,21 +16,24 @@
       :key="w.id"
     />
     <td
-      :class="{ 'w3-yellow': hovered }"
+      :class="{
+        'w3-yellow': hovered,
+        'w3-pale-blue': totalActivitiesScore !== 0
+      }"
       :title="fullName"
       class="w3-animate-zoom"
     >
       {{ totalActivitiesScore }}
     </td>
     <td
-      :class="{ 'w3-yellow': hovered }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS1 !== 0 }"
       :title="fullName"
       class="w3-animate-zoom"
     >
       {{ PS1 }}
     </td>
     <td
-      :class="{ 'w3-yellow': hovered }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS1 !== 0 }"
       :title="fullName"
       class="w3-animate-zoom"
     >
@@ -45,21 +48,24 @@
       :key="p.id"
     />
     <td
-      :class="{ 'w3-yellow': hovered }"
+      :class="{
+        'w3-yellow': hovered,
+        'w3-pale-blue': totalPerformaceScore !== 0
+      }"
       :title="fullName"
       class="w3-animate-zoom"
     >
       {{ totalPerformaceScore }}
     </td>
     <td
-      :class="{ 'w3-yellow': hovered }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS2 !== 0 }"
       :title="fullName"
       class="w3-animate-zoom"
     >
       {{ PS2 }}
     </td>
     <td
-      :class="{ 'w3-yellow': hovered }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS2 !== 0 }"
       :title="fullName"
       class="w3-animate-zoom"
     >
@@ -73,23 +79,26 @@
       :record="myExam"
     />
     <td
-      :class="{ 'w3-yellow': hovered }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS3 !== 0 }"
       :title="fullName"
       class="w3-animate-zoom"
     >
       {{ PS3 }}
     </td>
     <td
-      :class="{ 'w3-yellow': hovered }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS3 !== 0 }"
       :title="fullName"
       class="w3-animate-zoom"
     >
       {{ WS3 }}
     </td>
-    <td :class="{ 'w3-yellow': hovered }" :title="fullName">
+    <td
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': initialGrade !== 0 }"
+      :title="fullName"
+    >
       {{ initialGrade }}
     </td>
-    <td :class="{ 'w3-yellow': hovered }" :title="fullName">
+    <td :class="[qgColor]" :title="fullName">
       {{ quarterlyGrade }}
     </td>
   </tr>
@@ -205,6 +214,13 @@ export default {
       else if (ig >= 8.0 && ig <= 11.99) return 62
       else if (ig >= 4.0 && ig <= 7.99) return 61
       else if (ig >= 0 && ig <= 3.99) return 60
+    },
+    qgColor() {
+      if (this.quarterlyGrade >= 60 && this.quarterlyGrade <= 74)
+        return 'w3-pale-red'
+      else if (this.quarterlyGrade >= 75 && this.quarterlyGrade <= 89)
+        return 'w3-pale-yellow'
+      return 'w3-light-green'
     },
     myPerformances() {
       return this.myRecords.filter((r) => {
