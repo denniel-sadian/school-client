@@ -5,11 +5,13 @@
       class="w3-animate-zoom"
       :class="{ 'w3-yellow': hovered }"
     >
-      <i
-        class="fas fa-check w3-text-green"
-        v-if="qgColor !== 'w3-pale-red'"
-      ></i>
-      <i class="fas fa-times w3-text-red" v-else></i>
+      <span v-show="qgColor">
+        <i
+          class="fas fa-check w3-text-green"
+          v-if="qgColor !== 'w3-pale-red'"
+        ></i>
+        <i class="fas fa-times w3-text-red" v-else></i>
+      </span>
       <span>{{ fullName }}</span>
     </td>
     <Col
@@ -170,7 +172,7 @@ export default {
     },
     PS3() {
       const exam = this.allWorks.filter((w) => w.work_type === 'e')[0]
-      if (!exam || !this.myExam) return 0
+      if (!exam || !this.myExam) return
       return this.round((this.myExam.score * 100) / exam.highest_score)
     },
     WS3() {
@@ -228,7 +230,8 @@ export default {
         return 'w3-pale-red'
       else if (this.quarterlyGrade >= 75 && this.quarterlyGrade <= 89)
         return 'w3-pale-yellow'
-      return 'w3-light-green'
+      else if (this.quarterlyGrade >= 90 && this.quarterlyGrade <= 100)
+        return 'w3-light-green'
     },
     myPerformances() {
       return this.myRecords.filter((r) => {
