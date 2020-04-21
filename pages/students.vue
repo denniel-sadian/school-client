@@ -115,7 +115,7 @@
         </div>
         <div v-else>
           <h2 class="w3-center">List of Students</h2>
-          <div class="filter w3-gray w3-round">
+          <div class="filter w3-light-gray w3-round">
             <h3><i class="fas fa-filter"></i> Filter The List</h3>
             <div class="w3-padding w3-white w3-round">
               <div class="inpt">
