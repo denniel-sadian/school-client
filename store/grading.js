@@ -105,6 +105,18 @@ export const actions = {
       commit('SORT_WORKS')
     })
   },
+  createRecords({ commit }, records) {
+    // Create multiple records
+    const payload = {
+      records
+    }
+    return this.$axios
+      .post('grading/multiple-records/', payload)
+      .then(({ data }) => {
+        data.records.forEach((r) => commit('ADD_RECORD', r))
+        commit('SORT_RECORDS')
+      })
+  },
   updateWork({ commit }, payload) {
     // Update the work
     return this.$axios.put(payload.url, payload).then(({ data }) => {
