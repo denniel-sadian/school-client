@@ -101,46 +101,13 @@
             <div class="form-inputs">
               <div>
                 <h3>
-                  <i class="fas fa-pencil-alt"></i> Edit the grading sheet
+                  <i class="fas fa-pencil-alt"></i> Works
                 </h3>
               </div>
               <div class="scrolled">
                 <form @submit.prevent="updateSheet" v-if="!deleting">
                   <div class="inpt">
-                    <label>Department:</label>
-                    <select v-model="dep" :disabled="updating" required>
-                      <option
-                        v-for="d in departments"
-                        :value="d.url"
-                        :key="d.url"
-                        >{{ d.name }}</option
-                      >
-                    </select>
-                  </div>
-                  <div class="inpt">
-                    <label>Section:</label>
-                    <select v-model="sec" :disabled="updating" required>
-                      <option
-                        v-for="s in sections"
-                        :value="s.url"
-                        :key="s.url"
-                        >{{ s.name }}</option
-                      >
-                    </select>
-                  </div>
-                  <div class="inpt">
-                    <label>Subject:</label>
-                    <select v-model="sub" :disabled="updating" required>
-                      <option
-                        v-for="s in subjects"
-                        :value="s.url"
-                        :key="s.url"
-                        >{{ s.name }}</option
-                      >
-                    </select>
-                  </div>
-                  <div class="inpt">
-                    <label>Published:</label>
+                    <label>Done:</label>
                     <select v-model="pub" :disabled="updating" required>
                       <option value="true">Yes</option>
                       <option value="false">No</option>
@@ -274,7 +241,7 @@
           class="w3-green w3-button w3-animate-zoom w3-card-4"
           id="edit-sheet-btn"
         >
-          <i class="fas fa-pencil-alt"></i> Edit or Add Work
+          <i class="fas fa-pencil-alt"></i> Add Work
         </button>
       </div>
     </div>
@@ -301,9 +268,6 @@ export default {
       deleting: false,
       reallyDeleting: false,
 
-      dep: '',
-      sec: '',
-      sub: '',
       pub: '',
       wName: '',
       wType: '',
@@ -339,21 +303,6 @@ export default {
       let score = 0
       this.writtenWorks.forEach((w) => (score += w.highest_score))
       return score
-    },
-    department() {
-      return this.$store.state.information.departments.filter(
-        (e) => e.url === this.sheet.department
-      )[0].name
-    },
-    section() {
-      return this.$store.state.information.sections.filter(
-        (e) => e.url === this.sheet.section
-      )[0].name
-    },
-    subject() {
-      return this.$store.state.information.subjects.filter(
-        (e) => e.url === this.sheet.subject
-      )[0].name
     },
     username() {
       return this.$store.state.user.user.user.username
@@ -403,9 +352,6 @@ export default {
   watch: {
     showEditingForm(v) {
       if (v) {
-        this.dep = this.sheet.department
-        this.sec = this.sheet.section
-        this.sub = this.sheet.subject
         this.pub = this.sheet.publish
       }
     },
@@ -463,9 +409,9 @@ export default {
       this.updating = true
       const payload = {
         url: this.sheet.url,
-        department: this.dep,
-        section: this.sec,
-        subject: this.sub,
+        department: this.sheet.department,
+        section: this.sheet.section,
+        subject: this.sheet.subject,
         publish: this.pub
       }
       this.$store
