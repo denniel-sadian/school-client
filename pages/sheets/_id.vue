@@ -314,16 +314,19 @@ export default {
     sheet() {
       return this.$store.state.grading.currentSheet
     },
+    allWorks() {
+      return this.sheet.works
+    },
     writtenWorks() {
-      return this.sheet.works.filter(
+      return this.allWorks.filter(
         (e) => e.work_type === 'a' || e.work_type === 'q'
       )
     },
     performances() {
-      return this.sheet.works.filter((e) => e.work_type === 'p')
+      return this.allWorks.filter((e) => e.work_type === 'p')
     },
     exam() {
-      const exam = this.sheet.works.filter((e) => e.work_type === 'e')[0]
+      const exam = this.allWorks.filter((e) => e.work_type === 'e')[0]
       if (exam) return exam
       else return { highest_score: 0 }
     },
@@ -369,8 +372,13 @@ export default {
     subjects() {
       return this.$store.state.information.subjects
     },
+    students() {
+      return this.$store.state.information.students.filter((s) => 
+        (s.section === this.sheet.section)
+      )
+    },
     boys() {
-      return this.$store.state.information.students.filter((s) => (
+      return this.students.filter((s) => (
         s.section === this.sheet.section && s.gender === 'm')
       ).sort((a, b)=> {
         const x = (a.last_name+a.first_name).toLowerCase();
@@ -381,7 +389,7 @@ export default {
       })
     },
     girls() {
-      return this.$store.state.information.students.filter((s) => (
+      return this.students.filter((s) => (
         s.section === this.sheet.section && s.gender === 'f')
       ).sort((a, b)=> {
         const x = (a.last_name+a.first_name).toLowerCase();
@@ -407,14 +415,37 @@ export default {
         this.wType = ''
         this.wScore = ''
       }
-    }
+    },
   },
   methods: {
+    async createRecords() {
+      if (this.username !== this.sheet.teacher.username) return
+      let records = []
+      this.students.forEach((s) => {
+        this.allWorks.forEach((w) => {
+          if (
+            !this.sheet.records.filter(
+              (r) => r.student === s.url && r.work === w.url
+            )[0]
+          ) {
+            const rec = {
+              gsheet: this.sheet.url,
+              student: s.url,
+              work: w.url,
+              score: 0
+            }
+            records.push(rec)
+          }
+        })
+      })
+      if (records.length !== 0)
+        await this.$store.dispatch('grading/createRecords', records)
+    },
     async deleteSheet() {
       this.reallyDeleting = true
       await this.$store.dispatch('grading/deleteSheet', this.sheet.url).finally(()=>this.$router.push('/sheets'))
     },
-    createWork() {
+    async createWork() {
       this.creatingWork = true
       const payload = {
         gsheet: this.sheet.url,
@@ -422,8 +453,9 @@ export default {
         highest_score: this.wScore,
         work_type: this.wType
       }
-      this.$store
+      await this.$store
         .dispatch('grading/createWork', payload)
+        .then(async () => (await this.createRecords()))
         .then(() => (this.showWorkForm = false))
         .finally(() => (this.creatingWork = false))
     },
@@ -461,6 +493,7 @@ export default {
     await this.$store
       .dispatch('grading/retrieveSheet', url)
       .then(() => this.got++)
+    this.createRecords()
   },
   validate(context) {
     return /^\d+$/.test(context.params.id)

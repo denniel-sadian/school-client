@@ -254,36 +254,10 @@ export default {
       return this.$store.state.user.user.user.username
     }
   },
-  watch: {
-    allWorks() {
-      this.createRecord()
-    }
-  },
   methods: {
     round(x) {
       return Math.round((x + Number.EPSILON) * 100) / 100
-    },
-    createRecord() {
-      if (this.username !== this.sheetOwner) return
-      this.allWorks.forEach((w) => {
-        if (
-          !this.records.filter(
-            (r) => r.student === this.student.url && r.work === w.url
-          )[0]
-        ) {
-          const payload = {
-            gsheet: this.sheetURL,
-            student: this.student.url,
-            work: w.url,
-            score: 0
-          }
-          this.$store.dispatch('grading/createRecord', payload)
-        }
-      })
     }
-  },
-  mounted() {
-    this.createRecord()
   }
 }
 </script>
