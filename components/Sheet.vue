@@ -22,7 +22,7 @@
         <td>{{ new Date(sheet.date).toDateString() }}</td>
       </tr>
       <tr>
-        <th>Published:</th>
+        <th>Finished:</th>
         <td>
           <i class="fas fa-check-circle w3-text-green" v-if="sheet.publish"></i>
           <i class="fas fa-times-circle w3-text-red" v-else></i>
