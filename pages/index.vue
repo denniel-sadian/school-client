@@ -146,11 +146,11 @@ header h1 {
 }
 @media (max-width: 425px) {
   #first-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   #first-grid > div {
-    margin: 8px 0px;
+    margin: 8px;
   }
 }
 </style>
