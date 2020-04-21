@@ -1,36 +1,94 @@
 <template>
-  <tr>
-    <td :title="fullName" class="w3-animate-zoom">
+  <tr @mouseenter="hovered = true" @mouseleave="hovered = false">
+    <td
+      :title="fullName"
+      class="w3-animate-zoom"
+      :class="{ 'w3-yellow': hovered }"
+    >
       {{ fullName }}
     </td>
     <Col
+      :class="{ 'w3-yellow': hovered }"
       :title="fullName"
       as="td"
       v-for="w in myActivities"
       :record="w"
       :key="w.id"
     />
-    <td :title="fullName" class="w3-animate-zoom">
+    <td
+      :class="{ 'w3-yellow': hovered }"
+      :title="fullName"
+      class="w3-animate-zoom"
+    >
       {{ totalActivitiesScore }}
     </td>
-    <td :title="fullName" class="w3-animate-zoom">{{ PS1 }}</td>
-    <td :title="fullName" class="w3-animate-zoom">{{ WS1 }}</td>
+    <td
+      :class="{ 'w3-yellow': hovered }"
+      :title="fullName"
+      class="w3-animate-zoom"
+    >
+      {{ PS1 }}
+    </td>
+    <td
+      :class="{ 'w3-yellow': hovered }"
+      :title="fullName"
+      class="w3-animate-zoom"
+    >
+      {{ WS1 }}
+    </td>
     <Col
+      :class="{ 'w3-yellow': hovered }"
       :title="fullName"
       as="td"
       v-for="p in myPerformances"
       :record="p"
       :key="p.id"
     />
-    <td :title="fullName" class="w3-animate-zoom">
+    <td
+      :class="{ 'w3-yellow': hovered }"
+      :title="fullName"
+      class="w3-animate-zoom"
+    >
       {{ totalPerformaceScore }}
     </td>
-    <td :title="fullName" class="w3-animate-zoom">{{ PS2 }}</td>
-    <td :title="fullName" class="w3-animate-zoom">{{ WS2 }}</td>
-    <Col as="td" v-if="myExam" :record="myExam" />
-    <td :title="fullName" class="w3-animate-zoom">{{ PS3 }}</td>
-    <td :title="fullName" class="w3-animate-zoom">{{ WS3 }}</td>
-    <td :title="fullName">{{ initialGrade }}</td>
+    <td
+      :class="{ 'w3-yellow': hovered }"
+      :title="fullName"
+      class="w3-animate-zoom"
+    >
+      {{ PS2 }}
+    </td>
+    <td
+      :class="{ 'w3-yellow': hovered }"
+      :title="fullName"
+      class="w3-animate-zoom"
+    >
+      {{ WS2 }}
+    </td>
+    <Col
+      :class="{ 'w3-yellow': hovered }"
+      :title="fullName"
+      as="td"
+      v-if="myExam"
+      :record="myExam"
+    />
+    <td
+      :class="{ 'w3-yellow': hovered }"
+      :title="fullName"
+      class="w3-animate-zoom"
+    >
+      {{ PS3 }}
+    </td>
+    <td
+      :class="{ 'w3-yellow': hovered }"
+      :title="fullName"
+      class="w3-animate-zoom"
+    >
+      {{ WS3 }}
+    </td>
+    <td :class="{ 'w3-yellow': hovered }" :title="fullName">
+      {{ initialGrade }}
+    </td>
   </tr>
 </template>
 
@@ -48,6 +106,11 @@ export default {
     topTotalPerfScore: {
       type: Number,
       default: 0
+    }
+  },
+  data() {
+    return {
+      hovered: false
     }
   },
   computed: {
@@ -166,14 +229,11 @@ export default {
 th,
 td {
   white-space: nowrap;
-  border: 2px solid #9e9e9e;
+  border: 1px solid #9e9e9e;
   text-align: center;
 }
 
 tr > td:first-child {
   text-align: left;
-}
-
-tr:hover {
 }
 </style>

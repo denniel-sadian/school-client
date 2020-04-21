@@ -83,15 +83,17 @@ export default {
 <style scoped>
 td {
   text-align: center;
+  border: 2px solid black !important;
 }
 
 form {
-  display: flex;
-  border: 2px solid black;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
 }
 
 input {
-  width: 84px;
+  min-width: 84px;
+  width: 100%;
   text-align: center;
   border-style: none;
   border-right: 1px solid black;
@@ -108,6 +110,7 @@ button {
 }
 
 td:hover {
-  outline: 2px solid green;
+  outline: 10px solid #4caf50;
+  background: white !important;
 }
 </style>
