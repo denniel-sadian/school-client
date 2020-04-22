@@ -1,8 +1,8 @@
 <template>
   <div>
     <div v-if="got < 6" class="loading">
-      <h1 class="w3-text-green w3-center">
-        <i class="fas fa-spinner w3-spin"></i> Loading...
+      <h1 class="w3-text-white w3-center">
+        <i class="fas fa-spinner w3-spin"></i>
       </h1>
     </div>
     <div v-else>
@@ -429,8 +429,22 @@ export default {
 </script>
 
 <style scoped>
+.loading {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(128, 128, 128, 0.856);
+}
 
-.loading,
+.loading h1 {
+  font-size: 90px;
+}
+
 header {
   margin-top: 53px;
   padding: 64px 16px;
