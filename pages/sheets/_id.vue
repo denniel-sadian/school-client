@@ -6,7 +6,7 @@
       </h1>
     </div>
     <div v-else>
-      <header class="w3-center w3-green">
+      <header class="w3-center w3-pale-green">
         <h1>
           Grading sheet of {{ section }} for
           {{ subject }}
@@ -23,7 +23,7 @@
         <tr>
           <th rowspan="2">Learners' Names</th>
           <th class="w3-orange" :colspan="writtenWorks.length + 3">Written Works (20%)</th>
-          <th class="w3-teal" :colspan="performances.length + 3">Performance Tasks (60%)</th>
+          <th class="w3-green" :colspan="performances.length + 3">Performance Tasks (60%)</th>
           <th class="w3-purple" :colspan="3">Quarterly Assessment Tasks (20%)</th>
           <th rowspan="3">Initial Grade</th>
           <th rowspan="3">Quarterly Grade</th>
@@ -33,10 +33,10 @@
           <th class="w3-orange">Total</th>
           <th class="w3-orange">PS</th>
           <th class="w3-orange">WS</th>
-          <th class="w3-teal" v-for="i in performances.length" :key="'pp' + i + Math.random()">{{ i }}</th>
-          <th class="w3-teal">Total</th>
-          <th class="w3-teal">PS</th>
-          <th class="w3-teal">WS</th>
+          <th class="w3-green" v-for="i in performances.length" :key="'pp' + i + Math.random()">{{ i }}</th>
+          <th class="w3-green">Total</th>
+          <th class="w3-green">PS</th>
+          <th class="w3-green">WS</th>
           <th class="w3-purple">1</th>
           <th class="w3-purple">PS</th>
           <th class="w3-purple">WS</th>
@@ -47,10 +47,10 @@
           <th class="w3-orange">{{ totalWrittenWorksScore }}</th>
           <th class="w3-orange">100.00</th>
           <th class="w3-orange">20%</th>
-          <th class="w3-teal" v-for="p in performances" :key="p.url">{{ p.highest_score }}</th>
-          <th class="w3-teal">{{ totalPerformancesScore }}</th>
-          <th class="w3-teal">100.00</th>
-          <th class="w3-teal">60%</th>
+          <th class="w3-green" v-for="p in performances" :key="p.url">{{ p.highest_score }}</th>
+          <th class="w3-green">{{ totalPerformancesScore }}</th>
+          <th class="w3-green">100.00</th>
+          <th class="w3-green">60%</th>
           <th class="w3-purple">{{ exam.highest_score }}</th>
           <th class="w3-purple">100.00</th>
           <th class="w3-purple">20%</th>
@@ -61,10 +61,10 @@
           <th class="w3-orange"></th>
           <th class="w3-orange"></th>
           <th class="w3-orange"></th>
-          <th class="w3-teal" v-for="i in performances.length" :key="'1p' + i+ Math.random()"></th>
-          <th class="w3-teal"></th>
-          <th class="w3-teal"></th>
-          <th class="w3-teal"></th>
+          <th class="w3-green" v-for="i in performances.length" :key="'1p' + i+ Math.random()"></th>
+          <th class="w3-green"></th>
+          <th class="w3-green"></th>
+          <th class="w3-green"></th>
           <th class="w3-purple"></th>
           <th class="w3-purple"></th>
           <th class="w3-purple"></th>
@@ -533,13 +533,10 @@ header {
 
 #sheet-cont {
   overflow-x: auto;
+  margin-bottom: 64px;
 }
 
 table, th {
   border: 2px solid black;
-}
-
-table {
-  margin-bottom: 64px;
 }
 </style>

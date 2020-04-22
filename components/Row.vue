@@ -26,7 +26,7 @@
     <td
       :class="{
         'w3-yellow': hovered,
-        'w3-pale-blue': totalActivitiesScore !== 0
+        'w3-pale-blue': totalActivitiesScore > 0
       }"
       :title="fullName"
       class="w3-animate-zoom w3-border w3-border-orange"
@@ -34,21 +34,21 @@
       {{ totalActivitiesScore }}
     </td>
     <td
-      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS1 !== 0 }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS1 > 0 }"
       :title="fullName"
       class="w3-animate-zoom w3-border w3-border-orange"
     >
       {{ PS1 }}
     </td>
     <td
-      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS1 !== 0 }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS1 > 0 }"
       :title="fullName"
       class="w3-animate-zoom w3-border w3-border-orange"
     >
       {{ WS1 }}
     </td>
     <Col
-      class="w3-border w3-border-teal"
+      class="w3-border w3-border-green"
       :class="{ 'w3-yellow': hovered }"
       :title="fullName"
       as="td"
@@ -59,24 +59,24 @@
     <td
       :class="{
         'w3-yellow': hovered,
-        'w3-pale-blue': totalPerformaceScore !== 0
+        'w3-pale-blue': totalPerformaceScore > 0
       }"
       :title="fullName"
-      class="w3-animate-zoom w3-border w3-border-teal"
+      class="w3-animate-zoom w3-border w3-border-green"
     >
       {{ totalPerformaceScore }}
     </td>
     <td
-      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS2 !== 0 }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS2 > 0 }"
       :title="fullName"
-      class="w3-animate-zoom w3-border w3-border-teal"
+      class="w3-animate-zoom w3-border w3-border-green"
     >
       {{ PS2 }}
     </td>
     <td
-      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS2 !== 0 }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS2 > 0 }"
       :title="fullName"
-      class="w3-animate-zoom w3-border w3-border-teal"
+      class="w3-animate-zoom w3-border w3-border-green"
     >
       {{ WS2 }}
     </td>
@@ -89,21 +89,21 @@
       :record="myExam"
     />
     <td
-      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS3 !== 0 }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS3 > 0 }"
       :title="fullName"
       class="w3-animate-zoom w3-border w3-border-purple"
     >
       {{ PS3 }}
     </td>
     <td
-      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS3 !== 0 }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': WS3 > 0 }"
       :title="fullName"
       class="w3-animate-zoom w3-border w3-border-purple"
     >
       {{ WS3 }}
     </td>
     <td
-      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': initialGrade !== 0 }"
+      :class="{ 'w3-yellow': hovered, 'w3-pale-blue': initialGrade > 0 }"
       :title="fullName"
     >
       {{ initialGrade }}

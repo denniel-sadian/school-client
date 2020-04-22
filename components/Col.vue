@@ -1,5 +1,5 @@
 <template>
-  <td :class="{ 'pale-blue': record.score !== 0 }" class="w3-animate-zoom">
+  <td :class="{ 'pale-blue': record.score > 0 }" class="w3-animate-zoom">
     <div v-if="editing && updating">
       <i class="fas fa-spinner w3-spin"></i>
     </div>
