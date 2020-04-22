@@ -209,6 +209,9 @@ export default {
     await this.$store.dispatch('information/getSections').then(() => this.got++)
     await this.$store.dispatch('information/getSubjects').then(() => this.got++)
     await this.$store.dispatch('grading/retrieveSheets').then(() => this.got++)
+  },
+  head: {
+    title: 'School | Grading Sheets'
   }
 }
 </script>

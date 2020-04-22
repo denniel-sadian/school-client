@@ -126,6 +126,9 @@ export default {
       .dispatch('information/getDepartments')
       .then(() => this.got++)
     await this.$store.dispatch('information/getSections').then(() => this.got++)
+  },
+  head: {
+    title: 'School | Sections'
   }
 }
 </script>

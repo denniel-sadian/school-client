@@ -154,6 +154,9 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('user/getPerms').then(() => this.got++)
+  },
+  head: {
+    title: 'School | Registration Permissions'
   }
 }
 </script>

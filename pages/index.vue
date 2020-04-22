@@ -87,6 +87,9 @@ export default {
     if (this.role === 'admin') {
       await this.$store.dispatch('user/getPerms')
     }
+  },
+  head: {
+    title: 'School | Home'
   }
 }
 </script>

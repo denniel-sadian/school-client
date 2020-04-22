@@ -94,6 +94,9 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('information/getSubjects').then(() => this.got++)
+  },
+  head: {
+    title: 'School | Subjects'
   }
 }
 </script>

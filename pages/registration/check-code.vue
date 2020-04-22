@@ -77,6 +77,9 @@ export default {
         }, 10000)
       }
     }
+  },
+  head: {
+    title: 'School | Check Registration Code'
   }
 }
 </script>

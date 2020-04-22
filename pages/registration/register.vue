@@ -153,6 +153,9 @@ export default {
           })
       }
     }
+  },
+  head: {
+    title: 'School | Registration'
   }
 }
 </script>

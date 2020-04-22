@@ -84,6 +84,9 @@ export default {
   },
   mounted() {
     this.$store.dispatch('user/logout')
+  },
+  head: {
+    title: 'School | Login'
   }
 }
 </script>

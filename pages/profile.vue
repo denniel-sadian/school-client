@@ -323,6 +323,9 @@ export default {
   async mounted() {
     await this.$store.dispatch('information/getDepartments')
     await this.$store.dispatch('user/getUser')
+  },
+  head: {
+    title: 'School | Me'
   }
 }
 </script>
