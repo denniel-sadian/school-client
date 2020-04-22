@@ -96,7 +96,7 @@
         id="controls"
         v-show="role === 'teacher' && username === sheet.teacher.username"
       >
-        <div id="editing-modal" v-show="showEditingForm">
+        <div id="editing-modal" v-show="showEditingForm" class="w3-animate-opacity">
           <div class="w3-animate-bottom w3-card-4">
             <div class="form-inputs">
               <div>
@@ -459,6 +459,7 @@ header {
   padding: 16px;
   display: flex;
   justify-content: flex-end;
+  background: rgba(0, 0, 0, 0.459);
 }
 
 #editing-modal > div {
