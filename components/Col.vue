@@ -1,7 +1,7 @@
 <template>
   <td :class="{ 'pale-blue': record.score !== 0 }" class="w3-animate-zoom">
     <div v-if="editing && updating">
-      <i class="fas fa-spinner w3-spin w3-text-green"></i>
+      <i class="fas fa-spinner w3-spin"></i>
     </div>
     <div @click="edit" v-else-if="!editing && !updating">
       {{ record.score }}
