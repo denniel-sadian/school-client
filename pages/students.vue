@@ -115,9 +115,8 @@
         </div>
         <div v-else>
           <h2 class="w3-center">List of Students</h2>
-          <div class="filter w3-light-gray w3-round">
+          <div class="filter w3-light-gray w3-round w3-border w3-border-gray">
             <h3><i class="fas fa-filter"></i> Filter The List</h3>
-            <div class="w3-padding w3-white w3-round">
               <div class="inpt">
                 <label>Department:</label>
                 <select v-model="depFilter" required>
@@ -172,7 +171,6 @@
                 <label>Search Name:</label>
                 <input type="text" v-model="search" />
               </div>
-            </div>
           </div>
           <p
             class="w3-text-red w3-small w3-center"
