@@ -425,10 +425,8 @@ export default {
   validate(context) {
     return /^\d+$/.test(context.params.id)
   },
-  head() {
-    return {
-      title: `School | Grading Sheet of ${this.section} in ${this.subject}`
-    }
+  head: {
+      title: 'School | Grading Sheet'
   }
 }
 </script>
