@@ -11,35 +11,43 @@
         </p>
       </div>
     </header>
-    <article class="w3-container w3-margin-top">
+    <article class="w3-container">
       <div class="w3-content">
         <div id="first-grid">
           <div @click="$router.push('/departments')">
-            <h3>{{ departments }}</h3>
-            <p>Departments</p>
+            <h3><i class="fas fa-school"></i></h3>
+            <p>
+              {{ departments }} Department<span v-show="departments > 1"
+                >s</span
+              >
+            </p>
           </div>
           <div @click="$router.push('/sections')">
-            <h3>{{ sections }}</h3>
-            <p>Sections</p>
+            <h3><i class="fas fa-building"></i></h3>
+            <p>{{ sections }} Section<span v-show="sections > 1">s</span></p>
           </div>
           <div @click="$router.push('/subjects')">
-            <h3>{{ subjects }}</h3>
-            <p>Subjects</p>
+            <h3><i class="fas fa-percentage"></i></h3>
+            <p>{{ subjects }} Subject<span v-show="subjects > 1">s</span></p>
           </div>
           <div @click="$router.push('/students')">
-            <h3>{{ students }}</h3>
-            <p>Students</p>
+            <h3><i class="fas fa-portrait"></i></h3>
+            <p>{{ students }} Student<span v-show="students > 1">s</span></p>
           </div>
           <div @click="$router.push('/sheets')">
-            <h3>{{ sheets }}</h3>
-            <p>Grading Sheets</p>
+            <h3><i class="fas fa-file-excel"></i></h3>
+            <p>{{ sheets }} Grading Sheet<span v-show="sheets > 1">s</span></p>
           </div>
           <div
             @click="$router.push('/registration/permissions')"
             v-show="role === 'admin'"
           >
-            <h3>{{ regPerms }}</h3>
-            <p>Registration Permissions</p>
+            <h3><i class="fas fa-key"></i></h3>
+            <p>
+              {{ regPerms }} Registration Permission<span v-show="regPerms > 1"
+                >s</span
+              >
+            </p>
           </div>
         </div>
       </div>
@@ -112,32 +120,31 @@ header h1 {
 #first-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  margin: 64px 0px;
 }
 #first-grid > div {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
   text-align: center;
-  background: #f1f1f1;
   border-radius: 4px;
-  border: 1.5px solid #4caf50;
+  border: 1.5px solid #9e9e9e;
   cursor: pointer;
   transition: 0.3s;
   margin: 8px;
 }
 #first-grid > div:hover {
-  background: #8bc34a;
+  background: #f1f1f1;
 }
 #first-grid > div > h3 {
   margin: 0px;
   font-size: 50px;
   font-weight: 800;
   font-family: 'Courier New', Courier, monospace;
-  color: #4caf50;
+  color: #9e9e9e;
 }
 #first-grid > div > p {
   margin: 0px;
-  background: #4caf50;
   padding: 8px;
 }
 @media (max-width: 425px) {
