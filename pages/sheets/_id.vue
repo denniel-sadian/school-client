@@ -245,7 +245,7 @@ export default {
   data() {
     return {
       got: 0,
-      showEditingForm: false,
+      showEditingForm: true,
       updating: false,
       creatingWork: false,
       updated: false,
