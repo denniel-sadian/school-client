@@ -35,6 +35,21 @@
             </select>
           </div>
           <div class="inpt">
+            <label>For Grading:</label>
+            <select v-model="grading" :disabled="creating">
+              <option value="prelim">Perlim</option>
+              <option value="midterm">Midterm</option>
+              <option value="finals">Finals</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>For Semester:</label>
+            <select v-model="sem" :disabled="creating">
+              <option value="1">First Semester</option>
+              <option value="2">Second Semester</option>
+            </select>
+          </div>
+          <div class="inpt">
             <label>For Subject:</label>
             <select v-model="sub" :disabled="creating">
               <option v-for="s in subjects" :value="s.url" :key="s.id">{{
@@ -127,6 +142,8 @@ export default {
       error: false,
       dep: '',
       sec: '',
+      grading: '',
+      sem: '',
       sub: '',
       depFilter: '',
       secFilter: '',
@@ -190,7 +207,9 @@ export default {
       const payload = {
         department: this.dep,
         section: this.sec,
-        subject: this.sub
+        subject: this.sub,
+        sem: this.sem,
+        grading: this.grading
       }
       await this.$store
         .dispatch('grading/createSheet', payload)
