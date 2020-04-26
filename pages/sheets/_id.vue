@@ -172,6 +172,21 @@
                 </div>
                 <form @submit.prevent="updateSheet" v-if="!deleting">
                   <div class="inpt">
+                    <label>Grading:</label>
+                    <select v-model="grading" :disabled="creating">
+                      <option value="prelim">Perlim</option>
+                      <option value="midterm">Midterm</option>
+                      <option value="finals">Finals</option>
+                    </select>
+                  </div>
+                  <div class="inpt">
+                    <label>Semester:</label>
+                    <select v-model="sem" :disabled="creating">
+                      <option value="1">First Semester</option>
+                      <option value="2">Second Semester</option>
+                    </select>
+                  </div>
+                  <div class="inpt">
                     <label>Done:</label>
                     <select v-model="pub" :disabled="updating" required>
                       <option value="true">Yes</option>
@@ -253,6 +268,8 @@ export default {
       reallyDeleting: false,
 
       pub: '',
+      sem: '',
+      grading: '',
       wName: '',
       wType: '',
       wScore: 0
@@ -335,6 +352,8 @@ export default {
     showEditingForm(v) {
       if (v) {
         this.pub = this.sheet.publish
+        this.sem = this.sheet.sem
+        this.grading = this.sheet.grading
       }
     },
     creatingWork(v) {
@@ -393,7 +412,9 @@ export default {
         department: this.sheet.department,
         section: this.sheet.section,
         subject: this.sheet.subject,
-        publish: this.pub
+        publish: this.pub,
+        sem: this.sem,
+        grading: this.grading
       }
       this.$store
         .dispatch('grading/updateSheet', payload)
