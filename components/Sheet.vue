@@ -11,6 +11,14 @@
         <td>{{ section }}</td>
       </tr>
       <tr>
+        <th>Grading:</th>
+        <td>{{ sheet.grading }}</td>
+      </tr>
+      <tr>
+        <th>Semester:</th>
+        <td>{{ sheet.sem }}</td>
+      </tr>
+      <tr>
         <th>Teacher:</th>
         <td v-if="sheet.teacher.username === username">You</td>
         <td v-else>
