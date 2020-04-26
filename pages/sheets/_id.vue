@@ -442,6 +442,9 @@ export default {
       .dispatch('grading/retrieveSheet', url)
       .then(() => this.got++)
     this.createRecords()
+    this.pub = this.sheet.publish
+    this.sem = this.sheet.sem
+    this.grading = this.sheet.grading
   },
   validate(context) {
     return /^\d+$/.test(context.params.id)
