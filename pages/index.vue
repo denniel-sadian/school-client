@@ -2,7 +2,7 @@
   <div>
     <header class="w3-container w3-green">
       <div class="w3-content w3-padding">
-        <h1>Welcome to the shool management system</h1>
+        <h1>Welcome to the grading sheet system</h1>
         <p>
           <i class="fas fa-hand-sparkles"></i> Good day,
           <span class="fullname">{{ addressing }} {{ fullname }}</span
