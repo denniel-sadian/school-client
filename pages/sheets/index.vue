@@ -107,6 +107,21 @@
                 </select>
               </div>
               <div class="inpt">
+                <label>Semester:</label>
+                <select v-model="semFilter" :disabled="creating">
+                  <option value="1">First Sem</option>
+                  <option value="2">Second Sem</option>
+                </select>
+              </div>
+              <div class="inpt">
+                <label>Grading:</label>
+                <select v-model="gradingFilter" :disabled="creating">
+                  <option value="prelim">Perlim</option>
+                  <option value="midterm">Midterm</option>
+                  <option value="finals">Finals</option>
+                </select>
+              </div>
+              <div class="inpt">
                 <label>Owner:</label>
                 <select type="text" v-model="ownerFilter">
                   <option value="me">Me</option>
@@ -148,6 +163,8 @@ export default {
       depFilter: '',
       secFilter: '',
       subFilter: '',
+      semFilter: '',
+      gradingFilter: '',
       ownerFilter: 'me'
     }
   },
@@ -171,6 +188,14 @@ export default {
         .filter((s) => s.department === this.depFilter)
         .filter((s) => {
           if (this.secFilter) return s.section === this.secFilter
+          return true
+        })
+        .filter((s) => {
+          if (this.semFilter) return s.sem === this.semFilter
+          return true
+        })
+        .filter((s) => {
+          if (this.gradingFilter) return s.grading === this.gradingFilter
           return true
         })
         .filter((s) => {
