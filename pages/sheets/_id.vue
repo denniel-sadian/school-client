@@ -228,7 +228,7 @@
                   <span>Or</span>
                   <hr />
                 </div>
-                <p>You can publish the grades whenever you want, just make sure that this grading sheet is already done.</p>
+                <p class="w3-center">You can publish the grades whenever you want, just make sure that this grading sheet is already done.</p>
                 <p class="w3-small w3-center w3-text-green" v-show="submitted">The final grades have been been published to the students' cards.</p>
                 <button :disabled="!sheet.publish || submitting" @click="submitFinalGrade = true; submitting = true" class="w3-green w3-button w3-round">
                   <span v-if="!submitting">Publish Final Grades to Cards</span>
