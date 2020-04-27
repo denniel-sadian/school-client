@@ -93,7 +93,7 @@ export default {
           else return true
         })
         .filter((c) => {
-          if (this.gradingFilter) return c.gradingFilter === this.gradingFilter
+          if (this.gradingFilter) return c.grading === this.gradingFilter
           else return true
         })
         .filter((c) => {
