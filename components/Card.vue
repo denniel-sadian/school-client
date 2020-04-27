@@ -77,7 +77,7 @@ export default {
       remarks: ''
     }
   },
-  compute: {
+  computed: {
     role() {
       return this.$store.state.user.user.profile.role
     }
