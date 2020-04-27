@@ -398,9 +398,7 @@ export default {
           this.submitted = true
           setTimeout(() => this.submitted = false, 5000)
         })
-        .finally(() => {
-          this.submitting = false
-        })
+        .finally(() => this.submitting = false)
     },
     async createRecords() {
       if (this.username !== this.sheet.teacher.username) return
