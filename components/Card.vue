@@ -30,10 +30,6 @@
                 maxlength="255"
                 :disabled="upadting"
               />
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-              accusamus eligendi blanditiis incidunt rerum, voluptatem quidem
-              nam soluta quam. Ullam possimus amet odit deleniti a dolores ipsa
-              similique iure earum.
             </div>
           </form>
         </div>
