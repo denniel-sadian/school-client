@@ -74,16 +74,8 @@ export default {
     sections() {
       return this.$store.state.information.sections
     },
-    department() {
-      return this.$store.state.user.user.profile.department
-    },
     cards() {
       return this.$store.state.grading.cards
-        .filter(
-          (c) =>
-            c.student.department.url ===
-            `https://school.pythonanywhere.com/information/departments/${this.department}/`
-        )
         .filter((c) => {
           if (this.secFilter) return c.student.section.url === this.secFilter
           else return true
