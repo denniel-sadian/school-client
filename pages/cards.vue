@@ -10,7 +10,7 @@
         </p>
       </div>
     </header>
-    <div v-if="got < 1">
+    <div v-if="got < 2">
       <p class="w3-large w3-text-green w3-center">
         <i class="fas fa-spinner w3-spin"></i> Loading...
       </p>
@@ -27,7 +27,29 @@
               }}</option>
             </select>
           </div>
+          <div class="inpt">
+            <label>Semester:</label>
+            <select v-model="semFilter">
+              <option value="1">First Semester</option>
+              <option value="2">Second Semester</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>Grading:</label>
+            <select v-model="gradingFilter">
+              <option value="prelim">Prelim</option>
+              <option value="midterm">Midterm</option>
+              <option value="finals">Finals</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>Name:</label>
+            <input type="text" v-model="nameFilter" />
+          </div>
         </div>
+        <p class="w3-small w3-text-green w3-center">
+          {{ cards.length }} found.
+        </p>
         <Card v-for="c in cards" :card="c" :key="c.url" />
       </div>
     </div>
@@ -42,12 +64,18 @@ export default {
   data() {
     return {
       got: 0,
-      secFilter: ''
+      secFilter: '',
+      semFilter: '',
+      gradingFilter: '',
+      nameFilter: ''
     }
   },
   computed: {
     cards() {
-      return this.$store.state.grading.cards
+      return this.$store.state.grading.cards.filter((c) => {
+        if (this.secFilter) return c.student.section.url === this.secFilter
+        else return true
+      })
     },
     sections() {
       return this.$store.state.information.sections
@@ -77,6 +105,7 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('grading/retrieveCards').then(() => this.got++)
+    await this.$store.dispatch('information/getSections').then(() => this.got++)
   },
   head: {
     title: 'School | Cards'
