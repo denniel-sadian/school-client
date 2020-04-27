@@ -173,7 +173,7 @@
                 <form @submit.prevent="updateSheet" v-if="!deleting">
                   <div class="inpt">
                     <label>Grading:</label>
-                    <select v-model="grading" :disabled="creating">
+                    <select v-model="grading" :disabled="updating">
                       <option value="prelim">Perlim</option>
                       <option value="midterm">Midterm</option>
                       <option value="finals">Finals</option>
@@ -181,7 +181,7 @@
                   </div>
                   <div class="inpt">
                     <label>Semester:</label>
-                    <select v-model="sem" :disabled="creating">
+                    <select v-model="sem" :disabled="updating">
                       <option value="1">First Semester</option>
                       <option value="2">Second Semester</option>
                     </select>
@@ -228,7 +228,7 @@
                   <span>Or</span>
                   <hr />
                 </div>
-                <button :disabled="!sheet.publish" class="w3-green w3-button w3-round">Publish Grades to Cards</button>
+                <button :disabled="!sheet.publish" @click="submitFinalGrade = true" class="w3-green w3-button w3-round">{{ finalGrades.length }} Publish Grades to Cards</button>
               </div>
             </div>
             <div class="form-bottom-btns">
@@ -283,6 +283,9 @@ export default {
     }
   },
   computed: {
+    finalGrades() {
+      return this.$store.state.grading.finalGrades
+    },
     sheet() {
       return this.$store.state.grading.currentSheet
     },
