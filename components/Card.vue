@@ -34,7 +34,7 @@
           </form>
         </div>
       </div>
-      <div class="edit">
+      <div v-show="role === 'teacher'" class="edit">
         <button
           @click="editing = true"
           v-show="!editing"
@@ -75,6 +75,11 @@ export default {
       editing: false,
       upadting: false,
       remarks: ''
+    }
+  },
+  compute: {
+    role() {
+      return this.$store.state.user.user.profile.role
     }
   },
   watch: {
