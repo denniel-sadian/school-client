@@ -223,6 +223,12 @@
                     </h1>
                   </div>
                 </div>
+                <div class="or">
+                  <hr />
+                  <span>Or</span>
+                  <hr />
+                </div>
+                <button :disabled="!sheet.publish" class="w3-green w3-button w3-round">Publish Grades to Cards</button>
               </div>
             </div>
             <div class="form-bottom-btns">
