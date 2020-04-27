@@ -71,14 +71,38 @@ export default {
     }
   },
   computed: {
-    cards() {
-      return this.$store.state.grading.cards.filter((c) => {
-        if (this.secFilter) return c.student.section.url === this.secFilter
-        else return true
-      })
-    },
     sections() {
       return this.$store.state.information.sections
+    },
+    department() {
+      return this.$store.state.user.user.profile.department
+    },
+    cards() {
+      return this.$store.state.grading.cards
+        .filter(
+          (c) =>
+            c.student.department.url ===
+            `https://school.pythonanywhere.com/information/departments/${this.department}/`
+        )
+        .filter((c) => {
+          if (this.secFilter) return c.student.section.url === this.secFilter
+          else return true
+        })
+        .filter((c) => {
+          if (this.semFilter) return c.sem === this.semFilter
+          else return true
+        })
+        .filter((c) => {
+          if (this.gradingFilter) return c.gradingFilter === this.gradingFilter
+          else return true
+        })
+        .filter((c) => {
+          if (this.nameFilter)
+            return `${c.student.first_name} ${c.student.last_name}`
+              .toLowerCase()
+              .includes(this.nameFilter.toLowerCase())
+          else return true
+        })
     }
   },
   methods: {
