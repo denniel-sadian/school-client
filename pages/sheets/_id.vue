@@ -252,7 +252,7 @@
           class="w3-green w3-button w3-animate-zoom w3-card-4"
           id="edit-sheet-btn"
         >
-          <i class="fas fa-pencil-alt"></i> Add Works
+          <i class="fas fa-pencil-alt"></i> Edit
         </button>
       </div>
     </div>
