@@ -17,6 +17,17 @@
     </div>
     <div class="w3-container" v-else>
       <div class="w3-content">
+        <div class="w3-light-gray w3-round w3-border w3-border-gray w3-padding">
+          <h3><i class="fas fa-filter"></i> Filter the Cards</h3>
+          <div class="inpt">
+            <label>Section:</label>
+            <select v-model="secFilter" required>
+              <option v-for="s in sections" :value="s.url" :key="s.id">{{
+                s.name
+              }}</option>
+            </select>
+          </div>
+        </div>
         <Card v-for="c in cards" :card="c" :key="c.url" />
       </div>
     </div>
@@ -30,12 +41,16 @@ export default {
   components: { Card },
   data() {
     return {
-      got: 0
+      got: 0,
+      secFilter: ''
     }
   },
   computed: {
     cards() {
       return this.$store.state.grading.cards
+    },
+    sections() {
+      return this.$store.state.information.sections
     }
   },
   methods: {
