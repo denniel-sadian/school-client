@@ -13,7 +13,10 @@
     </header>
     <article class="w3-container">
       <div class="w3-content">
-        <div id="first-grid">
+        <h1 v-if="!doneLoading" class="w3-text-green w3-center">
+          <i class="fas fa-spinner w3-spin"></i> Loading...
+        </h1>
+        <div v-else id="first-grid" class="w3-animate-zoom">
           <div @click="$router.push('/departments')">
             <h3><i class="fas fa-school"></i></h3>
             <p>
@@ -61,6 +64,9 @@
 
 <script>
 export default {
+  data() {
+    return { got: 0 }
+  },
   computed: {
     fullname() {
       const f = this.$store.state.user.user.user.first_name
@@ -73,6 +79,10 @@ export default {
     },
     role() {
       return this.$store.state.user.user.profile.role
+    },
+    doneLoading() {
+      if (this.role === 'admin') return this.got === 4
+      return this.got === 3
     },
     departments() {
       return this.$store.state.information.departments.length
@@ -97,12 +107,13 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('information/getInformation')
-    await this.$store.dispatch('grading/retrieveSheets')
-    await this.$store.dispatch('grading/retrieveCards')
-    if (this.role === 'admin') {
-      await this.$store.dispatch('user/getPerms')
-    }
+    await this.$store
+      .dispatch('information/getInformation')
+      .then(() => this.got++)
+    await this.$store.dispatch('grading/retrieveSheets').then(() => this.got++)
+    await this.$store.dispatch('grading/retrieveCards').then(() => this.got++)
+    if (this.role === 'admin')
+      await this.$store.dispatch('user/getPerms').then(() => this.got++)
   },
   head: {
     title: 'School | Home'
