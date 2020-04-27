@@ -16,13 +16,16 @@
       </p>
     </div>
     <div v-else>
-      {{ cards }}
+      <Card v-for="c in cards" :card="c" :key="c.url" />
     </div>
   </div>
 </template>
 
 <script>
+import Card from '~/components/Card.vue'
+
 export default {
+  components: { Card },
   data() {
     return {
       got: 0
