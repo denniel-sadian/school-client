@@ -15,8 +15,10 @@
         <i class="fas fa-spinner w3-spin"></i> Loading...
       </p>
     </div>
-    <div v-else>
-      <Card v-for="c in cards" :card="c" :key="c.url" />
+    <div class="w3-container" v-else>
+      <div class="w3-content">
+        <Card v-for="c in cards" :card="c" :key="c.url" />
+      </div>
     </div>
   </div>
 </template>
