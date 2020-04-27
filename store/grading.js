@@ -18,7 +18,6 @@ export const mutations = {
   },
   SET_CARDS(state, cards) {
     state.cards = cards
-    state.cards = state.cards.sort((a, b) => b.id - a.id)
   },
   UPDATE_CARD(state, card) {
     state.cards.filter((e) => e.id === card.id)[0].remarks = card.remarks
