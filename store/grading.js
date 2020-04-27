@@ -8,6 +8,9 @@ export const mutations = {
   PUSH_GRADE(state, g) {
     state.finalGrades.push(g)
   },
+  EMPTY_GRADES(state) {
+    state.finalGrades = []
+  },
   SET_SHEETS(state, sheets) {
     state.sheets = sheets
     state.sheets = state.sheets.sort((a, b) => b.id - a.id)
@@ -73,6 +76,11 @@ export const mutations = {
 }
 
 export const actions = {
+  postFinalGrades({ commit }, payload) {
+    return this.$axios
+      .post('grading/write-grades/', payload)
+      .then(() => commit('EMPTY_GRADES'))
+  },
   retrieveSheets({ commit }) {
     // Get all the grading sheets
     return this.$axios

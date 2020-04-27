@@ -228,7 +228,11 @@
                   <span>Or</span>
                   <hr />
                 </div>
-                <button :disabled="!sheet.publish" @click="submitFinalGrade = true" class="w3-green w3-button w3-round">{{ finalGrades.length }} Publish Grades to Cards</button>
+                <p class="w3-small w3-center w3-text-green" v-show="submitted">The final grades have been been published to the students' cards.</p>
+                <button :disabled="!sheet.publish || submitting" @click="submitFinalGrade = true; submitting = true" class="w3-green w3-button w3-round">
+                  <span v-if="!submitting">Publish Final Grades to Cards</span>
+                  <span v-else><i class="fas fa-spinner w3-spin"></i> Publishing...</span>
+                </button>
               </div>
             </div>
             <div class="form-bottom-btns">
@@ -273,6 +277,8 @@ export default {
       deleting: false,
       reallyDeleting: false,
       submitFinalGrade: false,
+      submitting: false,
+      submitted: false,
 
       pub: '',
       sem: '',
@@ -378,13 +384,23 @@ export default {
     },
   },
   methods: {
-    publishGrades() {
+    async publishGrades() {
+      this.submitted = false
       const payload = {
         sem: this.sheet.sem,
         grading: this.sheet.grading,
         subject: this.subject.id,
         grades: this.finalGrades
       }
+      await this.$store
+        .dispatch('grading/postFinalGrades', payload)
+        .then(() => {
+          this.submitted = true
+          setTimeout(() => this.submitted = false, 5000)
+        })
+        .finally(() => {
+          this.submitting = false
+        })
     },
     async createRecords() {
       if (this.username !== this.sheet.teacher.username) return
