@@ -34,6 +34,10 @@
             <h3><i class="fas fa-portrait"></i></h3>
             <p>{{ students }} Student<span v-show="students > 1">s</span></p>
           </div>
+          <div @click="$router.push('/cards')">
+            <h3><i class="fas fa-id-card"></i></h3>
+            <p>{{ cards }} Report Card<span v-show="students > 1">s</span></p>
+          </div>
           <div @click="$router.push('/sheets')">
             <h3><i class="fas fa-file-excel"></i></h3>
             <p>{{ sheets }} Grading Sheet<span v-show="sheets > 1">s</span></p>
@@ -87,11 +91,15 @@ export default {
     },
     sheets() {
       return this.$store.state.grading.sheets.length
+    },
+    cards() {
+      return this.$store.state.grading.cards.length
     }
   },
   async mounted() {
     await this.$store.dispatch('information/getInformation')
     await this.$store.dispatch('grading/retrieveSheets')
+    await this.$store.dispatch('grading/retrieveCards')
     if (this.role === 'admin') {
       await this.$store.dispatch('user/getPerms')
     }
