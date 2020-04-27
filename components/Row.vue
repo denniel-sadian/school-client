@@ -128,11 +128,19 @@ export default {
     topTotalPerfScore: {
       type: Number,
       default: 0
+    },
+    shouldSubmit: {
+      type: Boolean,
     }
   },
   data() {
     return {
       hovered: false
+    }
+  },
+  watch: {
+    shouldSubmit(v) {
+      if(v) {}
     }
   },
   computed: {
