@@ -140,7 +140,10 @@ export default {
   },
   watch: {
     shouldSubmit(v) {
-      if(v) {}
+      if(v) this.$store.commit('grading/PUSH_GRADE', {
+        student: this.student.id,
+        score: this.quarterlyGrade
+      })
     }
   },
   computed: {

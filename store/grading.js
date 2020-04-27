@@ -1,9 +1,13 @@
 export const state = () => ({
   sheets: [],
-  currentSheet: {}
+  currentSheet: {},
+  finalGrades: []
 })
 
 export const mutations = {
+  PUSH_GRADE(state, g) {
+    state.finalGrades.push(g)
+  },
   SET_SHEETS(state, sheets) {
     state.sheets = sheets
     state.sheets = state.sheets.sort((a, b) => b.id - a.id)
