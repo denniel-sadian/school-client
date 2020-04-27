@@ -9,7 +9,7 @@
       <header class="w3-center w3-pale-green">
         <h1>
           Grading sheet of {{ section }} for
-          {{ subject }}
+          {{ subject.name }}
         </h1>
         <p>{{ new Date(sheet.date).toDateString() }}</p>
         <p v-if="sheet.teacher.username === username">Prepared by: You</p>
@@ -328,7 +328,7 @@ export default {
     subject() {
       return this.$store.state.information.subjects.filter((e) => (
         e.url === this.sheet.subject
-      ))[0].name
+      ))[0]
     },
     students() {
       return this.$store.state.information.students.filter((s) => 
@@ -359,6 +359,9 @@ export default {
     }
   },
   watch: {
+    finalGrades(v) {
+      if (v.length === this.students.length) this.publishGrades()
+    },
     showEditingForm(v) {
       if (v) {
         this.pub = this.sheet.publish
@@ -375,6 +378,14 @@ export default {
     },
   },
   methods: {
+    publishGrades() {
+      const payload = {
+        sem: this.sheet.sem,
+        grading: this.sheet.grading,
+        subject: this.subject.id,
+        grades: this.finalGrades
+      }
+    },
     async createRecords() {
       if (this.username !== this.sheet.teacher.username) return
       let records = []
