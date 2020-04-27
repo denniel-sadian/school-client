@@ -70,6 +70,16 @@
         </button>
         <button
           @click="
+            $router.push('/cards')
+            showLinks = false
+          "
+          class="w3-button"
+          :class="{ current: pageName === 'cards' }"
+        >
+          <i class="fas fa-id-card"></i> Cards
+        </button>
+        <button
+          @click="
             $router.push('/sheets')
             showLinks = false
           "
