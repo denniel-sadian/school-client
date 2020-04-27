@@ -1,7 +1,8 @@
 export const state = () => ({
   sheets: [],
   currentSheet: {},
-  finalGrades: []
+  finalGrades: [],
+  cards: []
 })
 
 export const mutations = {
@@ -14,6 +15,13 @@ export const mutations = {
   SET_SHEETS(state, sheets) {
     state.sheets = sheets
     state.sheets = state.sheets.sort((a, b) => b.id - a.id)
+  },
+  SET_CARDS(state, cards) {
+    state.cards = cards
+    state.cards = state.cards.sort((a, b) => b.id - a.id)
+  },
+  UPDATE_CARD(state, card) {
+    state.cards.filter((e) => e.id === card.id)[0].remarks = card.remarks
   },
   ADD_SHEET(state, sheets) {
     state.sheets.push(sheets)
@@ -77,9 +85,16 @@ export const mutations = {
 
 export const actions = {
   postFinalGrades({ commit }, payload) {
+    // Post the final grades
     return this.$axios
       .post('grading/write-grades/', payload)
       .then(() => commit('EMPTY_GRADES'))
+  },
+  retrieveCards({ commit }) {
+    // Get all the cards
+    return this.$axios
+      .get('grading/cards/')
+      .then(({ data }) => commit('SET_CARDS', data))
   },
   retrieveSheets({ commit }) {
     // Get all the grading sheets
@@ -105,6 +120,16 @@ export const actions = {
     return this.$axios
       .put(payload.url, payload)
       .then(({ data }) => commit('UPDATE_CURRENT_SHEET', data))
+  },
+  updateCard({ commit }, payload) {
+    // Update the card
+    return this.$axios
+      .put(payload.url, payload)
+      .then(({ data }) => commit('UPDATE_CARD', data))
+  },
+  deleteCard({ commit }, url) {
+    // Delete the card
+    return this.$axios.delete(url)
   },
   deleteSheet({ commit }, url) {
     // Delete the grading sheet
