@@ -16,7 +16,9 @@
     <div class="parent">
       <h2>Do you want to view your child's crad?</h2>
       <div>
-        <nuxt-link to="/cards" class="w3-button w3-round w3-blue"
+        <nuxt-link
+          to="/viewing-cards/check-permission"
+          class="w3-button w3-round w3-blue"
           >View Cards</nuxt-link
         >
       </div>
