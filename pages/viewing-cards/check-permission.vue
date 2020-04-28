@@ -13,7 +13,8 @@
             type="text"
             v-model="code"
             @keypress.enter="checkCode"
-            :disabled="disabled"
+            :disabled="checking"
+            required
           />
         </div>
         <p v-show="noCode" class="w3-small w3-center w3-text-red">
@@ -22,25 +23,13 @@
         <hr />
         <button
           type="submit"
-          :disabled="disabled"
+          :disabled="checking"
           class="w3-button w3-light-green"
         >
           <span v-if="checking">
             <i class="fas fa-spinner w3-spin"></i> Checking code...
           </span>
           <span v-else>Check Code</span>
-        </button>
-        <div class="or">
-          <hr />
-          <span>Or</span>
-          <hr />
-        </div>
-        <button
-          @click="$router.push('/login')"
-          :disabled="disabled"
-          class="w3-button w3-light-blue"
-        >
-          Login
         </button>
       </form>
     </div>
@@ -54,31 +43,21 @@ export default {
     return {
       code: '',
       noCode: false,
-      checking: false,
-      disabled: false
+      checking: false
     }
   },
   methods: {
     async checkCode() {
-      if (!this.code) return
       this.checking = true
       this.noCode = false
-      this.disabled = true
-      await this.$store.dispatch('registration/checkCode', this.code)
-      if (this.$store.state.registration.credentials !== null)
-        this.$router.push('/registration/register')
-      else {
-        this.checking = false
-        this.disabled = false
-        this.noCode = true
-        setTimeout(() => {
-          this.noCode = false
-        }, 10000)
-      }
+      await this.$store
+        .dispatch('cards/retrieveCards', this.code)
+        .catch(() => (this.noCode = true))
+        .finally(() => (this.checking = false))
     }
   },
   head: {
-    title: 'School | Check Registration Code'
+    title: 'School | Check Permission Code'
   }
 }
 </script>

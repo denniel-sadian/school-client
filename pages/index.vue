@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="parent">
-      <h2>Do you want to view your child's crad?</h2>
+      <h2>Do you want to view your child's card?</h2>
       <div>
         <nuxt-link
           to="/viewing-cards/check-permission"

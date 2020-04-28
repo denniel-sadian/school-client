@@ -10,7 +10,7 @@ export const mutations = {
 
 export const actions = {
   retrieveCards({ commit }, code) {
-    this.$axios
+    return this.$axios
       .post('grading/view-cards/', { code })
       .then(({ data }) => commit('SET_CARDS', data))
   }
