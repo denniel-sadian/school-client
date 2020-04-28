@@ -27,7 +27,7 @@ export default {
   computed: {
     head() {
       return `${this.card.grading} of ${
-        this.card.sem === 1 ? 'first' : 'second'
+        this.card.sem === '1' ? 'first' : 'second'
       } semester`
     },
     average() {
