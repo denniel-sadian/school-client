@@ -239,7 +239,7 @@ export default {
       await this.$store
         .dispatch('grading/createSheet', payload)
         .then(() => {
-          this.$router.push(`/sheets/${this.newID}`)
+          this.$router.push(`/dashboard/sheets/${this.newID}`)
         })
         .finally(() => {
           this.creating = false

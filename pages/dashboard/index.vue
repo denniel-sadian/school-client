@@ -17,7 +17,7 @@
           <i class="fas fa-spinner w3-spin"></i> Loading...
         </h1>
         <div v-else id="first-grid" class="w3-animate-zoom">
-          <div @click="$router.push('/departments')">
+          <div @click="$router.push('/dashboard/departments')">
             <h3><i class="fas fa-school"></i></h3>
             <p>
               {{ departments }} Department<span v-show="departments > 1"
@@ -25,23 +25,23 @@
               >
             </p>
           </div>
-          <div @click="$router.push('/sections')">
+          <div @click="$router.push('/dashboard/sections')">
             <h3><i class="fas fa-building"></i></h3>
             <p>{{ sections }} Section<span v-show="sections > 1">s</span></p>
           </div>
-          <div @click="$router.push('/subjects')">
+          <div @click="$router.push('/dashboard/subjects')">
             <h3><i class="fas fa-percentage"></i></h3>
             <p>{{ subjects }} Subject<span v-show="subjects > 1">s</span></p>
           </div>
-          <div @click="$router.push('/students')">
+          <div @click="$router.push('/dashboard/students')">
             <h3><i class="fas fa-portrait"></i></h3>
             <p>{{ students }} Student<span v-show="students > 1">s</span></p>
           </div>
-          <div @click="$router.push('/cards')">
+          <div @click="$router.push('/dashboard/cards')">
             <h3><i class="fas fa-id-card"></i></h3>
             <p>{{ cards }} Report Card<span v-show="students > 1">s</span></p>
           </div>
-          <div @click="$router.push('/sheets')">
+          <div @click="$router.push('/dashboard/sheets')">
             <h3><i class="fas fa-file-excel"></i></h3>
             <p>{{ sheets }} Grading Sheet<span v-show="sheets > 1">s</span></p>
           </div>

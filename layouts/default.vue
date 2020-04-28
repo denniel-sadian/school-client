@@ -4,7 +4,7 @@
       <div>
         <div
           @click="
-            $router.push('/profile')
+            $router.push('/dashboard/profile')
             showLinks = false
           "
           class="main"
@@ -20,7 +20,7 @@
       <div id="links" :class="{ 'w3-show': showLinks }" class="w3-animate-top">
         <button
           @click="
-            $router.push('/')
+            $router.push('/dashboard')
             showLinks = false
           "
           class="w3-button"
@@ -30,7 +30,7 @@
         </button>
         <button
           @click="
-            $router.push('/departments')
+            $router.push('/dashboard/departments')
             showLinks = false
           "
           class="w3-button"
@@ -40,7 +40,7 @@
         </button>
         <button
           @click="
-            $router.push('/sections')
+            $router.push('/dashboard/sections')
             showLinks = false
           "
           class="w3-button"
@@ -50,7 +50,7 @@
         </button>
         <button
           @click="
-            $router.push('/subjects')
+            $router.push('/dashboard/subjects')
             showLinks = false
           "
           class="w3-button"
@@ -60,7 +60,7 @@
         </button>
         <button
           @click="
-            $router.push('/students')
+            $router.push('/dashboard/students')
             showLinks = false
           "
           class="w3-button"
@@ -70,7 +70,7 @@
         </button>
         <button
           @click="
-            $router.push('/cards')
+            $router.push('/dashboard/cards')
             showLinks = false
           "
           class="w3-button"
@@ -80,7 +80,7 @@
         </button>
         <button
           @click="
-            $router.push('/sheets')
+            $router.push('/dashboard/sheets')
             showLinks = false
           "
           class="w3-button"

@@ -140,7 +140,7 @@ export default {
                 password: this.password
               })
               .then(() => {
-                this.$router.push('/')
+                this.$router.push('/dashboard')
               })
           })
           .catch(() => {

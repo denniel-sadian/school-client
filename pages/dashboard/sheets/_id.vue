@@ -429,7 +429,7 @@ export default {
     },
     async deleteSheet() {
       this.reallyDeleting = true
-      await this.$store.dispatch('grading/deleteSheet', this.sheet.url).finally(()=>this.$router.push('/sheets'))
+      await this.$store.dispatch('grading/deleteSheet', this.sheet.url).finally(()=>this.$router.push('/dashboard/sheets'))
     },
     async createWork() {
       this.creatingWork = true
