@@ -52,13 +52,7 @@
           </div>
           <div v-else>
             <h2 class="w3-center">List of Permissions</h2>
-            <Section
-              v-for="sec in sections"
-              :sec="sec"
-              :deps="departments"
-              :role="role"
-              :key="sec.id"
-            />
+            <VPerm v-for="p in perms" :perm="p" :key="p.id" />
           </div>
         </div>
       </article>
@@ -67,12 +61,12 @@
 </template>
 
 <script>
-import Section from '~/components/Section.vue'
+import VPerm from '~/components/VPerm.vue'
 
 export default {
   layout: 'dashboard',
   components: {
-    Section
+    VPerm
   },
   data() {
     return {
