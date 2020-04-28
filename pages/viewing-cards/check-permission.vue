@@ -18,10 +18,20 @@
           />
         </div>
         <div class="inpt">
-          <label>Student's Name:</label>
+          <label>Student's First Name:</label>
           <input
             type="text"
-            v-model="name"
+            v-model="fname"
+            @keypress.enter="checkCode"
+            :disabled="checking"
+            required
+          />
+        </div>
+        <div class="inpt">
+          <label>Student's Last Name:</label>
+          <input
+            type="text"
+            v-model="lname"
             @keypress.enter="checkCode"
             :disabled="checking"
             required
@@ -56,7 +66,8 @@ export default {
   data() {
     return {
       code: '',
-      name: '',
+      fname: '',
+      lname: '',
       noCode: false,
       noStudent: false,
       checking: false
@@ -69,13 +80,14 @@ export default {
   },
   methods: {
     async checkCode() {
-      if (!this.code || !this.name) return
+      if (!this.code || !this.fname || !this.lname) return
       this.checking = true
       this.noCode = false
       this.noStudent = false
       const payload = {
         code: this.code,
-        name: this.name
+        fname: this.fname,
+        lname: this.lname
       }
       await this.$store
         .dispatch('cards/retrieveCards', payload)
