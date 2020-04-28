@@ -7,8 +7,10 @@
         <td>{{ g.score }}</td>
       </tr>
       <tr>
-        <th>Average</th>
-        <td>{{ average }}</td>
+        <th><h5>Average</h5></th>
+        <td>
+          <h5>{{ average }}</h5>
+        </td>
       </tr>
     </table>
 
@@ -31,7 +33,11 @@ export default {
     average() {
       let sum = 0
       this.card.final_grades.forEach((e) => (sum += e.score))
-      return sum / this.card.final_grades.length
+      return (
+        Math.round(
+          (sum / this.card.final_grades.length + Number.EPSILON) * 100
+        ) / 100
+      )
     }
   }
 }
