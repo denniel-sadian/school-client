@@ -1,34 +1,28 @@
 <template>
-  <div class="cont w3-khaki">
-    <header class="w3-container">
-      <div class="w3-content head">
-        <div>
-          <img :src="photo" alt="" />
-        </div>
-        <div>
-          <h1>{{ fullname }}</h1>
-          <p>
-            <span class="w3-opacity">Department:</span>
-            {{ student.department.name }}
-          </p>
-          <p>
-            <span class="w3-opacity">Section:</span> {{ student.section.name }}
-          </p>
-          <p>
-            <span class="w3-opacity">Grade:</span> {{ student.grade_level }}
-          </p>
-          <p>
-            <span class="w3-opacity">Gender:</span>
-            {{ student.gender === 'm' ? 'Male' : 'Female' }}
-          </p>
-        </div>
+  <div class="w3-container cont w3-khaki">
+    <div class="w3-content head">
+      <div>
+        <img :src="photo" alt="" />
       </div>
-    </header>
-    <article class="w3-container">
-      <div class="w3-content">
-        <DisplayCard v-for="card in cards" :card="card" :key="card.id" />
+      <div>
+        <h1>{{ fullname }}</h1>
+        <p>
+          <span class="w3-opacity">Department:</span>
+          {{ student.department.name }}
+        </p>
+        <p>
+          <span class="w3-opacity">Section:</span> {{ student.section.name }}
+        </p>
+        <p><span class="w3-opacity">Grade:</span> {{ student.grade_level }}</p>
+        <p>
+          <span class="w3-opacity">Gender:</span>
+          {{ student.gender === 'm' ? 'Male' : 'Female' }}
+        </p>
       </div>
-    </article>
+    </div>
+    <div class="w3-content">
+      <DisplayCard v-for="card in cards" :card="card" :key="card.id" />
+    </div>
   </div>
 </template>
 
@@ -68,16 +62,13 @@ export default {
   padding: 64px 0px !important;
 }
 
-header {
-  font-family: 'Nunito';
-}
-
 .head {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 16px;
   border-bottom: 2px solid #9e9e9e;
+  font-family: 'Nunito';
 }
 
 .head div:first-child {
