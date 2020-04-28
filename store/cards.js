@@ -9,9 +9,9 @@ export const mutations = {
 }
 
 export const actions = {
-  retrieveCards({ commit }, code) {
+  retrieveCards({ commit }, payload) {
     return this.$axios
-      .post('grading/view-cards/', { code })
+      .post('grading/view-cards/', payload)
       .then(({ data }) => commit('SET_CARDS', data.cards))
   }
 }
