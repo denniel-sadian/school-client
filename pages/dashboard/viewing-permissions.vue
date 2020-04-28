@@ -31,7 +31,7 @@
           </div>
           <hr />
           <p class="w3-center w3-text-red w3-small" v-show="error">
-            Please provide a unique name.
+            The section and permission should be unique together.
           </p>
           <button
             type="submit"
@@ -95,7 +95,7 @@ export default {
       this.creating = true
       this.error = false
       const payload = {
-        code: this.name,
+        code: this.code,
         section: this.section
       }
       await this.$store
