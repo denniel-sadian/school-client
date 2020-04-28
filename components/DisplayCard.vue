@@ -6,6 +6,10 @@
         <th>{{ g.subject }}</th>
         <td>{{ g.score }}</td>
       </tr>
+      <tr>
+        <th>Average</th>
+        <td>{{ average }}</td>
+      </tr>
     </table>
 
     <h4>Teacher's Remarks:</h4>
@@ -23,6 +27,11 @@ export default {
       return `${this.card.grading} of ${
         this.card.sem === 1 ? 'first' : 'second'
       } semester`
+    },
+    average() {
+      let sum = 0
+      this.card.final_grades.forEach((e) => (sum += e.score))
+      return sum / this.card.final_grades.length
     }
   }
 }

@@ -59,7 +59,7 @@ export default {
 
 <style scoped>
 .cont {
-  padding: 64px 0px !important;
+  padding: 64px 16px !important;
 }
 
 .head {
