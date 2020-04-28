@@ -52,6 +52,7 @@ export default {
       this.noCode = false
       await this.$store
         .dispatch('cards/retrieveCards', this.code)
+        .then(() => this.$router.push('/viewing-cards'))
         .catch(() => (this.noCode = true))
         .finally(() => (this.checking = false))
     }

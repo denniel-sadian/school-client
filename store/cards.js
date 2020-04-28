@@ -12,6 +12,6 @@ export const actions = {
   retrieveCards({ commit }, code) {
     return this.$axios
       .post('grading/view-cards/', { code })
-      .then(({ data }) => commit('SET_CARDS', data))
+      .then(({ data }) => commit('SET_CARDS', data.cards))
   }
 }
