@@ -24,11 +24,21 @@
         </div>
       </div>
     </header>
+    <article class="w3-container">
+      <div class="w3-content">
+        <DisplayCard v-for="card in cards" :card="card" :key="card.id" />
+      </div>
+    </article>
   </div>
 </template>
 
 <script>
+import DisplayCard from '~/components/DisplayCard.vue'
+
 export default {
+  components: {
+    DisplayCard
+  },
   computed: {
     cards() {
       return this.$store.state.cards.cards
