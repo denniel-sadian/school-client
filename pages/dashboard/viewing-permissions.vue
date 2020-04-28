@@ -19,7 +19,7 @@
           <h2><i class="fas fa-plus-circle"></i> Add a Permission</h2>
           <div class="inpt">
             <label>For Section:</label>
-            <select v-model="section" required>
+            <select v-model="section" :disabled="creating" required>
               <option v-for="s in sections" :value="s.url" :key="s.id">{{
                 s.name
               }}</option>
@@ -52,7 +52,12 @@
           </div>
           <div v-else>
             <h2 class="w3-center">List of Permissions</h2>
-            <VPerm v-for="p in perms" :perm="p" :key="p.id" />
+            <VPerm
+              v-for="p in perms"
+              :perm="p"
+              :sections="sections"
+              :key="p.id"
+            />
           </div>
         </div>
       </article>
@@ -113,9 +118,7 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('information/getSections').then(() => this.got++)
-    await this.$store
-      .dispatch('information/retrievePerms')
-      .then(() => this.got++)
+    await this.$store.dispatch('grading/retrievePerms').then(() => this.got++)
   },
   head: {
     title: 'School | Viewing Permissions'
