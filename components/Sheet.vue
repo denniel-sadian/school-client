@@ -41,7 +41,7 @@
     <div>
       <nuxt-link
         id="view-link"
-        :to="'/sheets/' + sheet.id"
+        :to="'/dashboard/sheets/' + sheet.id"
         class="w3-button w3-green"
       >
         <i class="fas fa-long-arrow-alt-right"></i> View
