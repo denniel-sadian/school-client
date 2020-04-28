@@ -2,7 +2,8 @@ export const state = () => ({
   sheets: [],
   currentSheet: {},
   finalGrades: [],
-  cards: []
+  cards: [],
+  permissions: []
 })
 
 export const mutations = {
@@ -19,8 +20,19 @@ export const mutations = {
   SET_CARDS(state, cards) {
     state.cards = cards
   },
+  SET_PERMS(state, perms) {
+    state.permissions = perms
+  },
   UPDATE_CARD(state, card) {
     state.cards.filter((e) => e.id === card.id)[0].remarks = card.remarks
+  },
+  UPDATE_PERM(state, perm) {
+    state.permissions.filter((e) => e.id === perm.id)[0].section = perm.section
+    state.permissions.filter((e) => e.id === perm.id)[0].code = perm.code
+  },
+  ADD_PERM(state, perm) {
+    state.permissions.push(perm)
+    state.permissions = state.permissions.sort((a, b) => b.id - a.id)
   },
   ADD_SHEET(state, sheets) {
     state.sheets.push(sheets)
@@ -75,6 +87,9 @@ export const mutations = {
       (e) => e.url !== url
     )
   },
+  DELETE_PERM(state, url) {
+    state.permissions = state.permissions.filter((e) => e.url !== url)
+  },
   DELETE_RECORDS(state, url) {
     state.currentSheet.records = state.currentSheet.records.filter(
       (e) => e.work !== url
@@ -95,6 +110,12 @@ export const actions = {
       .get('grading/cards/')
       .then(({ data }) => commit('SET_CARDS', data))
   },
+  retrievePerms({ commit }) {
+    // Get all the viewing permissions
+    return this.$axios
+      .get('grading/permissions/')
+      .then(({ data }) => commit('SET_PERMS', data))
+  },
   retrieveSheets({ commit }) {
     // Get all the grading sheets
     return this.$axios
@@ -106,6 +127,12 @@ export const actions = {
     return this.$axios
       .post('grading/sheets/', payload)
       .then(({ data }) => commit('ADD_SHEET', data))
+  },
+  createPerm({ commit }, payload) {
+    // Create a permission
+    return this.$axios
+      .post('grading/permissions/', payload)
+      .then(({ data }) => commit('ADD_PERM', data))
   },
   retrieveSheet({ commit }, url) {
     // Get the grading sheet
@@ -119,6 +146,12 @@ export const actions = {
     return this.$axios
       .put(payload.url, payload)
       .then(({ data }) => commit('UPDATE_CURRENT_SHEET', data))
+  },
+  updatePerm({ commit }, payload) {
+    // Update the permission
+    return this.$axios
+      .put(payload.url, payload)
+      .then(({ data }) => commit('UPDATE_PERM', data))
   },
   updateCard({ commit }, payload) {
     // Update the card
@@ -166,6 +199,10 @@ export const actions = {
       commit('DELETE_WORK', url)
       commit('DELETE_RECORDS', url)
     })
+  },
+  deletePerm({ commit }, url) {
+    // Delete the permission
+    return this.$axios.delete(url).then(() => commit('DELETE_PERM', url))
   },
   createRecord({ commit }, payload) {
     // Create the record
