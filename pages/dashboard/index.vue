@@ -45,6 +45,14 @@
             <h3><i class="fas fa-file-excel"></i></h3>
             <p>{{ sheets }} Grading Sheet<span v-show="sheets > 1">s</span></p>
           </div>
+          <div @click="$router.push('/dashboard/viewing-permissions')">
+            <h3><i class="fas fa-eye"></i></h3>
+            <p>
+              {{ vPerms }} Card Viewing Permission<span v-show="sheets > 1"
+                >s</span
+              >
+            </p>
+          </div>
           <div
             @click="$router.push('/registration/permissions')"
             v-show="role === 'admin'"
@@ -82,8 +90,8 @@ export default {
       return this.$store.state.user.user.profile.role
     },
     doneLoading() {
-      if (this.role === 'admin') return this.got === 4
-      return this.got === 3
+      if (this.role === 'admin') return this.got === 5
+      return this.got === 4
     },
     departments() {
       return this.$store.state.information.departments.length
@@ -100,6 +108,9 @@ export default {
     regPerms() {
       return this.$store.state.user.permissions.length
     },
+    vPerms() {
+      return this.$store.state.grading.permissions.length
+    },
     sheets() {
       return this.$store.state.grading.sheets.length
     },
@@ -113,6 +124,7 @@ export default {
       .then(() => this.got++)
     await this.$store.dispatch('grading/retrieveSheets').then(() => this.got++)
     await this.$store.dispatch('grading/retrieveCards').then(() => this.got++)
+    await this.$store.dispatch('grading/retrievePerms').then(() => this.got++)
     if (this.role === 'admin')
       await this.$store.dispatch('user/getPerms').then(() => this.got++)
   },
