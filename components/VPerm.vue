@@ -2,7 +2,7 @@
   <div class="cont">
     <div v-if="!editing" class="details">
       <h3 class="w3-text-green"><i class="fas fa-key"></i> {{ perm.code }}</h3>
-      <p>For section: {{ perm.section.name }}</p>
+      <p>For section: {{ sectionName }}</p>
       <p class="w3-small">{{ new Date(perm.date).toDateString() }}</p>
     </div>
     <form @submit.prevent="update" v-else>
@@ -73,10 +73,15 @@ export default {
       code: ''
     }
   },
+  computed: {
+    sectionName() {
+      return this.sections.filter((p) => p.url === this.perm.section)[0].name
+    }
+  },
   watch: {
     editing(v) {
       if (v) {
-        this.section = this.perm.section.url
+        this.section = this.perm.section
         this.code = this.perm.code
       }
     }
@@ -95,9 +100,10 @@ export default {
         section: this.section,
         code: this.code
       }
-      await this.$store
-        .dispatch('grading/updatePerm', payload)
-        .finally(() => (this.updating = false))
+      await this.$store.dispatch('grading/updatePerm', payload).finally(() => {
+        this.updating = false
+        this.editing = false
+      })
     }
   }
 }
