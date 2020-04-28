@@ -55,6 +55,18 @@
           </span>
           <span v-else>Check Code</span>
         </button>
+        <div class="or">
+          <hr />
+          <span>Or</span>
+          <hr />
+        </div>
+        <button
+          @click="$router.push('/')"
+          class="w3-button w3-light-blue"
+          :disabled="checking"
+        >
+          Home
+        </button>
       </form>
     </div>
   </header>
