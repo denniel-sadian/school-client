@@ -199,6 +199,7 @@
 import Student from '~/components/Student.vue'
 
 export default {
+  layout: 'dashboard',
   components: { Student },
   data() {
     return {

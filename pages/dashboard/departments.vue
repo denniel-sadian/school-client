@@ -64,6 +64,7 @@
 import Department from '~/components/Department.vue'
 
 export default {
+  layout: 'dashboard',
   components: {
     Department
   },

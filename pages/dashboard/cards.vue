@@ -60,6 +60,7 @@
 import Card from '~/components/Card.vue'
 
 export default {
+  layout: 'dashboard',
   components: { Card },
   data() {
     return {

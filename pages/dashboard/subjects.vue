@@ -57,6 +57,7 @@
 import Subject from '~/components/Subject.vue'
 
 export default {
+  layout: 'dashboard',
   components: { Subject },
   data() {
     return {

@@ -264,6 +264,7 @@ import Work from '~/components/Work.vue'
 import Row from '~/components/Row.vue'
 
 export default {
+  layout: 'dashboard',
   components: {
     Work,
     Row

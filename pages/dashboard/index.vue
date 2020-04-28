@@ -64,6 +64,7 @@
 
 <script>
 export default {
+  layout: 'dashboard',
   data() {
     return { got: 0 }
   },

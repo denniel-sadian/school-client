@@ -186,6 +186,7 @@
 
 <script>
 export default {
+  layout: 'dashboard',
   data() {
     return {
       username: this.$store.state.user.user.user.username,

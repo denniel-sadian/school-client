@@ -149,6 +149,7 @@
 import Sheet from '~/components/Sheet.vue'
 
 export default {
+  layout: 'dashboard',
   components: { Sheet },
   data() {
     return {
