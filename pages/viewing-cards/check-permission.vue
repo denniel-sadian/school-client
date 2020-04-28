@@ -17,8 +17,22 @@
             required
           />
         </div>
+        <div class="inpt">
+          <label>Student's Name:</label>
+          <input
+            type="text"
+            v-model="name"
+            @keypress.enter="checkCode"
+            :disabled="checking"
+            required
+          />
+        </div>
         <p v-show="noCode" class="w3-small w3-center w3-text-red">
           Permission with this code does not exist.
+        </p>
+        <p v-show="noStudent" class="w3-small w3-center w3-text-red">
+          This permission code exists, however, there was no student found with
+          that name.
         </p>
         <hr />
         <button
@@ -42,17 +56,34 @@ export default {
   data() {
     return {
       code: '',
+      name: '',
       noCode: false,
+      noStudent: false,
       checking: false
+    }
+  },
+  computed: {
+    cardsLen() {
+      return this.$store.state.cards.cards.length
     }
   },
   methods: {
     async checkCode() {
+      if (!this.code || !this.name) return
       this.checking = true
       this.noCode = false
+      this.noStudent = false
+      const payload = {
+        code: this.code,
+        name: this.name
+      }
       await this.$store
-        .dispatch('cards/retrieveCards', this.code)
-        .then(() => this.$router.push('/viewing-cards'))
+        .dispatch('cards/retrieveCards', payload)
+        .then(() => {
+          this.noCode = false
+          if (!this.cardsLen) this.noStudent = true
+          else this.$router.push('/viewing-cards')
+        })
         .catch(() => (this.noCode = true))
         .finally(() => (this.checking = false))
     }
