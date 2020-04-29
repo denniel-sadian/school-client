@@ -1,6 +1,7 @@
 <template>
   <div class="cont">
     <h3>{{ head }}</h3>
+    <p class="w3-small">Date: {{ card.date }}</p>
     <table>
       <tr v-for="g in card.final_grades" :key="g.url">
         <th>{{ g.subject }}</th>
