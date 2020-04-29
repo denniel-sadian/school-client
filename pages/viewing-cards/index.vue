@@ -23,6 +23,9 @@
     <div class="w3-content">
       <DisplayCard v-for="card in cards" :card="card" :key="card.id" />
     </div>
+    <div class="w3-content w3-center">
+      <h1>Final Grade: {{ finalGrade }}</h1>
+    </div>
   </div>
 </template>
 
@@ -46,6 +49,19 @@ export default {
     photo() {
       if (this.student.photo) return this.student.photo
       else return '/anon_avatar.png'
+    },
+    finalGrade() {
+      let total = 0
+      this.cards.forEach((card) => {
+        let sum = 0
+        card.final_grades.forEach((e) => (sum += e.score))
+        total +=
+          Math.round((sum / card.final_grades.length + Number.EPSILON) * 100) /
+          100
+      })
+      return (
+        Math.round((total / this.cards.length + Number.EPSILON) * 100) / 100
+      )
     }
   },
   mounted() {
