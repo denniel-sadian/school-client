@@ -151,7 +151,7 @@ header h1 {
 
 #first-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   margin: 64px 0px;
 }
 #first-grid > div {
@@ -178,14 +178,5 @@ header h1 {
 #first-grid > div > p {
   margin: 0px;
   padding: 8px;
-}
-@media (max-width: 425px) {
-  #first-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  #first-grid > div {
-    margin: 8px;
-  }
 }
 </style>
