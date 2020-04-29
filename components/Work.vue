@@ -1,5 +1,5 @@
 <template>
-  <div class="cont w3-hover-shadow w3-animate-top">
+  <div class="cont w3-card-4 w3-animate-top">
     <div v-if="!editing && !deleting" class="w3-animate-opacity">
       <h4 class="w3-text-blue">{{ work.name }}</h4>
       <table>
@@ -173,10 +173,28 @@ export default {
 h4,
 td {
   font-family: 'Nunito';
+  text-transform: capitalize;
+}
+
+table {
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #9e9e9e;
+}
+
+th {
+  padding-left: 8px;
+}
+
+td {
+  text-align: center;
 }
 
 .cont {
-  border: 1px solid #9e9e9e;
+  border: 2px solid #9e9e9e;
   border-radius: 4px;
   padding: 8px;
   margin: 16px 0px;
