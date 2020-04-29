@@ -94,6 +94,9 @@ export const mutations = {
     state.currentSheet.records = state.currentSheet.records.filter(
       (e) => e.work !== url
     )
+  },
+  DELETE_CARD(state, url) {
+    state.cards = state.cards.filter((e) => e.url !== url)
   }
 }
 
@@ -161,7 +164,7 @@ export const actions = {
   },
   deleteCard({ commit }, url) {
     // Delete the card
-    return this.$axios.delete(url)
+    return this.$axios.delete(url).then(() => commit('DELETE_CARD', url))
   },
   deleteSheet({ commit }, url) {
     // Delete the grading sheet
