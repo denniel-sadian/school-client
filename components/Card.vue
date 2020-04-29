@@ -1,5 +1,5 @@
 <template>
-  <div class="cont">
+  <div class="cont" v-show="!deleting">
     <div class="details">
       <div class="head">
         <img v-if="card.student.photo" :src="card.student.photo" />
@@ -28,7 +28,7 @@
                 type="text"
                 v-model="remarks"
                 maxlength="255"
-                :disabled="upadting"
+                :disabled="updating"
               />
             </div>
           </form>
@@ -39,22 +39,30 @@
           @click="editing = true"
           v-show="!editing"
           class="w3-button w3-green"
-          :disabled="upadting"
+          :disabled="updating"
         >
           <i class="fas fa-pencil-alt"></i>
         </button>
         <button
+          v-show="!editing"
+          @click="deleteCard"
+          :disabled="updating || deleting"
+          class="w3-button w3-pink"
+        >
+          <i class="fas fa-trash-alt "></i>
+        </button>
+        <button
           v-show="editing"
           @click="update"
-          :disabled="upadting"
+          :disabled="updating"
           class="w3-button w3-green"
         >
-          <i v-if="!upadting" class="fas fa-save"></i>
+          <i v-if="!updating" class="fas fa-save"></i>
           <i v-else class="fas fa-spinner w3-spin"></i>
         </button>
         <button
           v-show="editing"
-          :disabled="upadting"
+          :disabled="updating"
           @click="editing = false"
           class="w3-button w3-pink"
         >
@@ -73,7 +81,8 @@ export default {
   data() {
     return {
       editing: false,
-      upadting: false,
+      updating: false,
+      deleting: false,
       remarks: ''
     }
   },
@@ -88,15 +97,21 @@ export default {
     }
   },
   methods: {
+    async deleteCard() {
+      this.deleting = true
+      await this.$store
+        .dispatch('grading/deleteCard', this.card.url)
+        .finally(() => (this.deleting = false))
+    },
     async update() {
-      this.upadting = true
+      this.updating = true
       const payload = {
         url: this.card.url,
         remarks: this.remarks
       }
       await this.$store.dispatch('grading/updateCard', payload).finally(() => {
         this.editing = false
-        this.upadting = false
+        this.updating = false
       })
     }
   }
