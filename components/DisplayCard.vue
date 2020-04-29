@@ -1,5 +1,5 @@
 <template>
-  <div class="cont">
+  <div class="card">
     <h3>{{ head }}</h3>
     <p class="w3-small">Date: {{ card.date }}</p>
     <table>
@@ -45,8 +45,12 @@ export default {
 </script>
 
 <style scoped>
-.cont {
-  padding: 16px 0px;
+.card {
+  padding: 16px;
+  margin: 64px 0px;
+  border: 2px solid #9e9e9e;
+  border-radius: 4px;
+  background: #fff;
 }
 
 h3,
@@ -63,7 +67,6 @@ table {
   width: 100%;
 }
 
-table,
 td,
 th {
   font-family: 'Nunito';
