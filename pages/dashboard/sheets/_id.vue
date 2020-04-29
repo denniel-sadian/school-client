@@ -11,10 +11,11 @@
           Grading sheet of {{ section }} for
           {{ subject.name }}
         </h1>
-        <p>{{ new Date(sheet.date).toDateString() }}</p>
-        <p v-if="sheet.teacher.username === username">Prepared by: You</p>
+        <p>{{ sheet.grading }} of {{ sheet.sem === '1'? 'first' : 'second' }} semester</p>
+        <p>Created on {{ new Date(sheet.date).toDateString() }}</p>
+        <p v-if="sheet.teacher.username === username">Prepared by You</p>
         <p v-else>
-          Prepared by: Teacher {{ sheet.teacher.first_name }}
+          Prepared by Teacher {{ sheet.teacher.first_name }}
           {{ sheet.teacher.last_name }}
         </p>
       </header>
