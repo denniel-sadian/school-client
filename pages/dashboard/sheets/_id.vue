@@ -206,7 +206,7 @@
                     >
                     <span v-else>Update</span>
                   </button>
-                  <button @click="deleting = true" class="w3-button w3-red w3-round w3-small w3-margin-top">Delete Grading Sheet</button>
+                  <button @click="deleting = true" :disabled="updating" class="w3-button w3-red w3-round w3-small w3-margin-top">Delete Grading Sheet</button>
                 </form>
                 <div v-else class="w3-center w3-khaki w3-padding w3-round w3-animate-zoom">
                   <div v-if="!reallyDeleting">
