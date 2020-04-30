@@ -46,6 +46,9 @@ nav {
   background: #ebf7e3;
   display: grid;
   grid-template-columns: 1fr auto auto auto;
+  position: fixed;
+  top: 0px;
+  width: 100%;
 }
 
 nav img {
@@ -96,6 +99,7 @@ nav a > *:first-child {
   margin: 8px 8px 0px 0px;
   border: none;
   background: none;
+  position: fixed;
 }
 
 @media screen and (max-width: 650px) {
