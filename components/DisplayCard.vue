@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style scoped>
 .card {
   padding: 16px;
   margin: 64px 0px;
