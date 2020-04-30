@@ -16,13 +16,8 @@ body,
 #__nuxt,
 #__layout,
 #__layout > div {
-  height: unset;
-  padding: unset;
-  margin: unset;
-}
-
-body {
-  margin: 0px;
+  height: 100vh;
   padding: 0px;
+  margin: 0px;
 }
 </style>

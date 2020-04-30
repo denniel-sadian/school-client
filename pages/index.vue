@@ -3,22 +3,27 @@
     <div class="first">
       <div>
         <div class="welcome">
-          <span>Elmore Junior High School</span>
-          <h1>Welcome to the system!</h1>
+          <p><span>Elmore Junior High School</span></p>
+          <h1><span>Welcome to the system!</span></h1>
           <p>
-            Do your grades online! Don't worry about having no personal
-            installation of tabulating programs.
+            <span
+              >Do your grades online! Don't worry about having no personal
+              installation of tabulating programs.</span
+            >
           </p>
-          <p>View your children's grades even without going to the school.</p>
+          <p>
+            <span
+              >View your children's grades even without going to the
+              school.</span
+            >
+          </p>
         </div>
       </div>
-      <div></div>
+      <div><img src="/school.png" /></div>
     </div>
     <div class="second">
       <div>
-        <h1>
-          Staff?
-        </h1>
+        <h2>Staff?</h2>
         <p>
           Your grading sheets are waiting for you, and your students are praying
           for high grades.
@@ -35,7 +40,7 @@
     </div>
     <div class="third">
       <div>
-        <h1>Guardian?</h1>
+        <h2>Guardian?</h2>
         <p>
           Is it card release already? Did you get a permission code already? See
           the results of your child's progress.
@@ -61,12 +66,6 @@
     'second third';
 }
 
-.cont > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .second,
 .third {
   padding: 16px;
@@ -76,7 +75,13 @@
   grid-area: first;
   background: #9bd770;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 50% 50%;
+}
+
+.first img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .first > div {
@@ -91,13 +96,9 @@
   padding: 16px 24px;
 }
 
-.welcome p {
-  margin-top: 0px;
-}
-
-.welcome span {
+.welcome p:first-child {
+  margin: 0px;
   font-size: 18px;
-  font-family: 'Verdana';
   font-weight: 800;
   color: #375f1b;
 }
@@ -106,13 +107,8 @@
   margin-top: 0px;
   color: #1b3409;
   font-weight: 800;
-  font-size: 4vw;
+  font-size: 45px;
   text-transform: capitalize;
-}
-
-.first > div:last-child {
-  background: url('/school.png') no-repeat center;
-  background-size: cover;
 }
 
 .second {
@@ -129,8 +125,42 @@
   color: white;
 }
 
-.second h1,
-.third h1 {
-  font-size: 3vw;
+@media screen and (max-width: 600px) {
+  .cont {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+      'first'
+      'second'
+      'third';
+  }
+
+  .first {
+    padding: 64px 0px;
+    display: grid;
+    grid-template-columns: 100%;
+    text-align: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url('/school.png');
+    background-position: center;
+    background-size: cover;
+  }
+
+  .first > div:last-child {
+    display: none;
+  }
+
+  .welcome span {
+    background: rgba(0, 0, 0, 0.349);
+    padding: 0px 8px;
+  }
+
+  .welcome p {
+    color: white !important;
+  }
+
+  .welcome h1 {
+    color: #9bd770;
+  }
 }
 </style>
