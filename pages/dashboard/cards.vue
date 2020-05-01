@@ -132,12 +132,9 @@ export default {
 
 <style scoped>
 header {
+  margin-top: 60px;
   padding: 64px 0px !important;
   text-align: center;
-}
-
-header h1 {
-  text-transform: capitalize;
 }
 
 .w3-content {

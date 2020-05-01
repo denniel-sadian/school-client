@@ -168,14 +168,11 @@ export default {
 
 <style scoped>
 header {
+  margin-top: 60px;
   padding: 64px 0px !important;
   text-align: center;
   background: #375f1b;
   color: white;
-}
-
-header h1 {
-  text-transform: capitalize;
 }
 
 .fullname {

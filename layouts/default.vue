@@ -133,7 +133,6 @@ nav a > *:first-child {
   position: fixed;
 }
 
-h1,
 h2,
 h3,
 h4,
@@ -141,6 +140,11 @@ h5,
 h6,
 p {
   font-family: 'Nunito';
+}
+
+header h1 {
+  text-transform: capitalize;
+  font-family: 'Roboto Slab', serif;
 }
 
 @media screen and (max-width: 800px) {
