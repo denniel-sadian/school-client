@@ -5,6 +5,13 @@
         ><img src="/icon.png" /> Grading System</nuxt-link
       >
       <nuxt-link
+        to="/dashboard"
+        v-show="thereIsUser"
+        :class="{ show: showLinks }"
+        class="s w3-animate-top w3-text-green"
+        ><i class="fas fa-solar-panel"></i> Dashboard</nuxt-link
+      >
+      <nuxt-link
         to="/"
         :class="{ show: showLinks }"
         class="s w3-animate-top w3-text-blue"
@@ -13,13 +20,13 @@
       <nuxt-link
         to="/login"
         :class="{ show: showLinks }"
-        class="s w3-animate-top w3-text-green"
+        class="s w3-animate-top w3-text-purple"
         ><i class="fas fa-sign-in-alt"></i> Sign In</nuxt-link
       >
       <nuxt-link
         to="/registration/check-code"
         :class="{ show: showLinks }"
-        class="s w3-animate-top w3-text-pink"
+        class="s w3-animate-top w3-text-teal"
         ><i class="fas fa-user-plus"></i> Sign Up</nuxt-link
       >
     </nav>
@@ -36,6 +43,11 @@ export default {
   transition: 'page',
   data() {
     return { showLinks: false }
+  },
+  computed: {
+    thereIsUser() {
+      return this.$store.state.user.user.hasOwnProperty('user')
+    }
   },
   watch: {
     $route: function() {
@@ -59,7 +71,7 @@ body,
 nav {
   background: #ebf7e3;
   display: grid;
-  grid-template-columns: 1fr auto auto auto;
+  grid-template-columns: 1fr repeat(4, auto);
   position: fixed;
   top: 0px;
   width: 100%;
