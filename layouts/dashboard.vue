@@ -34,13 +34,17 @@
       <i class="fas fa-times" v-else></i>
     </button>
     <nuxt />
+    <Vfooter />
   </div>
 </template>
 
 <script>
+import Vfooter from '~/components/Vfooter.vue'
+
 export default {
   middleware: 'auth',
   transition: 'page',
+  components: { Vfooter },
   data() {
     return {
       showLinks: false

@@ -33,12 +33,16 @@
       </button>
     </nav>
     <nuxt />
+    <Vfooter />
   </div>
 </template>
 
 <script>
+import Vfooter from '~/components/Vfooter.vue'
+
 export default {
   transition: 'page',
+  components: { Vfooter },
   data() {
     return { showLinks: false }
   },
