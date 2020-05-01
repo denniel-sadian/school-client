@@ -94,7 +94,7 @@ nav a {
 }
 
 nav a > *:first-child {
-  margin-right: 4px;
+  margin-right: 8px;
 }
 
 nav a:first-child {

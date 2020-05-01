@@ -9,8 +9,15 @@
   </div>
 </template>
 
+<script>
+export default {
+  layout: 'dashboard'
+}
+</script>
+
 <style scoped>
 header {
+  margin-top: 60px;
   padding: 64px 0px !important;
   text-align: center;
 }
