@@ -19,7 +19,7 @@
         <div v-else id="first-grid" class="w3-animate-zoom">
           <div
             @click="$router.push('/dashboard/departments')"
-            class="w3-border-indigo"
+            class="w3-border-indigo w3-card-4"
           >
             <h3><i class="fas fa-school w3-text-indigo"></i></h3>
             <p class="w3-indigo">
@@ -30,7 +30,7 @@
           </div>
           <div
             @click="$router.push('/dashboard/sections')"
-            class="w3-border-blue"
+            class="w3-border-blue w3-card-4"
           >
             <h3><i class="fas fa-building w3-text-blue"></i></h3>
             <p class="w3-blue">
@@ -39,7 +39,7 @@
           </div>
           <div
             @click="$router.push('/dashboard/subjects')"
-            class="w3-border-pink"
+            class="w3-border-pink w3-card-4"
           >
             <h3><i class="fas fa-percentage w3-text-pink"></i></h3>
             <p class="w3-pink">
@@ -48,7 +48,7 @@
           </div>
           <div
             @click="$router.push('/dashboard/students')"
-            class="w3-border-orange"
+            class="w3-border-orange w3-card-4"
           >
             <h3><i class="fas fa-portrait w3-text-orange"></i></h3>
             <p class="w3-orange">
@@ -57,7 +57,7 @@
           </div>
           <div
             @click="$router.push('/dashboard/cards')"
-            class="w3-border-brown"
+            class="w3-border-brown w3-card-4"
           >
             <h3><i class="fas fa-id-card w3-text-brown"></i></h3>
             <p class="w3-brown">
@@ -66,7 +66,7 @@
           </div>
           <div
             @click="$router.push('/dashboard/sheets')"
-            class="w3-border-green"
+            class="w3-border-green w3-card-4"
           >
             <h3><i class="fas fa-file-excel w3-text-green"></i></h3>
             <p class="w3-green">
@@ -75,7 +75,7 @@
           </div>
           <div
             @click="$router.push('/dashboard/viewing-permissions')"
-            class="w3-border-purple"
+            class="w3-border-purple w3-card-4"
           >
             <h3><i class="fas fa-eye w3-text-purple"></i></h3>
             <p class="w3-purple">
@@ -87,7 +87,7 @@
           <div
             @click="$router.push('/dashboard/permissions')"
             v-show="role === 'admin'"
-            class="w3-border-yellow"
+            class="w3-border-yellow w3-card-4"
           >
             <h3><i class="fas fa-key w3-text-yellow"></i></h3>
             <p class="w3-yellow">
