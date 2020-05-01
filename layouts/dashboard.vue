@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!---
     <nav>
       <div>
         <div
@@ -99,6 +100,40 @@
         </button>
       </div>
     </nav>
+    -->
+    <nav>
+      <nuxt-link to="/" class="home"
+        ><img :src="photo" /> {{ fullname }}</nuxt-link
+      >
+      <nuxt-link
+        to="/"
+        :class="{ show: showLinks }"
+        class="s w3-animate-top w3-text-orange"
+        ><i class="fas fa-home"></i> Home</nuxt-link
+      >
+      <nuxt-link
+        to="/dashboard"
+        :class="{ show: showLinks }"
+        class="s w3-animate-top w3-text-green"
+        ><i class="fas fa-solar-panel"></i> Dashboard</nuxt-link
+      >
+      <nuxt-link
+        to="/about"
+        :class="{ show: showLinks }"
+        class="s w3-animate-top w3-text-blue"
+        ><i class="fas fa-info-circle"></i> About</nuxt-link
+      >
+      <nuxt-link
+        to="/login"
+        :class="{ show: showLinks }"
+        class="s w3-animate-top w3-text-pink"
+        ><i class="fas fa-sign-out-alt"></i> Sign Out</nuxt-link
+      >
+    </nav>
+    <button id="nav-toggle" @click="showLinks = !showLinks">
+      <i class="fas fa-bars" v-if="!showLinks"></i>
+      <i class="fas fa-times" v-else></i>
+    </button>
     <nuxt />
   </div>
 </template>
@@ -142,144 +177,17 @@ export default {
 }
 </script>
 
-<style>
-html,
-body,
-#__nuxt,
-#__layout,
-#__layout > div {
-  height: unset;
-  padding: unset;
-  margin: unset;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  font-family: 'Nunito';
-}
-</style>
-
 <style scoped>
 nav {
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  padding: 8px;
-  background: #f1f1f1;
+  grid-template-columns: 1fr repeat(8, auto);
 }
 
-nav {
-  text-decoration: none;
-  font-family: 'Nunito';
-}
-
-nav .main {
-  display: flex;
-  align-items: center;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-nav .main #user-img {
-  min-width: 40px;
-  min-height: 40px;
-  max-width: 40px;
-  max-height: 40px;
+nav img {
   border-radius: 100%;
   background: #9e9e9e;
-  object-fit: cover;
 }
 
-nav .main span {
-  padding: 0px 18px 0px 8px;
-  text-transform: uppercase;
-  font-weight: 800;
-}
-
-#links {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 100%;
-}
-
-#links button {
-  padding: 0px 16px;
-  margin: 0px 4px;
-  border: 1px solid #f1f1f1;
-  color: #9e9e9e;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-#links button i {
-  margin-right: 8px;
-}
-
-#links button:hover {
-  border: 1px solid #9e9e9e;
-  background: #fff !important;
-  transition: 0.3s;
-}
-
-nav .toggle {
-  width: 40px;
-  height: 40px;
-  background: #f1f1f1;
-  border-radius: 100%;
-  display: none;
-  cursor: pointer;
-}
-
-@media (max-width: 1145px) {
-  nav {
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-  }
-
-  nav .main {
-    display: inline-flex;
-    margin: 8px 0px 0px 8px;
-  }
-
-  nav .toggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 8px;
-    right: 8px;
-  }
-
-  #links {
-    flex-direction: column;
-    display: none;
-  }
-
-  #links button {
-    margin: 0px;
-    height: 30px;
-    background: #f1f1f1;
-    border: none;
-    border-radius: unset;
-    width: 100%;
-    height: 40px;
-    color: black;
-    border: 1px solid #f1f1f1;
-  }
-}
-
-.current {
-  border-bottom: 1px solid black !important;
-  color: black !important;
+nav a:first-child {
+  font-family: 'Nunito';
 }
 </style>

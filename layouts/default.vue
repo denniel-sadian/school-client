@@ -70,6 +70,7 @@ nav img {
   max-height: 45px;
   min-width: 45px;
   min-height: 45px;
+  object-fit: cover;
 }
 
 nav a {
@@ -120,8 +121,14 @@ nav a > *:first-child {
   position: fixed;
 }
 
-.w3-button {
-  font-size: 12px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: 'Nunito';
 }
 
 @media screen and (max-width: 650px) {
