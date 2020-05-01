@@ -4,13 +4,22 @@
       <nuxt-link to="/" class="home"
         ><img src="/icon.png" /> Grading System</nuxt-link
       >
-      <nuxt-link v-show="showLinks" to="/" class="s"
+      <nuxt-link
+        to="/"
+        :class="{ show: showLinks }"
+        class="s w3-animate-top w3-text-blue"
         ><i class="fas fa-info-circle"></i> About</nuxt-link
       >
-      <nuxt-link v-show="showLinks" to="/login" class="s"
+      <nuxt-link
+        to="/login"
+        :class="{ show: showLinks }"
+        class="s w3-animate-top w3-text-green"
         ><i class="fas fa-sign-in-alt"></i> Sign In</nuxt-link
       >
-      <nuxt-link v-show="showLinks" to="/registration/check-code" class="s"
+      <nuxt-link
+        to="/registration/check-code"
+        :class="{ show: showLinks }"
+        class="s w3-animate-top w3-text-pink"
         ><i class="fas fa-user-plus"></i> Sign Up</nuxt-link
       >
     </nav>
@@ -26,7 +35,12 @@
 export default {
   transition: 'page',
   data() {
-    return { showLinks: true }
+    return { showLinks: false }
+  },
+  watch: {
+    $route: function() {
+      this.showLinks = false
+    }
   }
 }
 </script>
@@ -83,8 +97,12 @@ nav a > *:first-child {
 }
 
 .s:hover {
-  background: #9bd770;
+  background: #fff;
   border-radius: 32px;
+}
+
+.show {
+  display: inline-flex !important;
 }
 
 #nav-toggle {
@@ -102,9 +120,20 @@ nav a > *:first-child {
   position: fixed;
 }
 
+.w3-button {
+  font-size: 12px;
+}
+
 @media screen and (max-width: 650px) {
   nav {
     grid-template-columns: 100%;
+  }
+
+  .s {
+    display: none;
+    height: 45px;
+    margin: 0px;
+    border-radius: 0px !important;
   }
 
   #nav-toggle {
