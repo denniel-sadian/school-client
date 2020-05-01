@@ -6,7 +6,7 @@
       </h1>
     </div>
     <div v-else>
-      <header class="w3-center w3-pale-green">
+      <header class="w3-center">
         <h1>
           Grading sheet of {{ section }} for
           {{ subject.name }}
@@ -517,6 +517,8 @@ header {
   margin-top: 60px;
   padding: 64px 16px;
   text-transform: capitalize;
+  background: #375f1b;
+  color: white;
 }
 
 #adding-form {
