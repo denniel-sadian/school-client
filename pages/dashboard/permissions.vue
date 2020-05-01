@@ -20,33 +20,33 @@
           <h2><i class="fas fa-plus-circle"></i> Create permisson</h2>
           <div class="inpt">
             <label>Role:</label>
-            <select v-model="role" required>
+            <select v-model="role" :disabled="creating" required>
               <option value="admin">As an Admin</option>
               <option value="teacher">As a Teacher</option>
             </select>
           </div>
           <div class="inpt">
             <label>First Name:</label>
-            <input type="text" v-model="fName" required />
+            <input type="text" v-model="fName" :disabled="creating" required />
           </div>
           <div class="inpt">
             <label>Last Name:</label>
-            <input type="text" v-model="lName" required />
+            <input type="text" v-model="lName" :disabled="creating" required />
           </div>
           <div class="inpt">
             <label>Gender:</label>
-            <select v-model="gender" required>
+            <select v-model="gender" :disabled="creating" required>
               <option value="f">Female</option>
               <option value="m">Male</option>
             </select>
           </div>
           <div class="inpt">
             <label>Code:</label>
-            <input type="text" v-model="code" required />
+            <input type="text" v-model="code" :disabled="creating" required />
           </div>
           <div class="inpt">
             <label>Department:</label>
-            <select v-model="dep" required>
+            <select v-model="dep" :disabled="creating" required>
               <option
                 v-for="dep in departments"
                 :value="dep.id"
