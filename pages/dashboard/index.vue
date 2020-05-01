@@ -85,7 +85,7 @@
             </p>
           </div>
           <div
-            @click="$router.push('/registration/permissions')"
+            @click="$router.push('/dashboard/permissions')"
             v-show="role === 'admin'"
             class="w3-border-yellow"
           >
