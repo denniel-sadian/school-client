@@ -1,9 +1,7 @@
 <template>
   <div>
     <nav>
-      <nuxt-link to="/" class="home"
-        ><img src="/icon.png" /> Grading System</nuxt-link
-      >
+      <nuxt-link to="/"><img src="/icon.png" /> Grading System</nuxt-link>
       <nuxt-link
         to="/dashboard"
         v-show="thereIsUser"
@@ -99,10 +97,10 @@ nav a > *:first-child {
   margin-right: 4px;
 }
 
-.home {
+nav a:first-child {
   font-size: 20px;
   font-weight: 800;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Roboto Slab', serif;
 }
 
 .s {
