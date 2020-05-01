@@ -68,10 +68,6 @@ body,
   margin: 0px;
 }
 
-body {
-  padding-top: 60px;
-}
-
 nav {
   background: #ebf7e3;
   display: grid;
