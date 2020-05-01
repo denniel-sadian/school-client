@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="w3-container w3-green">
+    <header class="w3-container">
       <div class="w3-content w3-padding">
         <h1>Welcome to the grading sheet system</h1>
         <p>
@@ -17,37 +17,68 @@
           <i class="fas fa-spinner w3-spin"></i> Loading...
         </h1>
         <div v-else id="first-grid" class="w3-animate-zoom">
-          <div @click="$router.push('/dashboard/departments')">
-            <h3><i class="fas fa-school"></i></h3>
-            <p>
+          <div
+            @click="$router.push('/dashboard/departments')"
+            class="w3-border-indigo"
+          >
+            <h3><i class="fas fa-school w3-text-indigo"></i></h3>
+            <p class="w3-indigo">
               {{ departments }} Department<span v-show="departments > 1"
                 >s</span
               >
             </p>
           </div>
-          <div @click="$router.push('/dashboard/sections')">
-            <h3><i class="fas fa-building"></i></h3>
-            <p>{{ sections }} Section<span v-show="sections > 1">s</span></p>
+          <div
+            @click="$router.push('/dashboard/sections')"
+            class="w3-border-blue"
+          >
+            <h3><i class="fas fa-building w3-text-blue"></i></h3>
+            <p class="w3-blue">
+              {{ sections }} Section<span v-show="sections > 1">s</span>
+            </p>
           </div>
-          <div @click="$router.push('/dashboard/subjects')">
-            <h3><i class="fas fa-percentage"></i></h3>
-            <p>{{ subjects }} Subject<span v-show="subjects > 1">s</span></p>
+          <div
+            @click="$router.push('/dashboard/subjects')"
+            class="w3-border-pink"
+          >
+            <h3><i class="fas fa-percentage w3-text-pink"></i></h3>
+            <p class="w3-pink">
+              {{ subjects }} Subject<span v-show="subjects > 1">s</span>
+            </p>
           </div>
-          <div @click="$router.push('/dashboard/students')">
-            <h3><i class="fas fa-portrait"></i></h3>
-            <p>{{ students }} Student<span v-show="students > 1">s</span></p>
+          <div
+            @click="$router.push('/dashboard/students')"
+            class="w3-border-orange"
+          >
+            <h3><i class="fas fa-portrait w3-text-orange"></i></h3>
+            <p class="w3-orange">
+              {{ students }} Student<span v-show="students > 1">s</span>
+            </p>
           </div>
-          <div @click="$router.push('/dashboard/cards')">
-            <h3><i class="fas fa-id-card"></i></h3>
-            <p>{{ cards }} Report Card<span v-show="students > 1">s</span></p>
+          <div
+            @click="$router.push('/dashboard/cards')"
+            class="w3-border-brown"
+          >
+            <h3><i class="fas fa-id-card w3-text-brown"></i></h3>
+            <p class="w3-brown">
+              {{ cards }} Report Card<span v-show="students > 1">s</span>
+            </p>
           </div>
-          <div @click="$router.push('/dashboard/sheets')">
-            <h3><i class="fas fa-file-excel"></i></h3>
-            <p>{{ sheets }} Grading Sheet<span v-show="sheets > 1">s</span></p>
+          <div
+            @click="$router.push('/dashboard/sheets')"
+            class="w3-border-green"
+          >
+            <h3><i class="fas fa-file-excel w3-text-green"></i></h3>
+            <p class="w3-green">
+              {{ sheets }} Grading Sheet<span v-show="sheets > 1">s</span>
+            </p>
           </div>
-          <div @click="$router.push('/dashboard/viewing-permissions')">
-            <h3><i class="fas fa-eye"></i></h3>
-            <p>
+          <div
+            @click="$router.push('/dashboard/viewing-permissions')"
+            class="w3-border-purple"
+          >
+            <h3><i class="fas fa-eye w3-text-purple"></i></h3>
+            <p class="w3-purple">
               {{ vPerms }} Card Viewing Permission<span v-show="sheets > 1"
                 >s</span
               >
@@ -56,9 +87,10 @@
           <div
             @click="$router.push('/registration/permissions')"
             v-show="role === 'admin'"
+            class="w3-border-yellow"
           >
-            <h3><i class="fas fa-key"></i></h3>
-            <p>
+            <h3><i class="fas fa-key w3-text-yellow"></i></h3>
+            <p class="w3-yellow">
               {{ regPerms }} Registration Permission<span v-show="regPerms > 1"
                 >s</span
               >
@@ -139,6 +171,8 @@ header {
   margin-top: 53px;
   padding: 64px 0px !important;
   text-align: center;
+  background: #375f1b;
+  color: white;
 }
 
 header h1 {
@@ -163,17 +197,14 @@ header h1 {
   border: 1.5px solid #9e9e9e;
   cursor: pointer;
   transition: 0.3s;
-  margin: 8px;
+  margin: 24px 18px;
 }
 #first-grid > div:hover {
-  background: #f1f1f1;
+  background: #9e9e9e;
 }
 #first-grid > div > h3 {
-  margin: 0px;
+  margin: 16px 0px;
   font-size: 50px;
-  font-weight: 800;
-  font-family: 'Courier New', Courier, monospace;
-  color: #9e9e9e;
 }
 #first-grid > div > p {
   margin: 0px;
