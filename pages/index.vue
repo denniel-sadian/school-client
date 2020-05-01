@@ -128,8 +128,9 @@
   color: white;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 700px) {
   .cont {
+    height: unset;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     grid-template-areas:

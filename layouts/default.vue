@@ -27,11 +27,11 @@
         class="s w3-animate-top w3-text-teal"
         ><i class="fas fa-user-plus"></i> Sign Up</nuxt-link
       >
+      <button id="nav-toggle" @click="showLinks = !showLinks">
+        <i class="fas fa-bars" v-if="!showLinks"></i>
+        <i class="fas fa-times" v-else></i>
+      </button>
     </nav>
-    <button id="nav-toggle" @click="showLinks = !showLinks">
-      <i class="fas fa-bars" v-if="!showLinks"></i>
-      <i class="fas fa-times" v-else></i>
-    </button>
     <nuxt />
   </div>
 </template>
