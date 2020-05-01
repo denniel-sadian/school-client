@@ -85,8 +85,4 @@ nav img {
   border-radius: 100%;
   background: #9e9e9e;
 }
-
-nav a:first-child {
-  font-family: 'Nunito';
-}
 </style>
