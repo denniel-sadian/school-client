@@ -120,10 +120,6 @@ nav a > *:first-child {
   position: fixed;
 }
 
-.w3-button {
-  font-size: 12px;
-}
-
 @media screen and (max-width: 650px) {
   nav {
     grid-template-columns: 100%;
