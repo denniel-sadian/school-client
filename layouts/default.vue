@@ -7,7 +7,7 @@
       <nuxt-link
         to="/dashboard"
         v-show="thereIsUser"
-        :class="{ show: showLinks }"
+        :class="{ show: showLinks && thereIsUser }"
         class="s w3-animate-top w3-text-green"
         ><i class="fas fa-solar-panel"></i> Dashboard</nuxt-link
       >
@@ -143,9 +143,9 @@ p {
   font-family: 'Nunito';
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 800px) {
   nav {
-    grid-template-columns: 100%;
+    grid-template-columns: 100% !important;
   }
 
   .s {
