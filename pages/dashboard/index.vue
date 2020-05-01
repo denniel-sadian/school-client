@@ -79,7 +79,7 @@
           >
             <h3><i class="fas fa-eye w3-text-purple"></i></h3>
             <p class="w3-purple">
-              {{ vPerms }} Card Viewing Permission<span v-show="sheets > 1"
+              {{ vPerms }} Card Viewing Permission<span v-show="vPerms > 1"
                 >s</span
               >
             </p>
