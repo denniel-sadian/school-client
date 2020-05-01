@@ -514,7 +514,6 @@ export default {
 }
 
 header {
-  margin-top: 53px;
   padding: 64px 16px;
   text-transform: capitalize;
 }
