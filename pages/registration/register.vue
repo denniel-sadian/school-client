@@ -163,6 +163,7 @@ export default {
 <style scoped>
 header > div {
   overflow-y: auto;
+  margin-top: 60px;
 }
 
 header {

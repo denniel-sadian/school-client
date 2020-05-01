@@ -57,6 +57,7 @@
 
 <style scoped>
 .cont {
+  padding-top: 60px;
   height: 100vh;
   display: grid;
   grid-template-columns: 50% 50%;

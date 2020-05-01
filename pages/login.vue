@@ -99,6 +99,7 @@ header {
   justify-content: center;
   align-items: center;
   padding: 16px;
+  padding-top: 76px;
 }
 
 header > div {
@@ -108,6 +109,7 @@ header > div {
   max-width: 400px;
   width: 100%;
   padding: 16px;
+  overflow-y: auto;
 }
 
 header h2 {
