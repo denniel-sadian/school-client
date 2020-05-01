@@ -29,10 +29,6 @@
           <input type="email" v-model="email" :disabled="disabled" />
         </div>
         <div class="inpt">
-          <label>Photo: <span class="w3-opacity">Optional</span></label>
-          <input type="file" ref="file" v-on:change="handleFileUpload" />
-        </div>
-        <div class="inpt">
           <label>Password:</label>
           <input type="password" v-model="password" :disabled="disabled" />
         </div>
@@ -43,6 +39,15 @@
             v-model="password1"
             @keypress.enter="register"
             :disabled="disabled"
+          />
+        </div>
+        <div class="inpt">
+          <label>Photo: <span class="w3-opacity">Optional</span></label>
+          <input
+            type="file"
+            ref="file"
+            :disabled="disabled"
+            v-on:change="handleFileUpload"
           />
         </div>
         <p class="w3-small w3-text-red w3-center" v-show="wrong">
