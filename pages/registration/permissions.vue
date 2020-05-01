@@ -96,6 +96,7 @@
 import RegPerm from '~/components/RegPerm.vue'
 
 export default {
+  layout: 'dashboard',
   middleware: 'isAdmin',
   components: { RegPerm },
   data() {
