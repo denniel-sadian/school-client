@@ -18,6 +18,10 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/icon.png' },
       {
         rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap'
+      },
+      {
+        rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Nunito'
       },
       { rel: 'stylesheet', href: '/css/all.css' }
