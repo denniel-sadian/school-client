@@ -129,7 +129,7 @@ export default {
       await this.$store.dispatch('user/getPerms').then(() => this.got++)
   },
   head: {
-    title: 'School | Home'
+    title: 'School | Dashboard'
   }
 }
 </script>
