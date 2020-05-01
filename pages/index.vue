@@ -102,14 +102,16 @@
   font-size: 18px;
   font-weight: 800;
   color: #375f1b;
+  font-family: 'Roboto Slab', serif;
 }
 
 .welcome h1 {
   margin-top: 0px;
   color: #1b3409;
   font-weight: 800;
-  font-size: 45px;
+  font-size: 50px;
   text-transform: capitalize;
+  font-family: 'Roboto Slab', serif;
 }
 
 .second {
