@@ -108,7 +108,7 @@
     >
       {{ initialGrade }}
     </td>
-    <td :class="{ 'w3-yellow': hovered, [qgColor]: true }">
+    <td :title="fullName" :class="{ 'w3-yellow': hovered, [qgColor]: true }">
       {{ quarterlyGrade }}
     </td>
   </tr>
@@ -130,7 +130,7 @@ export default {
       default: 0
     },
     shouldSubmit: {
-      type: Boolean,
+      type: Boolean
     }
   },
   data() {
@@ -140,10 +140,11 @@ export default {
   },
   watch: {
     shouldSubmit(v) {
-      if(v) this.$store.commit('grading/PUSH_GRADE', {
-        student: this.student.id,
-        score: this.quarterlyGrade
-      })
+      if (v)
+        this.$store.commit('grading/PUSH_GRADE', {
+          student: this.student.id,
+          score: this.quarterlyGrade
+        })
     }
   },
   computed: {
