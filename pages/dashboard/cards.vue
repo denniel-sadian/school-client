@@ -66,8 +66,8 @@ export default {
     return {
       got: 0,
       secFilter: '',
-      semFilter: '',
-      gradingFilter: '',
+      semFilter: '1',
+      gradingFilter: 'prelim',
       nameFilter: ''
     }
   },
@@ -98,31 +98,11 @@ export default {
         })
     }
   },
-  methods: {
-    async createDepartment() {
-      this.creating = true
-      this.error = false
-      const payload = { name: this.name }
-      await this.$store
-        .dispatch('information/postDep', payload)
-        .then(() => {
-          this.name = ''
-          this.error = false
-        })
-        .catch(() => {
-          this.error = true
-          setTimeout(() => {
-            this.error = false
-          }, 10000)
-        })
-        .finally(() => {
-          this.creating = false
-        })
-    }
-  },
+  methods: {},
   async mounted() {
     await this.$store.dispatch('grading/retrieveCards').then(() => this.got++)
     await this.$store.dispatch('information/getSections').then(() => this.got++)
+    this.secFilter = this.sections[0].url
   },
   head: {
     title: 'School | Cards'
