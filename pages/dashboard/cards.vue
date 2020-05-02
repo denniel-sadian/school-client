@@ -5,9 +5,8 @@
         <h1>The Cards</h1>
         <p>
           Both teachers and admins can view this page, but only the teachers can
-          modify the cards. The cards are automatically created, so teachers do
-          not need to create them manually. The remarks, however, need to be
-          written individually by the teachers.
+          modify the cards' remarks. The remarks are needed to be written
+          individually.
         </p>
         <p>
           The cards below are not the combined results for the whole school year
@@ -88,13 +87,21 @@
             <h1><i class="fas fa-spinner w3-spin w3-text-yellow"></i></h1>
           </div>
         </div>
-        <button
-          v-show="cards.length !== 0 && !confirmDelete"
-          @click="confirmDelete = true"
-          class="w3-button del w3-red w3-round w3-animate-opacity"
+        <hr />
+        <div
+          v-show="cards.length !== 0 && !confirmDelete && anAdmin"
+          class="del w3-center"
         >
-          Delete all cards listed above
-        </button>
+          <p>
+            You should only be deleting cards at the end of the school year.
+          </p>
+          <button
+            @click="confirmDelete = true"
+            class="w3-button w3-red w3-round w3-animate-opacity"
+          >
+            Delete all cards listed above
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -121,6 +128,9 @@ export default {
     }
   },
   computed: {
+    anAdmin() {
+      return this.$store.state.user.user.profile.role === 'admin'
+    },
     sections() {
       return this.$store.state.information.sections
     },
