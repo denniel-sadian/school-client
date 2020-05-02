@@ -106,7 +106,7 @@
                 </h3>
               </div>
               <div class="scrolled">
-                <div>
+                <div v-show="!deleting">
                   <form
                     id="adding-form"
                     @submit.prevent="createWork"
@@ -166,27 +166,12 @@
                     <Work v-for="w in sheet.works" :work="w" :key="w.url" />
                   </div>
                 </div>
-                <div class="or">
+                <div class="or" v-show="!deleting">
                   <hr />
                   <span>Or</span>
                   <hr />
                 </div>
                 <form @submit.prevent="updateSheet" v-if="!deleting">
-                  <div class="inpt">
-                    <label>Grading:</label>
-                    <select v-model="grading" :disabled="updating">
-                      <option value="prelim">Perlim</option>
-                      <option value="midterm">Midterm</option>
-                      <option value="finals">Finals</option>
-                    </select>
-                  </div>
-                  <div class="inpt">
-                    <label>Semester:</label>
-                    <select v-model="sem" :disabled="updating">
-                      <option value="1">First Semester</option>
-                      <option value="2">Second Semester</option>
-                    </select>
-                  </div>
                   <div class="inpt">
                     <label>Done:</label>
                     <select v-model="pub" :disabled="updating" required>
@@ -224,17 +209,19 @@
                     </h1>
                   </div>
                 </div>
-                <div class="or">
+                <div class="or" v-show="!deleting">
                   <hr />
                   <span>Or</span>
                   <hr />
                 </div>
-                <p class="w3-center">You can publish the grades whenever you want, just make sure that this grading sheet is already done.</p>
-                <p class="w3-small w3-center w3-text-green" v-show="submitted">The final grades have been been published to the students' cards.</p>
-                <button :disabled="!sheet.publish || submitting" @click="submitFinalGrade = true; submitting = true" class="w3-green w3-button w3-round">
-                  <span v-if="!submitting">Publish Final Grades to Cards</span>
-                  <span v-else><i class="fas fa-spinner w3-spin"></i> Publishing...</span>
-                </button>
+                <div v-show="!deleting">
+                  <p class="w3-center">You can publish the grades whenever you want, just make sure that this grading sheet is already done.</p>
+                  <p class="w3-small w3-center w3-text-green" v-show="submitted">The final grades have been been published to the students' cards.</p>
+                  <button :disabled="!sheet.publish || submitting" @click="submitFinalGrade = true; submitting = true" class="w3-green w3-button w3-round">
+                    <span v-if="!submitting">Publish Final Grades to Cards</span>
+                    <span v-else><i class="fas fa-spinner w3-spin"></i> Publishing...</span>
+                  </button>
+                </div>
               </div>
             </div>
             <div class="form-bottom-btns">
@@ -283,9 +270,7 @@ export default {
       submitting: false,
       submitted: false,
 
-      pub: '',
-      sem: '',
-      grading: '',
+      pub: false,
       wName: '',
       wType: '',
       wScore: 0
@@ -372,11 +357,7 @@ export default {
       if (v.length === this.students.length) this.publishGrades()
     },
     showEditingForm(v) {
-      if (v) {
-        this.pub = this.sheet.publish
-        this.sem = this.sheet.sem
-        this.grading = this.sheet.grading
-      }
+      if (v) this.pub = this.sheet.publish
     },
     creatingWork(v) {
       if (!v) {
@@ -454,8 +435,8 @@ export default {
         section: this.sheet.section,
         subject: this.sheet.subject,
         publish: this.pub,
-        sem: this.sem,
-        grading: this.grading
+        sem: this.sheet.sem,
+        grading: this.sheet.grading
       }
       this.$store
         .dispatch('grading/updateSheet', payload)
@@ -484,8 +465,6 @@ export default {
       .then(() => this.got++)
     this.createRecords()
     this.pub = this.sheet.publish
-    this.sem = this.sheet.sem
-    this.grading = this.sheet.grading
   },
   validate(context) {
     return /^\d+$/.test(context.params.id)
