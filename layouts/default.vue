@@ -24,7 +24,7 @@
       <nuxt-link
         to="/registration/check-code"
         :class="{ show: showLinks }"
-        class="s w3-animate-top w3-text-teal"
+        class="s w3-animate-top w3-text-pink"
         ><i class="fas fa-user-plus"></i> Sign Up</nuxt-link
       >
       <button id="nav-toggle" @click="showLinks = !showLinks">
