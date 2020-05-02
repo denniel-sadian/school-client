@@ -33,8 +33,12 @@
       <i class="fas fa-bars" v-if="!showLinks"></i>
       <i class="fas fa-times" v-else></i>
     </button>
-    <nuxt />
-    <Vfooter />
+    <div class="page">
+      <div class="content">
+        <nuxt />
+      </div>
+      <Vfooter />
+    </div>
   </div>
 </template>
 

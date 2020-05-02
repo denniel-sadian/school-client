@@ -32,8 +32,12 @@
         <i class="fas fa-times" v-else></i>
       </button>
     </nav>
-    <nuxt />
-    <Vfooter />
+    <div class="page">
+      <div class="content">
+        <nuxt />
+      </div>
+      <Vfooter />
+    </div>
   </div>
 </template>
 
@@ -68,6 +72,17 @@ body,
   height: 100vh;
   padding: 0px;
   margin: 0px;
+}
+
+.page {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto;
+}
+
+.content {
+  height: 100%;
 }
 
 nav {
