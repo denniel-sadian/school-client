@@ -603,7 +603,6 @@ header {
 
 #sheet-cont {
   overflow-x: auto;
-  margin-bottom: 64px;
 }
 
 table, th {

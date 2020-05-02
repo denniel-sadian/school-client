@@ -102,7 +102,7 @@ nav img {
   object-fit: cover;
 }
 
-nav a {
+nav > * {
   margin: 8px;
   text-decoration: none;
   font-family: 'Nunito';
@@ -116,7 +116,7 @@ nav a > *:first-child {
   margin-right: 8px;
 }
 
-nav a:first-child {
+nav > a:first-child {
   font-size: 20px;
   font-weight: 800;
   font-family: 'Roboto Slab', serif;
