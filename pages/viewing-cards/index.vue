@@ -79,6 +79,7 @@ export default {
 }
 
 .head {
+  margin-top: 60px;
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: 1fr;
@@ -99,5 +100,14 @@ export default {
   min-height: 200px;
   max-width: 200px;
   max-height: 200px;
+  background: #9e9e9e;
+  border-radius: 100%;
+}
+
+@media screen and (max-width: 700px) {
+  .head {
+    grid-template-columns: 100%;
+    text-align: center;
+  }
 }
 </style>
