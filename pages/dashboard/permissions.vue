@@ -9,7 +9,7 @@
         </p>
       </div>
     </header>
-    <div v-if="got < 1">
+    <div v-if="got < 2">
       <p class="w3-large w3-text-green w3-center">
         <i class="fas fa-spinner w3-spin"></i> Loading...
       </p>
@@ -155,6 +155,9 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('user/getPerms').then(() => this.got++)
+    await this.$store
+      .dispatch('information/getDepartments')
+      .then(() => this.got++)
   },
   head: {
     title: 'School | Registration Permissions'
