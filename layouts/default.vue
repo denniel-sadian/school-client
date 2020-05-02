@@ -10,7 +10,7 @@
         ><i class="fas fa-solar-panel"></i> Dashboard</nuxt-link
       >
       <nuxt-link
-        to="/"
+        to="/about"
         :class="{ show: showLinks }"
         class="s w3-animate-top w3-text-blue"
         ><i class="fas fa-info-circle"></i> About</nuxt-link
