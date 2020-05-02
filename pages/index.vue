@@ -144,7 +144,7 @@
     display: grid;
     grid-template-columns: 100%;
     text-align: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    background: linear-gradient(rgba(0, 0, 0, 0.856), rgba(0, 0, 0, 0.712)),
       url('/school.png');
     background-position: center;
     background-size: cover;
