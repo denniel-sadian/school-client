@@ -38,7 +38,7 @@
           </form>
         </div>
       </div>
-      <div v-show="role === 'teacher'" class="edit">
+      <div v-if="role === 'teacher' && !confirmDelete" class="edit">
         <button
           @click="editing = true"
           v-show="!editing"
@@ -49,7 +49,7 @@
         </button>
         <button
           v-show="!editing"
-          @click="deleteCard"
+          @click="confirmDelete = true"
           :disabled="updating || deleting"
           class="w3-button w3-pink"
         >
@@ -73,6 +73,21 @@
           <i class="fas fa-times"></i>
         </button>
       </div>
+      <div v-else-if="role === 'teacher'" class="w3-center">
+        <p>
+          <i class="fas fa-exclamation-triangle w3-text-red"></i> Are you sure,
+          you want to delete this card?
+        </p>
+        <button class="w3-button w3-small w3-round w3-pink" @click="deleteCard">
+          Yes
+        </button>
+        <button
+          class="w3-button w3-small w3-round w3-green"
+          @click="confirmDelete = false"
+        >
+          No
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -87,6 +102,7 @@ export default {
       editing: false,
       updating: false,
       deleting: false,
+      confirmDelete: false,
       remarks: ''
     }
   },
