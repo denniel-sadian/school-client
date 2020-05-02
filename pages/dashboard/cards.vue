@@ -21,7 +21,7 @@
       </p>
     </div>
     <div class="w3-container" v-else>
-      <div class="w3-content w3-animate-bottom">
+      <div class="w3-content">
         <div class="w3-light-gray w3-round w3-border w3-border-gray w3-padding">
           <h3><i class="fas fa-filter"></i> Filter the Cards</h3>
           <div class="inpt">

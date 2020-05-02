@@ -1,15 +1,19 @@
 <template>
-  <div class="cont" v-show="!deleting">
+  <div class="cont w3-light-gray w3-card-4" v-show="!deleting">
     <div class="details">
       <div class="head">
-        <img v-if="card.student.photo" :src="card.student.photo" />
-        <img v-else src="/anon_avatar.png" />
+        <img
+          class="w3-khaki"
+          v-if="card.student.photo"
+          :src="card.student.photo"
+        />
+        <img class="w3-khaki" v-else src="/anon_avatar.png" />
         <div>
           <h3>{{ card.student.first_name }} {{ card.student.last_name }}</h3>
           <p>Department: {{ card.student.department.name }}</p>
           <p>Section: {{ card.student.section.name }}</p>
-          <p>Semester: {{ card.sem }}</p>
           <p>Grading: {{ card.grading }}</p>
+          <p>Semester: {{ card.sem }}</p>
           <table>
             <tr v-for="g in card.final_grades" :key="g.url">
               <th>{{ g.subject }}</th>
