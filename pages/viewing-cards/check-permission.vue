@@ -126,6 +126,7 @@ header {
   justify-content: center;
   align-items: center;
   padding: 16px;
+  padding-top: 76px;
 }
 
 header > div {
