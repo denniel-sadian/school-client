@@ -2,10 +2,14 @@ export const state = () => ({
   departments: [],
   sections: [],
   students: [],
-  subjects: []
+  subjects: [],
+  summary: {}
 })
 
 export const mutations = {
+  SET_SUMMARY(state, summary) {
+    state.summary = summary
+  },
   SET_DEPARTMENTS(state, deps) {
     state.departments = deps.sort((a, b) => {
       return b.id - a.id
@@ -90,11 +94,10 @@ export const mutations = {
 }
 
 export const actions = {
-  getInformation({ dispatch }) {
-    dispatch('getDepartments')
-    dispatch('getSections')
-    dispatch('getStudents')
-    dispatch('getSubjects')
+  getSummary({ commit }) {
+    return this.$axios
+      .get('information/summary/')
+      .then(({ data }) => commit('SET_SUMMARY', data))
   },
   getDepartments({ commit }) {
     return this.$axios.get('information/departments/').then(({ data }) => {
