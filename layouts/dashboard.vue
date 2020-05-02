@@ -78,6 +78,11 @@ export default {
       return ''
     }
   },
+  watch: {
+    $route: function() {
+      this.showLinks = false
+    }
+  },
   async mounted() {
     await this.$store.dispatch('user/getUser')
   }

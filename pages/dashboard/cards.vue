@@ -6,7 +6,12 @@
         <p>
           Both teachers and admins can view this page, but only the teachers can
           modify the cards. The cards are automatically created, so teachers do
-          not need to create them manually.
+          not need to create them manually. The remarks, however, need to be
+          written individually by the teachers.
+        </p>
+        <p>
+          The cards below are not the combined results for the whole school year
+          per student. Cards will be created every grading.
         </p>
       </div>
     </header>
@@ -16,7 +21,7 @@
       </p>
     </div>
     <div class="w3-container" v-else>
-      <div class="w3-content">
+      <div class="w3-content w3-animate-bottom">
         <div class="w3-light-gray w3-round w3-border w3-border-gray w3-padding">
           <h3><i class="fas fa-filter"></i> Filter the Cards</h3>
           <div class="inpt">
@@ -51,6 +56,45 @@
           {{ cards.length }} found.
         </p>
         <Card v-for="c in cards" :card="c" :key="c.url" />
+        <div
+          v-show="confirmDelete"
+          class="w3-container w3-center w3-khaki w3-round w3-padding w3-margin-bottom w3-animate-opacity"
+        >
+          <div v-if="!deleting">
+            <h2>
+              <i class="fas fa-exclamation-triangle w3-text-red"></i> Warning!
+            </h2>
+            <p>
+              Are you sure, you want to delete all of the cards listed above?
+              Doing so will not bring them back, of course. However, you can
+              always tell the other teachers to publish their grading sheets to
+              create the cards again.
+            </p>
+            <hr />
+            <button
+              @click="deleteAllListed"
+              class="w3-button w3-red w3-round w3-margin-top"
+            >
+              Yes, I understand.
+            </button>
+            <button
+              @click="confirmDelete = false"
+              class="w3-button w3-green w3-round w3-margin-top"
+            >
+              No, take me back.
+            </button>
+          </div>
+          <div v-else>
+            <h1><i class="fas fa-spinner w3-spin w3-text-yellow"></i></h1>
+          </div>
+        </div>
+        <button
+          v-show="cards.length !== 0 && !confirmDelete"
+          @click="confirmDelete = true"
+          class="w3-button del w3-red w3-round w3-animate-opacity"
+        >
+          Delete all cards listed above
+        </button>
       </div>
     </div>
   </div>
@@ -68,7 +112,12 @@ export default {
       secFilter: '',
       semFilter: '1',
       gradingFilter: 'prelim',
-      nameFilter: ''
+      nameFilter: '',
+
+      confirmDelete: false,
+      deleting: false,
+      toDelete: 0,
+      deleted: 0
     }
   },
   computed: {
@@ -98,7 +147,28 @@ export default {
         })
     }
   },
-  methods: {},
+  watch: {
+    deleted(v) {
+      if (v === this.toDelete) {
+        this.deleting = false
+        this.confirmDelete = false
+        this.toDelete = 0
+        this.deleted = 0
+      }
+    }
+  },
+  methods: {
+    async deleteAllListed() {
+      this.deleting = true
+      this.toDelete = this.cards.length
+      await this.cards.forEach(
+        async (c) =>
+          await this.$store
+            .dispatch('grading/deleteCard', c.url)
+            .then(() => this.deleted++)
+      )
+    }
+  },
   async mounted() {
     await this.$store.dispatch('grading/retrieveCards').then(() => this.got++)
     await this.$store.dispatch('information/getSections').then(() => this.got++)
@@ -127,8 +197,9 @@ form {
   border: 1px solid black;
 }
 
-.w3-button {
+.del {
   width: 100%;
+  margin: 64px 0px;
 }
 
 article {
