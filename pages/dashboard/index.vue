@@ -13,7 +13,7 @@
     </header>
     <article class="w3-container">
       <div class="w3-content">
-        <h1 v-if="!doneLoading" class="w3-text-green w3-center">
+        <h1 v-if="got < 1" class="w3-text-green w3-center">
           <i class="fas fa-spinner w3-spin"></i> Loading...
         </h1>
         <div v-else id="first-grid" class="w3-animate-zoom">
@@ -121,44 +121,33 @@ export default {
     role() {
       return this.$store.state.user.user.profile.role
     },
-    doneLoading() {
-      if (this.role === 'admin') return this.got === 5
-      return this.got === 4
-    },
     departments() {
-      return this.$store.state.information.departments.length
+      return this.$store.state.information.summary.departments
     },
     sections() {
-      return this.$store.state.information.sections.length
+      return this.$store.state.information.summary.sections
     },
     subjects() {
-      return this.$store.state.information.subjects.length
+      return this.$store.state.information.summary.subjects
     },
     students() {
-      return this.$store.state.information.students.length
+      return this.$store.state.information.summary.students
     },
     regPerms() {
-      return this.$store.state.user.permissions.length
+      return this.$store.state.information.summary.regperms
     },
     vPerms() {
-      return this.$store.state.grading.permissions.length
+      return this.$store.state.information.summary.vperms
     },
     sheets() {
-      return this.$store.state.grading.sheets.length
+      return this.$store.state.information.summary.sheets
     },
     cards() {
-      return this.$store.state.grading.cards.length
+      return this.$store.state.information.summary.cards
     }
   },
   async mounted() {
-    await this.$store
-      .dispatch('information/getInformation')
-      .then(() => this.got++)
-    await this.$store.dispatch('grading/retrieveSheets').then(() => this.got++)
-    await this.$store.dispatch('grading/retrieveCards').then(() => this.got++)
-    await this.$store.dispatch('grading/retrievePerms').then(() => this.got++)
-    if (this.role === 'admin')
-      await this.$store.dispatch('user/getPerms').then(() => this.got++)
+    await this.$store.dispatch('information/getSummary').then(() => this.got++)
   },
   head: {
     title: 'School | Dashboard'
