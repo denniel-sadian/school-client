@@ -37,12 +37,18 @@
             required
           />
         </div>
-        <p v-show="noCode" class="w3-small w3-center w3-text-red">
+        <p
+          v-show="noCode"
+          class="w3-animate-zoom w3-small w3-center w3-text-red"
+        >
           Permission with this code does not exist.
         </p>
-        <p v-show="noStudent" class="w3-small w3-center w3-text-red">
-          This permission code exists, however, there was no student found with
-          that name.
+        <p
+          v-show="noStudent"
+          class="w3-animate-zoom w3-small w3-center w3-text-red"
+        >
+          This permission code exists, however, there was no report card found
+          with this name.
         </p>
         <hr />
         <button
@@ -51,9 +57,9 @@
           class="w3-button w3-light-green"
         >
           <span v-if="checking">
-            <i class="fas fa-spinner w3-spin"></i> Checking code...
+            <i class="fas fa-spinner w3-spin"></i> Finding...
           </span>
-          <span v-else>Check Code</span>
+          <span v-else>View the Report Card</span>
         </button>
         <div class="or">
           <hr />
