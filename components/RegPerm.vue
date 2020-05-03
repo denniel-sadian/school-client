@@ -1,6 +1,6 @@
 <template>
   <div
-    class="cont"
+    class="cont w3-card-4 w3-light-gray"
     :class="{ 'w3-border-green': perm.used, 'w3-hide': deleting }"
   >
     <div class="display" v-if="!editing">
@@ -176,9 +176,9 @@ export default {
 <style scoped>
 .cont {
   padding: 16px;
-  border: 1px solid black;
+  border: 2px solid #9e9e9e;
   border-radius: 4px;
-  margin: 16px 0px;
+  margin: 64px 0px;
 }
 
 h3 {
@@ -197,7 +197,7 @@ h3 {
   justify-content: center;
   align-items: center;
   border-radius: 100%;
-  margin-left: 16px;
+  margin-left: 8px;
 }
 
 .w3-button {
