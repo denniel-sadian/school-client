@@ -1,6 +1,6 @@
 <template>
   <div
-    class="cont w3-animate-zoom"
+    class="cont w3-card-4 w3-pale-yellow w3-animate-zoom"
     :class="{ 'w3-opacity': deleting }"
     v-show="!hide"
   >
@@ -9,9 +9,7 @@
         <div>
           <img v-if="student.photo" :src="student.photo" alt="" />
           <img v-else src="/anon_avatar.png" alt="" />
-          <h4 class="w3-text-green">
-            {{ student.first_name }} {{ student.last_name }}
-          </h4>
+          <h4>{{ student.first_name }} {{ student.last_name }}</h4>
         </div>
         <table>
           <tr>
@@ -55,14 +53,14 @@
         <button
           @click="edit"
           :disabled="deleting"
-          class="w3-button w3-round w3-small w3-border w3-border-black"
+          class="w3-button w3-round w3-green w3-small"
         >
           <i class="fas fa-pencil-alt"></i>
         </button>
         <button
           @click="deleteStudent"
           :disabled="deleting"
-          class="w3-button w3-text-red w3-round w3-small w3-border w3-border-red"
+          class="w3-button w3-round w3-small w3-pink"
         >
           <i v-if="!deleting" class="fas fa-trash-alt"></i>
           <i v-else class="fas fa-spinner w3-spin"></i>
@@ -296,13 +294,14 @@ export default {
 <style scoped>
 .cont {
   padding: 5px 5px 2px 5px;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 4px;
-  margin: 30px 0px;
+  margin: 64px 0px;
 }
 
-h3 {
+h4 {
   font-weight: 800;
+  font-family: 'Roboto Slab', serif !important;
 }
 
 .btn {
@@ -319,7 +318,8 @@ h3 {
   justify-content: center;
   align-items: center;
   border-radius: 100%;
-  margin-left: 16px;
+  margin-left: 8px;
+  background: white;
 }
 
 .w3-button {
