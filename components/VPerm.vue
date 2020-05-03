@@ -1,5 +1,5 @@
 <template>
-  <div class="cont">
+  <div class="cont w3-card-4">
     <div v-if="!editing" class="details">
       <h3 class="w3-text-green"><i class="fas fa-key"></i> {{ perm.code }}</h3>
       <p>For section: {{ sectionName }}</p>
@@ -114,7 +114,7 @@ export default {
   border: 2px solid #9e9e9e;
   border-radius: 4px;
   padding: 8px;
-  margin: 40px 0px;
+  margin: 64px 0px;
 }
 
 .btns {
