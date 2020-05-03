@@ -1,5 +1,5 @@
 <template>
-  <div class="cont">
+  <div class="cont w3-card-4 w3-pale-yellow">
     <h3>{{ subject }}</h3>
     <table>
       <tr>
@@ -50,7 +50,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   props: {
     sheet: Object,
@@ -81,12 +81,12 @@ export default {
   border: 2px solid #9e9e9e;
   border-radius: 4px;
   padding: 8px;
-  margin: 16px 0px;
+  margin: 64px 0px;
 }
 
 h3 {
   font-weight: 800;
-  color: #4caf50;
+  font-family: 'Roboto Slab', serif !important;
 }
 
 th {
