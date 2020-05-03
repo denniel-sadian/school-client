@@ -25,7 +25,7 @@
           </div>
           <div class="inpt">
             <label>Department:</label>
-            <select v-model="dep" required>
+            <select v-model="dep" :disabled="creating" required>
               <option v-for="d in departments" :value="d.url" :key="d.id">{{
                 d.name
               }}</option>

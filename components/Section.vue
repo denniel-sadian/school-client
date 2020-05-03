@@ -1,5 +1,9 @@
 <template>
-  <div class="cont" :class="{ 'w3-opacity': deleting }" v-show="!hide">
+  <div
+    class="cont w3-light-gray w3-card-4"
+    :class="{ 'w3-opacity': deleting }"
+    v-show="!hide"
+  >
     <div class="display" v-if="!editing">
       <h3><i class="fas fa-building"></i> {{ sec.name }}</h3>
       <p class="w3-center w3-small w3-text-red" v-show="errorDelete">
@@ -134,9 +138,9 @@ export default {
 <style scoped>
 .cont {
   padding: 2px 16px 2px 16px;
-  border: 1px solid black;
+  border: 2px solid #9e9e9e;
   border-radius: 4px;
-  margin: 30px 0px;
+  margin: 64px 0px;
 }
 
 h3 {
@@ -157,7 +161,7 @@ h3 {
   justify-content: center;
   align-items: center;
   border-radius: 100%;
-  margin-left: 16px;
+  margin-left: 8px;
 }
 
 .w3-button {
