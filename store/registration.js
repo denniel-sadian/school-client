@@ -45,5 +45,11 @@ export const actions = {
     return this.$axios
       .post('accounts/student-permissions/', payload)
       .then(({ data }) => commit('ADD_PERM', data))
+  },
+  updatePerm({ commit }, payload) {
+    // Update the permission
+    return this.$axios
+      .put(payload.url, payload)
+      .then(({ data }) => commit('UPDATE_PERM', data))
   }
 }
