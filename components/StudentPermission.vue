@@ -7,7 +7,7 @@
     <form @submit.prevent="update" v-else>
       <div class="inpt">
         <label>Section:</label>
-        <select v-model="section" :disabled="updating" required>
+        <select v-model="section" :disabled="updating || deleting" required>
           <option v-for="sec in sections" :value="sec.name" :key="sec.id">{{
             sec.name
           }}</option>
@@ -15,7 +15,12 @@
       </div>
       <div class="inpt">
         <label>Code:</label>
-        <input type="text" v-model="code" :disabled="updating" required />
+        <input
+          type="text"
+          v-model="code"
+          :disabled="updating || deleting"
+          required
+        />
       </div>
     </form>
     <p v-show="error" class="w3-small w3-text-red w3-center">
@@ -25,7 +30,7 @@
       <button
         v-show="!editing"
         @click="editing = true"
-        :disabled="updating"
+        :disabled="updating || deleting"
         class="w3-green w3-button"
       >
         <i class="fas fa-pencil-alt"></i>
@@ -33,7 +38,7 @@
       <button
         v-show="!editing"
         @click="deletePerm"
-        :disabled="updating"
+        :disabled="updating || deleting"
         class="w3-pink w3-button"
       >
         <i v-if="!deleting" class="fas fa-trash-alt"></i>
@@ -42,7 +47,7 @@
       <button
         v-show="editing"
         @click="update"
-        :disabled="updating"
+        :disabled="updating || deleting"
         class="w3-green w3-button"
       >
         <i v-if="!updating" class="fas fa-save"></i>
@@ -51,7 +56,7 @@
       <button
         v-show="editing"
         @click="editing = false"
-        :disabled="updating"
+        :disabled="updating || deleting"
         class="w3-pink w3-button"
       >
         <i class="fas fa-times"></i>
