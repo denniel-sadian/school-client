@@ -58,6 +58,7 @@
             <student-permission
               v-for="perm in permissions"
               :perm="perm"
+              :sections="sections"
               :key="perm.url"
             />
           </div>
