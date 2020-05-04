@@ -20,41 +20,16 @@
         <form @submit.prevent="createPermission" class="w3-content">
           <h2><i class="fas fa-plus-circle"></i> Create permisson</h2>
           <div class="inpt">
-            <label>Role:</label>
-            <select v-model="role" :disabled="creating" required>
-              <option value="admin">As an Admin</option>
-              <option value="teacher">As a Teacher</option>
-            </select>
-          </div>
-          <div class="inpt">
-            <label>First Name:</label>
-            <input type="text" v-model="fName" :disabled="creating" required />
-          </div>
-          <div class="inpt">
-            <label>Last Name:</label>
-            <input type="text" v-model="lName" :disabled="creating" required />
-          </div>
-          <div class="inpt">
-            <label>Gender:</label>
-            <select v-model="gender" :disabled="creating" required>
-              <option value="f">Female</option>
-              <option value="m">Male</option>
+            <label>Section:</label>
+            <select v-model="sec" :disabled="creating" required>
+              <option v-for="sec in sections" :value="sec.name" :key="sec.id">{{
+                sec.name
+              }}</option>
             </select>
           </div>
           <div class="inpt">
             <label>Code:</label>
             <input type="text" v-model="code" :disabled="creating" required />
-          </div>
-          <div class="inpt">
-            <label>Department:</label>
-            <select v-model="dep" :disabled="creating" required>
-              <option
-                v-for="dep in departments"
-                :value="dep.id"
-                :key="dep.id"
-                >{{ dep.name }}</option
-              >
-            </select>
           </div>
           <hr />
           <p class="w3-center w3-text-red w3-small" v-show="error">
@@ -80,11 +55,10 @@
           </div>
           <div v-else>
             <h2 class="w3-center">List of Permissions</h2>
-            <RegPerm
+            <student-permission
               v-for="perm in permissions"
               :perm="perm"
-              :deps="departments"
-              :key="perm.id"
+              :key="perm.url"
             />
           </div>
         </div>
@@ -94,31 +68,27 @@
 </template>
 
 <script>
-import RegPerm from '~/components/RegPerm.vue'
+import StudentPermission from '~/components/StudentPermission.vue'
 
 export default {
   layout: 'dashboard',
   middleware: 'isAdmin',
-  components: { RegPerm },
+  components: { StudentPermission },
   data() {
     return {
       got: 0,
       creating: false,
       error: false,
-      role: '',
-      fName: '',
-      lName: '',
-      gender: '',
       code: '',
-      dep: ''
+      sec: ''
     }
   },
   computed: {
     permissions() {
-      return this.$store.state.user.permissions
+      return this.$store.state.registration.permissions
     },
-    departments() {
-      return this.$store.state.information.departments
+    sections() {
+      return this.$store.state.information.sections
     }
   },
   methods: {
@@ -127,21 +97,13 @@ export default {
       this.error = false
       const payload = {
         code: this.code,
-        role: this.role,
-        first_name: this.fName,
-        last_name: this.lName,
-        gender: this.gender,
-        department: this.dep
+        section: this.sec
       }
       await this.$store
-        .dispatch('user/postPerm', payload)
+        .dispatch('registration/createPerm', payload)
         .then(() => {
           this.code = ''
-          this.role = ''
-          this.fName = ''
-          this.lName = ''
-          this.gender = ''
-          this.dep = ''
+          this.sec = ''
         })
         .catch(() => {
           this.error = true
@@ -155,13 +117,13 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('user/getPerms').then(() => this.got++)
     await this.$store
-      .dispatch('information/getDepartments')
+      .dispatch('registration/retrievePerms')
       .then(() => this.got++)
+    await this.$store.dispatch('information/getSections').then(() => this.got++)
   },
   head: {
-    title: 'School | Registration Permissions'
+    title: 'School | Student Permissions'
   }
 }
 </script>
