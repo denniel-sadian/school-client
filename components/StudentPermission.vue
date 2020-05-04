@@ -1,5 +1,8 @@
 <template>
-  <div class="cont w3-card-4 w3-animate-zoom">
+  <div
+    class="cont w3-card-4 w3-animate-zoom"
+    :class="{ 'w3-opacity': deleting }"
+  >
     <div v-if="!editing" class="details">
       <h2><i class="fas fa-key w3-text-yellow"></i> {{ perm.code }}</h2>
       <p>For {{ perm.section }}</p>
@@ -118,6 +121,7 @@ export default {
   margin: 64px 0px;
   border: 2px solid black;
   border-radius: 4px;
+  transition: 0.3s;
 }
 
 .btns {
