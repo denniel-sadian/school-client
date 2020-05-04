@@ -97,13 +97,14 @@
             </p>
           </div>
           <div
-            @click="$router.push('/dashboard/permissions')"
+            @click="$router.push('/dashboard/student-permissions')"
             v-show="role === 'admin'"
             class="w3-border-yellow w3-card-4"
           >
             <h3><i class="fas fa-key w3-text-yellow"></i></h3>
             <p class="w3-yellow">
-              {{ studentPerms }} Student Account Creation Permission<span v-show="studentPerms > 1"
+              {{ studentPerms }} Student Account Creation Permission<span
+                v-show="studentPerms > 1"
                 >s</span
               >
             </p>
@@ -159,7 +160,7 @@ export default {
     },
     cards() {
       return this.$store.state.information.summary.cards
-    },
+    }
   },
   async mounted() {
     await this.$store.dispatch('information/getSummary').then(() => this.got++)
