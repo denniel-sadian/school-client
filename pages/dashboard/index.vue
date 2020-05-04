@@ -103,7 +103,7 @@
           >
             <h3><i class="fas fa-key w3-text-yellow"></i></h3>
             <p class="w3-yellow">
-              {{ studentPerms }} Student Account Creation Permission<span
+              {{ studentPerms }} Student Account Registration Permission<span
                 v-show="studentPerms > 1"
                 >s</span
               >
