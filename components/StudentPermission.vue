@@ -1,5 +1,5 @@
 <template>
-  <div class="cont w3-card-4 w3-animate-zoom" v-show="!deleting">
+  <div class="cont w3-card-4 w3-animate-zoom">
     <div v-if="!editing" class="details">
       <h2><i class="fas fa-key w3-text-yellow"></i> {{ perm.code }}</h2>
       <p>For {{ perm.section }}</p>
@@ -36,7 +36,8 @@
         :disabled="updating"
         class="w3-pink w3-button"
       >
-        <i class="fas fa-trash-alt"></i>
+        <i v-if="!deleting" class="fas fa-trash-alt"></i>
+        <i v-else class="fas fa-spinner w3-spin"></i>
       </button>
       <button
         v-show="editing"
