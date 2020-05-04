@@ -51,5 +51,9 @@ export const actions = {
     return this.$axios
       .put(payload.url, payload)
       .then(({ data }) => commit('UPDATE_PERM', data))
+  },
+  deletePerm({ commit }, url) {
+    // Delete the permission
+    return this.$axios.delete(url).then(() => commit('DELETE_PERM', url))
   }
 }

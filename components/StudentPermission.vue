@@ -1,10 +1,10 @@
 <template>
-  <div class="cont w3-card-4">
+  <div class="cont w3-card-4 w3-animate-zoom" v-show="!deleting">
     <div v-if="!editing" class="details">
       <h2><i class="fas fa-key w3-text-yellow"></i> {{ perm.code }}</h2>
       <p>For {{ perm.section }}</p>
     </div>
-    <div v-else>
+    <form @submit.prevent="update" v-else>
       <div class="inpt">
         <label>Section:</label>
         <select v-model="section" :disabled="updating" required>
@@ -17,13 +17,16 @@
         <label>Code:</label>
         <input type="text" v-model="code" :disabled="updating" required />
       </div>
-    </div>
+    </form>
+    <p v-show="error" class="w3-small w3-text-red w3-center">
+      Please provide a unique value for the code.
+    </p>
     <div class="btns">
       <button
         v-show="!editing"
         @click="editing = true"
         :disabled="updating"
-        class="w3-green"
+        class="w3-green w3-button"
       >
         <i class="fas fa-pencil-alt"></i>
       </button>
@@ -31,7 +34,7 @@
         v-show="!editing"
         @click="deletePerm"
         :disabled="updating"
-        class="w3-pink"
+        class="w3-pink w3-button"
       >
         <i class="fas fa-trash-alt"></i>
       </button>
@@ -39,7 +42,7 @@
         v-show="editing"
         @click="update"
         :disabled="updating"
-        class="w3-green"
+        class="w3-green w3-button"
       >
         <i v-if="!updating" class="fas fa-save"></i>
         <i v-else class="fas fa-spinner w3-spin"></i>
@@ -48,7 +51,7 @@
         v-show="editing"
         @click="editing = false"
         :disabled="updating"
-        class="w3-pink"
+        class="w3-pink w3-button"
       >
         <i class="fas fa-times"></i>
       </button>
