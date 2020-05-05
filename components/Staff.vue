@@ -12,16 +12,18 @@
           }}</span>
         </h4>
       </div>
-      <table>
-        <tr>
-          <th>Username:</th>
-          <td>{{ staff.username }}</td>
-        </tr>
-        <tr>
-          <th>Email:</th>
-          <td>{{ staff.email }}</td>
-        </tr>
-      </table>
+      <div>
+        <table>
+          <tr>
+            <th>Username:</th>
+            <td>{{ staff.username }}</td>
+          </tr>
+          <tr>
+            <th>Email:</th>
+            <td>{{ staff.email }}</td>
+          </tr>
+        </table>
+      </div>
     </div>
     <div v-else class="w3-center w3-animate-opacity">
       <div v-if="!deleting">
@@ -55,7 +57,7 @@
       @click="confirmDelete = true"
       class="del w3-button w3-pink w3-round-xxlarge w3-card-4 w3-animate-opacity"
     >
-      <i class="fas fa-trash-alt"></i> Delete Account
+      <i class="fas fa-trash-alt"></i>
     </button>
   </div>
 </template>
@@ -99,6 +101,11 @@ export default {
   align-items: center;
 }
 
+.display > div:last-child {
+  width: 100%;
+  overflow-x: auto;
+}
+
 img {
   min-width: 50px;
   min-height: 50px;
@@ -134,12 +141,19 @@ td {
 
 .del {
   position: absolute;
-  bottom: 8px;
+  top: 8px;
   right: 8px;
   display: none;
+  min-width: 35px;
+  min-height: 35px;
+  max-width: 35px;
+  max-height: 35px;
+  display: none;
+  justify-content: center;
+  align-items: center;
 }
 
 .cont:hover .del {
-  display: block;
+  display: flex;
 }
 </style>
