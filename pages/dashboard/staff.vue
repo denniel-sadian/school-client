@@ -15,7 +15,7 @@
       </p>
     </div>
     <div class="w3-container" v-else>
-      <div class="w3-container">
+      <div class="w3-content">
         <staff v-for="s in staff" :staff="s" :key="s.id" />
       </div>
     </div>
