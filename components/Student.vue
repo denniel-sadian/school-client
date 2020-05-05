@@ -9,7 +9,14 @@
         <div>
           <img v-if="student.photo" :src="student.photo" alt="" />
           <img v-else src="/anon_avatar.png" alt="" />
-          <h4>{{ student.first_name }} {{ student.last_name }}</h4>
+          <h4>
+            {{ student.first_name }} {{ student.last_name }}
+            <span
+              v-show="student.user !== null"
+              class="w3-tag w3-small w3-yellow w3-round-xxlarge"
+              >has an account</span
+            >
+          </h4>
         </div>
         <table>
           <tr>
