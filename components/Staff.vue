@@ -1,5 +1,13 @@
 <template>
-  <div class="cont"></div>
+  <div class="cont">
+    <div class="display">
+      <div>
+        <img v-if="staff.profile.photo" :src="staff.profile.photo" />
+        <img v-else src="/anon_avatar.png" />
+        <h4>{{ staff.first_name }} {{ staff.last_name }}</h4>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
