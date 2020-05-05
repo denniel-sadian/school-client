@@ -1,6 +1,6 @@
 <template>
   <div class="cont w3-card-4">
-    <div class="display">
+    <div class="display w3-animate-opacity" v-if="!confirmDelete">
       <div>
         <img v-if="staff.profile.photo" :src="staff.profile.photo" />
         <img v-else src="/anon_avatar.png" />
@@ -23,7 +23,40 @@
         </tr>
       </table>
     </div>
-    <button class="del"><i class="fas fa-trash-alt"></i> Delete Account</button>
+    <div v-else class="w3-center w3-animate-opacity">
+      <div v-if="!deleting">
+        <h4>
+          <i class="fas fa-exclamation-triangle w3-text-red"></i> Warning!
+        </h4>
+        <p>
+          Are you sure, you want to remove the account of
+          <span v-if="staff.profile.gender === 'm'">Mr.</span
+          ><span v-else>Ms.</span> {{ staff.first_name }} {{ staff.last_name }}?
+        </p>
+        <button
+          @click="deleteStaff"
+          class="w3-button w3-small w3-pink w3-round"
+        >
+          Yes
+        </button>
+        <button
+          @click="confirmDelete = false"
+          class="w3-button w3-small w3-green w3-round"
+        >
+          No
+        </button>
+      </div>
+      <div v-else class="w3-animate-opacity">
+        <h1><i class="fas fa-spinner w3-spin w3-text-blue"></i></h1>
+      </div>
+    </div>
+    <button
+      v-show="isAdmin && !confirmDelete"
+      @click="confirmDelete = true"
+      class="del w3-button w3-pink w3-round-xxlarge w3-card-4 w3-animate-opacity"
+    >
+      <i class="fas fa-trash-alt"></i> Delete Account
+    </button>
   </div>
 </template>
 
@@ -32,9 +65,21 @@ export default {
   props: {
     staff: Object
   },
+  data() {
+    return {
+      confirmDelete: false,
+      deleting: false
+    }
+  },
   computed: {
     isAdmin() {
       return this.$store.state.user.user.profile.role === 'admin'
+    }
+  },
+  methods: {
+    async deleteStaff() {
+      this.deleting = true
+      await this.$store.dispatch('information/deleteStaff', this.staff.id)
     }
   }
 }
@@ -91,5 +136,10 @@ td {
   position: absolute;
   bottom: 8px;
   right: 8px;
+  display: none;
+}
+
+.cont:hover .del {
+  display: block;
 }
 </style>
