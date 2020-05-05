@@ -478,6 +478,7 @@ export default {
 <style scoped>
 .loading {
   position: absolute;
+  z-index: 1;
   top: 0px;
   left: 0px;
   width: 100%;
@@ -507,6 +508,7 @@ header {
 #edit-sheet-btn {
   display: absolute;
   position: fixed;
+  z-index: 1;
   bottom: 16px;
   right: 16px;
   border-radius: 32px;
@@ -515,6 +517,7 @@ header {
 #editing-modal {
   display: absolute;
   position: fixed;
+  z-index: 1;
   top: 0px;
   left: 0px;
   width: 100%;

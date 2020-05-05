@@ -138,7 +138,7 @@ nav > a:first-child {
 
 #nav-toggle {
   display: none;
-  position: absolute;
+  z-index: 1;
   max-width: 45px;
   max-height: 45px;
   min-width: 45px;
