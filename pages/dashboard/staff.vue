@@ -14,16 +14,20 @@
         <i class="fas fa-spinner w3-spin"></i> Loading...
       </p>
     </div>
-    <div class="w3-container" v-else></div>
+    <div class="w3-container" v-else>
+      <div class="w3-container">
+        <staff v-for="s in staff" :staff="s" :key="s.id" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Card from '~/components/Card.vue'
+import Staff from '~/components/Staff.vue'
 
 export default {
   layout: 'dashboard',
-  components: { Card },
+  components: { Staff },
   data() {
     return {
       got: 0
