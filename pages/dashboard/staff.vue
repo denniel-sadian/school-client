@@ -30,9 +30,6 @@ export default {
     }
   },
   computed: {
-    anAdmin() {
-      return this.$store.state.user.user.profile.role === 'admin'
-    },
     staff() {
       return this.$store.state.information.staff
     }
