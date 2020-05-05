@@ -6,6 +6,11 @@
 export default {
   props: {
     staff: Object
+  },
+  computed: {
+    isAdmin() {
+      return this.$store.state.user.user.profile.role === 'admin'
+    }
   }
 }
 </script>
