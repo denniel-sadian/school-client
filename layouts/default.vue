@@ -92,6 +92,7 @@ nav {
   position: fixed;
   top: 0px;
   width: 100%;
+  z-index: 1;
 }
 
 nav img {
