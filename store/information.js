@@ -3,6 +3,7 @@ export const state = () => ({
   sections: [],
   students: [],
   subjects: [],
+  staff: [],
   summary: {}
 })
 
@@ -27,6 +28,11 @@ export const mutations = {
   },
   SET_SUBJECTS(state, subjs) {
     state.subjects = subjs.sort((a, b) => {
+      return b.id - a.id
+    })
+  },
+  SET_STAFF(state, staff) {
+    state.staff = staff.sort((a, b) => {
       return b.id - a.id
     })
   },
@@ -90,6 +96,9 @@ export const mutations = {
   },
   DELETE_STU(state, url) {
     state.students = state.students.filter((e) => e.url !== url)
+  },
+  DELETE_STAFF(state, id) {
+    state.staff = state.staff.filter((e) => e.id !== id)
   }
 }
 
@@ -112,6 +121,11 @@ export const actions = {
   getStudents({ commit }) {
     return this.$axios.get('information/students/').then(({ data }) => {
       commit('SET_STUDENTS', data)
+    })
+  },
+  getStaff({ commit }) {
+    return this.$axios.get('accounts/users/').then(({ data }) => {
+      commit('SET_STAFF', data)
     })
   },
   getSubjects({ commit }) {
@@ -201,6 +215,11 @@ export const actions = {
   deleteStu({ commit }, url) {
     return this.$axios.delete(url).then(() => {
       commit('DELETE_STU', url)
+    })
+  },
+  deleteStaff({ commit }, id) {
+    return this.$axios.delete(`accounts/users/${id}/`).then(() => {
+      commit('DELETE_STAFF', id)
     })
   },
   deleteSub({ commit }, url) {
