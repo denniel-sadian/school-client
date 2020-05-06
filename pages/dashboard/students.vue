@@ -8,7 +8,7 @@
         </p>
       </div>
     </header>
-    <div v-if="got < 4">
+    <div v-if="got < 3">
       <p class="w3-large w3-text-green w3-center"><i class="fas fa-spinner w3-spin"></i> Loading...</p>
     </div>
     <div v-else>
@@ -322,7 +322,6 @@ export default {
       .dispatch('information/getDepartments')
       .then(() => this.got++)
     await this.$store.dispatch('information/getSections').then(() => this.got++)
-    await this.$store.dispatch('information/getSubjects').then(() => this.got++)
     await this.$store.dispatch('information/getStudents').then(() => this.got++)
   },
   head: {

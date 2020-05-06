@@ -12,13 +12,14 @@
           <h4>
             {{ student.first_name }} {{ student.last_name }}
             <span
-              v-show="student.user !== null"
+              v-if="student.user !== null"
               class="w3-tag w3-small w3-yellow w3-round-xxlarge"
               >has an account</span
             >
           </h4>
         </div>
-        <table>
+        <div class="table-cont">
+          <table>
           <tr>
             <th>ID Number:</th>
             <td>{{ student.id_number }}</td>
@@ -32,8 +33,12 @@
             <td>{{ student.cp_number }}</td>
           </tr>
           <tr>
-            <th>Guardian's:</th>
-            <td>{{ student.guardian_cp_number }}</td>
+            <th>Guardian's Phone Number:</th>
+            <td>{{ student.cp_number }}</td>
+          </tr>
+          <tr v-if="student.user !== null">
+            <th>Email:</th>
+            <td>{{ student.user.email }}</td>
           </tr>
           <tr>
             <th>Address:</th>
@@ -52,6 +57,7 @@
             <td>{{ section }}</td>
           </tr>
         </table>
+        </div>
       </div>
       <p class="w3-center w3-small w3-text-red" v-show="errorDelete">
         You cannot delete a student that has records.
@@ -358,5 +364,17 @@ h4 {
 th {
   text-align: left;
   font-family: 'Courier New', Courier, monospace;
+}
+
+.table-cont, table {
+  overflow-x: auto;
+  width: 100%;
+  margin-top: 8px;
+}
+
+th, td {
+  border: 1px solid #9e9e9e;
+  padding-left: 4px;
+  white-space: nowrap;
 }
 </style>
