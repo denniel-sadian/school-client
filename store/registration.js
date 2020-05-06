@@ -1,6 +1,7 @@
 export const state = () => ({
   credentials: null,
-  permissions: []
+  permissions: [],
+  notRegisteredStudents: []
 })
 
 export const mutations = {
@@ -9,6 +10,9 @@ export const mutations = {
   },
   SET_PERMS(state, perms) {
     state.permissions = perms
+  },
+  SET_STUDENTS(state, students) {
+    state.notRegisteredStudents = students
   },
   UPDATE_PERM(state, perm) {
     state.permissions.filter((e) => e.id === perm.id)[0].section = perm.section
@@ -32,6 +36,16 @@ export const actions = {
       })
       .catch(() => {
         commit('SET_CREDENTIALS', null)
+      })
+  },
+  checkSectionCode({ commit }, code) {
+    return this.$axios
+      .post('accounts/student-register/', { code })
+      .then(({ data }) => {
+        commit('SET_STUDENTS', data)
+      })
+      .catch(() => {
+        commit('SET_STUDENTS', [])
       })
   },
   retrievePerms({ commit }) {
