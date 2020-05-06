@@ -2,52 +2,40 @@
   <header>
     <div class="w3-animate-zoom">
       <h2>Registration</h2>
-      <p class="w3-small w3-center">
-        Good day, <b>{{ addressing }} {{ fullname }}</b
-        >! You have been permitted by admin {{ fromWho }} to register
-        {{ creds.role === 'admin' ? "an admin's" : "a teacher's" }} account on
-        the system.
-        <span class="w3-opacity"
-          >Not you?
-          <nuxt-link class="w3-text-blue" to="/registration/check-code"
-            >Go back</nuxt-link
-          >.</span
-        >
-      </p>
       <hr />
       <form @submit.prevent="register">
         <div class="inpt">
-          <label>Username:</label>
-          <input type="text" v-model="username" :disabled="disabled" />
+          <label>Who are you?</label>
+          <select v-model="student" :disabled="disabled" required>
+            <option v-for="s in students" :value="s.id" :key="s.id"
+              >{{ s.first_name }} {{ s.last_name }}</option
+            >
+          </select>
         </div>
         <div class="inpt">
-          <label>ID Number:</label>
-          <input type="text" v-model="idNumber" :disabled="disabled" />
+          <label>Username:</label>
+          <input type="text" v-model="username" :disabled="disabled" required />
         </div>
         <div class="inpt">
           <label>Email:</label>
-          <input type="email" v-model="email" :disabled="disabled" />
+          <input type="email" v-model="email" :disabled="disabled" required />
         </div>
         <div class="inpt">
           <label>Password:</label>
-          <input type="password" v-model="password" :disabled="disabled" />
+          <input
+            type="password"
+            v-model="password"
+            :disabled="disabled"
+            required
+          />
         </div>
         <div class="inpt">
           <label>Password Again:</label>
           <input
             type="password"
             v-model="password1"
-            @keypress.enter="register"
             :disabled="disabled"
-          />
-        </div>
-        <div class="inpt">
-          <label>Photo: <span class="w3-opacity">Optional</span></label>
-          <input
-            type="file"
-            ref="file"
-            :disabled="disabled"
-            v-on:change="handleFileUpload"
+            required
           />
         </div>
         <p class="w3-small w3-text-red w3-center" v-show="wrong">
@@ -89,56 +77,45 @@ export default {
   data() {
     return {
       username: '',
-      idNumber: '',
       email: '',
       password: '',
       password1: '',
-      file: '',
+      student: 0,
       registering: false,
       wrong: false,
       disabled: false
     }
   },
   computed: {
-    creds() {
-      return this.$store.state.registration.credentials
+    students() {
+      return this.$store.state.registration.notRegisteredStudents
     },
-    addressing() {
-      if (this.creds.gender === 'f') return 'miss'
-      return 'mister'
-    },
-    fullname() {
-      return `${this.creds.first_name} ${this.creds.last_name}`
-    },
-    fromWho() {
-      return `${this.creds.from_who.first_name} ${this.creds.from_who.last_name}`
+    code() {
+      return this.$store.state.registration.sectionCode
     }
   },
   methods: {
-    handleFileUpload() {
-      this.file = this.$refs.file.files[0]
-    },
     async register() {
-      if (
-        this.username &&
-        this.idNumber &&
-        this.email &&
-        this.password &&
-        this.password1
-      ) {
+      if (this.username && this.email && this.password && this.password1) {
         this.registering = true
         this.disabled = true
-        let formData = new FormData()
-        if (this.file !== '') formData.append('photo', this.file)
-        formData.append('code', this.creds.code)
-        formData.append('username', this.username)
-        formData.append('id_number', this.idNumber)
-        formData.append('email', this.email)
-        formData.append('password', this.password)
-        formData.append('password1', this.password1)
+        this.wrong = false
+        if (this.password !== this.password1) {
+          this.wrong = true
+          return
+        }
+        const payload = {
+          code: this.code,
+          username: this.username,
+          email: this.email,
+          password: this.password,
+          student: this.student
+        }
+        console.log(payload)
         await this.$axios
-          .post('accounts/register/', formData)
+          .post('accounts/student-register/', payload)
           .then(async (res) => {
+            /*
             await this.$store
               .dispatch('user/login', {
                 username: this.username,
@@ -147,6 +124,7 @@ export default {
               .then(() => {
                 this.$router.push('/dashboard')
               })
+              */
           })
           .catch(() => {
             this.wrong = true
