@@ -84,7 +84,7 @@
 
 <script>
 export default {
-  middleware: 'hasPermissionToRegister',
+  middleware: 'studentHasPermissionToRegister',
   layout: 'full_height_body',
   data() {
     return {
