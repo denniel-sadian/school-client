@@ -23,10 +23,9 @@
     </div>
     <div class="second">
       <div>
-        <h2>Staff?</h2>
+        <h2>Staff or Student?</h2>
         <p>
-          Your grading sheets are waiting for you, and your students are praying
-          for high grades.
+          Sign in or sign up to create grading sheets and take exams.
         </p>
         <nuxt-link to="/login" class="w3-button w3-round-xxlarge w3-green"
           ><i class="fas fa-sign-in-alt"></i> Sign In</nuxt-link
@@ -34,7 +33,12 @@
         <nuxt-link
           to="/registration/check-code"
           class="w3-button w3-round-xxlarge w3-border w3-border-green w3-hover-green"
-          ><i class="fas fa-user-plus"></i> Sign Up</nuxt-link
+          ><i class="fas fa-user-plus"></i> Staff Sign Up</nuxt-link
+        >
+        <nuxt-link
+          to="/registration/check-section-code"
+          class="w3-button w3-round-xxlarge w3-border w3-border-green w3-hover-green"
+          ><i class="fas fa-user-plus"></i> Student Sign Up</nuxt-link
         >
       </div>
     </div>
@@ -126,6 +130,10 @@
   background: #1b3409;
   text-align: center;
   color: white;
+}
+
+.w3-button {
+  margin: 4px 0px;
 }
 
 @media screen and (max-width: 700px) {
