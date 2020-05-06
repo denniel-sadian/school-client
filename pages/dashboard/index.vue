@@ -86,10 +86,10 @@
           </div>
           <div
             @click="$router.push('/dashboard/staff')"
-            class="w3-border-purple w3-card-4"
+            class="w3-border-orange w3-card-4"
           >
-            <h3><i class="fas fa-portrait w3-text-purple"></i></h3>
-            <p class="w3-purple">{{ staff }} Staff</p>
+            <h3><i class="fas fa-portrait w3-text-orange"></i></h3>
+            <p class="w3-orange">{{ staff }} Staff</p>
           </div>
           <div
             @click="$router.push('/dashboard/permissions')"
