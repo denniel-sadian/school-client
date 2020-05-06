@@ -85,6 +85,13 @@
             </p>
           </div>
           <div
+            @click="$router.push('/dashboard/staff')"
+            class="w3-border-purple w3-card-4"
+          >
+            <h3><i class="fas fa-portrait w3-text-purple"></i></h3>
+            <p class="w3-purple">{{ staff }} Staff</p>
+          </div>
+          <div
             @click="$router.push('/dashboard/permissions')"
             v-show="role === 'admin'"
             class="w3-border-yellow w3-card-4"
@@ -160,6 +167,9 @@ export default {
     },
     cards() {
       return this.$store.state.information.summary.cards
+    },
+    staff() {
+      return this.$store.state.information.summary.staff
     }
   },
   async mounted() {
