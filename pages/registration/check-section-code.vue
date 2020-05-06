@@ -66,7 +66,7 @@ export default {
       this.noCode = false
       this.disabled = true
       await this.$store.dispatch('registration/checkSectionCode', this.code)
-      if (this.$store.state.registration.notRegisteredStudents !== [])
+      if (this.$store.state.registration.notRegisteredStudents)
         this.$router.push('/registration/register-student')
       else {
         this.checking = false
