@@ -37,6 +37,18 @@
           <hr />
         </div>
         <button
+          @click="$router.push('/registration/check-section-code')"
+          :disabled="disabled"
+          class="w3-button w3-orange"
+        >
+          Student Sign Up
+        </button>
+        <div class="or">
+          <hr />
+          <span>Or</span>
+          <hr />
+        </div>
+        <button
           @click="$router.push('/login')"
           :disabled="disabled"
           class="w3-button w3-light-blue"
