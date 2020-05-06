@@ -33,12 +33,7 @@
         <nuxt-link
           to="/registration/check-code"
           class="w3-button w3-round-xxlarge w3-border w3-border-green w3-hover-green"
-          ><i class="fas fa-user-plus"></i> Staff Sign Up</nuxt-link
-        >
-        <nuxt-link
-          to="/registration/check-section-code"
-          class="w3-button w3-round-xxlarge w3-border w3-border-green w3-hover-green"
-          ><i class="fas fa-user-plus"></i> Student Sign Up</nuxt-link
+          ><i class="fas fa-user-plus"></i> Sign Up</nuxt-link
         >
       </div>
     </div>
