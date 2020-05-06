@@ -1,7 +1,7 @@
 export const state = () => ({
   credentials: null,
   permissions: [],
-  notRegisteredStudents: []
+  notRegisteredStudents: null
 })
 
 export const mutations = {
@@ -45,7 +45,7 @@ export const actions = {
         commit('SET_STUDENTS', data)
       })
       .catch(() => {
-        commit('SET_STUDENTS', [])
+        commit('SET_STUDENTS', null)
       })
   },
   retrievePerms({ commit }) {
