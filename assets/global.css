@@ -23,11 +23,13 @@
 }
 
 .inpt select[multiple] {
-  height: 80px;
+  height: 150px;
 }
 
 .inpt select[multiple] option {
   padding: 8px 0px;
+  white-space: normal;
+  border-bottom: 1px solid #9e9e9e;
 }
 
 .inpt input[type='file'] {
