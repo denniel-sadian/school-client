@@ -23,6 +23,13 @@
           >{{ s.grading }}</span
         >
       </div>
+      <p class="w3-small">
+        {{ teacher.profile.gender === 'm' ? 'Mr.' : 'Ms.' }}
+        {{ teacher.first_name }} {{ teacher.last_name }}
+      </p>
+      <p class="w3-small">
+        {{ new Date(exam.date).toDateString() }}
+      </p>
       <div class="link">
         <nuxt-link :to="`/exams/${this.exam.id}`" class="w3-green w3-button"
           ><i class="fas fa-long-arrow-alt-right"></i> View</nuxt-link
@@ -78,6 +85,11 @@ export default {
 
 .sheet {
   margin-bottom: 16px;
+  padding: 8px;
+  padding-top: 12px;
+  border: 1px solid #9e9e9e;
+  background: #f1f1f1;
+  border-radius: 4px;
 }
 
 .link {
