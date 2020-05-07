@@ -23,11 +23,11 @@
           >{{ s.grading }}</span
         >
       </div>
-    </div>
-    <div class="link">
-      <nuxt-link :to="`/exams/${this.exam.id}`" class="w3-green w3-button"
-        ><i class="fas fa-long-arrow-alt-right"></i> View</nuxt-link
-      >
+      <div class="link">
+        <nuxt-link :to="`/exams/${this.exam.id}`" class="w3-green w3-button"
+          ><i class="fas fa-long-arrow-alt-right"></i> View</nuxt-link
+        >
+      </div>
     </div>
   </div>
 </template>

@@ -114,7 +114,17 @@ export default {
     async getName(url) {
       return await this.$axios.get(url)
     },
-    createExam() {}
+    async createExam() {
+      this.creating = true
+      const payload = {
+        sheets: this.selectedSheets,
+        items: []
+      }
+      console.log(payload)
+      await this.$store
+        .dispatch('exams/createExam', payload)
+        .finally(() => (this.creating = false))
+    }
   },
   async mounted() {
     await this.$store.dispatch('exams/retrieveExams').then(() => this.got++)
