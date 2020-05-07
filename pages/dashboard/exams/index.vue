@@ -21,9 +21,10 @@
       <article class="w3-container" v-show="isTeacher">
         <form @submit.prevent="createExam" class="w3-content">
           <h2><i class="fas fa-plus-circle"></i> Create an Exam</h2>
-          <p>
+          <p v-if="sheets.length > 0">
             Select the grading sheets on which the exam should be included.
           </p>
+          <p v-else>All of your grading sheets have their own exams already.</p>
           <label class="container" v-for="s in sheets" :key="s.id"
             ><span class="label">
               <span
@@ -49,6 +50,7 @@
           <hr />
           <button
             type="submit"
+            v-show="sheets.length > 0"
             :disabled="creating"
             class="w3-button w3-green w3-round"
           >
@@ -101,7 +103,9 @@ export default {
       const sheets = this.$store.state.grading.sheets.filter(
         (s) => s.teacher.id === this.userID
       )
-      return sheets
+      return sheets.filter(
+        (s) => s.works.filter((w) => w.work_type === 'e').length === 0
+      )
     },
     exams() {
       const exams = this.$store.state.exams.exams
@@ -120,10 +124,19 @@ export default {
         sheets: this.selectedSheets,
         items: []
       }
-      console.log(payload)
       await this.$store
         .dispatch('exams/createExam', payload)
         .finally(() => (this.creating = false))
+      await this.selectedSheets.forEach(async (s) => {
+        const work = {
+          gsheet: s,
+          name: 'Examination',
+          highest_score: 0,
+          work_type: 'e'
+        }
+        await this.$store.dispatch('grading/createWork', work).catch(() => {})
+      })
+      await this.$store.dispatch('grading/retrieveSheets')
     }
   },
   async mounted() {
