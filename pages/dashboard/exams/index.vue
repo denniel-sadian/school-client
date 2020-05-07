@@ -30,17 +30,14 @@
                 class="w3-tag w3-round-xxlarge w3-text-green w3-white w3-border w3-border-green"
                 >{{ s.section_name }}</span
               >
-              |
               <span
                 class="w3-tag w3-round-xxlarge w3-text-pink w3-white w3-border w3-border-pink"
                 >{{ s.subject_name }}</span
               >
-              |
               <span
                 class="w3-tag w3-round-xxlarge w3-text-blue w3-white w3-border w3-border-blue"
                 >{{ s.sem === 1 ? 'First Sem' : 'Second Sem' }}</span
               >
-              |
               <span
                 class="w3-tag w3-round-xxlarge w3-text-purple w3-white w3-border w3-border-purple"
                 >{{ s.grading }}</span
