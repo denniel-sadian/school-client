@@ -113,7 +113,8 @@ export default {
   methods: {
     async getName(url) {
       return await this.$axios.get(url)
-    }
+    },
+    createExam() {}
   },
   async mounted() {
     await this.$store.dispatch('exams/retrieveExams').then(() => this.got++)
