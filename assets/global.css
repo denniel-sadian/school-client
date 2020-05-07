@@ -22,6 +22,14 @@
   padding: 0px 8px;
 }
 
+.inpt select[multiple] {
+  height: 80px;
+}
+
+.inpt select[multiple] option {
+  padding: 8px 0px;
+}
+
 .inpt input[type='file'] {
   font-size: 12px;
   display: flex;
