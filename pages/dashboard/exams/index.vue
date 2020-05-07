@@ -59,13 +59,27 @@
           </button>
         </form>
       </article>
+      <article class="w3-container">
+        <div class="w3-content">
+          <div v-if="exams.length === 0" class="w3-center">
+            <h4>There is no exam yet.</h4>
+          </div>
+          <div v-else>
+            <h2 class="w3-center">List of Exams</h2>
+            <Exam v-for="e in exams" :exam="e" :key="e.url" />
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </template>
 
 <script>
+import Exam from '~/components/Exam.vue'
+
 export default {
   layout: 'dashboard',
+  components: { Exam },
   data() {
     return {
       got: 0,
@@ -79,6 +93,9 @@ export default {
     },
     userID() {
       return this.$store.state.user.user.user.id
+    },
+    userDetailLink() {
+      return `https://school.pythonanywhere.com/accounts/user-detail/${this.userID}/`
     },
     sheets() {
       const sheets = this.$store.state.grading.sheets.filter(
@@ -138,9 +155,5 @@ form {
 
 .w3-button {
   width: 100%;
-}
-
-.w3-tag {
-  margin-bottom: 4px;
 }
 </style>

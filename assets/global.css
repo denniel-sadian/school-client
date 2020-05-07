@@ -135,3 +135,7 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.w3-tag {
+  margin-bottom: 4px;
+}
