@@ -19,17 +19,36 @@
     </div>
     <div v-else>
       <article class="w3-container" v-show="isTeacher">
-        <form @submit.prevent="createSheet" class="w3-content">
+        <form @submit.prevent="createExam" class="w3-content">
           <h2><i class="fas fa-plus-circle"></i> Create an Exam</h2>
-          <div class="inpt">
-            <label>For Grading Sheets:</label>
-            <select v-model="selectedSheets" multiple :disabled="creating">
-              <option v-for="s in sheets" :value="s.url" :key="s.id">
-                {{ s.section_name }} / {{ s.subject_name }} /
-                {{ s.sem === 1 ? 'First Sem' : 'Second Sem' }} / {{ s.grading }}
-              </option>
-            </select>
-          </div>
+          <p>
+            Select the grading sheets on which the exam should be included.
+          </p>
+          <label class="container" v-for="s in sheets" :key="s.id"
+            ><span class="label">
+              <span
+                class="w3-tag w3-round-xxlarge w3-text-green w3-white w3-border w3-border-green"
+                >{{ s.section_name }}</span
+              >
+              |
+              <span
+                class="w3-tag w3-round-xxlarge w3-text-pink w3-white w3-border w3-border-pink"
+                >{{ s.subject_name }}</span
+              >
+              |
+              <span
+                class="w3-tag w3-round-xxlarge w3-text-blue w3-white w3-border w3-border-blue"
+                >{{ s.sem === 1 ? 'First Sem' : 'Second Sem' }}</span
+              >
+              |
+              <span
+                class="w3-tag w3-round-xxlarge w3-text-purple w3-white w3-border w3-border-purple"
+                >{{ s.grading }}</span
+              >
+            </span>
+            <input v-model="selectedSheets" :value="s.url" type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
           <hr />
           <button
             type="submit"
@@ -112,5 +131,19 @@ header h1 {
 
 .w3-content {
   max-width: 600px;
+}
+
+form {
+  padding: 16px;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.w3-button {
+  width: 100%;
+}
+
+.w3-tag {
+  margin-bottom: 4px;
 }
 </style>
