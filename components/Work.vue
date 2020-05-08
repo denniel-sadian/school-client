@@ -18,7 +18,7 @@
       </table>
 
       <p class="w3-small" v-show="work.work_type === 'e'">
-        The highest score of this examination will be set automatically.
+        This work -- as well as its records -- can only be modified by the system.
       </p>
 
       <div id="btns" v-show="work.work_type !== 'e'">
