@@ -1,93 +1,120 @@
 <template>
   <div class="cont">
-    <header class="w3-container">
-      <div class="w3-content">
-        <h1>Quarterly Test for the grading sheets below</h1>
-        <div class="sheet" v-for="s in sheets" :key="s.url">
-          <span
-            class="w3-tag w3-round-xxlarge w3-text-green w3-white w3-border w3-border-green"
-            >{{ s.section }}</span
-          >
-          <span
-            class="w3-tag w3-round-xxlarge w3-text-pink w3-white w3-border w3-border-pink"
-            >{{ s.subject }}</span
-          >
-          <span
-            class="w3-tag w3-round-xxlarge w3-text-blue w3-white w3-border w3-border-blue"
-            >{{ s.sem === 1 ? 'First Sem' : 'Second Sem' }}</span
-          >
-          <span
-            class="w3-tag w3-round-xxlarge w3-text-purple w3-white w3-border w3-border-purple"
-            >{{ s.grading }}</span
-          >
-        </div>
-      </div>
-    </header>
-    <div class="w3-content">
-      <div class="w3-content">
-        <div class="inputs">
-          <h2><i class="fas fa-plus-circle"></i> Add an Item</h2>
-          <div class="inpt">
-            <label>Question:</label>
-            <input type="text" v-model="question" :disabled="creatingItem" />
+    <div v-if="!doneLoading" class="loading">
+      <h1 class="w3-text-white w3-center">
+        <i class="fas fa-spinner w3-spin"></i>
+      </h1>
+    </div>
+    <div v-else>
+      <header class="w3-container">
+        <div class="w3-content">
+          <h1>Quarterly Test for the grading sheets below</h1>
+          <div class="sheet" v-for="s in sheets" :key="s.url">
+            <span
+              class="w3-tag w3-round-xxlarge w3-text-green w3-white w3-border w3-border-green"
+              >{{ s.section }}</span
+            >
+            <span
+              class="w3-tag w3-round-xxlarge w3-text-pink w3-white w3-border w3-border-pink"
+              >{{ s.subject }}</span
+            >
+            <span
+              class="w3-tag w3-round-xxlarge w3-text-blue w3-white w3-border w3-border-blue"
+              >{{ s.sem === 1 ? 'First Sem' : 'Second Sem' }}</span
+            >
+            <span
+              class="w3-tag w3-round-xxlarge w3-text-purple w3-white w3-border w3-border-purple"
+              >{{ s.grading }}</span
+            >
           </div>
-          <hr v-show="question !== ''" />
-          <div class="inpt w3-animate-opacity" v-show="question !== ''">
-            <label>Choice:</label>
-            <input
-              type="text"
-              v-model="choice"
-              @keypress.enter="addChoice"
-              :disabled="choices.length === 4"
-            />
-            <button
-              @click="addChoice"
-              :disabled="choices.length === 4"
-              class="w3-small w3-button w3-round w3-light-green"
-            >
-              Add Choice
-            </button>
-            <div
-              v-for="c in choices"
-              :key="c.letter"
-              class="choice w3-hover-shadow"
-            >
-              <div class="letter">{{ c.letter }}</div>
-              <div class="text">{{ c.text }}</div>
-              <div class="del">
-                <button @click="deleteChoice(c.letter)" class="w3-button">
-                  <i class="fas fa-trash-alt"></i>
-                </button>
+          <p class="w3-small">
+            Prepared by
+            {{ exam.teacher.profile.gender === 'm' ? 'Mr.' : 'Ms.' }}
+            {{ exam.teacher.first_name }} {{ exam.teacher.last_name }} on
+            {{ new Date(exam.date).toDateString() }}.
+          </p>
+        </div>
+      </header>
+      <div v-show="editable" class="w3-container">
+        <div class="w3-content">
+          <div class="inputs">
+            <h2><i class="fas fa-plus-circle"></i> Add an Item</h2>
+            <div class="inpt">
+              <label>Question:</label>
+              <input
+                type="text"
+                v-model="question"
+                maxlength="255"
+                :disabled="creatingItem"
+              />
+            </div>
+            <hr v-show="question !== ''" />
+            <div class="inpt w3-animate-opacity" v-show="question !== ''">
+              <label>Choice:</label>
+              <input
+                type="text"
+                v-model="choice"
+                @keypress.enter="addChoice"
+                maxlength="255"
+                :disabled="choices.length === 4"
+              />
+              <button
+                @click="addChoice"
+                :disabled="choices.length === 4"
+                class="w3-small w3-button w3-round w3-light-green"
+              >
+                Add Choice
+              </button>
+              <div
+                v-for="c in choices"
+                :key="c.letter"
+                class="choice w3-hover-shadow"
+              >
+                <div class="letter">{{ c.letter }}</div>
+                <div class="text">{{ c.text }}</div>
+                <div class="del">
+                  <button @click="deleteChoice(c.letter)" class="w3-button">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </div>
               </div>
             </div>
+            <hr v-show="choices.length === 4" />
+            <div class="inpt w3-animate-opacity" v-show="choices.length === 4">
+              <label>Correct Answer:</label>
+              <select v-model="correct" :disabled="creatingItem">
+                <option value="a">A</option>
+                <option value="b">B</option>
+                <option value="c">C</option>
+                <option value="d">D</option>
+              </select>
+            </div>
+            <hr v-show="correct !== ''" />
+            <button
+              @click="createItem"
+              :disabled="creatingItem"
+              v-show="correct !== ''"
+              class="w3-button w3-green w3-round w3-animate-opacity"
+            >
+              <i v-if="creatingItem" class="fas fa-spinner w3-spin"></i>
+              <span v-else>Add Item</span>
+            </button>
           </div>
-          <hr v-show="choices.length === 4" />
-          <div class="inpt w3-animate-opacity" v-show="choices.length === 4">
-            <label>Correct Answer:</label>
-            <select v-model="correct" :disabled="creatingItem">
-              <option value="a">A</option>
-              <option value="b">B</option>
-              <option value="c">C</option>
-              <option value="d">D</option>
-            </select>
-          </div>
-          <hr v-show="correct !== ''" />
-          <button
-            @click="createItem"
-            :disabled="creatingItem"
-            v-show="correct !== ''"
-            class="w3-button w3-green w3-round w3-animate-opacity"
-          >
-            <i v-if="creatingItem" class="fas fa-spinner w3-spin"></i>
-            <span v-else>Add Item</span>
-          </button>
         </div>
       </div>
-    </div>
-    <div class="w3-container">
-      <div class="w3-content">
-        <h2>Items</h2>
-        <Item v-for="url in exam.items" :itemUrl="url" :key="url" />
+      <div class="w3-container">
+        <div v-if="exam.items.length === 0" class="w3-content">
+          <h2>No items yet.</h2>
+        </div>
+        <div v-else class="w3-content">
+          <h2>Items ({{ exam.items.length }})</h2>
+          <Item
+            v-for="url in exam.items"
+            :itemUrl="url"
+            :editable="editable"
+            :key="url"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -107,7 +134,8 @@ export default {
       choices: [],
       choice: '',
       correct: '',
-      creatingItem: false
+      creatingItem: false,
+      doneLoading: false
     }
   },
   computed: {
@@ -116,6 +144,9 @@ export default {
     },
     username() {
       return this.$store.state.user.user.user.username
+    },
+    editable() {
+      return this.username === this.exam.teacher.username
     }
   },
   watch: {
@@ -178,7 +209,7 @@ export default {
     const url = `exam/exams/${parseInt(this.$route.params.id)}/`
     await this.$store.dispatch('exams/retrieveExam', url)
     await this.$store.dispatch('exams/retrieveTeacher', this.exam.teacher)
-    this.exam.sheets.forEach(async (s) => {
+    await this.exam.sheets.forEach(async (s) => {
       await this.$axios.get(s).then(async ({ data }) => {
         let sheet = data
         sheet.subject = await this.getName(data.subject)
@@ -186,6 +217,7 @@ export default {
         this.sheets.push(sheet)
       })
     })
+    this.doneLoading = true
   },
   validate(context) {
     return /^\d+$/.test(context.params.id)
@@ -194,6 +226,23 @@ export default {
 </script>
 
 <style scoped>
+.loading {
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(128, 128, 128, 0.856);
+}
+
+.loading h1 {
+  font-size: 90px;
+}
+
 header {
   margin-top: 60px;
   padding: 64px 16px;

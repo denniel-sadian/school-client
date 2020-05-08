@@ -15,6 +15,9 @@ export const mutations = {
   },
   PUSH_ITEM(state, url) {
     state.exam.items.push(url)
+  },
+  DELETE_ITEM(state, url) {
+    state.exam.items = state.exam.items.filter((i) => i !== url)
   }
 }
 
@@ -41,5 +44,8 @@ export const actions = {
         await this.$axios.post('exam/choices/', c)
       })
     })
+  },
+  deleteItem({ commit }, url) {
+    return this.$axios.delete(url).then(() => commit('DELETE_ITEM', url))
   }
 }
