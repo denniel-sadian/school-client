@@ -87,6 +87,7 @@
       as="td"
       v-if="myExam"
       :record="myExam"
+      :isExam="true"
     />
     <td
       :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS3 > 0 }"
