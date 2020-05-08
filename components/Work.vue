@@ -17,7 +17,11 @@
         </tr>
       </table>
 
-      <div id="btns">
+      <p class="w3-small" v-show="work.work_type === 'e'">
+        The highest score of this examination will be set automatically.
+      </p>
+
+      <div id="btns" v-show="work.work_type !== 'e'">
         <button
           @click="editing = true"
           class="w3-button w3-small w3-light-green"
