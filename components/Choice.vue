@@ -1,7 +1,7 @@
 <template>
   <div class="cont">
     <div class="display">
-      <h5>{{ item.text }}</h5>
+      <h4>{{ item.question }}</h4>
     </div>
   </div>
 </template>
@@ -9,22 +9,23 @@
 <script>
 export default {
   props: {
-    itemUrl: String
+    choiceUrl: String
   },
   data() {
     return {
-      item: {}
+      choice: {}
     }
   },
   async created() {
-    await this.$axios.get(this.itemUrl).then(({ data }) => (this.item = data))
+    await this.$axios
+      .get(this.choiceUrl)
+      .then(({ data }) => (this.choice = data))
   }
 }
 </script>
 
 <style scoped>
 .cont {
-  margin-bottom: 64px;
   border: 2px solid black;
   border-radius: 4px;
   padding: 8px;
