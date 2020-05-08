@@ -74,6 +74,15 @@
             </p>
           </div>
           <div
+            @click="$router.push('/dashboard/exams')"
+            class="w3-border-green w3-card-4"
+          >
+            <h3><i class="fas fa-file-excel w3-text-green"></i></h3>
+            <p class="w3-green">
+              Examinations
+            </p>
+          </div>
+          <div
             @click="$router.push('/dashboard/viewing-permissions')"
             class="w3-border-purple w3-card-4"
           >
