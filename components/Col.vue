@@ -30,7 +30,7 @@ export default {
   props: {
     record: Object,
     isExam: {
-      type: Object,
+      type: Boolean,
       default: false
     }
   },
