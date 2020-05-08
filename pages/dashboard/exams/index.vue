@@ -126,7 +126,7 @@ export default {
       }
       await this.$store
         .dispatch('exams/createExam', payload)
-        .finally(() => (this.creating = false))
+        .then(({ data }) => this.$router.push(`/dashboard/exams/${data.id}`))
     }
   },
   async mounted() {
