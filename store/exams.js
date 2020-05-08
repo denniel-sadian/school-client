@@ -1,16 +1,14 @@
 export const state = () => ({
-  exams: []
+  exams: [],
+  exam: {}
 })
 
 export const mutations = {
   SET_EXAMS(state, exams) {
     state.exams = exams
   },
-  PUSH_EXAM(state, exam) {
-    state.exams.push(exam)
-    state.exams = state.exams.sort((a, b) => {
-      return b.id - a.id
-    })
+  SET_EXAM(state, exam) {
+    state.exam = exam
   }
 }
 
@@ -23,6 +21,6 @@ export const actions = {
   createExam({ commit }, payload) {
     return this.$axios
       .post('exam/exams/', payload)
-      .then(({ data }) => commit('PUSH_EXAM', data))
+      .then(({ data }) => commit('SET_EXAM', data))
   }
 }
