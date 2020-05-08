@@ -31,7 +31,9 @@
         {{ new Date(exam.date).toDateString() }}
       </p>
       <div class="link">
-        <nuxt-link :to="`/exams/${this.exam.id}`" class="w3-green w3-button"
+        <nuxt-link
+          :to="`/dashboard/exams/${this.exam.id}`"
+          class="w3-green w3-button"
           ><i class="fas fa-long-arrow-alt-right"></i> View</nuxt-link
         >
       </div>
