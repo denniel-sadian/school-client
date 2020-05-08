@@ -106,6 +106,7 @@
                 </h3>
               </div>
               <div class="scrolled">
+                <p class="w3-small">The examination will be automatically created.</p>
                 <div v-show="!deleting">
                   <form
                     id="adding-form"
@@ -132,7 +133,6 @@
                       >
                         <option value="a">Activity</option>
                         <option value="q">Quiz</option>
-                        <option value="e">Examination</option>
                         <option value="p">Performance</option>
                       </select>
                     </div>
