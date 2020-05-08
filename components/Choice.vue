@@ -15,10 +15,8 @@
             <i
               v-show="answer === choice.letter"
               class="fas fa-check w3-text-green"
-            >
-              Correct</i
-            ></span
-          >
+            ></i
+          ></span>
           <input v-else type="text" maxlength="255" v-model="text" />
         </div>
       </div>

@@ -116,6 +116,41 @@
           />
         </div>
       </div>
+      <div v-show="editable" class="w3-container">
+        <div class="w3-content">
+          <button
+            class="w3-red w3-round w3-button"
+            @click="confirmDelete = true"
+            v-show="!confirmDelete"
+          >
+            Delete Exam
+          </button>
+          <div
+            v-show="confirmDelete"
+            class="w3-khaki w3-margin-top w3-padding w3-center"
+          >
+            <h3>
+              <i class="fas fa-exclamation-triangle w3-text-red"></i> Warning!
+            </h3>
+            <p>
+              Deleting this exam will delete this for real, of course. Are you
+              sure to continue?
+            </p>
+            <hr />
+            <div class="w3-margin-top">
+              <button class="w3-button w3-red w3-round" @click="deleteExam">
+                Yes
+              </button>
+              <button
+                class="w3-button w3-green w3-round w3-margin-top"
+                @click="confirmDelete = false"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -135,7 +170,8 @@ export default {
       choice: '',
       correct: '',
       creatingItem: false,
-      doneLoading: false
+      doneLoading: false,
+      confirmDelete: false
     }
   },
   computed: {
@@ -203,6 +239,12 @@ export default {
     },
     deleteChoice(letter) {
       this.choices = this.choices.filter((c) => c.letter !== letter)
+    },
+    async deleteExam() {
+      this.doneLoading = false
+      await this.$axios
+        .delete(this.exam.url)
+        .then(() => this.$router.push('/dashboard/exams'))
     }
   },
   async mounted() {
