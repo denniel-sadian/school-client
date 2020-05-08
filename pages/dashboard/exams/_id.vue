@@ -31,8 +31,8 @@
             <label>Question:</label>
             <input type="text" v-model="question" :disabled="creatingItem" />
           </div>
-          <hr />
-          <div class="inpt">
+          <hr v-show="question !== ''" />
+          <div class="inpt w3-animate-opacity" v-show="question !== ''">
             <label>Choice:</label>
             <input
               type="text"
@@ -61,8 +61,8 @@
               </div>
             </div>
           </div>
-          <hr />
-          <div class="inpt">
+          <hr v-show="choices.length === 4" />
+          <div class="inpt w3-animate-opacity" v-show="choices.length === 4">
             <label>Correct Answer:</label>
             <select v-model="correct" :disabled="creatingItem">
               <option value="a">A</option>
@@ -71,11 +71,12 @@
               <option value="d">D</option>
             </select>
           </div>
-          <hr />
+          <hr v-show="correct !== ''" />
           <button
             @click="createItem"
             :disabled="creatingItem"
-            class="w3-button w3-green w3-round"
+            v-show="correct !== ''"
+            class="w3-button w3-green w3-round w3-animate-opacity"
           >
             <i v-if="creatingItem" class="fas fa-spinner w3-spin"></i>
             <span v-else>Add Item</span>
@@ -155,7 +156,7 @@ export default {
           .then(() => {
             this.question = ''
             this.correct = ''
-            this.choices = ''
+            this.choices = []
           })
           .finally(() => (this.creatingItem = false))
       }
