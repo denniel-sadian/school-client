@@ -36,9 +36,9 @@ export const actions = {
   createItem({ commit }, payload) {
     return this.$axios.post('exam/items/', payload.item).then(({ data }) => {
       commit('PUSH_ITEM', data.url)
-      payload.choices.forEach((c) => {
+      payload.choices.forEach(async (c) => {
         c.item = data.url
-        this.$axios.post('exam/choices/', c)
+        await this.$axios.post('exam/choices/', c)
       })
     })
   }
