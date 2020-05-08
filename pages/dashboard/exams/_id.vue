@@ -84,12 +84,21 @@
         </div>
       </div>
     </div>
+    <div class="w3-container">
+      <div class="w3-content">
+        <h2>Items</h2>
+        <Item v-for="url in exam.items" :itemUrl="url" :key="url" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Item from '~/components/Item.vue'
+
 export default {
   layout: 'dashboard',
+  components: { Item },
   data() {
     return {
       sheets: [],

@@ -1,6 +1,8 @@
 <template>
   <div class="cont">
-    {{ item }}
+    <div class="display">
+      <h4>{{ item.question }}</h4>
+    </div>
   </div>
 </template>
 
