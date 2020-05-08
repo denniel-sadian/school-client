@@ -127,16 +127,6 @@ export default {
       await this.$store
         .dispatch('exams/createExam', payload)
         .finally(() => (this.creating = false))
-      await this.selectedSheets.forEach(async (s) => {
-        const work = {
-          gsheet: s,
-          name: 'Examination',
-          highest_score: 0,
-          work_type: 'e'
-        }
-        await this.$store.dispatch('grading/createWork', work).catch(() => {})
-      })
-      await this.$store.dispatch('grading/retrieveSheets')
     }
   },
   async mounted() {
