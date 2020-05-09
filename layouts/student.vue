@@ -68,11 +68,8 @@ export default {
     },
     photo() {
       if (this.$store.state.user.user.user.student) {
-        if (this.$store.state.user.user.user.student !== null)
-          return (
-            'https://school.pythonanywhere.com' +
-            this.$store.state.user.user.user.student.photo
-          )
+        const url = this.$store.state.user.user.user.student.photo
+        if (url !== null) return `https://school.pythonanywhere.com${url}`
         return '/anon_avatar.png'
       }
       return ''
