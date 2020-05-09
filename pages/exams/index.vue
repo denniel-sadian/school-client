@@ -49,9 +49,11 @@ export default {
     return { doneLoading: false }
   },
   computed: {
+    studentID() {
+      return this.$store.state.user.user.user.student.id
+    },
     studentLink() {
-      const id = this.$store.state.user.user.user.student.id
-      return `https://school.pythonanywhere.com/information/students/${id}/`
+      return `https://school.pythonanywhere.com/information/students/${this.studentID}/`
     },
     sessions() {
       return this.$store.state.exams.sessions
@@ -68,6 +70,7 @@ export default {
   async mounted() {
     await this.$store.dispatch('exams/retrieveStrippedExams')
     await this.$store.dispatch('exams/retrieveSessions')
+    this.$store.commit('exams/SET_STUDENT_ID', this.studentID)
     this.doneLoading = true
   }
 }
