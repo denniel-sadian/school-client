@@ -33,6 +33,10 @@
             {{ exam.teacher.first_name }} {{ exam.teacher.last_name }} on
             {{ new Date(exam.date).toDateString() }}.
           </p>
+          <p v-show="published" class="w3-small">
+            This exam has been published already and is currently visible to the
+            students.
+          </p>
           <div v-show="editable" class="checkbox">
             <span v-if="doingPublish"
               ><i class="fas fa-spinner w3-spin"></i> Loading ...</span
@@ -221,6 +225,8 @@ export default {
   },
   methods: {
     async setPublishedOrNot() {
+      if (!this.editable) return
+      this.doingPublish = true
       this.doingPublish = true
       const payload = {
         published: this.published,
