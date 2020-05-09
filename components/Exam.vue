@@ -30,6 +30,7 @@
       <p class="w3-small">
         {{ new Date(exam.date).toDateString() }}
       </p>
+      <p class="w3-small" v-show="exam.published">Published</p>
       <div class="link">
         <nuxt-link
           :to="`/dashboard/exams/${this.exam.id}`"
