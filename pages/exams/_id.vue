@@ -17,12 +17,9 @@
           <h3 class="w3-text-red">Direction:</h3>
           <h3>Choose the best answer that applies for each item.</h3>
           <ol>
-            <ItemAnswering
-              as="li"
-              v-for="item in exam.items"
-              :item="item"
-              :key="item.url"
-            />
+            <li v-for="item in exam.items" :key="item.url">
+              <ItemAnswering :item="item" />
+            </li>
           </ol>
         </div>
       </div>
