@@ -18,7 +18,7 @@
       </div>
     </div>
     <div v-else>
-      <header class="w3-container w3-padding">
+      <header class="w3-container">
         <div class="w3-content">
           <h1>{{ subject }}</h1>
           <p>Prepared by {{ teacher }}. {{ sem }}'s {{ grading }}.</p>
@@ -127,7 +127,7 @@ export default {
 }
 
 header {
-  padding: 64px 0px !important;
+  padding: 64px 16px !important;
   text-align: center;
 }
 
