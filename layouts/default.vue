@@ -11,8 +11,8 @@
       >
       <nuxt-link
         to="/exams"
-        v-else
-        :class="{ show: showLinks && thereIsUser }"
+        v-else-if="thereIsUser"
+        :class="{ show: showLinks }"
         class="s w3-animate-top w3-text-green"
         ><i class="fas fa-pencil-alt"></i> Exams</nuxt-link
       >
@@ -59,6 +59,7 @@ export default {
   },
   computed: {
     thereIsUser() {
+      console.log(this.$store.state.user.user.hasOwnProperty('user'))
       return this.$store.state.user.user.hasOwnProperty('user')
     },
     isStaff() {
