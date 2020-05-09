@@ -10,9 +10,7 @@
 </template>
 
 <script>
-export default {
-  layout: 'dashboard'
-}
+export default {}
 </script>
 
 <style scoped>

@@ -59,7 +59,6 @@ export default {
   },
   computed: {
     thereIsUser() {
-      console.log(this.$store.state.user.user.hasOwnProperty('user'))
       return this.$store.state.user.user.hasOwnProperty('user')
     },
     isStaff() {
