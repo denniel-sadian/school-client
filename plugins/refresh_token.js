@@ -1,9 +1,9 @@
-export default async function({ $axios, app }) {
+export default async function({ $axios, store }) {
   const refresher = () => {
-    if (app.store.state.user.canRefreshToken) {
+    if (store.state.user.canRefreshToken) {
       const rToken = localStorage.getItem('school_refresh_token')
 
-      if (rToken === null || !app.store.state.user.canRefreshToken) return
+      if (rToken === null || !store.state.user.canRefreshToken) return
 
       $axios
         .post(
