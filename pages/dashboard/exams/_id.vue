@@ -33,6 +33,13 @@
             {{ exam.teacher.first_name }} {{ exam.teacher.last_name }} on
             {{ new Date(exam.date).toDateString() }}.
           </p>
+          <div class="checkbox">
+            <label class="container"
+              >Published
+              <input v-model="published" :value="false" type="checkbox" />
+              <span class="checkmark"></span>
+            </label>
+          </div>
         </div>
       </header>
       <div v-show="editable" class="w3-container">
@@ -169,6 +176,7 @@ export default {
       choices: [],
       choice: '',
       correct: '',
+      published: false,
       creatingItem: false,
       doneLoading: false,
       confirmDelete: false
@@ -259,6 +267,8 @@ export default {
         this.sheets.push(sheet)
       })
     })
+    this.published = this.exam.published
+    console.log(this.exam.published)
     this.doneLoading = true
   },
   validate(context) {
@@ -305,6 +315,7 @@ header {
 
 .w3-content {
   max-width: 600px;
+  margin-bottom: 32px;
 }
 
 .inputs {
@@ -369,5 +380,22 @@ header {
   background: none;
   border: none;
   margin: 0px;
+}
+
+.checkbox {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #87ceeb;
+  padding: 8px 16px 8px 8px;
+  border-radius: 32px;
+}
+
+.checkbox .container {
+  margin-bottom: 0px;
+}
+
+.checkbox .container .checkmark {
+  border-radius: 100%;
 }
 </style>
