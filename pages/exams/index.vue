@@ -1,5 +1,5 @@
 <template>
-  <div><h1>HEllp</h1></div>
+  <div class="cont"></div>
 </template>
 
 <script>
@@ -8,4 +8,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.cont {
+  margin-top: 60px;
+}
+</style>
