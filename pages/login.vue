@@ -62,7 +62,9 @@ export default {
   },
   computed: {
     isStaff() {
-      return this.$store.state.user.user.user.profile !== null
+      if (this.$store.state.user.user.hasOwnProperty('user'))
+        return this.$store.state.user.user.user.student === null
+      return false
     }
   },
   methods: {

@@ -4,10 +4,17 @@
       <nuxt-link to="/"><img src="/icon.png" /> Grading System</nuxt-link>
       <nuxt-link
         to="/dashboard"
-        v-show="thereIsUser"
-        :class="{ show: showLinks && thereIsUser }"
+        v-if="isStaff"
+        :class="{ show: showLinks && isStaff }"
         class="s w3-animate-top w3-text-green"
         ><i class="fas fa-solar-panel"></i> Dashboard</nuxt-link
+      >
+      <nuxt-link
+        to="/exams"
+        v-else
+        :class="{ show: showLinks && thereIsUser }"
+        class="s w3-animate-top w3-text-green"
+        ><i class="fas fa-pencil-alt"></i> Exams</nuxt-link
       >
       <nuxt-link
         to="/about"
@@ -53,6 +60,10 @@ export default {
   computed: {
     thereIsUser() {
       return this.$store.state.user.user.hasOwnProperty('user')
+    },
+    isStaff() {
+      if (this.thereIsUser)
+        return this.$store.state.user.user.user.student === null
     }
   },
   watch: {
