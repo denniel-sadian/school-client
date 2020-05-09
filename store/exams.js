@@ -1,11 +1,15 @@
 export const state = () => ({
   exams: [],
+  sessions: [],
   exam: {}
 })
 
 export const mutations = {
   SET_EXAMS(state, exams) {
     state.exams = exams
+  },
+  SET_SESSIONS(state, sessions) {
+    state.sessions = sessions
   },
   SET_EXAM(state, exam) {
     state.exam = exam
@@ -26,6 +30,16 @@ export const actions = {
     return this.$axios
       .get('exam/exams/')
       .then(({ data }) => commit('SET_EXAMS', data))
+  },
+  retrieveStrippedExams({ commit }) {
+    return this.$axios
+      .get('exam/stripped-exams/')
+      .then(({ data }) => commit('SET_EXAMS', data))
+  },
+  retrieveSessions({ commit }) {
+    return this.$axios
+      .get('exam/sessions/')
+      .then(({ data }) => commit('SET_SESSIONS', data))
   },
   retrieveTeacher({ commit }, url) {
     return this.$axios.get(url).then(({ data }) => commit('SET_TEACHER', data))
