@@ -38,7 +38,11 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/refresh_token.js', '~/plugins/axios'],
+  plugins: [
+    '~/plugins/refresh_token.js',
+    '~/plugins/axios',
+    '~/plugins/getAuth.js'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
