@@ -21,6 +21,21 @@
               <ItemAnswering :item="item" />
             </li>
           </ol>
+          <div class="w3-center">
+            <p v-if="!complete">
+              Please complete answering the exam before sending your answers.
+            </p>
+            <div v-else class="w3-margin-bottom">
+              <p>
+                You have completed answering the exam. Are you sure, you want to
+                submit your answers already? Once you submit, you will never be
+                able to answer this exam ever again, of course.
+              </p>
+              <button class="w3-button w3-green w3-round">
+                Yes, Submit My Answers
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -47,6 +62,15 @@ export default {
   computed: {
     exams() {
       return this.$store.state.exams.exams
+    },
+    complete() {
+      return (
+        this.exam.items.length ===
+        this.$store.state.exams.toSubmit.answers.length
+      )
+    },
+    toSubmit() {
+      return this.$store.state.exams.toSubmit
     }
   },
   async mounted() {
@@ -101,5 +125,9 @@ header {
 }
 .loading h1 {
   font-size: 90px;
+}
+
+button {
+  width: 100%;
 }
 </style>
