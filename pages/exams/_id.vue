@@ -12,6 +12,12 @@
           <p>Prepared by {{ teacher }}. {{ sem }}'s {{ grading }}.</p>
         </div>
       </header>
+      <div class="w3-container">
+        <div class="w3-content">
+          <h3 class="w3-text-red">Direction:</h3>
+          <h3>Choose the best answer that applies for each item.</h3>
+        </div>
+      </div>
     </div>
   </div>
 </template>
