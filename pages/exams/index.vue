@@ -7,7 +7,7 @@
     </div>
     <div v-else>
       <div v-if="exams.length !== 0">
-        <header class="w3-container">
+        <header class="w3-container w3-padding">
           <div class="w3-content w3-center">
             <h1>Welcome to the Examination Page!</h1>
             <p>
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div v-else>
-        <header class="w3-container">
+        <header class="w3-container w3-padding">
           <div class="w3-content w3-center">
             <h1 class="w3-text-red">Exams are down!</h1>
             <p>
@@ -82,7 +82,7 @@ export default {
 }
 
 header {
-  padding: 64px 0px;
+  padding: 64px 0px !important;
 }
 
 .w3-content {

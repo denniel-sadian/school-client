@@ -21,7 +21,6 @@ export default {
   },
   watch: {
     answer(v) {
-      console.log(this.$store.state.exams.toSubmit)
       this.$store.commit('exams/PUSH_OR_MODIFY_ANSWER', {
         item: this.item.id,
         answer: v

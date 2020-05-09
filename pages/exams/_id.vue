@@ -1,18 +1,30 @@
 <template>
   <div class="cont">
     <div v-if="!doneLoading" class="loading">
-      <h1 class="w3-text-white w3-center">
-        <i class="fas fa-spinner w3-spin"></i>
-      </h1>
+      <div v-if="!doneChecking">
+        <h1 class="w3-center">
+          <i class="fas fa-spinner w3-spin"></i>
+        </h1>
+      </div>
+      <div v-else class="w3-center w3-animate-zoom">
+        <h1>Score: {{ results.score }}/{{ results.out_of }}</h1>
+        <p>
+          Please take note that once you've taken an exam, you'll never be able
+          to take it again. Your session to this exam has been recorded already.
+        </p>
+        <nuxt-link to="/exams" class="w3-button w3-green w3-round"
+          >Okay</nuxt-link
+        >
+      </div>
     </div>
     <div v-else>
-      <header class="w3-container">
+      <header class="w3-container w3-padding">
         <div class="w3-content">
           <h1>{{ subject }}</h1>
           <p>Prepared by {{ teacher }}. {{ sem }}'s {{ grading }}.</p>
         </div>
       </header>
-      <div class="w3-container">
+      <div class="w3-container w3-padding">
         <div class="w3-content">
           <h3 class="w3-text-red">Direction:</h3>
           <h3>Choose the best answer that applies for each item.</h3>
@@ -31,7 +43,7 @@
                 submit your answers already? Once you submit, you will never be
                 able to answer this exam ever again, of course.
               </p>
-              <button class="w3-button w3-green w3-round">
+              <button @click="submit" class="w3-button w3-green w3-round">
                 Yes, Submit My Answers
               </button>
             </div>
@@ -52,11 +64,13 @@ export default {
   data() {
     return {
       exam: {},
+      results: {},
       sem: '',
       grading: '',
       teacher: '',
       subject: '',
-      doneLoading: false
+      doneLoading: false,
+      doneChecking: false
     }
   },
   computed: {
@@ -71,6 +85,16 @@ export default {
     },
     toSubmit() {
       return this.$store.state.exams.toSubmit
+    }
+  },
+  methods: {
+    async submit() {
+      if (!this.complete) return
+      this.doneLoading = false
+      await this.$axios
+        .post('exam/check/', this.toSubmit)
+        .then(({ data }) => (this.results = data))
+        .finally(() => (this.doneChecking = true))
     }
   },
   async mounted() {
@@ -103,7 +127,7 @@ export default {
 }
 
 header {
-  padding: 64px 0px;
+  padding: 64px 0px !important;
   text-align: center;
 }
 
@@ -122,9 +146,13 @@ header {
   justify-content: center;
   align-items: center;
   background: rgba(128, 128, 128, 0.856);
+  text-align: center;
+  color: white;
+  padding: 16px;
 }
 .loading h1 {
   font-size: 90px;
+  font-family: 'Nunito';
 }
 
 button {
