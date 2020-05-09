@@ -67,11 +67,11 @@ export default {
       return 'user'
     },
     photo() {
-      if (this.$store.state.user.user) {
-        if (this.$store.state.user.user.student.photo !== null)
+      if (this.$store.state.user.user.user.student) {
+        if (this.$store.state.user.user.user.student !== null)
           return (
             'https://school.pythonanywhere.com' +
-            this.$store.state.user.user.student.photo
+            this.$store.state.user.user.user.student.photo
           )
         return '/anon_avatar.png'
       }
