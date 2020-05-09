@@ -33,8 +33,11 @@
             {{ exam.teacher.first_name }} {{ exam.teacher.last_name }} on
             {{ new Date(exam.date).toDateString() }}.
           </p>
-          <div class="checkbox">
-            <label class="container"
+          <div v-show="editable" class="checkbox">
+            <span v-if="doingPublish"
+              ><i class="fas fa-spinner w3-spin"></i> Loading ...</span
+            >
+            <label v-else class="container"
               >Published
               <input v-model="published" :value="false" type="checkbox" />
               <span class="checkmark"></span>
@@ -176,6 +179,7 @@ export default {
       choices: [],
       choice: '',
       correct: '',
+      doingPublish: false,
       published: false,
       creatingItem: false,
       doneLoading: false,
@@ -194,6 +198,9 @@ export default {
     }
   },
   watch: {
+    published() {
+      this.setPublishedOrNot()
+    },
     choices(v) {
       for (let i = 0; i < v.length; i++) {
         switch (i) {
@@ -213,6 +220,18 @@ export default {
     }
   },
   methods: {
+    async setPublishedOrNot() {
+      this.doingPublish = true
+      const payload = {
+        published: this.published,
+        sheets: this.exam.sheets,
+        items: this.exam.items
+      }
+      await this.$axios
+        .put(this.exam.url, payload)
+        .then(({ data }) => (this.published = data.published))
+        .finally(() => (this.doingPublish = false))
+    },
     async getName(url) {
       const { data } = await this.$axios.get(url)
       return data.name
@@ -268,7 +287,6 @@ export default {
       })
     })
     this.published = this.exam.published
-    console.log(this.exam.published)
     this.doneLoading = true
   },
   validate(context) {
