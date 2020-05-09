@@ -16,6 +16,14 @@
         <div class="w3-content">
           <h3 class="w3-text-red">Direction:</h3>
           <h3>Choose the best answer that applies for each item.</h3>
+          <ol>
+            <ItemAnswering
+              as="li"
+              v-for="item in exam.items"
+              :item="item"
+              :key="item.url"
+            />
+          </ol>
         </div>
       </div>
     </div>
@@ -23,11 +31,11 @@
 </template>
 
 <script>
-import ExamDisplay from '~/components/ExamDisplay.vue'
+import ItemAnswering from '~/components/ItemAnswering.vue'
 
 export default {
   layout: 'student',
-  components: { ExamDisplay },
+  components: { ItemAnswering },
   data() {
     return {
       exam: {},
