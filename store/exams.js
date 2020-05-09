@@ -37,13 +37,15 @@ export const actions = {
     return this.$axios.post('exam/exams/', payload)
   },
   createItem({ commit }, payload) {
-    return this.$axios.post('exam/items/', payload.item).then(({ data }) => {
-      commit('PUSH_ITEM', data.url)
-      payload.choices.forEach(async (c) => {
-        c.item = data.url
-        await this.$axios.post('exam/choices/', c)
+    return this.$axios
+      .post('exam/items/', payload.item)
+      .then(async ({ data }) => {
+        commit('PUSH_ITEM', data.url)
+        await payload.choices.forEach(async (c) => {
+          c.item = data.url
+          await this.$axios.post('exam/choices/', c)
+        })
       })
-    })
   },
   deleteItem({ commit }, url) {
     return this.$axios.delete(url).then(() => commit('DELETE_ITEM', url))
