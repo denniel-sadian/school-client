@@ -1,5 +1,5 @@
 <template>
-  <div class="cont" v-show="!deleting">
+  <div class="cont w3-card-4" v-show="!deleting">
     <div v-if="!doneLoading" class="w3-center">
       <h1><i class="fas fa-spinner w3-spin w3-text-gray"></i></h1>
     </div>
