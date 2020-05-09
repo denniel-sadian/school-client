@@ -60,6 +60,11 @@ export default {
       disabled: false
     }
   },
+  computed: {
+    isStaff() {
+      return this.$store.state.user.user.user.profile !== null
+    }
+  },
   methods: {
     async login() {
       if (!this.username || !this.password) return
@@ -71,7 +76,8 @@ export default {
           password: this.password
         })
         .then(() => {
-          this.$router.push('/dashboard')
+          if (this.isStaff) this.$router.push('/dashboard')
+          else this.$router.push('/exams')
         })
         .catch(() => {
           this.no_such_account = true
