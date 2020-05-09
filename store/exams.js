@@ -1,7 +1,12 @@
 export const state = () => ({
   exams: [],
   sessions: [],
-  exam: {}
+  exam: {},
+  toSubmit: {
+    student: 0,
+    exam: 0,
+    answers: []
+  }
 })
 
 export const mutations = {
@@ -16,6 +21,21 @@ export const mutations = {
   },
   SET_TEACHER(state, teacher) {
     state.exam.teacher = teacher
+  },
+  SET_STUDENT_ID(state, id) {
+    state.toSubmit.student = id
+  },
+  SET_EXAM_ID(state, id) {
+    state.toSubmit.exam = id
+  },
+  PUSH_OR_MODIFY_ANSWER(state, d) {
+    const answer = state.toSubmit.answers.filter((a) => a.item === d.item)[0]
+    if (answer) {
+      state.toSubmit.answers.filter((a) => a.item === d.item)[0].answer =
+        d.answer
+    } else {
+      state.toSubmit.answers.push(d)
+    }
   },
   PUSH_ITEM(state, url) {
     state.exam.items.push(url)
