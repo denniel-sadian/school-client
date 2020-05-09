@@ -44,7 +44,7 @@
 import Vfooter from '~/components/Vfooter.vue'
 
 export default {
-  middleware: 'auth',
+  middleware: ['auth', 'isStudent'],
   transition: 'page',
   components: { Vfooter },
   data() {
