@@ -3,10 +3,11 @@
     <div v-if="!doneLoading">
       <h2><i class="fas fa-spinner w3-spin w3-text-gray"></i></h2>
     </div>
-    <div v-else>
+    <div v-else @click="$router.push(`/exams/${exam.id}`)">
       <h2>{{ subject }}</h2>
       <p>
         Prepared by {{ teacher }} on {{ new Date(exam.date).toDateString() }}.
+        {{ sem }}'s {{ grading }}.
       </p>
     </div>
   </div>
@@ -21,6 +22,8 @@ export default {
     return {
       teacher: '',
       subject: '',
+      sem: '',
+      grading: '',
       doneLoading: false
     }
   },
@@ -29,10 +32,13 @@ export default {
       const addressing = data.profile.gender === 'm' ? 'Mr.' : 'Ms.'
       this.teacher = `${addressing} ${data.first_name} ${data.last_name}`
     })
-    await this.$axios
-      .get(this.exam.sheets[0])
-      .then(async ({ data }) => await this.$axios.get(data.subject))
-      .then(({ data }) => (this.subject = data.name))
+    await this.$axios.get(this.exam.sheets[0]).then(async ({ data }) => {
+      this.sem = data.sem === '1' ? 'First Semester' : 'Second Semester'
+      this.grading = data.grading
+      await this.$axios
+        .get(data.subject)
+        .then(({ data }) => (this.subject = data.name))
+    })
     this.doneLoading = true
   }
 }
