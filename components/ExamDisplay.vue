@@ -1,10 +1,13 @@
 <template>
-  <div class="cont">
-    <div v-if="!doneLoading" class="w3-center">
+  <div class="cont w3-card-4">
+    <div v-if="!doneLoading">
       <h2><i class="fas fa-spinner w3-spin w3-text-gray"></i></h2>
     </div>
     <div v-else>
       <h2>{{ subject }}</h2>
+      <p>
+        Prepared by {{ teacher }} on {{ new Date(exam.date).toDateString() }}.
+      </p>
     </div>
   </div>
 </template>
@@ -28,8 +31,8 @@ export default {
     })
     await this.$axios
       .get(this.exam.sheets[0])
-      .then(async ({ sheet }) => await this.$axios.get(sheet.subject))
-      .then(({ subject }) => (this.subject = subject.name))
+      .then(async ({ data }) => await this.$axios.get(data.subject))
+      .then(({ data }) => (this.subject = data.name))
     this.doneLoading = true
   }
 }
@@ -41,5 +44,17 @@ export default {
   border-radius: 4px;
   margin: 50px 0px;
   padding: 8px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.cont:hover {
+  background: #87ceeb;
+  border-color: #2196f3;
+  cursor: pointer;
+}
+
+h2 {
+  font-family: 'Roboto Slab', serif !important;
 }
 </style>

@@ -18,6 +18,11 @@
             </p>
           </div>
         </header>
+        <div class="w3-container">
+          <div class="w3-content">
+            <exam-display v-for="e in exams" :exam="e" :key="e.url" />
+          </div>
+        </div>
       </div>
       <div v-else>
         <header class="w3-container">
@@ -35,8 +40,11 @@
 </template>
 
 <script>
+import ExamDisplay from '~/components/ExamDisplay.vue'
+
 export default {
   layout: 'student',
+  components: { ExamDisplay },
   data() {
     return { doneLoading: false }
   },
