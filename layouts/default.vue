@@ -124,11 +124,11 @@ nav > * {
   transition: 0.3s;
 }
 
-nav a > *:first-child {
+nav * > *:first-child {
   margin-right: 8px;
 }
 
-nav > a:first-child {
+nav > *:first-child {
   font-size: 20px;
   font-weight: 800;
   font-family: 'Roboto Slab', serif;

@@ -1,9 +1,7 @@
 <template>
   <div>
     <nav>
-      <nuxt-link to="/dashboard/profile" class="home"
-        ><img :src="photo" /> {{ fullname }}</nuxt-link
-      >
+      <span><img :src="photo" /> {{ fullname }}</span>
       <nuxt-link
         to="/"
         :class="{ show: showLinks }"

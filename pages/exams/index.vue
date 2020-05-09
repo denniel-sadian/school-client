@@ -8,7 +8,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .cont {
   margin-top: 60px;
 }
