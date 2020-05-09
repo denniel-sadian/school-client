@@ -31,6 +31,7 @@
 import ItemAnswering from '~/components/ItemAnswering.vue'
 
 export default {
+  middleware: 'isThereExams',
   layout: 'student',
   components: { ItemAnswering },
   data() {
