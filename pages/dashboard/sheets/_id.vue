@@ -164,7 +164,7 @@
                     >
                       <span v-if="creatingWork"
                         ><i class="fas fa-spinner w3-spin"></i> Adding
-                        work...</span
+                        work and initial records...</span
                       >
                       <span v-else>Add Work</span>
                     </button>
