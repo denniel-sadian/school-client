@@ -20,7 +20,13 @@
           <h2><i class="fas fa-plus-circle"></i> Add a Subject</h2>
           <div class="inpt">
             <label>Subject Name:</label>
-            <input type="text" v-model="name" required :disabled="creating" />
+            <input
+              type="text"
+              v-model="name"
+              maxlength="50"
+              required
+              :disabled="creating"
+            />
           </div>
           <hr />
           <p class="w3-center w3-text-red w3-small" v-show="error">

@@ -21,7 +21,13 @@
           <h2><i class="fas fa-plus-circle"></i> Add a Section</h2>
           <div class="inpt">
             <label>Section Name:</label>
-            <input type="text" v-model="name" required :disabled="creating" />
+            <input
+              type="text"
+              v-model="name"
+              maxlength="50"
+              required
+              :disabled="creating"
+            />
           </div>
           <div class="inpt">
             <label>Department:</label>

@@ -31,7 +31,13 @@
     <form v-else @submit.prevent="update">
       <div class="inpt">
         <label>Department Name:</label>
-        <input type="text" v-model="name" required :disabled="updating" />
+        <input
+          type="text"
+          v-model="name"
+          maxlength="50"
+          required
+          :disabled="updating"
+        />
       </div>
       <hr />
       <p v-show="error" class="w3-small w3-text-red w3-center">

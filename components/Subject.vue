@@ -1,5 +1,9 @@
 <template>
-  <div class="cont w3-light-gray w3-card-4" :class="{ 'w3-opacity': deleting }" v-show="!hide">
+  <div
+    class="cont w3-light-gray w3-card-4"
+    :class="{ 'w3-opacity': deleting }"
+    v-show="!hide"
+  >
     <div class="display" v-if="!editing">
       <h3><i class="fas fa-percentage"></i> {{ subj.name }}</h3>
       <p class="w3-center w3-small w3-text-red" v-show="errorDelete">
@@ -26,7 +30,13 @@
     <form v-else @submit.prevent="update">
       <div class="inpt">
         <label>Subject Name:</label>
-        <input type="text" v-model="name" required :disabled="updating" />
+        <input
+          type="text"
+          v-model="name"
+          maxlength="50"
+          required
+          :disabled="updating"
+        />
       </div>
       <hr />
       <p v-show="error" class="w3-small w3-text-red w3-center">
