@@ -272,7 +272,6 @@ export default {
       this.updatedPhoto = false
       let formData = new FormData()
       formData.append('photo', this.file)
-      this.$store.dispatch('user/toogleRefresh')
       await this.$store
         .dispatch('user/updatePhoto', formData)
         .then(() => {
@@ -288,10 +287,7 @@ export default {
             this.errorFile = false
           }, 15000)
         })
-        .finally(() => {
-          this.updatingFile = false
-          this.$store.dispatch('user/toogleRefresh')
-        })
+        .finally(() => (this.updatingFile = false))
     },
     async update() {
       this.updating = true

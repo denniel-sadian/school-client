@@ -9,114 +9,124 @@
       </div>
     </header>
     <div v-if="got < 3">
-      <p class="w3-large w3-text-green w3-center"><i class="fas fa-spinner w3-spin"></i> Loading...</p>
+      <p class="w3-large w3-text-green w3-center">
+        <i class="fas fa-spinner w3-spin"></i> Loading...
+      </p>
     </div>
     <div v-else>
       <article class="w3-container">
-      <form @submit.prevent="createStudent" class="w3-animate-zoom w3-content">
-        <h2><i class="fas fa-plus-circle"></i> Add a Student</h2>
-        <div class="inpt">
-          <label>First Name:</label>
-          <input type="text" v-model="fName" required :disabled="creating" />
-        </div>
-        <div class="inpt">
-          <label>Last Name:</label>
-          <input type="text" v-model="lName" required :disabled="creating" />
-        </div>
-        <div class="inpt">
-          <label>ID Number:</label>
-          <input type="text" v-model="idNum" required :disabled="creating" />
-        </div>
-        <div class="inpt">
-          <label>Gender:</label>
-          <select v-model="gender" required>
-            <option value="m">Male</option>
-            <option value="f">Female</option>
-          </select>
-        </div>
-        <div class="inpt">
-          <label>Phone Number:</label>
-          <input type="text" v-model="phone" required :disabled="creating" />
-        </div>
-        <div class="inpt">
-          <label>Guardian's Phone Number:</label>
-          <input
-            type="text"
-            v-model="guardianPhone"
-            required
-            :disabled="creating"
-          />
-        </div>
-        <div class="inpt">
-          <label>Address:</label>
-          <input type="text" v-model="address" required :disabled="creating" />
-        </div>
-        <div class="inpt">
-          <label>Grade Level:</label>
-          <select class="form-control" v-model="grade" required>
-            <option value="1">Grade 1</option>
-            <option value="2">Grade 2</option>
-            <option value="3">Grade 3</option>
-            <option value="4">Grade 4</option>
-            <option value="5">Grade 5</option>
-            <option value="6">Grade 6</option>
-            <option value="7">Grade 7</option>
-            <option value="8">Grade 8</option>
-            <option value="9">Grade 9</option>
-            <option value="10">Grade 10</option>
-            <option value="11">Grade 11</option>
-            <option value="12">Grade 12</option>
-            <option value="c1">First Year College</option>
-            <option value="c2">Second Year College</option>
-            <option value="c3">Third Year College</option>
-            <option value="c4">Fourth Year College</option>
-          </select>
-        </div>
-        <div class="inpt">
-          <label>Department:</label>
-          <select v-model="dep" required>
-            <option v-for="d in departments" :value="d.url" :key="d.id">{{
-              d.name
-            }}</option>
-          </select>
-        </div>
-        <div class="inpt">
-          <label>Section:</label>
-          <select v-model="sec" required>
-            <option v-for="s in sections" :value="s.url" :key="s.id">{{
-              s.name
-            }}</option>
-          </select>
-        </div>
-        <div class="inpt">
-          <label>Photo: <span class="w3-opacity">Optional</span></label>
-          <input type="file" ref="file" @change="handleFileUpload" />
-        </div>
-        <hr />
-        <p class="w3-center w3-text-red w3-small" v-show="error">
-          Please provide unique values for the ID number.
-        </p>
-        <button
-          type="submit"
-          :disabled="creating"
-          class="w3-button w3-green w3-round"
+        <form
+          @submit.prevent="createStudent"
+          class="w3-animate-zoom w3-content"
         >
-          <span v-if="creating"
-            ><i class="fas fa-spinner w3-spin"></i> Adding...</span
+          <h2><i class="fas fa-plus-circle"></i> Add a Student</h2>
+          <div class="inpt">
+            <label>First Name:</label>
+            <input type="text" v-model="fName" required :disabled="creating" />
+          </div>
+          <div class="inpt">
+            <label>Last Name:</label>
+            <input type="text" v-model="lName" required :disabled="creating" />
+          </div>
+          <div class="inpt">
+            <label>ID Number:</label>
+            <input type="text" v-model="idNum" required :disabled="creating" />
+          </div>
+          <div class="inpt">
+            <label>Gender:</label>
+            <select v-model="gender" required>
+              <option value="m">Male</option>
+              <option value="f">Female</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>Phone Number:</label>
+            <input type="text" v-model="phone" required :disabled="creating" />
+          </div>
+          <div class="inpt">
+            <label>Guardian's Phone Number:</label>
+            <input
+              type="text"
+              v-model="guardianPhone"
+              required
+              :disabled="creating"
+            />
+          </div>
+          <div class="inpt">
+            <label>Address:</label>
+            <input
+              type="text"
+              v-model="address"
+              required
+              :disabled="creating"
+            />
+          </div>
+          <div class="inpt">
+            <label>Grade Level:</label>
+            <select class="form-control" v-model="grade" required>
+              <option value="1">Grade 1</option>
+              <option value="2">Grade 2</option>
+              <option value="3">Grade 3</option>
+              <option value="4">Grade 4</option>
+              <option value="5">Grade 5</option>
+              <option value="6">Grade 6</option>
+              <option value="7">Grade 7</option>
+              <option value="8">Grade 8</option>
+              <option value="9">Grade 9</option>
+              <option value="10">Grade 10</option>
+              <option value="11">Grade 11</option>
+              <option value="12">Grade 12</option>
+              <option value="c1">First Year College</option>
+              <option value="c2">Second Year College</option>
+              <option value="c3">Third Year College</option>
+              <option value="c4">Fourth Year College</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>Department:</label>
+            <select v-model="dep" required>
+              <option v-for="d in departments" :value="d.url" :key="d.id">{{
+                d.name
+              }}</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>Section:</label>
+            <select v-model="sec" required>
+              <option v-for="s in sections" :value="s.url" :key="s.id">{{
+                s.name
+              }}</option>
+            </select>
+          </div>
+          <div class="inpt">
+            <label>Photo: <span class="w3-opacity">Optional</span></label>
+            <input type="file" ref="file" @change="handleFileUpload" />
+          </div>
+          <hr />
+          <p class="w3-center w3-text-red w3-small" v-show="error">
+            Please provide unique values for the ID number.
+          </p>
+          <button
+            type="submit"
+            :disabled="creating"
+            class="w3-button w3-green w3-round"
           >
-          <span v-else>Add This Student</span>
-        </button>
-      </form>
-    </article>
-    <article class="w3-container">
-      <div class="w3-content">
-        <div v-if="totalStudents === 0" class="w3-center">
-          <h4>There is no student yet.</h4>
-        </div>
-        <div v-else>
-          <h2 class="w3-center">List of Students</h2>
-          <div class="filter w3-light-gray w3-round w3-border w3-border-gray">
-            <h3><i class="fas fa-filter"></i> Filter The List</h3>
+            <span v-if="creating"
+              ><i class="fas fa-spinner w3-spin"></i> Adding...</span
+            >
+            <span v-else>Add This Student</span>
+          </button>
+        </form>
+      </article>
+      <article class="w3-container">
+        <div class="w3-content">
+          <div v-if="totalStudents === 0" class="w3-center">
+            <h4>There is no student yet.</h4>
+          </div>
+          <div v-else>
+            <h2 class="w3-center">List of Students</h2>
+            <div class="filter w3-light-gray w3-round w3-border w3-border-gray">
+              <h3><i class="fas fa-filter"></i> Filter The List</h3>
               <div class="inpt">
                 <label>Department:</label>
                 <select v-model="depFilter" required>
@@ -171,26 +181,26 @@
                 <label>Search Name:</label>
                 <input type="text" v-model="search" />
               </div>
+            </div>
+            <p
+              class="w3-text-red w3-small w3-center"
+              v-if="students.length === 0"
+            >
+              No student found with the above filters.
+            </p>
+            <p v-else class="w3-text-green w3-small w3-center">
+              {{ students.length }} found.
+            </p>
+            <Student
+              v-for="s in students"
+              :student="s"
+              :deps="departments"
+              :secs="sections"
+              :key="s.id"
+            />
           </div>
-          <p
-            class="w3-text-red w3-small w3-center"
-            v-if="students.length === 0"
-          >
-            No student found with the above filters.
-          </p>
-          <p v-else class="w3-text-green w3-small w3-center">
-            {{ students.length }} found.
-          </p>
-          <Student
-            v-for="s in students"
-            :student="s"
-            :deps="departments"
-            :secs="sections"
-            :key="s.id"
-          />
         </div>
-      </div>
-    </article>
+      </article>
     </div>
   </div>
 </template>
@@ -286,7 +296,6 @@ export default {
       formData.append('grade_level', this.grade)
       formData.append('department', this.dep)
       formData.append('section', this.sec)
-      this.$store.dispatch('user/toogleRefresh')
       await this.$store
         .dispatch('information/postStu', formData)
         .then(() => {
@@ -311,10 +320,7 @@ export default {
             this.error = false
           }, 10000)
         })
-        .finally(() => {
-          this.creating = false
-          this.$store.dispatch('user/toogleRefresh')
-        })
+        .finally(() => (this.creating = false))
     }
   },
   async mounted() {

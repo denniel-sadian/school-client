@@ -283,7 +283,6 @@ export default {
       formData.append('grade_level', this.grade)
       formData.append('department', this.dep)
       formData.append('section', this.sec)
-      this.$store.dispatch('user/toogleRefresh')
       await this.$store
         .dispatch('information/putStu', formData)
         .then(() => {
@@ -295,10 +294,7 @@ export default {
             this.error = false
           }, 10000)
         })
-        .finally(() => {
-          this.updating = false
-          this.$store.dispatch('user/toogleRefresh')
-        })
+        .finally(() => this.updating = false)
     }
   }
 }
