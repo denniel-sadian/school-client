@@ -22,7 +22,7 @@
         system.
       </p>
 
-      <div id="btns" v-show="work.work_type !== 'e'">
+      <div id="btns" v-show="work.work_type !== 'e' && editable">
         <button
           @click="editing = true"
           class="w3-button w3-small w3-light-green"
@@ -107,7 +107,8 @@
 <script>
 export default {
   props: {
-    work: Object
+    work: Object,
+    editable: Boolean
   },
   data() {
     return {
