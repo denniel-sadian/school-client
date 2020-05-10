@@ -29,9 +29,9 @@
 export default {
   props: {
     record: Object,
-    isExam: {
+    isEditable: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   data() {
@@ -48,7 +48,7 @@ export default {
       )[0].highest_score
     },
     canBeEdited() {
-      if (this.isExam) return false
+      if (this.isEditable) return false
       return (
         this.$store.state.user.user.user.username ===
         this.$store.state.grading.currentSheet.teacher.username
