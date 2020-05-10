@@ -25,7 +25,7 @@
           <th rowspan="2">Learners' Names</th>
           <th class="w3-orange" :colspan="writtenWorks.length + 3">Written Works (20%)</th>
           <th class="w3-green" :colspan="performances.length + 3">Performance Tasks (60%)</th>
-          <th class="w3-purple" :colspan="3">Quarterly Assessment Tasks (20%)</th>
+          <th class="w3-purple" :colspan="3">Quarterly Assessment Task (20%)</th>
           <th rowspan="3">Initial Grade</th>
           <th rowspan="3">Quarterly Grade</th>
         </tr>
@@ -106,7 +106,13 @@
                 </h3>
               </div>
               <div class="scrolled">
-                <p class="w3-small">The examination will be automatically created.</p>
+                <p v-if="!sheet.has_multiple_choice_exam" class="w3-small">
+                  If the Quarterly Assessment Task of this grading sheet is a multiple
+                  choice examination, you can use the built-in exam creator of the system,
+                  and the system will take care of all the recording processes for the Quarterly
+                  Assessment Task of this grading sheet.
+                </p>
+                <p v-else>The system is taking care of the examination.</p>
                 <div v-show="!deleting">
                   <form
                     id="adding-form"
