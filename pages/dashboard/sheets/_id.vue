@@ -106,14 +106,14 @@
                 </h3>
               </div>
               <div class="scrolled">
-                <p v-if="!sheet.has_multiple_choice_exam" class="w3-small">
-                  If the Quarterly Assessment Task of this grading sheet is a multiple
-                  choice examination, you can use the built-in exam creator of the system,
-                  and the system will take care of all the recording processes for the Quarterly
-                  Assessment Task of this grading sheet.
-                </p>
-                <p v-else>The system is taking care of the examination.</p>
                 <div v-show="!deleting">
+                  <p v-if="!sheet.has_multiple_choice_exam" class="w3-small">
+                     If the Quarterly Assessment Task of this grading sheet is a multiple
+                     choice examination, you can use the built-in exam creator of the system,
+                     and the system will take care of all the recording processes for the Quarterly
+                     Assessment Task of this grading sheet.
+                  </p>
+                  <p v-else>The system is taking care of the examination.</p>
                   <form
                     id="adding-form"
                     @submit.prevent="createWork"
