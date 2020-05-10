@@ -303,7 +303,6 @@ export default {
           this.fName = ''
           this.lName = ''
           this.idNum = ''
-          /*
           this.gender = ''
           this.phone = ''
           this.guardianPhone = ''
@@ -311,7 +310,6 @@ export default {
           this.grade = ''
           this.dep = ''
           this.sec = ''
-          */
           this.error = false
         })
         .catch(() => {
