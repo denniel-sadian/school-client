@@ -24,7 +24,7 @@
           <p v-if="sheets.length > 0">
             Select the grading sheets on which the exam should be included.
           </p>
-          <p v-else>All of your grading sheets have their own exams already.</p>
+          <p v-else>You have no grading sheet that needs an exam.</p>
           <label class="container" v-for="s in sheets" :key="s.id"
             ><span class="label">
               <span
