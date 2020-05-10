@@ -18,5 +18,5 @@ export default async function({ $axios, store }) {
     }
   }
   await refresher()
-  setInterval(refresher, 30000)
+  setInterval(refresher, 10000)
 }
