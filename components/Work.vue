@@ -17,9 +17,9 @@
         </tr>
       </table>
 
-      <p class="w3-small" v-show="work.work_type === 'e'">
+      <p class="w3-small" v-show="work.work_type === 'e' && editable">
         This work -- as well as its records -- can only be modified by the
-        system.
+        system itself.
       </p>
 
       <div id="btns" v-show="work.work_type !== 'e' && editable">
