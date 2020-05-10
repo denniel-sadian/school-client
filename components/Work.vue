@@ -17,12 +17,11 @@
         </tr>
       </table>
 
-      <p class="w3-small" v-show="work.work_type === 'e' && editable">
-        This work -- as well as its records -- can only be modified by the
-        system itself.
+      <p class="w3-small" v-if="!editable">
+        This work -- as well as its records -- can only be
+        modified by the system itself.
       </p>
-
-      <div id="btns" v-show="work.work_type !== 'e' && editable">
+      <div id="btns" v-else>
         <button
           @click="editing = true"
           class="w3-button w3-small w3-light-green"

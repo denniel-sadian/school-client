@@ -1,5 +1,5 @@
 <template>
-  <div class="cont w3-card-4 w3-white">
+  <div v-show="shouldShow" class="cont w3-card-4 w3-white">
     <div v-if="got < 1 + this.exam.sheets.length" class="w3-center">
       <h1><i class="fas fa-spinner w3-spin w3-text-gray"></i></h1>
     </div>
@@ -49,6 +49,7 @@ export default {
   },
   data() {
     return {
+      shouldShow: true,
       got: 0,
       teacher: {},
       sheets: []
@@ -61,6 +62,10 @@ export default {
     }
   },
   async mounted() {
+    if (this.exam.sheets.length === 0) {
+      this.shouldShow = false
+      await this.$axios.delete(this.exam.url)
+    }
     await this.$axios.get(this.exam.teacher).then(({ data }) => {
       this.teacher = data
       this.got++
