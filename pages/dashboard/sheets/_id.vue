@@ -89,7 +89,7 @@
           <th></th>
           <th></th>
         </tr>
-        <Row as="tr" v-for="g in girls" :shouldSubmit="submitFinalGrade" :isExamEditable="sheet.has_multiple_choice_exam" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="g" :key="g.url"/>
+        <Row as="tr" v-for="g in girls" :shouldSubmit="submitFinalGrade" :isExamEditable="!sheet.has_multiple_choice_exam" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="g" :key="g.url"/>
       </table>
       </div>
 
