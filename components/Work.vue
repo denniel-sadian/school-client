@@ -18,7 +18,8 @@
       </table>
 
       <p class="w3-small" v-show="work.work_type === 'e'">
-        This work -- as well as its records -- can only be modified by the system.
+        This work -- as well as its records -- can only be modified by the
+        system.
       </p>
 
       <div id="btns" v-show="work.work_type !== 'e'">
@@ -65,7 +66,7 @@
     <form v-else @submit.prevent="update" class="w3-animate-opacity">
       <div class="inpt">
         <label>Name:</label>
-        <input v-model="name" :disabled="updating" required />
+        <input v-model="name" maxlength="100" :disabled="updating" required />
       </div>
       <div class="inpt">
         <label>Type:</label>

@@ -119,6 +119,7 @@
                         required
                         type="text"
                         v-model="wName"
+                        maxlength="100"
                         name="wName"
                         :disabled="creatingWork"
                       />
