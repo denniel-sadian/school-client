@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="got < 6" class="loading">
+    <div v-if="!doneLoading" class="loading">
       <h1 class="w3-text-white w3-center">
         <i class="fas fa-spinner w3-spin"></i>
       </h1>
@@ -72,7 +72,7 @@
           <th></th>
           <th></th>
         </tr>
-        <Row as="tr" v-for="b in boys" :shouldSubmit="submitFinalGrade" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="b" :key="b.url"/>
+        <Row as="tr" v-for="b in boys" :shouldSubmit="submitFinalGrade" :isExamEditable="sheet.has_multiple_choice_exam" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="b" :key="b.url"/>
         <tr>
           <th>Female</th>
           <th v-for="i in writtenWorks.length" :key="'2w' + i+ Math.random()"></th>
@@ -89,7 +89,7 @@
           <th></th>
           <th></th>
         </tr>
-        <Row as="tr" v-for="g in girls" :shouldSubmit="submitFinalGrade" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="g" :key="g.url"/>
+        <Row as="tr" v-for="g in girls" :shouldSubmit="submitFinalGrade" :isExamEditable="sheet.has_multiple_choice_exam" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="g" :key="g.url"/>
       </table>
       </div>
 
@@ -107,12 +107,14 @@
               </div>
               <div class="scrolled">
                 <div v-show="!deleting">
-                  <p v-if="!sheet.has_multiple_choice_exam" class="w3-small">
-                     If the Quarterly Assessment Task of this grading sheet is a multiple
-                     choice examination, you can use the built-in exam creator of the system,
-                     and the system will take care of all the recording processes for the Quarterly
-                     Assessment Task of this grading sheet.
-                  </p>
+                  <div v-if="!sheet.has_multiple_choice_exam" class="w3-small">
+                    <p>
+                      If the Quarterly Assessment Task of this grading sheet is a multiple
+                      choice examination, you can use the built-in exam creator of the system,
+                      and the system will take care of all the recording processes for the Quarterly
+                      Assessment Task of this grading sheet.
+                    </p>
+                  </div>
                   <p v-else>The system is taking care of the examination.</p>
                   <form
                     id="adding-form"
@@ -141,7 +143,7 @@
                         <option value="a">Activity</option>
                         <option value="q">Quiz</option>
                         <option value="p">Performance</option>
-                        <option v-show="sheet.has_multiple_choice_exam" value="e">Examination</option>
+                        <option v-show="!sheet.has_multiple_choice_exam" value="e">Examination</option>
                       </select>
                     </div>
                     <div class="inpt">
@@ -267,7 +269,7 @@ export default {
   },
   data() {
     return {
-      got: 0,
+      doneLoading: false,
       showEditingForm: true,
       updating: false,
       creatingWork: false,
@@ -277,8 +279,9 @@ export default {
       submitFinalGrade: false,
       submitting: false,
       submitted: false,
-
       pub: false,
+      subjectName: '',
+      sectionName: '',
       wName: '',
       wType: '',
       wScore: 0
@@ -456,23 +459,17 @@ export default {
     }
   },
   async mounted() {
+    await this.$store.dispatch('information/getStudents')
+    const sheetUrl = `https://school.pythonanywhere.com/grading/sheets/${this.$route.params.id}/`
     await this.$store
-      .dispatch('information/getDepartments')
-      .then(() => this.got++)
-    await this.$store.dispatch('information/getSections').then(() => this.got++)
-    await this.$store.dispatch('information/getSubjects').then(() => this.got++)
-    await this.$store.dispatch('information/getStudents').then(() => this.got++)
-    await this.$store
-      .dispatch('grading/retrieveSheets', url)
-      .then(() => this.got++)
-    const url = this.$store.state.grading.sheets.filter(
-      (e) => e.id === parseInt(this.$route.params.id)
-    )[0].url
-    await this.$store
-      .dispatch('grading/retrieveSheet', url)
-      .then(() => this.got++)
+      .dispatch('grading/retrieveSheet', sheetUrl)
+    await this.$axios.get(this.sheet.subject)
+      .then(({ data }) => this.subjectName = data.name)
+    await this.$axios.get(this.sheet.section)
+      .then(({ data }) => this.sectionName = data.name)
     this.createRecords()
     this.pub = this.sheet.publish
+    this.doneLoading = true
   },
   validate(context) {
     return /^\d+$/.test(context.params.id)
