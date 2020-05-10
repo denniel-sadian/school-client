@@ -165,7 +165,7 @@
                     There are no works yet.
                   </p>
                   <div v-else>
-                    <Work v-for="w in sheet.works" :work="w" :key="w.url" />
+                    <Work v-for="w in sheet.works" :work="w" :editable="sheet.has_multiple_choice_exam" :key="w.url" />
                   </div>
                 </div>
                 <div class="or" v-show="!deleting">
