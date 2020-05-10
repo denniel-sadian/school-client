@@ -1,4 +1,4 @@
-export default function({ $axios, redirect }) {
+export default function({ $axios, app, redirect }) {
   const t = localStorage.getItem('school_access_token')
   if (t !== null) $axios.setToken(t, 'Bearer')
 
@@ -8,11 +8,8 @@ export default function({ $axios, redirect }) {
 
   $axios.onError((error) => {
     if (error.response.status === 401) {
-      if (
-        error.response.data.detail !==
-        'No active account found with the given credentials'
-      )
-        redirect('/login')
+      app.store.dispatch('user/logout')
+      redirect('/login')
     }
   })
 }
