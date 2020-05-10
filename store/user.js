@@ -100,8 +100,5 @@ export const actions = {
     commit('SET_USER', {})
     commit('SET_PERMISSIONS', [])
     commit('SET_REFRESHING_TRUE')
-  },
-  toogleRefresh({ commit }) {
-    commit('TOGGLE_CAN_REFRESH')
   }
 }
