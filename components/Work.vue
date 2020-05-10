@@ -17,9 +17,9 @@
         </tr>
       </table>
 
-      <p class="w3-small" v-if="!editable">
-        This work -- as well as its records -- can only be
-        modified by the system itself.
+      <p class="w3-small" v-if="!editable && workType === 'Examination'">
+        This work -- as well as its records -- can only be modified by the
+        system itself.
       </p>
       <div id="btns" v-else>
         <button
