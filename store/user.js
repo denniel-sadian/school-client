@@ -1,7 +1,6 @@
 export const state = () => ({
   user: JSON.parse(localStorage.getItem('school_user') || '{}'),
-  permissions: [],
-  canRefreshToken: true
+  permissions: []
 })
 
 export const mutations = {
@@ -13,9 +12,6 @@ export const mutations = {
     state.permissions = perms.sort((a, b) => {
       return b.id - a.id
     })
-  },
-  SET_REFRESHING_TRUE(state) {
-    state.canRefreshToken = true
   },
   PUSH_PERM(state, perm) {
     state.permissions.push(perm)
@@ -35,9 +31,6 @@ export const mutations = {
   },
   DELETE_PERM(state, id) {
     delete state.permissions.filter((p) => p.id === id)[0]
-  },
-  TOGGLE_CAN_REFRESH(state) {
-    state.canRefreshToken = !state.canRefreshToken
   }
 }
 
