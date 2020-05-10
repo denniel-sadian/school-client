@@ -1,11 +1,11 @@
 export default async function({ $axios, store }) {
-  const refresher = () => {
+  const refresher = async () => {
     if (store.state.user.canRefreshToken) {
       const rToken = localStorage.getItem('school_refresh_token')
 
-      if (rToken === null || !store.state.user.canRefreshToken) return
+      if (rToken === null) return
 
-      $axios
+      await $axios
         .post(
           'accounts/refresh-token/',
           { refresh: rToken },
