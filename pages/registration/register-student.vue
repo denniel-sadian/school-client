@@ -97,13 +97,13 @@ export default {
   methods: {
     async register() {
       if (this.username && this.email && this.password && this.password1) {
-        this.registering = true
-        this.disabled = true
-        this.wrong = false
         if (this.password !== this.password1) {
           this.wrong = true
           return
         }
+        this.registering = true
+        this.disabled = true
+        this.wrong = false
         const payload = {
           code: this.code,
           username: this.username,
