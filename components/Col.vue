@@ -32,6 +32,10 @@ export default {
     isEditable: {
       type: Boolean,
       default: true
+    },
+    isExam: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -48,7 +52,7 @@ export default {
       )[0].highest_score
     },
     canBeEdited() {
-      if (this.isEditable) return false
+      if (this.isEditable && this.isExam) return false
       return (
         this.$store.state.user.user.user.username ===
         this.$store.state.grading.currentSheet.teacher.username
