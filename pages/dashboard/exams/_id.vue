@@ -87,7 +87,11 @@
                 <div class="letter">{{ c.letter }}</div>
                 <div class="text">{{ c.text }}</div>
                 <div class="del">
-                  <button @click="deleteChoice(c.letter)" class="w3-button">
+                  <button
+                    @click="deleteChoice(c.letter)"
+                    :disabled="creatingItem"
+                    class="w3-button"
+                  >
                     <i class="fas fa-trash-alt"></i>
                   </button>
                 </div>
@@ -252,22 +256,24 @@ export default {
       if (this.question && this.correct && this.choices.length === 4) {
         this.creatingItem = true
         const payload = {
-          item: {
-            exam: this.exam.url,
-            question: this.question,
-            correct: this.correct,
-            choices: []
-          },
-          choices: this.choices
+          exam: this.exam.url,
+          question: this.question,
+          correct: this.correct,
+          choices: []
         }
-        await this.$store
-          .dispatch('exams/createItem', payload)
-          .then(() => {
-            this.question = ''
-            this.correct = ''
-            this.choices = []
-          })
-          .finally(() => (this.creatingItem = false))
+        let itemUrl
+        await this.$axios
+          .post('exam/items/', payload)
+          .then(({ data }) => (itemUrl = data.url))
+        this.choices.forEach(async (c) => (c.item = itemUrl))
+        await this.$axios.post('exam/choices/', this.choices[0])
+        await this.$axios.post('exam/choices/', this.choices[1])
+        await this.$axios.post('exam/choices/', this.choices[2])
+        await this.$axios.post('exam/choices/', this.choices[3])
+        this.$store.commit('exams/PUSH_ITEM', itemUrl)
+        this.question = ''
+        ;(this.correct = ''), (this.choices = [])
+        this.creatingItem = false
       }
     },
     deleteChoice(letter) {
