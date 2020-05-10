@@ -87,7 +87,7 @@
       as="td"
       v-if="myExam"
       :record="myExam"
-      :isExam="true"
+      :isEditable="isExamEditable"
     />
     <td
       :class="{ 'w3-yellow': hovered, 'w3-pale-blue': PS3 > 0 }"
@@ -122,6 +122,7 @@ export default {
   components: { Col },
   props: {
     student: Object,
+    isExamEditable: Boolean,
     topTotalActScore: {
       type: Number,
       default: 0
