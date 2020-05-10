@@ -29,7 +29,13 @@
           </div>
           <div class="inpt">
             <label>Code:</label>
-            <input type="text" v-model="code" :disabled="creating" required />
+            <input
+              type="text"
+              v-model="code"
+              maxlength="50"
+              :disabled="creating"
+              required
+            />
           </div>
           <hr />
           <p class="w3-center w3-text-red w3-small" v-show="error">

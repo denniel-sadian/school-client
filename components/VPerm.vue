@@ -16,7 +16,13 @@
       </div>
       <div class="inpt">
         <label>Permission Code:</label>
-        <input type="text" v-model="code" required :disabled="updating" />
+        <input
+          type="text"
+          v-model="code"
+          maxlength="50"
+          required
+          :disabled="updating"
+        />
       </div>
     </form>
     <div class="btns">

@@ -53,11 +53,11 @@
       </div>
       <div class="inpt">
         <label>First Name:</label>
-        <input type="text" v-model="fName" required />
+        <input type="text" v-model="fName" maxlength="50" required />
       </div>
       <div class="inpt">
         <label>Last Name:</label>
-        <input type="text" v-model="lName" required />
+        <input type="text" v-model="lName" maxlength="50" required />
       </div>
       <div class="inpt">
         <label>Gender:</label>
@@ -68,7 +68,7 @@
       </div>
       <div class="inpt">
         <label>Code:</label>
-        <input type="text" v-model="code" required />
+        <input type="text" v-model="code" maxlength="50" required />
       </div>
       <div class="inpt">
         <label>Department:</label>

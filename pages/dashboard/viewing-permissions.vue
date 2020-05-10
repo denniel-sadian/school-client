@@ -27,7 +27,13 @@
           </div>
           <div class="inpt">
             <label>Permission Code:</label>
-            <input type="text" v-model="code" required :disabled="creating" />
+            <input
+              type="text"
+              v-model="code"
+              maxlength="50"
+              required
+              :disabled="creating"
+            />
           </div>
           <hr />
           <p class="w3-center w3-text-red w3-small" v-show="error">

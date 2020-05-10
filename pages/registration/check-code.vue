@@ -9,10 +9,11 @@
       <hr />
       <form @submit.prevent="checkCode">
         <div class="inpt">
-          <label for="code">Permission Code:</label>
+          <label>Permission Code:</label>
           <input
             type="text"
             v-model="code"
+            maxlength="50"
             @keypress.enter="checkCode"
             :disabled="disabled"
           />

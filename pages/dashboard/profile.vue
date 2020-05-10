@@ -58,6 +58,7 @@
             <label>ID Number:</label>
             <input
               type="text"
+              maxlength="255"
               v-model="idNumber"
               :disabled="updating"
               required

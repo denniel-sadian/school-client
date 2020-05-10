@@ -21,6 +21,7 @@
         <input
           type="text"
           v-model="code"
+          maxlength="50"
           :disabled="updating || deleting"
           required
         />

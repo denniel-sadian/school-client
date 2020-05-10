@@ -42,7 +42,13 @@
           </div>
           <div class="inpt">
             <label>Code:</label>
-            <input type="text" v-model="code" :disabled="creating" required />
+            <input
+              type="text"
+              v-model="code"
+              maxlength="50"
+              :disabled="creating"
+              required
+            />
           </div>
           <div class="inpt">
             <label>Department:</label>
