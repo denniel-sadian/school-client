@@ -135,6 +135,7 @@
                         <option value="a">Activity</option>
                         <option value="q">Quiz</option>
                         <option value="p">Performance</option>
+                        <option v-show="sheet.has_multiple_choice_exam" value="e">Examination</option>
                       </select>
                     </div>
                     <div class="inpt">
