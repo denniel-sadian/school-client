@@ -185,7 +185,26 @@
             These are the comments of the admins regarding this examination.
           </p>
         </div>
-        <div class="middle"></div>
+        <div class="middle">
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quis
+            beatae temporibus, tenetur iste eveniet reiciendis reprehenderit
+            libero similique recusandae ipsum quisquam quod nobis voluptate at.
+            Excepturi quaerat corporis maxime?
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
+            expedita vitae eius rerum provident ipsam porro. Sequi, sunt
+            molestias. Quo neque ipsum quos officia consequuntur labore ratione
+            perspiciatis nam veritatis.
+          </h1>
+          <h1>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla
+            ullam praesentium, molestiae corrupti asperiores quibusdam magni
+            quisquam deserunt odit consequuntur error hic atque ipsam iste
+            architecto cumque nobis voluptatem culpa!
+          </h1>
+        </div>
         <div class="bottom">
           <button
             @click="showComments = false"
@@ -229,6 +248,7 @@ export default {
       return this.$store.state.user.user.user.username
     },
     editable() {
+      if (!this.doneLoading) return false
       return this.username === this.exam.teacher.username
     }
   },
@@ -502,6 +522,10 @@ header {
 .comments .top {
   background: white;
   border-radius: 8px;
+}
+
+.comments .middle {
+  overflow-y: auto;
 }
 
 .comments .top,
