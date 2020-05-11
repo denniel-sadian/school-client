@@ -127,10 +127,10 @@
         <div v-else class="w3-content">
           <h2>Items ({{ exam.items.length }})</h2>
           <Item
-            v-for="url in exam.items"
-            :itemUrl="url"
+            v-for="i in exam.items"
+            :item="i"
             :editable="editable"
-            :key="url"
+            :key="i.url"
           />
         </div>
       </div>
@@ -266,13 +266,17 @@ export default {
           .post('exam/items/', payload)
           .then(({ data }) => (item = data))
         this.choices.forEach(async (c) => (c.item = item.url))
-        await this.$axios.post('exam/choices/', this.choices[0])
-          .then(({ data }) => (item.choices.push(data)))
-        await this.$axios.post('exam/choices/', this.choices[1])
+        await this.$axios
+          .post('exam/choices/', this.choices[0])
           .then(({ data }) => item.choices.push(data))
-        await this.$axios.post('exam/choices/', this.choices[2])
+        await this.$axios
+          .post('exam/choices/', this.choices[1])
           .then(({ data }) => item.choices.push(data))
-        await this.$axios.post('exam/choices/', this.choices[3])
+        await this.$axios
+          .post('exam/choices/', this.choices[2])
+          .then(({ data }) => item.choices.push(data))
+        await this.$axios
+          .post('exam/choices/', this.choices[3])
           .then(({ data }) => item.choices.push(data))
         this.$store.commit('exams/PUSH_ITEM', item)
         this.question = ''
