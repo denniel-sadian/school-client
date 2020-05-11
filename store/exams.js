@@ -49,7 +49,7 @@ export const mutations = {
     item.choices.filter((c) => c.id === choice.id)[0].text = choice.text
   },
   DELETE_ITEM(state, url) {
-    state.exam.items = state.exam.items.filter((i) => i !== url)
+    state.exam.items = state.exam.items.filter((i) => i.url !== url)
   }
 }
 
