@@ -267,13 +267,13 @@ export default {
           .then(({ data }) => (item = data))
         this.choices.forEach(async (c) => (c.item = item.url))
         await this.$axios.post('exam/choices/', this.choices[0])
-          .then(({data}) => item.choices.push(data))
+          .then(({ data }) => (item.choices.push(data)))
         await this.$axios.post('exam/choices/', this.choices[1])
-          .then(({data}) => item.choices.push(data))
+          .then(({ data }) => item.choices.push(data))
         await this.$axios.post('exam/choices/', this.choices[2])
-          .then(({data}) => item.choices.push(data))
+          .then(({ data }) => item.choices.push(data))
         await this.$axios.post('exam/choices/', this.choices[3])
-          .then(({data}) => item.choices.push(data))
+          .then(({ data }) => item.choices.push(data))
         this.$store.commit('exams/PUSH_ITEM', item)
         this.question = ''
         this.correct = ''
