@@ -179,11 +179,8 @@
     </button>
     <div v-show="showComments" class="comments-cont">
       <div class="comments w3-animate-bottom">
-        <div class="top">
+        <div class="top w3-blue">
           <h2><i class="fas fa-comment-dots"></i> Comments</h2>
-          <p>
-            These are the comments regarding this examination.
-          </p>
         </div>
         <div class="middle">
           <staff-comment v-for="c in exam.comments" :comment="c" :key="c.url" />
