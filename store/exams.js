@@ -99,7 +99,7 @@ export const actions = {
   },
   createComment({ commit }, payload) {
     return this.$axios
-      .post('exam/admincomments', payload)
+      .post('exam/staffcomments', payload)
       .then(({ data }) => commit('PUSH_COMMENT', data))
   },
   deleteItem({ commit }, url) {
