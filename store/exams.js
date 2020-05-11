@@ -51,11 +51,6 @@ export const actions = {
       .get('exam/exams/')
       .then(({ data }) => commit('SET_EXAMS', data))
   },
-  retrieveStrippedExams({ commit }) {
-    return this.$axios
-      .get('exam/stripped-exams/')
-      .then(({ data }) => commit('SET_EXAMS', data))
-  },
   retrieveSessions({ commit }) {
     return this.$axios
       .get('exam/sessions/')
