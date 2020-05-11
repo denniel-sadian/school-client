@@ -209,7 +209,7 @@ export default {
   layout: 'dashboard',
   components: {
     Item,
-    AdminComment
+    StaffComment
   },
   data() {
     return {
