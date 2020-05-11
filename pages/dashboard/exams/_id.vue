@@ -180,30 +180,13 @@
     <div v-show="showComments" class="comments-cont">
       <div class="comments w3-animate-bottom">
         <div class="top">
-          <h2>Comments</h2>
+          <h2><i class="fas fa-comment-dots"></i> Comments</h2>
           <p>
-            These are the comments of the admins regarding this examination.
+            These are the comments regarding this examination.
           </p>
         </div>
         <div class="middle">
-          <h1>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quis
-            beatae temporibus, tenetur iste eveniet reiciendis reprehenderit
-            libero similique recusandae ipsum quisquam quod nobis voluptate at.
-            Excepturi quaerat corporis maxime?
-          </h1>
-          <h1>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
-            expedita vitae eius rerum provident ipsam porro. Sequi, sunt
-            molestias. Quo neque ipsum quos officia consequuntur labore ratione
-            perspiciatis nam veritatis.
-          </h1>
-          <h1>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla
-            ullam praesentium, molestiae corrupti asperiores quibusdam magni
-            quisquam deserunt odit consequuntur error hic atque ipsam iste
-            architecto cumque nobis voluptatem culpa!
-          </h1>
+          <admin-comment v-for="c in exam.comments" :comment="c" :key="c.url" />
         </div>
         <div class="bottom">
           <button
@@ -220,10 +203,14 @@
 
 <script>
 import Item from '~/components/Item.vue'
+import AdminComment from '~/components/AdminComment.vue'
 
 export default {
   layout: 'dashboard',
-  components: { Item },
+  components: {
+    Item,
+    AdminComment
+  },
   data() {
     return {
       sheets: [],
