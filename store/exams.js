@@ -75,7 +75,7 @@ export const actions = {
   },
   togglePublished({ commit }, payload) {
     return this.$axios
-      .put(this.exam.url, payload)
+      .put(payload.url, payload)
       .then(({ data }) => commit('TOGGLE_PUBLISHED', data.published))
   },
   updateItem({ commit }, payload) {

@@ -33,7 +33,7 @@
             {{ exam.teacher.first_name }} {{ exam.teacher.last_name }} on
             {{ new Date(exam.date).toDateString() }}.
           </p>
-          <p v-show="published" class="w3-small">
+          <p v-show="exam.published" class="w3-small">
             This exam has been published already and is currently visible to the
             students.
           </p>
@@ -228,19 +228,18 @@ export default {
     }
   },
   methods: {
-    async setPublishedOrNot() {
+    setPublishedOrNot() {
       if (!this.editable) return
       this.doingPublish = true
-      this.doingPublish = true
       const payload = {
+        url: this.exam.url,
         published: this.published,
-        sheets: this.exam.sheets,
-        items: this.exam.items
+        sheets: this.exam.sheets
       }
-      await this.$axios
-        .put(this.exam.url, payload)
-        .then(({ data }) => (this.published = data.published))
-        .finally(() => (this.doingPublish = false))
+      this.$store.dispatch('exams/togglePublished', payload).finally(() => {
+        this.doingPublish = false
+        this.published = this.exam.published
+      })
     },
     async getName(url) {
       const { data } = await this.$axios.get(url)
