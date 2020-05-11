@@ -61,12 +61,6 @@ export default {
         this.updatingChoice = false
       })
     }
-  },
-  async mounted() {
-    await this.$axios
-      .get(this.choiceUrl)
-      .then(({ data }) => (this.choice = data))
-    this.doneLoading = true
   }
 }
 </script>
