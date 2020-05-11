@@ -520,7 +520,6 @@ header {
 }
 
 #editing-modal {
-  display: absolute;
   position: fixed;
   z-index: 1;
   top: 0px;

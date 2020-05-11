@@ -37,16 +37,6 @@
             This exam has been published already and is currently visible to the
             students.
           </p>
-          <div v-show="editable" class="checkbox">
-            <span v-if="doingPublish"
-              ><i class="fas fa-spinner w3-spin"></i> Loading ...</span
-            >
-            <label v-else class="container"
-              >Published
-              <input v-model="published" :value="false" type="checkbox" />
-              <span class="checkmark"></span>
-            </label>
-          </div>
         </div>
       </header>
       <div v-show="editable" class="w3-container">
@@ -170,6 +160,42 @@
         </div>
       </div>
     </div>
+    <div v-show="editable" class="checkbox">
+      <span v-if="doingPublish"
+        ><i class="fas fa-spinner w3-spin"></i> Loading ...</span
+      >
+      <label v-else class="container"
+        >Published
+        <input v-model="published" :value="false" type="checkbox" />
+        <span class="checkmark"></span>
+      </label>
+    </div>
+    <button
+      v-show="!showComments"
+      @click="showComments = true"
+      class="show-comments-toggle-btn w3-button w3-green w3-animate-zoom"
+    >
+      <i class="fas fa-comment-dots"></i> Admin Comments
+    </button>
+    <div v-show="showComments" class="comments-cont">
+      <div class="comments w3-animate-bottom">
+        <div class="top">
+          <h2>Comments</h2>
+          <p>
+            These are the comments of the admins regarding this examination.
+          </p>
+        </div>
+        <div class="middle"></div>
+        <div class="bottom">
+          <button
+            @click="showComments = false"
+            class="w3-button w3-pink w3-round-xxlarge"
+          >
+            <i class="fas fa-times"></i> Close
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -187,6 +213,7 @@ export default {
       choices: [],
       choice: '',
       correct: '',
+      showComments: false,
       doingPublish: false,
       published: false,
       creatingItem: false,
@@ -422,7 +449,7 @@ header {
 
 .checkbox {
   position: fixed;
-  bottom: 20px;
+  bottom: 70px;
   right: 20px;
   background: #87ceeb;
   padding: 8px 16px 8px 8px;
@@ -435,5 +462,55 @@ header {
 
 .checkbox .container .checkmark {
   border-radius: 100%;
+}
+
+.show-comments-toggle-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 32px;
+  width: unset;
+}
+
+.comments-cont {
+  display: absolute;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.753);
+  padding: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comments-cont .comments {
+  max-width: 500px;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr auto;
+}
+
+.comments button {
+  width: unset;
+}
+
+.comments .top {
+  background: white;
+  border-radius: 8px;
+}
+
+.comments .top,
+.comments .bottom {
+  text-align: center;
+}
+
+.comments .top,
+.comments .bottom {
+  padding: 8px;
 }
 </style>
