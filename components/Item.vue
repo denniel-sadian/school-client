@@ -1,9 +1,6 @@
 <template>
   <div class="cont w3-card-4" v-show="!deleting">
-    <div v-if="!doneLoading" class="w3-center">
-      <h1><i class="fas fa-spinner w3-spin w3-text-gray"></i></h1>
-    </div>
-    <div v-else class="display">
+    <div class="display">
       <div v-if="!confirmDelete">
         <div v-if="!updatingItem">
           <h4 v-if="!editing">{{ item.question }}</h4>
@@ -21,12 +18,12 @@
           <h3><i class="fas fa-spinner w3-spin w3-text-gray"></i></h3>
         </div>
         <Choice
-          v-for="url in item.choices"
-          :choiceUrl="url"
+          v-for="c in item.choices"
+          :choiceUrl="c.url"
           :editing="editing"
           :updating="updating"
           :answer="item.correct"
-          :key="url"
+          :key="c.url"
         />
         <div v-if="!updatingItem">
           <p v-if="!editing">Answer: {{ item.correct }}</p>
@@ -102,15 +99,13 @@ import Choice from '~/components/Choice.vue'
 export default {
   components: { Choice },
   props: {
-    itemUrl: String,
+    item: Object,
     editable: Boolean
   },
   data() {
     return {
-      item: {},
       question: '',
       answer: '',
-      doneLoading: false,
       editing: false,
       updating: false,
       updatingItem: false,
@@ -139,27 +134,21 @@ export default {
         return
       this.updatingItem = true
       const payload = {
+        url: this.item.url,
         exam: this.item.exam,
         question: this.question,
         correct: this.answer,
         choices: []
       }
-      await this.$axios
-        .put(this.itemUrl, payload)
-        .then(({ data }) => (this.item = data))
-        .finally(() => {
-          this.updatingItem = false
-          this.editing = false
-        })
+      await this.$store.dispatch('exams/updateItem', payload).finally(() => {
+        this.updatingItem = false
+        this.editing = false
+      })
     },
     async deleteItem() {
       this.deleting = true
-      await this.$store.dispatch('exams/deleteItem', this.itemUrl)
+      await this.$store.dispatch('exams/deleteItem', this.item.url)
     }
-  },
-  async mounted() {
-    await this.$axios.get(this.itemUrl).then(({ data }) => (this.item = data))
-    this.doneLoading = true
   }
 }
 </script>
