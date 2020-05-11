@@ -186,15 +186,56 @@
           </p>
         </div>
         <div class="middle">
-          <admin-comment v-for="c in exam.comments" :comment="c" :key="c.url" />
+          <staff-comment v-for="c in exam.comments" :comment="c" :key="c.url" />
         </div>
         <div class="bottom">
+          <button
+            @click="showCommentModal = true"
+            class="w3-button w3-green w3-round-xxlarge"
+          >
+            <i class="fas fa-comment-medical"></i> Comment
+          </button>
           <button
             @click="showComments = false"
             class="w3-button w3-pink w3-round-xxlarge"
           >
             <i class="fas fa-times"></i> Close
           </button>
+        </div>
+        <div
+          v-show="showCommentModal"
+          class="comment-modal w3-card-4 w3-animate-bottom"
+        >
+          <div v-if="postingComment" class="w3-center">
+            <h3><i class="fas fa-spinner w3-spin w3-text-gray"></i></h3>
+          </div>
+          <div v-else>
+            <h3><i class="fas fa-comment-dots"></i> Commenting</h3>
+            <div class="inpt">
+              <label>Comment:</label>
+              <input
+                @keypress.enter="addComment"
+                type="text"
+                v-model="comment"
+                maxlength="255"
+                required
+              />
+            </div>
+            <div class="buttons">
+              <button
+                @click="addComment"
+                class="w3-button w3-round-xxlarge w3-green w3-small"
+              >
+                <i class="fas fa-comment-dots"></i> Add Comment
+              </button>
+              <button
+                @click="showCommentModal = false"
+                class="w3-button w3-round-xxlarge w3-pink w3-small"
+              >
+                <i class="fas fa-times"></i> Close
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -214,17 +255,20 @@ export default {
   data() {
     return {
       sheets: [],
+      choices: [],
 
       question: '',
-      choices: [],
       choice: '',
       correct: '',
+      comment: '',
       showComments: false,
+      showCommentModal: false,
       doingPublish: false,
       published: false,
       creatingItem: false,
       doneLoading: false,
-      confirmDelete: false
+      confirmDelete: false,
+      postingComment: false
     }
   },
   computed: {
@@ -326,6 +370,19 @@ export default {
       await this.$axios
         .delete(this.exam.url)
         .then(() => this.$router.push('/dashboard/exams'))
+    },
+    async addComment() {
+      if (this.comment === '') return
+      this.postingComment = true
+      const payload = {
+        exam: this.exam.url,
+        comment: this.comment
+      }
+      await this.$store.dispatch('exams/createComment', payload).finally(() => {
+        this.showCommentModal = false
+        this.postingComment = false
+        this.comment = ''
+      })
     }
   },
   async mounted() {
@@ -488,7 +545,6 @@ header {
   height: 100vh;
   z-index: 1;
   background: rgba(0, 0, 0, 0.753);
-  padding: 16px;
   display: flex;
   justify-content: flex-end;
 }
@@ -500,6 +556,20 @@ header {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: auto 1fr auto;
+  position: relative;
+  padding: 16px;
+}
+
+.comment-modal {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  background: white;
+  padding: 16px;
+}
+
+.comment-modal .buttons {
+  text-align: right;
 }
 
 .comments button {
@@ -513,6 +583,16 @@ header {
 
 .comments .middle {
   overflow-y: auto;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.comments .middle::-webkit-scrollbar {
+  display: none;
+}
+
+.comments .middle {
+  -ms-overflow-style: none;
 }
 
 .comments .top,
