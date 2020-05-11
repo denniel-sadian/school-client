@@ -97,7 +97,15 @@ export const actions = {
   createExam({ commit }, payload) {
     return this.$axios.post('exam/exams/', payload)
   },
+  createComment({ commit }, payload) {
+    return this.$axios
+      .post('exam/admincomments', payload)
+      .then(({ data }) => commit('PUSH_COMMENT', data))
+  },
   deleteItem({ commit }, url) {
     return this.$axios.delete(url).then(() => commit('DELETE_ITEM', url))
+  },
+  deleteComment({ commit }, url) {
+    return this.$axios.delete(url).then(() => commit('DELETE_COMMENT', url))
   }
 }
