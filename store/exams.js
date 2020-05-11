@@ -37,8 +37,8 @@ export const mutations = {
       state.toSubmit.answers.push(d)
     }
   },
-  PUSH_ITEM(state, url) {
-    state.exam.items.push(url)
+  PUSH_ITEM(state, item) {
+    state.exam.items.push(item)
   },
   DELETE_ITEM(state, url) {
     state.exam.items = state.exam.items.filter((i) => i !== url)
