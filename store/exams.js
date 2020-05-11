@@ -45,8 +45,8 @@ export const mutations = {
     state.exam.items.filter((i) => i.id === item.id)[0].correct = item.correct
   },
   UPDATE_CHOICE(state, choice) {
-    const item = state.exam.items.filter((i) => i.url === choice.item)
-    item.choices.filter((c) => c.id === choice.id).text = choice.text
+    const item = state.exam.items.filter((i) => i.url === choice.item)[0]
+    item.choices.filter((c) => c.id === choice.id)[0].text = choice.text
   },
   DELETE_ITEM(state, url) {
     state.exam.items = state.exam.items.filter((i) => i !== url)
