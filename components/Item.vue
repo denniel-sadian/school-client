@@ -19,7 +19,7 @@
         </div>
         <Choice
           v-for="c in item.choices"
-          :choiceUrl="c.url"
+          :choice="c"
           :editing="editing"
           :updating="updating"
           :answer="item.correct"
