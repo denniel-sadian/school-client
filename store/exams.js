@@ -37,6 +37,9 @@ export const mutations = {
       state.toSubmit.answers.push(d)
     }
   },
+  PUSH_COMMENT(state, comment) {
+    state.exam.comments.push(comment)
+  },
   PUSH_ITEM(state, item) {
     state.exam.items.push(item)
   },
