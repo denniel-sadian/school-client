@@ -40,6 +40,9 @@ export const mutations = {
   PUSH_ITEM(state, item) {
     state.exam.items.push(item)
   },
+  TOGGLE_PUBLISHED(state, b) {
+    state.exam.published = b
+  },
   UPDATE_ITEM(state, item) {
     state.exam.items.filter((i) => i.id === item.id)[0].question = item.question
     state.exam.items.filter((i) => i.id === item.id)[0].correct = item.correct
@@ -69,6 +72,11 @@ export const actions = {
   },
   retrieveExam({ commit }, url) {
     return this.$axios.get(url).then(({ data }) => commit('SET_EXAM', data))
+  },
+  togglePublished({ commit }, payload) {
+    return this.$axios
+      .put(this.exam.url, payload)
+      .then(({ data }) => commit('TOGGLE_PUBLISHED', data.published))
   },
   updateItem({ commit }, payload) {
     return this.$axios
