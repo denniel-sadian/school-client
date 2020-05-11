@@ -87,6 +87,7 @@ img {
 .text {
   border-left: 3px solid #9e9e9e;
   padding: 12px 8px;
+  margin-bottom: 0px;
 }
 
 button {
