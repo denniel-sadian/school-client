@@ -1,5 +1,5 @@
 <template>
-  <div v-show="displayed" class="holder">
+  <div v-show="displayed" class="holder w3-animate-top">
     <div class="top">
       <img :src="photo" alt="" />
       <div>
