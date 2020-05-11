@@ -77,7 +77,7 @@ export const actions = {
   },
   updateChoice({ commit }, payload) {
     return this.$axios
-      .put(this.payload.url, payload)
+      .put(payload.url, payload)
       .then(({ data }) => commit('UPDATE_CHOICE', data))
   },
   createExam({ commit }, payload) {

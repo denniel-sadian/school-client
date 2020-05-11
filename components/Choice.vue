@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div v-if="!doneLoading" class="w3-center">
-      <h4><i class="fas fa-spinner w3-spin w3-text-gray"></i></h4>
-    </div>
-    <div v-else class="choice">
+    <div class="choice">
       <div class="letter">{{ choice.letter }}</div>
       <div class="text">
         <div v-if="updatingChoice">
@@ -34,7 +31,6 @@ export default {
   },
   data() {
     return {
-      doneLoading: false,
       updatingChoice: false,
       text: ''
     }
