@@ -56,6 +56,9 @@ export const mutations = {
   },
   DELETE_ITEM(state, url) {
     state.exam.items = state.exam.items.filter((i) => i.url !== url)
+  },
+  DELETE_COMMENT(state, url) {
+    state.exam.comments = state.exam.comments.filter((c) => c.url !== url)
   }
 }
 
