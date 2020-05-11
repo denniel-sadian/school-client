@@ -26,8 +26,7 @@
           :key="c.url"
         />
         <div v-if="!updatingItem">
-          <p v-if="!editing">Answer: {{ item.correct }}</p>
-          <div v-else class="inpt">
+          <div v-if="editing" class="inpt">
             <label>Answer:</label>
             <select v-model="answer" :disabled="updatingItem">
               <option value="a">A</option>
