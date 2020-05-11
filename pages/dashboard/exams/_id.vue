@@ -175,7 +175,7 @@
       @click="showComments = true"
       class="show-comments-toggle-btn w3-button w3-green w3-animate-zoom"
     >
-      <i class="fas fa-comment-dots"></i> Admin Comments
+      <i class="fas fa-comment-dots"></i> Comments
     </button>
     <div v-show="showComments" class="comments-cont">
       <div class="comments w3-animate-bottom">
@@ -203,7 +203,7 @@
 
 <script>
 import Item from '~/components/Item.vue'
-import AdminComment from '~/components/AdminComment.vue'
+import StaffComment from '~/components/StaffComment.vue'
 
 export default {
   layout: 'dashboard',

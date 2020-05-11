@@ -33,17 +33,17 @@ export default {
   },
   computed: {
     photo() {
-      const p = this.comment.admin.profile.photo
+      const p = this.comment.staff.profile.photo
       if (p !== null) return p
       return '/anon_avatar.png'
     },
     fullname() {
-      return `${this.comment.admin.first_name} ${this.comment.admin.last_name}`
+      return `${this.comment.staff.first_name} ${this.comment.staff.last_name}`
     },
     ownedByUser() {
       return (
         this.$store.state.user.user.user.username ===
-        this.comment.admin.username
+        this.comment.staff.username
       )
     }
   },
