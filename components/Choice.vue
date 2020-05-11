@@ -27,14 +27,13 @@
 <script>
 export default {
   props: {
-    choiceUrl: String,
+    choice: Object,
     answer: String,
     editing: Boolean,
     updating: Boolean
   },
   data() {
     return {
-      choice: {},
       doneLoading: false,
       updatingChoice: false,
       text: ''
@@ -53,16 +52,14 @@ export default {
       if (this.text === this.choice.text || this.text === '') return
       this.updatingChoice = true
       const payload = {
+        url: this.choice.url,
         item: this.choice.item,
         letter: this.choice.letter,
         text: this.text
       }
-      await this.$axios
-        .put(this.choiceUrl, payload)
-        .then(({ data }) => (this.choice = data))
-        .finally(() => {
-          this.updatingChoice = false
-        })
+      await this.$store.dispatch('exams/updateChoice', payload).finally(() => {
+        this.updatingChoice = false
+      })
     }
   },
   async mounted() {
