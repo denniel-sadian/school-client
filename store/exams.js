@@ -40,6 +40,10 @@ export const mutations = {
   PUSH_ITEM(state, item) {
     state.exam.items.push(item)
   },
+  UPDATE_ITEM(state, item) {
+    state.exam.items.filter((i) => i.id === item.id)[0].question = item.question
+    state.exam.items.filter((i) => i.id === item.id)[0].correct = item.correct
+  },
   DELETE_ITEM(state, url) {
     state.exam.items = state.exam.items.filter((i) => i !== url)
   }
@@ -61,6 +65,11 @@ export const actions = {
   },
   retrieveExam({ commit }, url) {
     return this.$axios.get(url).then(({ data }) => commit('SET_EXAM', data))
+  },
+  updateItem({ commit }, payload) {
+    return this.$axios
+      .put(payload.url, payload)
+      .then(({ data }) => commit('UPDATE_ITEM', data))
   },
   createExam({ commit }, payload) {
     return this.$axios.post('exam/exams/', payload)
