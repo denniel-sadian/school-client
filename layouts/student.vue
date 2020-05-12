@@ -19,7 +19,7 @@
       <nuxt-link
         to="/student/announcements"
         :class="{ show: showLinks }"
-        class="s w3-animate-top w3-purple"
+        class="s w3-animate-top w3-text-purple"
         ><i class="fas fa-bullhorn"></i> Announcements</nuxt-link
       >
       <nuxt-link
