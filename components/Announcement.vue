@@ -61,7 +61,7 @@ export default {
   padding: 16px;
   background: white;
   border-radius: 8px;
-  margin-bottom: 16px;
+  margin: 64px 0px;
   position: relative;
 }
 

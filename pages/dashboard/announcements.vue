@@ -37,7 +37,6 @@
         </form>
       </article>
       <article class="w3-container">
-        {{ announcements }}
         <div class="w3-content">
           <div v-if="announcements.length === 0" class="w3-center">
             <h4>There is no announcement yet.</h4>
