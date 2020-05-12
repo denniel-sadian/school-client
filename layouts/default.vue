@@ -10,7 +10,7 @@
         ><i class="fas fa-solar-panel"></i> Dashboard</nuxt-link
       >
       <nuxt-link
-        to="/exams"
+        to="/student/exams"
         v-else-if="thereIsUser"
         :class="{ show: showLinks }"
         class="s w3-animate-top w3-text-green"

@@ -9,7 +9,7 @@
         ><i class="fas fa-home"></i> Home</nuxt-link
       >
       <nuxt-link
-        to="/exams"
+        to="/student/exams"
         :class="{ show: showLinks }"
         class="s w3-animate-top w3-text-green"
         ><i class="fas fa-pencil-alt"></i> Exams</nuxt-link

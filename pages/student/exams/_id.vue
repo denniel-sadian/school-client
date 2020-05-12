@@ -12,7 +12,7 @@
           Please take note that once you've taken an exam, you'll never be able
           to take it again. Your session to this exam has been recorded already.
         </p>
-        <nuxt-link to="/exams" class="w3-button w3-green w3-round"
+        <nuxt-link to="/student/exams" class="w3-button w3-green w3-round"
           >Okay</nuxt-link
         >
       </div>
