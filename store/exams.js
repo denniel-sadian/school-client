@@ -28,6 +28,13 @@ export const mutations = {
   SET_EXAM_ID(state, id) {
     state.toSubmit.exam = id
   },
+  EMPTY_TO_SUBMIT(state) {
+    state.toSubmit = {
+      student: 0,
+      exam: 0,
+      answers: []
+    }
+  },
   PUSH_OR_MODIFY_ANSWER(state, d) {
     const answer = state.toSubmit.answers.filter((a) => a.item === d.item)[0]
     if (answer) {
