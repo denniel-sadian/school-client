@@ -1,4 +1,5 @@
 export const state = () => ({
+  announcements: [],
   departments: [],
   sections: [],
   students: [],
@@ -10,6 +11,9 @@ export const state = () => ({
 export const mutations = {
   SET_SUMMARY(state, summary) {
     state.summary = summary
+  },
+  SET_ANNOUNCEMENTS(state, announcements) {
+    state.announcements = announcements
   },
   SET_DEPARTMENTS(state, deps) {
     state.departments = deps.sort((a, b) => {
@@ -61,6 +65,12 @@ export const mutations = {
       stu.grade_level
     state.students.filter((e) => e.id === stu.id)[0].section = stu.section
   },
+  PUSH_ANNOUNCEMENT(state, ann) {
+    state.announcements.push(ann)
+    state.announcements = state.announcements.sort((a, b) => {
+      return b.id - a.id
+    })
+  },
   PUSH_DEPARTMENT(state, dep) {
     state.departments.push(dep)
     state.departments = state.departments.sort((a, b) => {
@@ -99,6 +109,9 @@ export const mutations = {
   },
   DELETE_STAFF(state, id) {
     state.staff = state.staff.filter((e) => e.id !== id)
+  },
+  DELETE_ANNOUNCEMENT(state, id) {
+    state.announcements = state.announcements.filter((e) => e.id !== id)
   }
 }
 
@@ -111,6 +124,11 @@ export const actions = {
   getDepartments({ commit }) {
     return this.$axios.get('information/departments/').then(({ data }) => {
       commit('SET_DEPARTMENTS', data)
+    })
+  },
+  getAnnouncements({ commit }) {
+    return this.$axios.get('information/announcements/').then(({ data }) => {
+      commit('SET_ANNOUNCEMENTS', data)
     })
   },
   getSections({ commit }) {
@@ -138,6 +156,13 @@ export const actions = {
       .post('information/departments/', payload)
       .then(({ data }) => {
         commit('PUSH_DEPARTMENT', data)
+      })
+  },
+  postAnn({ commit }, payload) {
+    return this.$axios
+      .post('information/announcements/', payload)
+      .then(({ data }) => {
+        commit('PUSH_ANNOUNCEMENT', data)
       })
   },
   postSec({ commit }, payload) {
@@ -200,6 +225,11 @@ export const actions = {
   putPerm({ commit }, payload) {
     return this.$axios.put(payload.url, payload).then(({ data }) => {
       commit('MODIFY_PERM', data)
+    })
+  },
+  deleteAnn({ commit }, url) {
+    return this.$axios.delete(url).then(() => {
+      commit('DELETE_ANNOUNCEMENT', url)
     })
   },
   deleteDep({ commit }, url) {
