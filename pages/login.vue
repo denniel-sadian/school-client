@@ -79,7 +79,7 @@ export default {
         })
         .then(() => {
           if (this.isStaff) this.$router.push('/dashboard')
-          else this.$router.push('/student/exams')
+          else this.$router.push('/student/announcements')
         })
         .catch(() => {
           this.no_such_account = true
