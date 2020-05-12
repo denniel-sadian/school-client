@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  layout: 'dashboard',
+  layout: 'student',
   data() {
     return {
       updated: false,
