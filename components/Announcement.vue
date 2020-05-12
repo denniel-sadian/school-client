@@ -1,5 +1,5 @@
 <template>
-  <div v-show="displayed" class="holder w3-animate-top">
+  <div v-show="displayed" class="ann w3-animate-zoom w3-card-4">
     <div class="top">
       <img :src="photo" alt="" />
       <div>
@@ -53,9 +53,9 @@ export default {
 <style scoped>
 .ann {
   padding: 16px;
-  margin: 64px 0px;
   background: white;
   border-radius: 8px;
+  margin-bottom: 16px;
   position: relative;
 }
 
@@ -98,7 +98,7 @@ button {
   border-radius: 100%;
 }
 
-.holder:hover button {
+.ann:hover button {
   display: flex;
 }
 </style>
