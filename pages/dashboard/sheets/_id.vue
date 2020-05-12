@@ -9,7 +9,7 @@
       <header class="w3-center">
         <h1>
           Grading sheet of {{ section }} for
-          {{ subject.name }}
+          {{ subject }}
         </h1>
         <p>{{ sheet.grading }} of {{ sheet.sem === '1'? 'first' : 'second' }} semester</p>
         <p>Created on {{ new Date(sheet.date).toDateString() }}</p>
@@ -72,7 +72,7 @@
           <th></th>
           <th></th>
         </tr>
-        <Row as="tr" v-for="b in boys" :shouldSubmit="submitFinalGrade" :isExamEditable="sheet.has_multiple_choice_exam" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="b" :key="b.url"/>
+        <Row as="tr" v-for="b in boys" :shouldSubmit="submitFinalGrade" :isExamEditable="!sheet.has_multiple_choice_exam" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="b" :key="b.url"/>
         <tr>
           <th>Female</th>
           <th v-for="i in writtenWorks.length" :key="'2w' + i+ Math.random()"></th>
@@ -328,12 +328,13 @@ export default {
     },
     section() {
       const sections = this.$store.state.information.sections
-      return sections.filter((e) => e.url === this.sheet.section)[0].name
+      if (sections.length !== 0)
+        return sections.filter((e) => e.url === this.sheet.section)[0].name
     },
     subject() {
-      return this.$store.state.information.subjects.filter((e) => (
-        e.url === this.sheet.subject
-      ))[0]
+      const subjects = this.$store.state.information.subjects
+      if (subjects.length !== 0)
+        return subjects.filter((e) => (e.url === this.sheet.subject))[0].name
     },
     students() {
       return this.$store.state.information.students.filter((s) => 
@@ -459,6 +460,8 @@ export default {
     }
   },
   async mounted() {
+    await this.$store.dispatch('information/getSections')
+    await this.$store.dispatch('information/getSubjects')
     await this.$store.dispatch('information/getStudents')
     const sheetUrl = `https://school.pythonanywhere.com/grading/sheets/${this.$route.params.id}/`
     await this.$store

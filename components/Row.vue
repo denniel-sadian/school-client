@@ -87,7 +87,7 @@
       as="td"
       v-if="myExam"
       :record="myExam"
-      :isEditable="isExamEditable"
+      :isExamEditable="isExamEditable"
       :isExam="true"
     />
     <td
