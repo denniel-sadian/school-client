@@ -3,7 +3,7 @@
     <div class="top">
       <img :src="photo" alt="" />
       <div>
-        <h4>{{ fullname }}</h4>
+        <h4>{{ addressing }} {{ fullname }}</h4>
         <p class="w3-small">
           <i class="fas fa-calendar-alt"></i>
           {{ date }} - {{ time }}
@@ -33,6 +33,9 @@ export default {
     },
     fullname() {
       return `${this.announcement.staff.first_name} ${this.announcement.staff.last_name}`
+    },
+    addressing() {
+      return this.announcement.staff.profile.gender === 'm' ? 'Mr.' : 'Ms.'
     },
     ownedByUser() {
       return (
