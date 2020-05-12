@@ -112,7 +112,6 @@ export default {
         .get(data.subject)
         .then(({ data }) => (this.subject = data.name))
     })
-    this.$store.commit('exams/RESET_TO_SUBMIT')
     this.$store.commit('exams/SET_EXAM_ID', this.exam.id)
     this.doneLoading = true
   },
