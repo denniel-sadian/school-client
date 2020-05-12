@@ -3,7 +3,7 @@
     <div v-if="!doneLoading">
       <h2><i class="fas fa-spinner w3-spin w3-text-gray"></i></h2>
     </div>
-    <div v-else @click="$router.push(`/exams/${exam.id}`)">
+    <div v-else @click="$router.push(`/student/exams/${exam.id}`)">
       <h2>{{ subject }}</h2>
       <p>
         Prepared by {{ teacher }} on {{ new Date(exam.date).toDateString() }}.
