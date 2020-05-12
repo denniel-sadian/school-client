@@ -11,17 +11,17 @@
       >
       <nuxt-link
         to="/student/exams"
-        v-show="thereIsUser && !isStaff"
+        v-if="thereIsUser && !isStaff"
         :class="{ show: showLinks }"
         class="s w3-animate-top w3-text-green"
         ><i class="fas fa-pencil-alt"></i> Exams</nuxt-link
       >
       <nuxt-link
         to="/student/announcements"
-        v-show="thereIsUser && !isStaff"
+        v-if="thereIsUser && !isStaff"
         :class="{ show: showLinks }"
         class="s w3-animate-top w3-text-purple"
-        ><i class="fas fa-bullhorn"></i> announcements</nuxt-link
+        ><i class="fas fa-bullhorn"></i> Announcements</nuxt-link
       >
       <nuxt-link
         to="/about"
@@ -106,7 +106,7 @@ body,
 nav {
   background: #ebf7e3;
   display: grid;
-  grid-template-columns: 1fr repeat(4, auto);
+  grid-template-columns: 1fr repeat(5, auto);
   position: fixed;
   top: 0px;
   width: 100%;

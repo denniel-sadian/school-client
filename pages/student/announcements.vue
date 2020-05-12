@@ -2,7 +2,7 @@
   <div>
     <header class="w3-container">
       <div class="w3-content w3-padding w3-center">
-        <h1>Announcements</h1>
+        <h1><i class="fas fa-bullhorn"></i> Announcements</h1>
       </div>
     </header>
     <div v-if="!doneLoading">

@@ -91,7 +91,7 @@ export default {
 
 <style scoped>
 nav {
-  grid-template-columns: 1fr repeat(8, auto);
+  grid-template-columns: 1fr repeat(9, auto);
 }
 
 nav img {
