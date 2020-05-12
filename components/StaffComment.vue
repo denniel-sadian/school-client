@@ -3,7 +3,7 @@
     <div class="top">
       <img :src="photo" alt="" />
       <div>
-        <h4>{{ fullname }}</h4>
+        <h4>{{ addressing }} {{ fullname }}</h4>
         <p class="w3-small">
           <i class="fas fa-calendar-alt"></i>
           {{ new Date(comment.date).toDateString() }}
@@ -39,6 +39,9 @@ export default {
     },
     fullname() {
       return `${this.comment.staff.first_name} ${this.comment.staff.last_name}`
+    },
+    addressing() {
+      return this.comment.staff.profile.gender === 'm' ? 'Mr.' : 'Ms.'
     },
     ownedByUser() {
       return (
