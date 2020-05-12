@@ -6,7 +6,7 @@
         <h4>{{ fullname }}</h4>
         <p class="w3-small">
           <i class="fas fa-calendar-alt"></i>
-          {{ date }} {{ time }}
+          {{ date }} - {{ time }}
         </p>
       </div>
     </div>
