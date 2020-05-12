@@ -110,8 +110,8 @@ export const mutations = {
   DELETE_STAFF(state, id) {
     state.staff = state.staff.filter((e) => e.id !== id)
   },
-  DELETE_ANNOUNCEMENT(state, id) {
-    state.announcements = state.announcements.filter((e) => e.id !== id)
+  DELETE_ANNOUNCEMENT(state, url) {
+    state.announcements = state.announcements.filter((e) => e.url !== url)
   }
 }
 
