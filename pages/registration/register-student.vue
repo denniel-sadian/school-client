@@ -120,7 +120,7 @@ export default {
                 password: this.password
               })
               .then(() => {
-                this.$router.push('/student/exams')
+                this.$router.push('/student/announcements')
               })
           })
           .catch(() => {
