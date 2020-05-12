@@ -28,7 +28,7 @@ export const mutations = {
   SET_EXAM_ID(state, id) {
     state.toSubmit.exam = id
   },
-  EMPTY_TO_SUBMIT(state) {
+  RESET_TO_SUBMIT(state) {
     state.toSubmit = {
       student: 0,
       exam: 0,
