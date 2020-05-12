@@ -6,7 +6,7 @@
         <h4>{{ fullname }}</h4>
         <p class="w3-small">
           <i class="fas fa-calendar-alt"></i>
-          {{ new Date(announcement.date).toDateString() }}
+          {{ date }} {{ time }}
         </p>
       </div>
     </div>
@@ -39,6 +39,12 @@ export default {
         this.$store.state.user.user.user.username ===
         this.announcement.staff.username
       )
+    },
+    date() {
+      return new Date(this.announcement.date).toLocaleDateString()
+    },
+    time() {
+      return new Date(this.announcement.date).toLocaleTimeString()
     }
   },
   methods: {
