@@ -17,6 +17,12 @@
         ><i class="fas fa-pencil-alt"></i> Exams</nuxt-link
       >
       <nuxt-link
+        to="/student/announcements"
+        :class="{ show: showLinks }"
+        class="s w3-animate-top w3-purple"
+        ><i class="fas fa-bullhorn"></i> Announcements</nuxt-link
+      >
+      <nuxt-link
         to="/about"
         :class="{ show: showLinks }"
         class="s w3-animate-top w3-text-blue"
