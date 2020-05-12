@@ -18,11 +18,22 @@
         </h1>
         <div v-else id="first-grid" class="w3-animate-zoom">
           <div
-            @click="$router.push('/dashboard/departments')"
-            class="w3-border-indigo w3-card-4"
+            @click="$router.push('/dashboard/announcements')"
+            class="w3-border-red w3-card-4"
           >
-            <h3><i class="fas fa-school w3-text-indigo"></i></h3>
-            <p class="w3-indigo">
+            <h3><i class="fas fa-bullhorn w3-text-red"></i></h3>
+            <p class="w3-red">
+              {{ announcements }} Announcement<span v-show="announcements > 1"
+                >s</span
+              >
+            </p>
+          </div>
+          <div
+            @click="$router.push('/dashboard/departments')"
+            class="w3-border-orange w3-card-4"
+          >
+            <h3><i class="fas fa-school w3-text-orange"></i></h3>
+            <p class="w3-orange">
               {{ departments }} Department<span v-show="departments > 1"
                 >s</span
               >
@@ -30,64 +41,64 @@
           </div>
           <div
             @click="$router.push('/dashboard/sections')"
-            class="w3-border-blue w3-card-4"
+            class="w3-border-yellow w3-card-4"
           >
-            <h3><i class="fas fa-building w3-text-blue"></i></h3>
-            <p class="w3-blue">
+            <h3><i class="fas fa-building w3-text-yellow"></i></h3>
+            <p class="w3-yellow">
               {{ sections }} Section<span v-show="sections > 1">s</span>
             </p>
           </div>
           <div
             @click="$router.push('/dashboard/subjects')"
-            class="w3-border-pink w3-card-4"
+            class="w3-border-green w3-card-4"
           >
-            <h3><i class="fas fa-percentage w3-text-pink"></i></h3>
-            <p class="w3-pink">
+            <h3><i class="fas fa-percentage w3-text-green"></i></h3>
+            <p class="w3-green">
               {{ subjects }} Subject<span v-show="subjects > 1">s</span>
             </p>
           </div>
           <div
             @click="$router.push('/dashboard/students')"
-            class="w3-border-orange w3-card-4"
+            class="w3-border-blue w3-card-4"
           >
-            <h3><i class="fas fa-portrait w3-text-orange"></i></h3>
-            <p class="w3-orange">
+            <h3><i class="fas fa-portrait w3-text-blue"></i></h3>
+            <p class="w3-blue">
               {{ students }} Student<span v-show="students > 1">s</span>
             </p>
           </div>
           <div
             @click="$router.push('/dashboard/cards')"
-            class="w3-border-brown w3-card-4"
+            class="w3-border-indigo w3-card-4"
           >
-            <h3><i class="fas fa-id-card w3-text-brown"></i></h3>
-            <p class="w3-brown">
+            <h3><i class="fas fa-id-card w3-text-indigo"></i></h3>
+            <p class="w3-indigo">
               {{ cards }} Report Card<span v-show="students > 1">s</span>
             </p>
           </div>
           <div
             @click="$router.push('/dashboard/sheets')"
-            class="w3-border-green w3-card-4"
+            class="w3-border-purple w3-card-4"
           >
-            <h3><i class="fas fa-file-excel w3-text-green"></i></h3>
-            <p class="w3-green">
+            <h3><i class="fas fa-file-excel w3-text-purple"></i></h3>
+            <p class="w3-purple">
               {{ sheets }} Grading Sheet<span v-show="sheets > 1">s</span>
             </p>
           </div>
           <div
             @click="$router.push('/dashboard/exams')"
-            class="w3-border-green w3-card-4"
+            class="w3-border-red w3-card-4"
           >
-            <h3><i class="fas fa-file-excel w3-text-green"></i></h3>
-            <p class="w3-green">
-              Examinations
+            <h3><i class="fas fa-skull-crossbones w3-text-red"></i></h3>
+            <p class="w3-red">
+              {{ exams }} Examination<span v-show="exams > 1">s</span>
             </p>
           </div>
           <div
             @click="$router.push('/dashboard/viewing-permissions')"
-            class="w3-border-purple w3-card-4"
+            class="w3-border-orange w3-card-4"
           >
-            <h3><i class="fas fa-eye w3-text-purple"></i></h3>
-            <p class="w3-purple">
+            <h3><i class="fas fa-eye w3-text-orange"></i></h3>
+            <p class="w3-orange">
               {{ vPerms }} Card Viewing Permission<span v-show="vPerms > 1"
                 >s</span
               >
@@ -95,18 +106,18 @@
           </div>
           <div
             @click="$router.push('/dashboard/staff')"
-            class="w3-border-orange w3-card-4"
+            class="w3-border-yellow w3-card-4"
           >
-            <h3><i class="fas fa-portrait w3-text-orange"></i></h3>
-            <p class="w3-orange">{{ staff }} Staff</p>
+            <h3><i class="fas fa-portrait w3-text-yellow"></i></h3>
+            <p class="w3-yellow">{{ staff }} Staff</p>
           </div>
           <div
             @click="$router.push('/dashboard/permissions')"
             v-show="role === 'admin'"
-            class="w3-border-yellow w3-card-4"
+            class="w3-border-green w3-card-4"
           >
-            <h3><i class="fas fa-key w3-text-yellow"></i></h3>
-            <p class="w3-yellow">
+            <h3><i class="fas fa-key w3-text-green"></i></h3>
+            <p class="w3-green">
               {{ regPerms }} Registration Permission<span v-show="regPerms > 1"
                 >s</span
               >
@@ -115,10 +126,10 @@
           <div
             @click="$router.push('/dashboard/student-permissions')"
             v-show="role === 'admin'"
-            class="w3-border-yellow w3-card-4"
+            class="w3-border-blue w3-card-4"
           >
-            <h3><i class="fas fa-key w3-text-yellow"></i></h3>
-            <p class="w3-yellow">
+            <h3><i class="fas fa-key w3-text-blue"></i></h3>
+            <p class="w3-blue">
               {{ studentPerms }} Student Account Registration Permission<span
                 v-show="studentPerms > 1"
                 >s</span
@@ -179,6 +190,12 @@ export default {
     },
     staff() {
       return this.$store.state.information.summary.staff
+    },
+    exams() {
+      return this.$store.state.information.summary.exams
+    },
+    announcements() {
+      return this.$store.state.information.summary.announcements
     }
   },
   async mounted() {
