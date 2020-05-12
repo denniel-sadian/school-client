@@ -4,9 +4,9 @@
       <div class="w3-content w3-padding w3-center">
         <h1>The Announcements</h1>
         <p>
-          Both admins and teachers can view this. Both of them can create thier
-          own announcements as well, but they can only delete the announcements
-          they will be creating.
+          Both admins and teachers can view this page. Both of them can create
+          thier own announcements as well, but they can only delete the
+          announcements they created.
         </p>
       </div>
     </header>
