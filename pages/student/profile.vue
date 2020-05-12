@@ -1,25 +1,157 @@
 <template>
   <div>
-    <header class="w3-container">
-      <div id="profile-header">
-        <div id="profile-photo">
-          <img :src="photo" alt="Avatar" />
+    <div v-if="!doneLoading" class="loading">
+      <h1 class="w3-text-white w3-center">
+        <i class="fas fa-spinner w3-spin"></i>
+      </h1>
+    </div>
+    <div v-else class="cont">
+      <header class="w3-container">
+        <div id="profile-header">
+          <div id="profile-photo">
+            <img :src="photo" alt="Avatar" />
+          </div>
+          <div id="profile-info">
+            <h1>{{ fullName }}</h1>
+            <p>
+              <strong>@{{ user.username }}</strong>
+            </p>
+            <p>
+              This is your student profile. You can only change your username,
+              email, and password.
+            </p>
+          </div>
         </div>
-        <div id="profile-info">
-          <h1>{{ fullName }}</h1>
-          <p>
-            <strong>@{{ user.username }}</strong>
+      </header>
+      <article class="w3-container">
+        <div class="w3-content">
+          <div class="table-cont">
+            <table>
+              <tr>
+                <th>Gender:</th>
+                <td>{{ user.student.gender === 'm' ? 'Male' : 'Female' }}</td>
+              </tr>
+              <tr>
+                <th>ID Number:</th>
+                <td>{{ user.student.id_number }}</td>
+              </tr>
+              <tr>
+                <th>Email:</th>
+                <td>{{ user.email }}</td>
+              </tr>
+              <tr>
+                <th>Phone Number:</th>
+                <td>{{ user.student.cp_number }}</td>
+              </tr>
+              <tr>
+                <th>Guardian's Phone Number:</th>
+                <td>{{ user.student.guardian_cp_number }}</td>
+              </tr>
+              <tr>
+                <th>Address:</th>
+                <td>{{ user.student.address }}</td>
+              </tr>
+              <tr>
+                <th>Department:</th>
+                <td>{{ department }}</td>
+              </tr>
+              <tr>
+                <th>Section:</th>
+                <td>{{ section }}</td>
+              </tr>
+              <tr>
+                <th>Grade Level:</th>
+                <td>{{ user.student.grade_level }}</td>
+              </tr>
+            </table>
+          </div>
+
+          <hr />
+          <h3>Change your Username</h3>
+          <div class="inpt">
+            <label>Username:</label>
+            <input
+              type="text"
+              v-model="username"
+              @keypress.enter="update('username')"
+              :disabled="updating"
+            />
+          </div>
+          <p v-show="errorUsername" class="w3-small w3-text-red w3-center">
+            This is already taken.
           </p>
-          <p v-if="profile.role === 'admin'">
-            Your role is one of the admins of this system.
+          <button
+            class="w3-button w3-green"
+            @click="update('username')"
+            :disabled="updating"
+          >
+            Change Username
+          </button>
+          <hr />
+          <h3>Change your Email</h3>
+          <div class="inpt">
+            <label>Email:</label>
+            <input
+              type="text"
+              v-model="email"
+              @keypress.enter="update('email')"
+              :disabled="updating"
+            />
+          </div>
+          <p v-show="errorEmail" class="w3-small w3-text-green w3-center">
+            This is an incorrect email format.
           </p>
-          <p v-else>Your role is a teacher.</p>
+          <button
+            class="w3-button w3-green"
+            @click="update('email')"
+            :disabled="updating"
+          >
+            Change Email
+          </button>
+          <hr />
+          <h3>Change your Password</h3>
+          <div class="inpt">
+            <label>Current Password:</label>
+            <input
+              type="password"
+              v-model="password"
+              @keypress.enter="updatePassword"
+              :disabled="updating"
+            />
+          </div>
+          <div class="inpt">
+            <label>New Password:</label>
+            <input
+              type="password"
+              v-model="password1"
+              @keypress.enter="updatePassword"
+            />
+          </div>
+          <div class="inpt">
+            <label>Confirm Password:</label>
+            <input
+              type="password"
+              v-model="password2"
+              @keypress.enter="updatePassword"
+            />
+          </div>
+          <p v-show="errorPassword" class="w3-small w3-text-red w3-center">
+            Something was wrong. Perhaps, your current password was incorrect,
+            or your new password was not confirmed correctly.
+          </p>
+          <p v-show="updatedPassword" class="w3-small w3-text-green w3-center">
+            Your password has been updated.
+          </p>
+          <button
+            class="w3-button w3-green"
+            @click="updatePassword"
+            :disabled="updating"
+          >
+            Change Password
+          </button>
         </div>
-      </div>
-    </header>
-    <article class="w3-container">
-      <div class="w3-content"></div>
-    </article>
+      </article>
+    </div>
   </div>
 </template>
 
@@ -30,7 +162,15 @@ export default {
     return {
       updated: false,
       updating: false,
-      error: false,
+      doneLoading: false,
+      errorUsername: false,
+      errorEmail: false,
+      errorPassword: false,
+      updatedPassword: false,
+      department: '',
+      section: '',
+      username: '',
+      email: '',
       password: '',
       password1: '',
       password2: ''
@@ -47,11 +187,65 @@ export default {
       if (this.user.student.photo !== null)
         return 'https://school.pythonanywhere.com/' + this.user.student.photo
       return '/anon_avatar.png'
+    },
+    payload() {
+      return {
+        first_name: this.user.student.first_name,
+        last_name: this.user.student.last_name,
+        gender: this.user.student.gender,
+        id_number: this.user.student.id_number,
+        department: this.user.student.department
+      }
+    }
+  },
+  watch: {
+    user(v) {
+      this.username = v.username
+      this.email = v.email
     }
   },
   methods: {
+    async update(what) {
+      const payload = { ...this.payload }
+      if (what === 'email') {
+        if (this.email === '') return
+        else {
+          payload.email = this.email
+          payload.username = this.user.username
+        }
+      } else {
+        if (this.username === '') return
+        else {
+          payload.email = this.user.email
+          payload.username = this.username
+        }
+      }
+      this.updating = true
+      await this.$store
+        .dispatch('user/updateProfile', payload)
+        .catch(() => {
+          if (what === 'email') {
+            this.errorEmail = true
+            setTimeout(() => {
+              this.errorEmail = false
+            }, 10000)
+          } else {
+            this.errorUsername = true
+            setTimeout(() => {
+              this.errorUsername = false
+            }, 10000)
+          }
+        })
+        .finally(() => (this.updating = false))
+    },
     async updatePassword() {
-      this.updatingPassword = true
+      if (
+        this.password === '' ||
+        this.password1 === '' ||
+        this.password2 === ''
+      )
+        return
+      this.updating = true
       this.errorPassword = false
       const payload = {
         password: this.password,
@@ -72,16 +266,26 @@ export default {
         })
         .catch(() => {
           this.errorPassword = true
-          this.updatingPassword = false
+          this.updating = false
           this.updatedPassword = false
           setTimeout(() => {
             this.errorPassword = false
           }, 10000)
         })
-        .finally(() => (this.updatingPassword = false))
+        .finally(() => (this.updating = false))
     }
   },
-  async mounted() {},
+  async mounted() {
+    await this.$axios
+      .get(`information/departments/${this.user.student.department}/`)
+      .then(({ data }) => (this.department = data.name))
+    await this.$axios
+      .get(`information/sections/${this.user.student.section}/`)
+      .then(({ data }) => (this.section = data.name))
+    this.username = this.user.username
+    this.email = this.user.email
+    this.doneLoading = true
+  },
   head: {
     title: 'School | Me'
   }
@@ -89,6 +293,27 @@ export default {
 </script>
 
 <style scoped>
+.cont {
+  margin-bottom: 64px;
+}
+
+.loading {
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(128, 128, 128, 0.856);
+}
+
+.loading h1 {
+  font-size: 90px;
+}
+
 header {
   margin-top: 60px;
   padding: 64px 0px;
@@ -97,6 +322,15 @@ header {
 .w3-content {
   max-width: 500px;
   padding: 16px 0px;
+}
+
+.table-cont {
+  overflow-x: auto;
+}
+
+hr {
+  margin: 150px 0px;
+  border: 1px solid #9e9e9e;
 }
 
 #profile-header {
@@ -114,7 +348,7 @@ header {
   min-height: 200px;
   border-radius: 100%;
   object-fit: cover;
-  border: 2px solid #9e9e9e;
+  border: 1px solid #9e9e9e;
 }
 #profile-info {
   padding: 16px;
@@ -134,8 +368,14 @@ header {
   border-radius: 4px;
 }
 
-.or {
-  margin: 64px 0px;
+table {
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #9e9e9e;
+  padding: 4px 8px;
 }
 
 @media (max-width: 900px) {
