@@ -139,14 +139,7 @@ export default {
         await this.$axios
           .post('accounts/register/', formData)
           .then(async (res) => {
-            await this.$store
-              .dispatch('user/login', {
-                username: this.username,
-                password: this.password
-              })
-              .then(() => {
-                this.$router.push('/registration/sent')
-              })
+            this.$router.push('/registration/sent')
           })
           .catch(() => {
             this.wrong = true
