@@ -145,7 +145,7 @@ export default {
                 password: this.password
               })
               .then(() => {
-                this.$router.push('/dashboard')
+                this.$router.push('/registration/sent')
               })
           })
           .catch(() => {
