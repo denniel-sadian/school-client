@@ -17,8 +17,8 @@
               <strong>@{{ user.username }}</strong>
             </p>
             <p>
-              This is your student profile. You can only change your username,
-              email, and password.
+              This is your student profile. You can only change either your
+              username or password.
             </p>
           </div>
         </div>
@@ -73,7 +73,7 @@
             <input
               type="text"
               v-model="username"
-              @keypress.enter="update('username')"
+              @keypress.enter="updateUsername"
               :disabled="updating"
             />
           </div>
@@ -82,31 +82,10 @@
           </p>
           <button
             class="w3-button w3-green"
-            @click="update('username')"
+            @click="updateUsername"
             :disabled="updating"
           >
             Change Username
-          </button>
-          <hr />
-          <h3>Change your Email</h3>
-          <div class="inpt">
-            <label>Email:</label>
-            <input
-              type="text"
-              v-model="email"
-              @keypress.enter="update('email')"
-              :disabled="updating"
-            />
-          </div>
-          <p v-show="errorEmail" class="w3-small w3-text-green w3-center">
-            This is an incorrect email format.
-          </p>
-          <button
-            class="w3-button w3-green"
-            @click="update('email')"
-            :disabled="updating"
-          >
-            Change Email
           </button>
           <hr />
           <h3>Change your Password</h3>
@@ -164,13 +143,11 @@ export default {
       updating: false,
       doneLoading: false,
       errorUsername: false,
-      errorEmail: false,
       errorPassword: false,
       updatedPassword: false,
       department: '',
       section: '',
       username: '',
-      email: '',
       password: '',
       password1: '',
       password2: ''
@@ -187,15 +164,6 @@ export default {
       if (this.user.student.photo !== null)
         return 'https://school.pythonanywhere.com/' + this.user.student.photo
       return '/anon_avatar.png'
-    },
-    payload() {
-      return {
-        first_name: this.user.student.first_name,
-        last_name: this.user.student.last_name,
-        gender: this.user.student.gender,
-        id_number: this.user.student.id_number,
-        department: this.user.student.department
-      }
     }
   },
   watch: {
@@ -205,36 +173,25 @@ export default {
     }
   },
   methods: {
-    async update(what) {
-      const payload = { ...this.payload }
-      if (what === 'email') {
-        if (this.email === '') return
-        else {
-          payload.email = this.email
-          payload.username = this.user.username
-        }
-      } else {
-        if (this.username === '') return
-        else {
-          payload.email = this.user.email
-          payload.username = this.username
-        }
+    async updateUsername() {
+      if (this.username === '') return
+      const payload = {
+        first_name: this.user.student.first_name,
+        last_name: this.user.student.last_name,
+        gender: this.user.student.gender,
+        id_number: this.user.student.id_number,
+        department: this.user.student.department,
+        username: this.username,
+        email: this.user.email
       }
       this.updating = true
       await this.$store
         .dispatch('user/updateProfile', payload)
         .catch(() => {
-          if (what === 'email') {
-            this.errorEmail = true
-            setTimeout(() => {
-              this.errorEmail = false
-            }, 10000)
-          } else {
-            this.errorUsername = true
-            setTimeout(() => {
-              this.errorUsername = false
-            }, 10000)
-          }
+          this.errorUsername = true
+          setTimeout(() => {
+            this.errorUsername = false
+          }, 10000)
         })
         .finally(() => (this.updating = false))
     },
