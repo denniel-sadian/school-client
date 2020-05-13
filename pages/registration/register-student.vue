@@ -114,7 +114,7 @@ export default {
         await this.$axios
           .post('accounts/student-register/', payload)
           .then(() => {
-            this.$router.push('/registration/done')
+            this.$router.push('/registration/sent')
           })
           .catch(() => {
             this.wrong = true
