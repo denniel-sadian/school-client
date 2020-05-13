@@ -112,6 +112,9 @@ export const mutations = {
   },
   DELETE_ANNOUNCEMENT(state, url) {
     state.announcements = state.announcements.filter((e) => e.url !== url)
+  },
+  REMOVE_USER_OF_STUDENT(state, id) {
+    state.students.filter((s) => s.id === id)[0].user = null
   }
 }
 

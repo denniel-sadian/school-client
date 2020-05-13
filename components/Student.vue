@@ -81,114 +81,149 @@
       </div>
     </div>
     <form v-else @submit.prevent="update">
-      <div class="inpt">
-        <label>First Name:</label>
-        <input type="text" v-model="fName" required :disabled="updating" />
-      </div>
-      <div class="inpt">
-        <label>Last Name:</label>
-        <input type="text" v-model="lName" required :disabled="updating" />
-      </div>
-      <div class="inpt">
-        <label>ID Number:</label>
-        <input type="text" v-model="idNum" required :disabled="updating" />
-      </div>
-      <div class="inpt">
-        <label>Gender:</label>
-        <select v-model="gender" required :disabled="updating">
-          <option value="m">Male</option>
-          <option value="f">Female</option>
-        </select>
-      </div>
-      <div class="inpt">
-        <label>Phone Number:</label>
-        <input type="text" v-model="phone" required :disabled="updating" />
-      </div>
-      <div class="inpt">
-        <label>Guardian's Phone Number:</label>
-        <input
-          type="text"
-          v-model="guardianPhone"
-          required
+      <div v-if="!confirmUserDelete">
+        <div class="inpt">
+          <label>First Name:</label>
+          <input type="text" v-model="fName" required :disabled="updating" />
+        </div>
+        <div class="inpt">
+          <label>Last Name:</label>
+          <input type="text" v-model="lName" required :disabled="updating" />
+        </div>
+        <div class="inpt">
+          <label>ID Number:</label>
+          <input type="text" v-model="idNum" required :disabled="updating" />
+        </div>
+        <div class="inpt">
+          <label>Gender:</label>
+          <select v-model="gender" required :disabled="updating">
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+          </select>
+        </div>
+        <div class="inpt">
+          <label>Phone Number:</label>
+          <input type="text" v-model="phone" required :disabled="updating" />
+        </div>
+        <div class="inpt">
+          <label>Guardian's Phone Number:</label>
+          <input
+            type="text"
+            v-model="guardianPhone"
+            required
+            :disabled="updating"
+          />
+        </div>
+        <div class="inpt">
+          <label>Address:</label>
+          <input type="text" v-model="address" required :disabled="updating" />
+        </div>
+        <div class="inpt">
+          <label>Grade Level:</label>
+          <select
+            class="form-control"
+            v-model="grade"
+            required
+            :disabled="updating"
+          >
+            <option value="1">Grade 1</option>
+            <option value="2">Grade 2</option>
+            <option value="3">Grade 3</option>
+            <option value="4">Grade 4</option>
+            <option value="5">Grade 5</option>
+            <option value="6">Grade 6</option>
+            <option value="7">Grade 7</option>
+            <option value="8">Grade 8</option>
+            <option value="9">Grade 9</option>
+            <option value="10">Grade 10</option>
+            <option value="11">Grade 11</option>
+            <option value="12">Grade 12</option>
+            <option value="c1">First Year College</option>
+            <option value="c2">Second Year College</option>
+            <option value="c3">Third Year College</option>
+            <option value="c4">Fourth Year College</option>
+          </select>
+        </div>
+        <div class="inpt">
+          <label>Department:</label>
+          <select v-model="dep" required :disabled="updating">
+            <option v-for="d in deps" :value="d.url" :key="d.id">{{
+              d.name
+            }}</option>
+          </select>
+        </div>
+        <div class="inpt">
+          <label>Section:</label>
+          <select v-model="sec" required :disabled="updating">
+            <option v-for="s in secs" :value="s.url" :key="s.id">{{
+              s.name
+            }}</option>
+          </select>
+        </div>
+        <div class="inpt">
+          <label>Photo: <span class="w3-opacity">Optional</span></label>
+          <input
+            type="file"
+            ref="file"
+            @change="handleFileUpload"
+            :disabled="updating"
+          />
+        </div>
+        <hr />
+        <p v-show="error" class="w3-small w3-text-red w3-center">
+          Please provide a unique value for the ID number.
+        </p>
+        <button
+          type="submit"
           :disabled="updating"
-        />
-      </div>
-      <div class="inpt">
-        <label>Address:</label>
-        <input type="text" v-model="address" required :disabled="updating" />
-      </div>
-      <div class="inpt">
-        <label>Grade Level:</label>
-        <select
-          class="form-control"
-          v-model="grade"
-          required
-          :disabled="updating"
+          class="w3-button w3-light-green w3-round w3-small w3"
         >
-          <option value="1">Grade 1</option>
-          <option value="2">Grade 2</option>
-          <option value="3">Grade 3</option>
-          <option value="4">Grade 4</option>
-          <option value="5">Grade 5</option>
-          <option value="6">Grade 6</option>
-          <option value="7">Grade 7</option>
-          <option value="8">Grade 8</option>
-          <option value="9">Grade 9</option>
-          <option value="10">Grade 10</option>
-          <option value="11">Grade 11</option>
-          <option value="12">Grade 12</option>
-          <option value="c1">First Year College</option>
-          <option value="c2">Second Year College</option>
-          <option value="c3">Third Year College</option>
-          <option value="c4">Fourth Year College</option>
-        </select>
-      </div>
-      <div class="inpt">
-        <label>Department:</label>
-        <select v-model="dep" required :disabled="updating">
-          <option v-for="d in deps" :value="d.url" :key="d.id">{{
-            d.name
-          }}</option>
-        </select>
-      </div>
-      <div class="inpt">
-        <label>Section:</label>
-        <select v-model="sec" required :disabled="updating">
-          <option v-for="s in secs" :value="s.url" :key="s.id">{{
-            s.name
-          }}</option>
-        </select>
-      </div>
-      <div class="inpt">
-        <label>Photo: <span class="w3-opacity">Optional</span></label>
-        <input
-          type="file"
-          ref="file"
-          @change="handleFileUpload"
+          <span v-if="updating"
+            ><i class="fas fa-spinner w3-spin"></i> Updating...</span
+          >
+          <span v-else>Update</span>
+        </button>
+        <button
           :disabled="updating"
-        />
-      </div>
-      <hr />
-      <p v-show="error" class="w3-small w3-text-red w3-center">
-        Please provide a unique value for the ID number.
-      </p>
-      <button
-        type="submit"
-        :disabled="updating"
-        class="w3-button w3-light-green w3-round w3-small w3"
-      >
-        <span v-if="updating"
-          ><i class="fas fa-spinner w3-spin"></i> Updating...</span
+          class="w3-pink w3-round w3-button w3-small"
+          @click="editing = false"
         >
-        <span v-else>Update</span>
-      </button>
-      <button
-        :disabled="updating"
-        class="w3-pink w3-round w3-button w3-small"
-        @click="editing = false"
-      >
-        Cancel
-      </button>
+          Cancel
+        </button>
+        <div v-if="student.user !== null && isAdmin">
+          <hr />
+          <button
+            :disabled="updating"
+            @click="confirmUserDelete = true"
+            class="w3-red w3-round w3-button w3-small"
+          >
+            Delete Student's Account
+          </button>
+        </div>
+      </div>
+      <div v-else class="w3-center">
+        <h2><i class="fas fa-exclamation-triangle w3-text-red"></i> Warning</h2>
+        <p>
+          Are you use you want to delete the account of
+          {{ student.first_name }} {{ student.last_name }}? The account to of
+          this student will be deleted but not the records.
+        </p>
+        <hr />
+        <button
+          :disabled="updating"
+          class="w3-pink w3-round w3-button w3-small"
+          @click="deleteUser"
+        >
+          Yes
+        </button>
+        <button
+          :disabled="updating"
+          class="w3-green w3-round w3-button w3-small"
+          @click="confirmUserDelete = false"
+        >
+          No
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -208,6 +243,7 @@ export default {
       error: false,
       errorDelete: false,
       hide: false,
+      confirmUserDelete: false,
       fName: '',
       lName: '',
       gender: '',
@@ -231,6 +267,9 @@ export default {
       const sec = this.secs.filter((s) => s.url === this.student.section)[0]
       if (!sec) return
       return sec.name
+    },
+    isAdmin() {
+      return this.$store.state.user.user.profile.role === 'admin'
     }
   },
   methods: {
@@ -246,6 +285,22 @@ export default {
       this.dep = this.student.department
       this.sec = this.student.section
       this.grade = this.student.grade_level
+    },
+    async deleteUser() {
+      this.deleting = true
+      console.log(`accounts/users/${this.student.user.id}/`)
+      await this.$axios
+        .delete(`accounts/users/${this.student.user.id}/`)
+        .then(() =>
+          this.$store.commit(
+            'information/REMOVE_USER_OF_STUDENT',
+            this.student.id
+          )
+        )
+        .finally(() => {
+          this.deleting = false
+          this.editing = false
+        })
     },
     async deleteStudent() {
       this.deleting = true
