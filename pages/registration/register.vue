@@ -138,7 +138,7 @@ export default {
         formData.append('password1', this.password1)
         await this.$axios
           .post('accounts/register/', formData)
-          .then(async (res) => {
+          .then(() => {
             this.$router.push('/registration/sent')
           })
           .catch(() => {

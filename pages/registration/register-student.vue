@@ -113,15 +113,8 @@ export default {
         }
         await this.$axios
           .post('accounts/student-register/', payload)
-          .then(async (res) => {
-            await this.$store
-              .dispatch('user/login', {
-                username: this.username,
-                password: this.password
-              })
-              .then(() => {
-                this.$router.push('/student/announcements')
-              })
+          .then(() => {
+            this.$router.push('/registration/done')
           })
           .catch(() => {
             this.wrong = true
