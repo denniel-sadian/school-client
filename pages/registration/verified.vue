@@ -16,7 +16,7 @@
 export default {
   layout: 'full_height_body',
   head: {
-    title: 'School | Done'
+    title: 'School | Activated'
   }
 }
 </script>
