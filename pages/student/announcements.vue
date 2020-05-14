@@ -3,6 +3,7 @@
     <header class="w3-container">
       <div class="w3-content w3-padding w3-center">
         <h1><i class="fas fa-bullhorn"></i> Announcements</h1>
+        <p>The announcements are comming from your teachers and admins.</p>
       </div>
     </header>
     <div v-if="!doneLoading">
