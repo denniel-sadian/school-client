@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="w3-animate-zoom">
-      <h2>Permission</h2>
+      <h2>Section</h2>
       <p class="w3-small w3-center">
         Please, enter the account registration permission code that your admin
         gave you.
