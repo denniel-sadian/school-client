@@ -44,6 +44,18 @@
         >
           Register
         </button>
+        <div class="or">
+          <hr />
+          <span>Or</span>
+          <hr />
+        </div>
+        <a
+          href="https://school.pythonanywhere.com/accounts/dj/password_reset/"
+          class="w3-button w3-pink"
+          :disabled="disabled"
+        >
+          Password Forgotten
+        </a>
       </form>
     </div>
   </header>
