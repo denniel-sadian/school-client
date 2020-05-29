@@ -9,7 +9,7 @@
       <header class="w3-center">
         <h1>
           Grading sheet of {{ section }} for
-          {{ subject }}
+          {{ subject.name }}
         </h1>
         <p>{{ sheet.grading }} of {{ sheet.sem === '1'? 'first' : 'second' }} semester</p>
         <p>Created on {{ new Date(sheet.date).toDateString() }}</p>
@@ -334,7 +334,7 @@ export default {
     subject() {
       const subjects = this.$store.state.information.subjects
       if (subjects.length !== 0)
-        return subjects.filter((e) => (e.url === this.sheet.subject))[0].name
+        return subjects.filter((e) => (e.url === this.sheet.subject))[0]
     },
     students() {
       return this.$store.state.information.students.filter((s) => 
