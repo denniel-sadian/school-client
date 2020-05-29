@@ -3,7 +3,7 @@
     <header class="w3-container">
       <h1>About The System</h1>
       <h4>
-        <span class="w3-purple">Elmore Junior High School</span>
+        <span class="w3-purple">Bognuyan National High School</span>
       </h4>
     </header>
     <article class="w3-container">

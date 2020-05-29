@@ -3,7 +3,7 @@
     <div class="first">
       <div>
         <div class="welcome">
-          <p><span>Elmore Junior High School</span></p>
+          <p><span>Bognuyan National High School</span></p>
           <h1><span>Welcome to the system!</span></h1>
           <p>
             <span
