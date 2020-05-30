@@ -16,6 +16,8 @@
         <div v-if="sheet.teacher.username === username">
           <p>Prepared by You</p>
           <p>You can change each component's percentage in the panel.</p>
+          <p v-show="students.length === 0">The section that has been chosen for this grading sheet has no students yet. You might want to add the students first before working with this grading sheet.
+            You can add them <nuxt-link to="/dashboard/students" class="w3-text-blue">here</nuxt-link>.</p>
         </div>
         <p v-else>
           Prepared by Teacher {{ sheet.teacher.first_name }}
