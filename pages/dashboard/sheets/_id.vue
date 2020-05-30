@@ -105,7 +105,7 @@
             <div class="form-inputs">
               <div>
                 <h3>
-                  <i class="fas fa-pencil-alt"></i> Works
+                  <i class="fas fa-pencil-alt"></i> Panel
                 </h3>
               </div>
               <div class="scrolled">
@@ -265,7 +265,7 @@
           class="w3-green w3-button w3-animate-zoom w3-card-4"
           id="edit-sheet-btn"
         >
-          <i class="fas fa-pencil-alt"></i> Edit
+          <i class="fas fa-pencil-alt"></i> Panel
         </button>
       </div>
     </div>
