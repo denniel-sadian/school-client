@@ -46,6 +46,9 @@ export const mutations = {
     state.currentSheet.subject = sheet.subject
     state.currentSheet.section = sheet.section
     state.currentSheet.publish = sheet.publish
+    state.currentSheet.wo_percent = sheet.wo_percent
+    state.currentSheet.pt_percent = sheet.pt_percent
+    state.currentSheet.qa_percent = sheet.qa_percent
   },
   ADD_WORK(state, work) {
     state.currentSheet.works.push(work)
