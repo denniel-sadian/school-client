@@ -63,15 +63,15 @@
           </div>
           <div class="inpt">
             <label>Written Work Percent:</label>
-            <input type="number" v-model="wo" :disabled="creating" />
+            <input type="number" min="0" max="100" v-model="wo" :disabled="creating" />
           </div>
           <div class="inpt">
             <label>Performance Task Percent:</label>
-            <input type="number" v-model="pt" :disabled="creating" />
+            <input type="number" min="0" max="100" v-model="pt" :disabled="creating" />
           </div>
           <div class="inpt">
             <label>Quarterly Assessment Percent:</label>
-            <input type="number" v-model="qa" :disabled="creating" />
+            <input type="number" min="0" max="100" v-model="qa" :disabled="creating" />
           </div>
           <hr />
           <button
