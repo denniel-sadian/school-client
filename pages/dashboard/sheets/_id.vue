@@ -184,15 +184,15 @@
                 <form @submit.prevent="updateSheet" v-if="!deleting">
                   <div class="inpt">
                   <label>Written Work Percent:</label>
-                  <input type="number" v-model="wo" :disabled="updating" />
+                  <input type="number" min="0" max="100" v-model="wo" :disabled="updating" />
                 </div>
                 <div class="inpt">
                   <label>Performance Task Percent:</label>
-                  <input type="number" v-model="pt" :disabled="updating" />
+                  <input type="number" min="0" max="100" v-model="pt" :disabled="updating" />
                 </div>
                 <div class="inpt">
                   <label>Quarterly Assessment Percent:</label>
-                  <input type="number" v-model="qa" :disabled="updating" />
+                  <input type="number" min="0" max="100" v-model="qa" :disabled="updating" />
                 </div>
                   <div class="inpt">
                     <label>Done:</label>
