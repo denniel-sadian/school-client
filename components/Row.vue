@@ -187,7 +187,7 @@ export default {
       )
     },
     WS1() {
-      return this.round((this.PS1 * 20) / 100)
+      return this.round((this.PS1 * this.WOP) / 100)
     },
     PS2() {
       return this.round(
@@ -195,7 +195,7 @@ export default {
       )
     },
     WS2() {
-      return this.round((this.PS2 * 60) / 100)
+      return this.round((this.PS2 * this.PTP) / 100)
     },
     PS3() {
       const exam = this.allWorks.filter((w) => w.work_type === 'e')[0]
@@ -203,7 +203,7 @@ export default {
       return this.round((this.myExam.score * 100) / exam.highest_score)
     },
     WS3() {
-      return this.round((this.PS3 * 20) / 100)
+      return this.round((this.PS3 * this.QAP) / 100)
     },
     initialGrade() {
       return this.round(this.WS1 + this.WS2 + this.WS3)
