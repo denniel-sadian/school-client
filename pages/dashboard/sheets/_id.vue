@@ -23,9 +23,9 @@
         <table id="sheet">
         <tr>
           <th rowspan="2">Learners' Names</th>
-          <th class="w3-orange" :colspan="writtenWorks.length + 3">Written Works (20%)</th>
-          <th class="w3-green" :colspan="performances.length + 3">Performance Tasks (60%)</th>
-          <th class="w3-purple" :colspan="3">Quarterly Assessment Task (20%)</th>
+          <th class="w3-orange" :colspan="writtenWorks.length + 3">Written Works ({{ sheet.wo_percent }}%)</th>
+          <th class="w3-green" :colspan="performances.length + 3">Performance Tasks ({{ sheet.pt_percent }}%)</th>
+          <th class="w3-purple" :colspan="3">Quarterly Assessment Task ({{ sheet.qa_percent }}%)</th>
           <th rowspan="3">Initial Grade</th>
           <th rowspan="3">Quarterly Grade</th>
         </tr>
@@ -47,14 +47,14 @@
           <th class="w3-orange" v-for="w in writtenWorks" :key="w.url">{{ w.highest_score }}</th>
           <th class="w3-orange">{{ totalWrittenWorksScore }}</th>
           <th class="w3-orange">100.00</th>
-          <th class="w3-orange">20%</th>
+          <th class="w3-orange">{{ sheet.wo_percent }}%</th>
           <th class="w3-green" v-for="p in performances" :key="p.url">{{ p.highest_score }}</th>
           <th class="w3-green">{{ totalPerformancesScore }}</th>
           <th class="w3-green">100.00</th>
-          <th class="w3-green">60%</th>
+          <th class="w3-green">{{ sheet.pt_percent }}%</th>
           <th class="w3-purple">{{ exam.highest_score }}</th>
           <th class="w3-purple">100.00</th>
-          <th class="w3-purple">20%</th>
+          <th class="w3-purple">{{ sheet.qa_percent }}%</th>
         </tr>
         <tr>
           <th>Male</th>
@@ -183,6 +183,18 @@
                 </div>
                 <form @submit.prevent="updateSheet" v-if="!deleting">
                   <div class="inpt">
+                  <label>Written Work Percent:</label>
+                  <input type="number" v-model="wo" :disabled="updating" />
+                </div>
+                <div class="inpt">
+                  <label>Performance Task Percent:</label>
+                  <input type="number" v-model="pt" :disabled="updating" />
+                </div>
+                <div class="inpt">
+                  <label>Quarterly Assessment Percent:</label>
+                  <input type="number" v-model="qa" :disabled="updating" />
+                </div>
+                  <div class="inpt">
                     <label>Done:</label>
                     <select v-model="pub" :disabled="updating" required>
                       <option value="true">Yes</option>
@@ -284,7 +296,10 @@ export default {
       sectionName: '',
       wName: '',
       wType: '',
-      wScore: 0
+      wScore: 0,
+      wo: 0,
+      pt: 0,
+      qa: 0
     }
   },
   computed: {
@@ -369,7 +384,12 @@ export default {
       if (v.length === this.students.length) this.publishGrades()
     },
     showEditingForm(v) {
-      if (v) this.pub = this.sheet.publish
+      if (v) {
+        this.pub = this.sheet.publish
+        this.wo = this.sheet.wo_percent
+        this.pt = this.sheet.pt_percent
+        this.qa = this.sheet.qa_percent
+      }
     },
     creatingWork(v) {
       if (!v) {
@@ -448,7 +468,10 @@ export default {
         subject: this.sheet.subject,
         publish: this.pub,
         sem: this.sheet.sem,
-        grading: this.sheet.grading
+        grading: this.sheet.grading,
+        wo_percent: this.wo,
+        pt_percent: this.pt,
+        qa_percent: this.qa,
       }
       this.$store
         .dispatch('grading/updateSheet', payload)
