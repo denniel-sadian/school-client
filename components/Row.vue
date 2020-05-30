@@ -132,6 +132,18 @@ export default {
       type: Number,
       default: 0
     },
+    WOP: {
+      type: Number,
+      default: 20
+    },
+    PTP: {
+      type: Number,
+      default: 60
+    },
+    QAP: {
+      type: Number,
+      default: 20
+    },
     shouldSubmit: {
       type: Boolean
     }
