@@ -37,6 +37,10 @@
           <div class="inpt">
             <label>For Grading:</label>
             <select v-model="grading" :disabled="creating">
+              <option value="1st">First Grading</option>
+              <option value="2nd">Second Grading</option>
+              <option value="3rd">Third Grading</option>
+              <option value="4th">Fourth Grading</option>
               <option value="prelim">Perlim</option>
               <option value="midterm">Midterm</option>
               <option value="finals">Finals</option>
@@ -56,6 +60,18 @@
                 s.name
               }}</option>
             </select>
+          </div>
+          <div class="inpt">
+            <label>Written Work Percent:</label>
+            <input type="number" v-model="wo" :disabled="creating" />
+          </div>
+          <div class="inpt">
+            <label>Performance Task Percent:</label>
+            <input type="number" v-model="pt" :disabled="creating" />
+          </div>
+          <div class="inpt">
+            <label>Quarterly Assessment Percent:</label>
+            <input type="number" v-model="qa" :disabled="creating" />
           </div>
           <hr />
           <button
@@ -154,6 +170,9 @@ export default {
   data() {
     return {
       got: 0,
+      wo: 20,
+      pt: 60,
+      qa: 20,
       creating: false,
       error: false,
       dep: '',
