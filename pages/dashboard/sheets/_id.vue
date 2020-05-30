@@ -72,7 +72,7 @@
           <th></th>
           <th></th>
         </tr>
-        <Row as="tr" v-for="b in boys" :shouldSubmit="submitFinalGrade" :isExamEditable="!sheet.has_multiple_choice_exam" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="b" :key="b.url"/>
+        <Row as="tr" v-for="b in boys" :WOP="sheet.wo_percent" :PTP="sheet.pt_percent" :QAP="sheet.qa_percent" :shouldSubmit="submitFinalGrade" :isExamEditable="!sheet.has_multiple_choice_exam" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="b" :key="b.url"/>
         <tr>
           <th>Female</th>
           <th v-for="i in writtenWorks.length" :key="'2w' + i+ Math.random()"></th>
@@ -89,7 +89,7 @@
           <th></th>
           <th></th>
         </tr>
-        <Row as="tr" v-for="g in girls" :shouldSubmit="submitFinalGrade" :isExamEditable="!sheet.has_multiple_choice_exam" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="g" :key="g.url"/>
+        <Row as="tr" v-for="g in girls" :WOP="sheet.wo_percent" :PTP="sheet.pt_percent" :QAP="sheet.qa_percent" :shouldSubmit="submitFinalGrade" :isExamEditable="!sheet.has_multiple_choice_exam" :topTotalActScore="totalWrittenWorksScore" :topTotalPerfScore="totalPerformancesScore" :student="g" :key="g.url"/>
       </table>
       </div>
 
