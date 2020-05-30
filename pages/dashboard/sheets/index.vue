@@ -254,7 +254,10 @@ export default {
         section: this.sec,
         subject: this.sub,
         sem: this.sem,
-        grading: this.grading
+        grading: this.grading,
+        wo_percent: this.wo,
+        pt_percent: this.pt,
+        qa_percent: this.qa
       }
       await this.$store
         .dispatch('grading/createSheet', payload)
