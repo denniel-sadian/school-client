@@ -364,23 +364,23 @@ export default {
     boys() {
       return this.students.filter((s) => (
         s.section === this.sheet.section && s.gender === 'm')
-      ).sort((a, b)=> {
+      ).sort((a, b) => {
         const x = (a.last_name+a.first_name).toLowerCase();
-  const y = (b.last_name+b.first_name).toLowerCase();
-  if (x < y) {return -1;}
-  if (x > y) {return 1;}
-  return 0;
+        const y = (b.last_name+b.first_name).toLowerCase();
+        if (x < y) { return -1 }
+        if (x > y) { return 1 }
+        return 0;
       })
     },
     girls() {
       return this.students.filter((s) => (
         s.section === this.sheet.section && s.gender === 'f')
-      ).sort((a, b)=> {
+      ).sort((a, b) => {
         const x = (a.last_name+a.first_name).toLowerCase();
-  const y = (b.last_name+b.first_name).toLowerCase();
-  if (x < y) {return -1;}
-  if (x > y) {return 1;}
-  return 0;
+        const y = (b.last_name+b.first_name).toLowerCase();
+        if (x < y) { return -1 }
+        if (x > y) { return 1 }
+        return 0;
       })
     }
   },
