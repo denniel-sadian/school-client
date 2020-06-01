@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  middleware: 'isSummaryEmpty',
   computed: {
     summary() {
       return this.$store.state.grading.summary
