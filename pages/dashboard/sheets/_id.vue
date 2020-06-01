@@ -429,6 +429,12 @@ export default {
         this.qa = this.sheet.qa_percent
       }
     },
+    sheet(v) {
+      this.pub = v.publish
+      this.wo = v.wo_percent
+      this.pt = v.pt_percent
+      this.qa = v.qa_percent
+    },
     creatingWork(v) {
       if (!v) {
         this.wName = ''
