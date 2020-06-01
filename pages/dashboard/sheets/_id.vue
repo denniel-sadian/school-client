@@ -241,12 +241,12 @@
                   <span>Or</span>
                   <hr />
                 </div>
-                <div>
+                <div v-show="!deleting">
                   <ul class="w3-ul w3-border w3-round">
                     <li><h4>Related Sheets</h4></li>
-                    <li v-for="s in relatedSheets" v-show="s.id !== sheet.id" :key="'related'+s.id" class="w3-hover-light-gray">
+                    <li v-for="s in relatedSheets" :key="'related'+s.id" class="w3-hover-light-gray">
                       <nuxt-link :to="'/dashboard/sheets/' + s.id" class="w3-text-blue">
-                        {{ s.section }} _ {{ s.subject }} _ {{ s.grading }} Quarter _ {{ s.sem }} Semester
+                        <span v-show="s.id === sheet.id" class="w3-small w3-tag w3-round-xxlarge w3-green">Current</span> {{ s.section }} _ {{ s.subject }} _ {{ s.grading }} Quarter _ {{ s.sem }} Semester
                       </nuxt-link>
                     </li>
                   </ul>
