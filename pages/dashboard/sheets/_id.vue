@@ -250,7 +250,7 @@
                       </nuxt-link>
                     </li>
                   </ul>
-                  <button :disabled="relatedSheets.length < 4" class="w3-button w3-green w3-round w3-small">View Quarterly Grades Summary</button>
+                  <button :disabled="relatedSheets.length < 4" @click="viewSummary()" class="w3-button w3-green w3-round w3-small">View Quarterly Grades Summary</button>
                 </div>
                 <div class="or" v-show="!deleting">
                   <hr />
@@ -433,6 +433,9 @@ export default {
     },
   },
   methods: {
+    viewSummary() {
+      
+    },
     async publishGrades() {
       this.submitted = false
       const payload = {
