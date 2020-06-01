@@ -41,7 +41,11 @@
           <div class="inpt">
             <label>Grading:</label>
             <select v-model="gradingFilter">
-              <option value="prelim">Prelim</option>
+              <option value="1st">First Quarter</option>
+              <option value="2nd">Second Quarter</option>
+              <option value="3rd">Third Quarter</option>
+              <option value="4th">Fourth Quarter</option>
+              <option value="prelim">Perlim</option>
               <option value="midterm">Midterm</option>
               <option value="finals">Finals</option>
             </select>
