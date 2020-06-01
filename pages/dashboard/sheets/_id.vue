@@ -439,8 +439,7 @@ export default {
     async publishGrades() {
       this.submitted = false
       const payload = {
-        sem: this.sheet.sem,
-        grading: this.sheet.grading,
+        sheet: this.sheet.id,
         subject: this.subject.id,
         grades: this.finalGrades
       }
