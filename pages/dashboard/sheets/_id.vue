@@ -447,7 +447,9 @@ export default {
     async viewSummary() {
       const payload = {sheets:[]}
       this.relatedSheets.forEach(s => (payload.sheets.push(s.id)))
-      await this.$store.dispatch('grading/retrieveSummary', payload)
+      await this.$store
+        .dispatch('grading/retrieveSummary', payload)
+        .then(() => (this.$router.push('/dashboard/sheets/summary')))
     },
     async publishGrades() {
       this.submitted = false
