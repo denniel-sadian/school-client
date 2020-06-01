@@ -139,7 +139,7 @@ export const actions = {
   retrieveSummary({ commit }, payload) {
     // Get the summary
     return this.$axios
-      .get('grading/view-summary/')
+      .post('grading/view-summary/', payload)
       .then(({ data }) => commit('SET_SUMMARY', data))
   },
   retrieveRelatedSheets({ commit }, id) {
