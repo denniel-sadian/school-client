@@ -4,6 +4,7 @@ export const state = () => ({
   relatedSheets: [],
   finalGrades: [],
   cards: [],
+  summary: [],
   permissions: []
 })
 
@@ -17,6 +18,9 @@ export const mutations = {
   SET_SHEETS(state, sheets) {
     state.sheets = sheets
     state.sheets = state.sheets.sort((a, b) => b.id - a.id)
+  },
+  SET_SUMMARY(state, summary) {
+    state.summary = summary
   },
   SET_RELATED_SHEETS(state, sheets) {
     state.relatedSheets = sheets
@@ -131,6 +135,12 @@ export const actions = {
     return this.$axios
       .get('grading/sheets/')
       .then(({ data }) => commit('SET_SHEETS', data))
+  },
+  retrieveSummary({ commit }, payload) {
+    // Get the summary
+    return this.$axios
+      .get('grading/view-summary/')
+      .then(({ data }) => commit('SET_SUMMARY', data))
   },
   retrieveRelatedSheets({ commit }, id) {
     // Get all the related grading sheets
