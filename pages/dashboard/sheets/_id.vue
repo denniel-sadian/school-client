@@ -11,7 +11,7 @@
           Grading sheet of {{ section }} for
           {{ subject.name }}
         </h1>
-        <p>{{ sheet.grading }} of {{ sheet.sem === '1'? 'first' : 'second' }} semester</p>
+        <p>{{ gradingSemester }}</p>
         <p>Created on {{ new Date(sheet.date).toDateString() }}</p>
         <div v-if="sheet.teacher.username === username">
           <p>Prepared by You</p>
@@ -313,6 +313,15 @@ export default {
     },
     sheet() {
       return this.$store.state.grading.currentSheet
+    },
+    gradingSemester() {
+      let grading
+      const jhs = ['1st', '2nd', '3rd', '4th']
+      const sem = this.sheet.sem === '1'? 'first' : 'second'
+      if (jhs.includes(this.sheet.grading))
+        grading = `${this.sheet.grading} Quarter`
+      else grading = this.sheet.grading
+      return `${grading} of ${sem} semester`
     },
     allWorks() {
       return this.sheet.works
