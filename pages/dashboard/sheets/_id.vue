@@ -250,7 +250,7 @@
                       </nuxt-link>
                     </li>
                   </ul>
-                  <button :disabled="relatedSheets.length < 4" @click="viewSummary()" class="w3-button w3-green w3-round w3-small">View Quarterly Grades Summary</button>
+                  <button :disabled="cannotViewSummary" @click="viewSummary()" class="w3-button w3-green w3-round w3-small">View Quarterly Grades Summary</button>
                 </div>
                 <div class="or" v-show="!deleting">
                   <hr />
@@ -332,6 +332,11 @@ export default {
     },
     relatedSheets() {
       return this.$store.state.grading.relatedSheets
+    },
+    cannotViewSummary() {
+      let bools = []
+      this.relatedSheets.forEach(s => (bools.push(s.publish)))
+      return bools.includes(false)
     },
     gradingSemester() {
       let grading
@@ -433,8 +438,10 @@ export default {
     },
   },
   methods: {
-    viewSummary() {
-      
+    async viewSummary() {
+      const payload = {sheets:[]}
+      this.relatedSheets.forEach(s => (payload.sheets.push(s.id)))
+      await this.$store.dispatch('grading/retrieveSummary', payload)
     },
     async publishGrades() {
       this.submitted = false
