@@ -242,7 +242,7 @@
                   <hr />
                 </div>
                 <div v-show="!deleting">
-                  <ul class="w3-ul w3-border w3-round">
+                  <ul class="w3-ul w3-border w3-round w3-margin-bottom">
                     <li><h4>Related Sheets</h4></li>
                     <li v-for="s in relatedSheets" :key="'related'+s.id" class="w3-hover-light-gray">
                       <nuxt-link :to="'/dashboard/sheets/' + s.id" class="w3-text-blue">
@@ -250,6 +250,7 @@
                       </nuxt-link>
                     </li>
                   </ul>
+                  <button :disabled="relatedSheets.length < 4" class="w3-button w3-green w3-round w3-small">View Quarterly Grades Summary</button>
                 </div>
                 <div class="or" v-show="!deleting">
                   <hr />
