@@ -95,6 +95,7 @@ export default {
 h3 {
   font-weight: 800;
   font-family: 'Roboto Slab', serif !important;
+  text-transform: capitalize;
 }
 
 th {
