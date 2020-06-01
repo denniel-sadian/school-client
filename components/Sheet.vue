@@ -1,6 +1,6 @@
 <template>
   <div class="cont w3-card-4 w3-pale-yellow">
-    <h3>{{ subject }}</h3>
+    <h3>{{ name }}</h3>
     <table>
       <tr>
         <th>Department:</th>
@@ -57,6 +57,14 @@ export default {
     username: String
   },
   computed: {
+    name() {
+      let grading
+      const jhs = ['1st', '2nd', '3rd', '4th']
+      if (jhs.includes(this.sheet.grading))
+        grading = `${this.sheet.grading} Quarter`
+      else grading = this.sheet.grading
+      return `${this.section} _ ${this.subject} _ ${grading}`
+    },
     department() {
       return this.$store.state.information.departments.filter(
         (e) => e.url === this.sheet.department
