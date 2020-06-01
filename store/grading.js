@@ -1,6 +1,7 @@
 export const state = () => ({
   sheets: [],
   currentSheet: {},
+  relatedSheets: [],
   finalGrades: [],
   cards: [],
   permissions: []
@@ -16,6 +17,9 @@ export const mutations = {
   SET_SHEETS(state, sheets) {
     state.sheets = sheets
     state.sheets = state.sheets.sort((a, b) => b.id - a.id)
+  },
+  SET_RELATED_SHEETS(state, sheets) {
+    state.relatedSheets = sheets
   },
   SET_CARDS(state, cards) {
     state.cards = cards
@@ -127,6 +131,12 @@ export const actions = {
     return this.$axios
       .get('grading/sheets/')
       .then(({ data }) => commit('SET_SHEETS', data))
+  },
+  retrieveRelatedSheets({ commit }, id) {
+    // Get all the related grading sheets
+    return this.$axios
+      .get(`grading/related-sheets/${id}/`)
+      .then(({ data }) => commit('SET_RELATED_SHEETS', data))
   },
   createSheet({ commit }, payload) {
     // Create a grading sheet
