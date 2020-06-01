@@ -241,6 +241,21 @@
                   <span>Or</span>
                   <hr />
                 </div>
+                <div>
+                  <ul class="w3-ul w3-border">
+                    <li><h4>Related Sheets</h4></li>
+                    <li v-for="s in relatedSheets" v-show="s.id !== sheet.id" :key="'related'+s.id">
+                      <nuxt-link :to="'/dashboard/sheets/' + s.id" class="w3-text-blue">
+                        {{ s.section }} _ {{ s.subject }} _ {{ s.grading }} Quarter _ {{ s.sem }} Semester
+                      </nuxt-link>
+                    </li>
+                  </ul>
+                </div>
+                <div class="or" v-show="!deleting">
+                  <hr />
+                  <span>Or</span>
+                  <hr />
+                </div>
                 <div v-show="!deleting">
                   <p class="w3-center">You can publish the grades whenever you want, just make sure that this grading sheet is already done.</p>
                   <p class="w3-small w3-center w3-text-green" v-show="submitted">The final grades have been been published to the students' cards.</p>
@@ -313,6 +328,9 @@ export default {
     },
     sheet() {
       return this.$store.state.grading.currentSheet
+    },
+    relatedSheets() {
+      return this.$store.state.grading.relatedSheets
     },
     gradingSemester() {
       let grading
@@ -503,6 +521,8 @@ export default {
     const sheetUrl = `https://school.pythonanywhere.com/grading/sheets/${this.$route.params.id}/`
     await this.$store
       .dispatch('grading/retrieveSheet', sheetUrl)
+    await this.$store
+      .dispatch('grading/retrieveRelatedSheets', this.$route.params.id)
     await this.$axios.get(this.sheet.subject)
       .then(({ data }) => this.subjectName = data.name)
     await this.$axios.get(this.sheet.section)
@@ -633,5 +653,9 @@ header {
 
 table, th {
   border: 2px solid black;
+}
+
+a {
+  text-decoration: none;
 }
 </style>
