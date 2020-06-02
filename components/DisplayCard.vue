@@ -31,14 +31,33 @@ export default {
         this.card.sem === '1' ? 'first' : 'second'
       } semester`
     },
+    isThereMAPEH() {
+      return this.MAPEHgrades.length !== 0
+    },
+    MAPEHgrades() {
+      return this.card.final_grades.filter((e) =>
+        e.subject.toLowerCase().includes('mapeh')
+      )
+    },
+    MAPEHaverage() {
+      let sum = 0
+      this.MAPEHgrades.forEach((e) => (sum += e.score))
+      return (
+        Math.round((sum / this.MAPEHgrades.length + Number.EPSILON) * 100) / 100
+      )
+    },
     average() {
       let sum = 0
-      this.card.final_grades.forEach((e) => (sum += e.score))
-      return (
-        Math.round(
-          (sum / this.card.final_grades.length + Number.EPSILON) * 100
-        ) / 100
-      )
+      let divisor = this.card.final_grades.length
+      if (this.isThereMAPEH) {
+        sum += this.MAPEHaverage
+        divisor -= this.MAPEHgrades.length
+        divisor++
+      }
+      this.card.final_grades
+        .filter((e) => !e.subject.toLowerCase().includes('mapeh'))
+        .forEach((e) => (sum += e.score))
+      return Math.round((sum / divisor + Number.EPSILON) * 100) / 100
     }
   }
 }
