@@ -339,7 +339,7 @@ export default {
     cannotViewSummary() {
       let bools = []
       this.relatedSheets.forEach(s => (bools.push(s.publish)))
-      return bools.includes(false)
+      return bools.includes(false) || this.relatedSheets.length < 4
     },
     gradingSemester() {
       let grading
