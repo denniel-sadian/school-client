@@ -7,7 +7,7 @@
       <h2>{{ subject }}</h2>
       <p>
         Prepared by {{ teacher }} on {{ new Date(exam.date).toDateString() }}.
-        {{ sem }}'s {{ grading }}.
+        {{ sem }}'s {{ grading }} Quarter.
       </p>
     </div>
   </div>
