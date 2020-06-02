@@ -114,7 +114,7 @@
                 </h3>
               </div>
               <div class="scrolled">
-                <div v-show="!deleting">
+                <div>
                   <div v-if="!sheet.has_multiple_choice_exam" class="w3-small">
                     <p>
                       If the Quarterly Assessment Task of this grading sheet is a multiple
@@ -184,12 +184,12 @@
                     <Work v-for="w in sheet.works" :work="w" :editable="!sheet.has_multiple_choice_exam" :key="w.url" />
                   </div>
                 </div>
-                <div class="or" v-show="!deleting">
+                <div class="or">
                   <hr />
                   <span>Or</span>
                   <hr />
                 </div>
-                <form @submit.prevent="updateSheet" v-if="!deleting">
+                <form @submit.prevent="updateSheet">
                   <div class="inpt">
                   <label>Written Work Percent:</label>
                   <input type="number" min="0" max="100" v-model="wo" :disabled="updating" />
@@ -222,29 +222,13 @@
                     >
                     <span v-else>Update</span>
                   </button>
-                  <button @click="deleting = true" :disabled="updating" class="w3-button w3-red w3-round w3-small w3-margin-top">Delete Grading Sheet</button>
                 </form>
-                <div v-else class="w3-center w3-khaki w3-padding w3-round w3-animate-zoom">
-                  <div v-if="!reallyDeleting">
-                    <h3><i class="fas fa-exclamation-circle w3-text-red"></i> Warning!</h3>
-                    <p>You cannot bring back the records of this grading sheet once
-                      it's deleted, unless, of course, you start from the top. Are you sure you want to continue?</p>
-                    <hr>
-                  <button @click="deleteSheet" class="w3-button w3-round w3-small w3-red">Yes. I understand.</button>
-                  <button class="w3-button w3-round w3-small w3-green w3-margin-top" @click="deleting = false">No! Take me back.</button>
-                  </div>
-                  <div v-else>
-                    <h1 class="w3-text-yellow">
-                      <i class="fas fa-spinner w3-spin"></i>
-                    </h1>
-                  </div>
-                </div>
-                <div class="or" v-show="!deleting">
+                <div class="or">
                   <hr />
                   <span>Or</span>
                   <hr />
                 </div>
-                <div v-show="!deleting">
+                <div>
                   <ul class="w3-ul w3-border w3-round w3-margin-bottom">
                     <li><h4>Sisters</h4></li>
                     <li v-for="s in relatedSheets" :key="'related'+s.id" class="w3-hover-light-gray">
@@ -255,12 +239,12 @@
                   </ul>
                   <button :disabled="cannotViewSummary" @click="viewSummary()" class="w3-button w3-green w3-round w3-small">View Quarterly Grades Summary</button>
                 </div>
-                <div class="or" v-show="!deleting">
+                <div class="or">
                   <hr />
                   <span>Or</span>
                   <hr />
                 </div>
-                <div v-show="!deleting">
+                <div>
                   <p class="w3-center">You can publish the grades whenever you want, just make sure that this grading sheet is already done.</p>
                   <p class="w3-small w3-center w3-text-green" v-show="submitted">The final grades have been been published to the students' cards.</p>
                   <button :disabled="!sheet.publish || submitting" @click="submitFinalGrade = true; submitting = true" class="w3-green w3-button w3-round">
@@ -310,8 +294,6 @@ export default {
       updating: false,
       creatingWork: false,
       updated: false,
-      deleting: false,
-      reallyDeleting: false,
       submitFinalGrade: false,
       submitting: false,
       submitted: false,
@@ -496,7 +478,6 @@ export default {
         await this.$store.dispatch('grading/createRecords', records)
     },
     async deleteSheet() {
-      this.reallyDeleting = true
       await this.$store.dispatch('grading/deleteSheet', this.sheet.url).finally(()=>this.$router.push('/dashboard/sheets'))
     },
     async createWork() {
