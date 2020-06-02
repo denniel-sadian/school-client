@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     head() {
-      return `${this.card.grading} of ${
+      return `${this.card.grading} Quarter of ${
         this.card.sem === '1' ? 'first' : 'second'
       } semester`
     },
