@@ -25,6 +25,11 @@ export default {
   props: {
     card: Object
   },
+  data() {
+    return {
+      pushed: false
+    }
+  },
   computed: {
     head() {
       return `${this.card.grading} of ${
@@ -58,7 +63,10 @@ export default {
         .filter((e) => !e.subject.toLowerCase().includes('mapeh'))
         .forEach((e) => (sum += e.score))
       const average = Math.round((sum / divisor + Number.EPSILON) * 100) / 100
-      this.$store.commit('grading/PUSH_AVERAGE', average)
+      if (!this.pushed) {
+        this.$store.commit('grading/PUSH_AVERAGE', average)
+        this.pushed = true
+      }
       return average
     }
   }

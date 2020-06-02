@@ -52,16 +52,13 @@ export default {
     },
     finalGrade() {
       let total = 0
-      this.cards.forEach((card) => {
-        let sum = 0
-        card.final_grades.forEach((e) => (sum += e.score))
-        total +=
-          Math.round((sum / card.final_grades.length + Number.EPSILON) * 100) /
-          100
-      })
+      this.averages.forEach((a) => (total += a))
       return (
-        Math.round((total / this.cards.length + Number.EPSILON) * 100) / 100
+        Math.round((total / this.averages.length + Number.EPSILON) * 100) / 100
       )
+    },
+    averages() {
+      return this.$store.state.grading.averages
     }
   },
   mounted() {

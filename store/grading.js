@@ -13,7 +13,7 @@ export const mutations = {
   PUSH_GRADE(state, g) {
     state.finalGrades.push(g)
   },
-  PUSH_AVERAGES(state, a) {
+  PUSH_AVERAGE(state, a) {
     state.averages.push(a)
   },
   EMPTY_GRADES(state) {
