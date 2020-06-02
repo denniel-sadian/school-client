@@ -66,6 +66,7 @@ th {
 
 td {
   font-family: 'Nunito', Verdana;
+  text-align: center;
 }
 
 table {
