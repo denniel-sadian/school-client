@@ -76,7 +76,7 @@ export default {
     },
     name() {
       if (this.isMAPEH)
-        return `${this.sheet.section} _ ${this.sheet.subject} _ ${this.sheet.grading}`
+        return `${this.sheet.section} _ ${this.sheet.subject} _ ${this.sheet.grading} Quarter`
       return `${this.sheet.section} _ ${this.sheet.subject}`
     }
   },

@@ -47,7 +47,7 @@
               </template>
             </select>
           </div>
-          <div v-show="showGrading" class="inpt">
+          <div v-show="isMAPEH" class="inpt">
             <label>For Grading:</label>
             <select v-model="grading" :disabled="creating">
               <option value="1st">First Quarter</option>
@@ -56,7 +56,7 @@
               <option value="4th">Fourth Quarter</option>
             </select>
           </div>
-          <div class="inpt">
+          <div v-show="isMAPEH" class="inpt">
             <label>For Semester:</label>
             <select v-model="sem" :disabled="creating">
               <option value="1">First Semester</option>
@@ -215,7 +215,7 @@ export default {
     }
   },
   computed: {
-    showGrading() {
+    isMAPEH() {
       return this.sub.toLowerCase() === 'mapeh'
     },
     departments() {
