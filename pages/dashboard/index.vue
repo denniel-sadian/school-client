@@ -168,7 +168,7 @@ export default {
       return this.$store.state.information.summary.sections
     },
     subjects() {
-      return this.$store.state.information.summary.subjects
+      return this.$store.state.information.summary.subjects - 4
     },
     students() {
       return this.$store.state.information.summary.students
