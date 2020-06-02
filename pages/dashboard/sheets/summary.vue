@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  layout: 'dashboard',
   middleware: 'isSummaryEmpty',
   computed: {
     summary() {
