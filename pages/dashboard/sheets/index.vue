@@ -35,6 +35,14 @@
             </select>
           </div>
           <div class="inpt">
+            <label>For Subject:</label>
+            <select v-model="sub" :disabled="creating">
+              <option v-for="s in subjects" :value="s.url" :key="s.id">{{
+                s.name
+              }}</option>
+            </select>
+          </div>
+          <div class="inpt">
             <label>For Grading:</label>
             <select v-model="grading" :disabled="creating">
               <option value="1st">First Quarter</option>
@@ -48,14 +56,6 @@
             <select v-model="sem" :disabled="creating">
               <option value="1">First Semester</option>
               <option value="2">Second Semester</option>
-            </select>
-          </div>
-          <div class="inpt">
-            <label>For Subject:</label>
-            <select v-model="sub" :disabled="creating">
-              <option v-for="s in subjects" :value="s.url" :key="s.id">{{
-                s.name
-              }}</option>
             </select>
           </div>
           <div class="inpt">
