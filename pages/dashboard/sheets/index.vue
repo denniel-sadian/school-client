@@ -9,7 +9,7 @@
         </p>
       </div>
     </header>
-    <div v-if="got < 4">
+    <div v-if="!doneLoading">
       <p class="w3-large w3-text-green w3-center">
         <i class="fas fa-spinner w3-spin"></i> Loading...
       </p>
@@ -21,7 +21,7 @@
           <div class="inpt">
             <label>For Department:</label>
             <select v-model="dep" :disabled="creating">
-              <option v-for="d in departments" :value="d.url" :key="d.id">{{
+              <option v-for="d in departments" :value="d.name" :key="d.name">{{
                 d.name
               }}</option>
             </select>
@@ -29,7 +29,7 @@
           <div class="inpt">
             <label>For Section:</label>
             <select v-model="sec" :disabled="creating">
-              <option v-for="s in sections" :value="s.url" :key="s.id">{{
+              <option v-for="s in sections" :value="s.name" :key="s.name">{{
                 s.name
               }}</option>
             </select>
@@ -37,12 +37,17 @@
           <div class="inpt">
             <label>For Subject:</label>
             <select v-model="sub" :disabled="creating">
-              <option v-for="s in subjects" :value="s.url" :key="s.id">{{
-                s.name
-              }}</option>
+              <template v-for="s in subjects">
+                <option
+                  v-if="!s.name.toLowerCase().includes('mapeh (')"
+                  :value="s.name"
+                  :key="s.name"
+                  >{{ s.name }}</option
+                >
+              </template>
             </select>
           </div>
-          <div class="inpt">
+          <div v-show="showGrading" class="inpt">
             <label>For Grading:</label>
             <select v-model="grading" :disabled="creating">
               <option value="1st">First Quarter</option>
@@ -103,7 +108,7 @@
       </article>
       <article class="w3-container">
         <div class="w3-content">
-          <div v-if="totalSheets === 0" class="w3-center">
+          <div v-if="totalGroups === 0" class="w3-center">
             <h4>There is no grading sheet yet.</h4>
           </div>
           <div v-else>
@@ -115,8 +120,8 @@
                 <select v-model="depFilter">
                   <option
                     v-for="d in departments"
-                    :value="d.url"
-                    :key="d.url"
+                    :value="d.name"
+                    :key="d.name"
                     >{{ d.name }}</option
                   >
                 </select>
@@ -124,7 +129,7 @@
               <div class="inpt">
                 <label>Section:</label>
                 <select v-model="secFilter">
-                  <option v-for="s in sections" :value="s.url" :key="s.url">{{
+                  <option v-for="s in sections" :value="s.name" :key="s.name">{{
                     s.name
                   }}</option>
                 </select>
@@ -132,9 +137,14 @@
               <div class="inpt">
                 <label>Subject:</label>
                 <select v-model="subFilter">
-                  <option v-for="s in subjects" :value="s.url" :key="s.url">{{
-                    s.name
-                  }}</option>
+                  <template v-for="s in subjects">
+                    <option
+                      v-if="!s.name.toLowerCase().includes('mapeh (')"
+                      :value="s.name"
+                      :key="s.name"
+                      >{{ s.name }}</option
+                    >
+                  </template>
                 </select>
               </div>
               <div class="inpt">
@@ -162,10 +172,10 @@
               </div>
             </div>
             <p class="w3-small w3-text-green w3-center">
-              {{ sheets.length }} found with this filter.
+              {{ groups.length }} found with this filter.
             </p>
             <Sheet
-              v-for="s in sheets"
+              v-for="s in groups"
               :sheet="s"
               :username="username"
               :key="s.id"
@@ -185,16 +195,16 @@ export default {
   components: { Sheet },
   data() {
     return {
-      got: 0,
       wo: 30,
       pt: 50,
       qa: 20,
       creating: false,
       error: false,
+      doneLoading: false,
       dep: '',
       sec: '',
-      grading: '',
-      sem: '',
+      grading: '1st',
+      sem: '1',
       sub: '',
       depFilter: '',
       secFilter: '',
@@ -205,22 +215,23 @@ export default {
     }
   },
   computed: {
+    showGrading() {
+      return this.sub.toLowerCase() === 'mapeh'
+    },
     departments() {
       return this.$store.state.information.departments
     },
     sections() {
-      const sections = this.$store.state.information.sections
-      if (this.dep === '') return sections
-      return sections.filter((e) => e.department === this.dep)
+      return this.$store.state.information.sections
     },
     subjects() {
       return this.$store.state.information.subjects
     },
-    totalSheets() {
-      return this.$store.state.grading.sheets.length
+    totalGroups() {
+      return this.$store.state.grading.groups.length
     },
-    sheets() {
-      return this.$store.state.grading.sheets
+    groups() {
+      return this.$store.state.grading.groups
         .filter((s) => s.department === this.depFilter)
         .filter((s) => {
           if (this.secFilter) return s.section === this.secFilter
@@ -251,7 +262,7 @@ export default {
       return this.$store.state.user.user.profile.role
     },
     newID() {
-      return this.$store.state.grading.sheets[0].id
+      return this.$store.state.grading.currentSheet.id
     }
   },
   watch: {
@@ -276,7 +287,7 @@ export default {
         qa_percent: this.qa
       }
       await this.$store
-        .dispatch('grading/createSheet', payload)
+        .dispatch('grading/createGroup', payload)
         .then(() => {
           this.$router.push(`/dashboard/sheets/${this.newID}`)
         })
@@ -286,12 +297,11 @@ export default {
     }
   },
   async mounted() {
-    await this.$store
-      .dispatch('information/getDepartments')
-      .then(() => this.got++)
-    await this.$store.dispatch('information/getSections').then(() => this.got++)
-    await this.$store.dispatch('information/getSubjects').then(() => this.got++)
-    await this.$store.dispatch('grading/retrieveSheets').then(() => this.got++)
+    await this.$store.dispatch('information/getDepartments')
+    await this.$store.dispatch('information/getSections')
+    await this.$store.dispatch('information/getSubjects')
+    await this.$store.dispatch('grading/retrieveGroups')
+    this.doneLoading = true
   },
   head: {
     title: 'School | Grading Sheets'
