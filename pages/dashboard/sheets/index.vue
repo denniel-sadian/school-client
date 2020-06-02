@@ -41,9 +41,6 @@
               <option value="2nd">Second Quarter</option>
               <option value="3rd">Third Quarter</option>
               <option value="4th">Fourth Quarter</option>
-              <option value="prelim">Perlim</option>
-              <option value="midterm">Midterm</option>
-              <option value="finals">Finals</option>
             </select>
           </div>
           <div class="inpt">
@@ -154,9 +151,6 @@
                   <option value="2nd">Second Quarter</option>
                   <option value="3rd">Third Quarter</option>
                   <option value="4th">Fourth Quarter</option>
-                  <option value="prelim">Perlim</option>
-                  <option value="midterm">Midterm</option>
-                  <option value="finals">Finals</option>
                 </select>
               </div>
               <div class="inpt">
