@@ -51,7 +51,12 @@
           </div>
           <div v-else>
             <h2 class="w3-center">List of Subjects</h2>
-            <Subject v-for="s in subjects" :subj="s" :key="s.id" />
+            <div v-for="s in subjects" :key="s.id">
+              <Subject
+                v-if="!s.name.toLowerCase().includes('mapeh (')"
+                :subj="s"
+              />
+            </div>
           </div>
         </div>
       </article>
