@@ -7,15 +7,51 @@
     <article>
       <div class="table-cont">
         <table>
-          <tr>
+          <tr class="w3-green">
             <th>Learners' Name</th>
-            <th>1st Quarter</th>
-            <th>2nd Quarter</th>
-            <th>3rd Quarter</th>
-            <th>4th Quarter</th>
+            <th>
+              <nuxt-link :to="`/dashboard/sheets/${sheets[0].id}`"
+                >1st Quarter</nuxt-link
+              >
+            </th>
+            <th>
+              <nuxt-link :to="`/dashboard/sheets/${sheets[1].id}`"
+                >2nd Quarter</nuxt-link
+              >
+            </th>
+            <th>
+              <nuxt-link :to="`/dashboard/sheets/${sheets[2].id}`"
+                >3rd Quarter</nuxt-link
+              >
+            </th>
+            <th>
+              <nuxt-link :to="`/dashboard/sheets/${sheets[3].id}`"
+                >4th Quarter</nuxt-link
+              >
+            </th>
             <th>FINAL GRADE</th>
             <th>REMARK</th>
           </tr>
+          <tr class="w3-gray">
+            <th>MALE</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <SummaryRow as="tr" v-for="b in boys" :record="b" :key="b.name" />
+          <tr class="w3-gray">
+            <th>FEMALE</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <SummaryRow as="tr" v-for="g in girls" :record="g" :key="g.name" />
         </table>
       </div>
     </article>
@@ -23,18 +59,31 @@
 </template>
 
 <script>
+import SummaryRow from '~/components/SummaryRow.vue'
+
 export default {
   layout: 'dashboard',
   middleware: 'isSummaryEmpty',
+  components: { SummaryRow },
   computed: {
     summary() {
+      console.log(this.$store.state.grading.summary)
       return this.$store.state.grading.summary
     },
+    sheets() {
+      return this.summary.sheets
+    },
+    boys() {
+      return this.summary.rows.filter((r) => r.gender === 'm')
+    },
+    girls() {
+      return this.summary.rows.filter((r) => r.gender === 'f')
+    },
     section() {
-      return this.summary[0].section
+      return this.summary.sheets[0].section
     },
     subject() {
-      return this.summary[0].subject
+      return this.summary.sheets[0].subject
     }
   }
 }
@@ -55,8 +104,7 @@ table {
   width: 100%;
 }
 
-th,
-td {
+th {
   border: 1px solid black;
   white-space: nowrap;
   padding: 4px 8px;
