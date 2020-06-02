@@ -57,7 +57,9 @@ export default {
       this.card.final_grades
         .filter((e) => !e.subject.toLowerCase().includes('mapeh'))
         .forEach((e) => (sum += e.score))
-      return Math.round((sum / divisor + Number.EPSILON) * 100) / 100
+      const average = Math.round((sum / divisor + Number.EPSILON) * 100) / 100
+      this.$store.commit('grading/PUSH_AVERAGE', average)
+      return average
     }
   }
 }
