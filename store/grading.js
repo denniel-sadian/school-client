@@ -117,7 +117,7 @@ export const mutations = {
     state.cards = state.cards.filter((e) => e.url !== url)
   },
   DELETE_GROUP(state, id) {
-    state.groups = state.groups.filter((e) => e.url !== id)
+    state.groups = state.groups.filter((e) => e.iid !== id)
   }
 }
 
@@ -200,9 +200,11 @@ export const actions = {
     // Delete the card
     return this.$axios.delete(url).then(() => commit('DELETE_CARD', url))
   },
-  deleteSheet({ commit }, url) {
-    // Delete the grading sheet
-    return this.$axios.delete(url)
+  deleteGroup({ commit }, id) {
+    // Delete the group
+    return this.$axios
+      .delete(`grading/grading-sheet-groups/${id}/`)
+      .then(() => commit('DELETE_GROUP', id))
   },
   createWork({ commit }, payload) {
     // Create a work
