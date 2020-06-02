@@ -38,6 +38,10 @@ export const mutations = {
     state.permissions.filter((e) => e.id === perm.id)[0].section = perm.section
     state.permissions.filter((e) => e.id === perm.id)[0].code = perm.code
   },
+  UPDATE_RELATED_SHEET(state, sheet) {
+    state.relatedSheets.filter((s) => s.id === sheet.id)[0].publish =
+      sheet.publish
+  },
   ADD_PERM(state, perm) {
     state.permissions.push(perm)
     state.permissions = state.permissions.sort((a, b) => b.id - a.id)
@@ -169,9 +173,10 @@ export const actions = {
   },
   updateSheet({ commit }, payload) {
     // Update the grading sheet
-    return this.$axios
-      .put(payload.url, payload)
-      .then(({ data }) => commit('UPDATE_CURRENT_SHEET', data))
+    return this.$axios.put(payload.url, payload).then(({ data }) => {
+      commit('UPDATE_CURRENT_SHEET', data)
+      commit('UPDATE_RELATED_SHEET', data)
+    })
   },
   updatePerm({ commit }, payload) {
     // Update the permission
