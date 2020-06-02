@@ -17,23 +17,40 @@
 export default {
   props: {
     record: Object,
-    kind: {
-      type: String,
-      default: 'jhs'
-    }
+    isMAPEH: Boolean
   },
   computed: {
     col0() {
-      return this.record.grades.filter((g) => g.col === 0)[0].grade
+      if (!this.isMAPEH)
+        return this.record.grades.filter((g) => g.col === 0)[0].grade
+      else
+        return this.record.grades.filter((g) =>
+          g.subject.toLowerCase().includes('music')
+        )[0].grade
     },
     col1() {
-      return this.record.grades.filter((g) => g.col === 1)[0].grade
+      if (!this.isMAPEH)
+        return this.record.grades.filter((g) => g.col === 1)[0].grade
+      else
+        return this.record.grades.filter((g) =>
+          g.subject.toLowerCase().includes('arts')
+        )[0].grade
     },
     col2() {
-      return this.record.grades.filter((g) => g.col === 2)[0].grade
+      if (!this.isMAPEH)
+        return this.record.grades.filter((g) => g.col === 2)[0].grade
+      else
+        return this.record.grades.filter((g) =>
+          g.subject.toLowerCase().includes('physical education')
+        )[0].grade
     },
     col3() {
-      return this.record.grades.filter((g) => g.col === 3)[0].grade
+      if (!this.isMAPEH)
+        return this.record.grades.filter((g) => g.col === 3)[0].grade
+      else
+        return this.record.grades.filter((g) =>
+          g.subject.toLowerCase().includes('health')
+        )[0].grade
     },
     final() {
       return (this.col0 + this.col1 + this.col2 + this.col3) / 4

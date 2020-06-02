@@ -2,12 +2,16 @@
   <div>
     <header>
       <h1>Summary of Quarterly Grades</h1>
-      <p>{{ subject }} of {{ section }}</p>
+      <p>
+        {{ isMAPEH ? 'MAPEH' : subject }}
+        <span v-show="isMAPEH">{{ sheets[0].grading }} Quarter</span> of
+        {{ section }}
+      </p>
     </header>
     <article>
       <div class="table-cont">
         <table>
-          <tr class="w3-green">
+          <tr v-if="!isMAPEH" class="w3-green">
             <th>Learners' Name</th>
             <th>
               <nuxt-link :to="`/dashboard/sheets/${sheets[0].id}`"
@@ -32,6 +36,31 @@
             <th>FINAL GRADE</th>
             <th>REMARK</th>
           </tr>
+          <tr v-else class="w3-green">
+            <th>Learners' Name</th>
+            <th>
+              <nuxt-link :to="`/dashboard/sheets/${sheets[0].id}`"
+                >Music {{ sheets[0].grading }} Quarter</nuxt-link
+              >
+            </th>
+            <th>
+              <nuxt-link :to="`/dashboard/sheets/${sheets[1].id}`"
+                >Arts {{ sheets[1].grading }} Quarter</nuxt-link
+              >
+            </th>
+            <th>
+              <nuxt-link :to="`/dashboard/sheets/${sheets[2].id}`"
+                >PE {{ sheets[2].grading }} Quarter</nuxt-link
+              >
+            </th>
+            <th>
+              <nuxt-link :to="`/dashboard/sheets/${sheets[3].id}`"
+                >Health {{ sheets[3].grading }} Quarter</nuxt-link
+              >
+            </th>
+            <th>FINAL GRADE</th>
+            <th>REMARK</th>
+          </tr>
           <tr class="w3-gray">
             <th>MALE</th>
             <th></th>
@@ -41,7 +70,13 @@
             <th></th>
             <th></th>
           </tr>
-          <SummaryRow as="tr" v-for="b in boys" :record="b" :key="b.name" />
+          <SummaryRow
+            as="tr"
+            v-for="b in boys"
+            :record="b"
+            :isMAPEH="isMAPEH"
+            :key="b.name"
+          />
           <tr class="w3-gray">
             <th>FEMALE</th>
             <th></th>
@@ -51,7 +86,13 @@
             <th></th>
             <th></th>
           </tr>
-          <SummaryRow as="tr" v-for="g in girls" :record="g" :key="g.name" />
+          <SummaryRow
+            as="tr"
+            v-for="g in girls"
+            :record="g"
+            :isMAPEH="isMAPEH"
+            :key="g.name"
+          />
         </table>
       </div>
     </article>
@@ -84,6 +125,9 @@ export default {
     },
     subject() {
       return this.summary.sheets[0].subject
+    },
+    isMAPEH() {
+      return this.subject.toLowerCase().includes('mapeh')
     }
   }
 }
