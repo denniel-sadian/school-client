@@ -1,5 +1,6 @@
 export const state = () => ({
   currentSheet: {},
+  sheets: [],
   relatedSheets: [],
   groups: [],
   finalGrades: [],
@@ -145,6 +146,12 @@ export const actions = {
     return this.$axios
       .get('grading/grading-sheet-groups/')
       .then(({ data }) => commit('SET_GROUPS', data))
+  },
+  retrieveSheets({ commit }) {
+    // Get all the sheets
+    return this.$axios
+      .get('grading/sheets/')
+      .then(({ data }) => commit('SET_SHEETS', data))
   },
   retrieveSummary({ commit }, payload) {
     // Get the summary
