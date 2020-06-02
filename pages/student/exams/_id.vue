@@ -21,7 +21,7 @@
       <header class="w3-container">
         <div class="w3-content">
           <h1>{{ subject }}</h1>
-          <p>Prepared by {{ teacher }}. {{ sem }}'s {{ grading }}.</p>
+          <p>Prepared by {{ teacher }}. {{ sem }}'s {{ grading }} Quarter.</p>
         </div>
       </header>
       <div class="w3-container w3-padding">
