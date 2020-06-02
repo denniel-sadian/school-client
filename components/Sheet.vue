@@ -22,8 +22,10 @@
     </table>
 
     <p v-if="sheet.teacher.username === username">Created by you.</p>
-    <p v-else>Created by teacher {{ sheet.teacher.username }}</p>
-
+    <p v-else>
+      Created by teacher {{ sheet.teacher.first_name }}
+      {{ sheet.teacher.last_name }}.
+    </p>
     <div v-if="confirmDelete && sheet.teacher.username === username">
       <div>
         <h4>
@@ -47,7 +49,7 @@
         </button>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="sheet.teacher.username === username">
       <button
         @click="confirmDelete = true"
         class="w3-button w3-round-xxlarge w3-red w3-small"
