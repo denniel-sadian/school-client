@@ -103,7 +103,6 @@
 
       <div
         id="controls"
-        v-show="role === 'teacher' && username === sheet.teacher.username"
       >
         <div id="editing-modal" v-show="showEditingForm" class="w3-animate-opacity">
           <div class="w3-animate-bottom w3-card-4">
@@ -114,7 +113,7 @@
                 </h3>
               </div>
               <div class="scrolled">
-                <div>
+                <div v-show="canBeEdited">
                   <div v-if="!sheet.has_multiple_choice_exam" class="w3-small">
                     <p>
                       If the Quarterly Assessment Task of this grading sheet is a multiple
@@ -184,12 +183,12 @@
                     <Work v-for="w in sheet.works" :work="w" :editable="!sheet.has_multiple_choice_exam" :key="w.url" />
                   </div>
                 </div>
-                <div class="or">
+                <div class="or" v-show="canBeEdited">
                   <hr />
                   <span>Or</span>
                   <hr />
                 </div>
-                <form @submit.prevent="updateSheet">
+                <form v-show="canBeEdited" @submit.prevent="updateSheet">
                   <div class="inpt">
                   <label>Written Work Percent:</label>
                   <input type="number" min="0" max="100" v-model="wo" :disabled="updating" />
@@ -223,14 +222,14 @@
                     <span v-else>Update</span>
                   </button>
                 </form>
-                <div class="or">
+                <div class="or" v-show="canBeEdited">
                   <hr />
                   <span>Or</span>
                   <hr />
                 </div>
                 <div>
                   <ul class="w3-ul w3-border w3-round w3-margin-bottom">
-                    <li><h4>Sisters</h4></li>
+                    <li><h4>Sister Spreadsheet</h4></li>
                     <li v-for="s in relatedSheets" :key="'related'+s.id" class="w3-hover-light-gray">
                       <nuxt-link :to="'/dashboard/sheets/' + s.id" class="w3-text-blue">
                         <span v-show="s.id === sheet.id" class="w3-small w3-tag w3-round-xxlarge w3-green">Selected</span> {{ s.section }} _ {{ s.subject }} _ {{ s.grading }} Quarter _ {{ s.sem }} Semester
@@ -238,13 +237,14 @@
                     </li>
                   </ul>
                   <button :disabled="cannotViewSummary" @click="viewSummary()" class="w3-button w3-green w3-round w3-small">View Quarterly Grades Summary</button>
+                  <p class="w3-small w3-center" v-show="cannotViewSummary">This grading sheet is not yet done, so you cannot see its summary.</p>
                 </div>
-                <div class="or">
+                <div class="or" v-show="canBeEdited">
                   <hr />
                   <span>Or</span>
                   <hr />
                 </div>
-                <div>
+                <div v-show="canBeEdited">
                   <p class="w3-center">You can publish the grades whenever you want, just make sure that this grading sheet is already done.</p>
                   <p class="w3-small w3-center w3-text-green" v-show="submitted">The final grades have been been published to the students' cards.</p>
                   <button :disabled="!sheet.publish || submitting" @click="submitFinalGrade = true; submitting = true" class="w3-green w3-button w3-round">
@@ -309,6 +309,9 @@ export default {
     }
   },
   computed: {
+    canBeEdited() {
+      return this.role === 'teacher' && this.username === this.sheet.teacher.username
+    },
     finalGrades() {
       return this.$store.state.grading.finalGrades
     },
