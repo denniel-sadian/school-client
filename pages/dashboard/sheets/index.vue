@@ -269,7 +269,7 @@ export default {
     departments(v) {
       this.depFilter = this.departments.filter(
         (e) => e.id === this.$store.state.user.user.profile.department
-      )[0].url
+      )[0].name
     }
   },
   methods: {
