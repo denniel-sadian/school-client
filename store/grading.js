@@ -117,7 +117,7 @@ export const mutations = {
     state.cards = state.cards.filter((e) => e.url !== url)
   },
   DELETE_GROUP(state, id) {
-    state.groups = state.groups.filter((e) => e.iid !== id)
+    state.groups = state.groups.filter((e) => e.id !== id)
   }
 }
 
