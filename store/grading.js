@@ -1,7 +1,7 @@
 export const state = () => ({
-  sheets: [],
   currentSheet: {},
   relatedSheets: [],
+  groups: [],
   finalGrades: [],
   cards: [],
   summary: [],
@@ -21,7 +21,10 @@ export const mutations = {
   },
   SET_SHEETS(state, sheets) {
     state.sheets = sheets
-    state.sheets = state.sheets.sort((a, b) => b.id - a.id)
+  },
+  SET_GROUPS(state, groups) {
+    state.groups = groups
+    state.groups = state.groups.sort((a, b) => b.id - a.id)
   },
   SET_SUMMARY(state, summary) {
     state.summary = summary
@@ -49,10 +52,6 @@ export const mutations = {
   ADD_PERM(state, perm) {
     state.permissions.push(perm)
     state.permissions = state.permissions.sort((a, b) => b.id - a.id)
-  },
-  ADD_SHEET(state, sheets) {
-    state.sheets.push(sheets)
-    state.sheets = state.sheets.sort((a, b) => b.id - a.id)
   },
   SET_CURRENT_SHEET(state, sheet) {
     state.currentSheet = sheet
@@ -116,6 +115,9 @@ export const mutations = {
   },
   DELETE_CARD(state, url) {
     state.cards = state.cards.filter((e) => e.url !== url)
+  },
+  DELETE_GROUP(state, id) {
+    state.groups = state.groups.filter((e) => e.url !== id)
   }
 }
 
@@ -138,11 +140,11 @@ export const actions = {
       .get('grading/permissions/')
       .then(({ data }) => commit('SET_PERMS', data))
   },
-  retrieveSheets({ commit }) {
-    // Get all the grading sheets
+  retrieveGroups({ commit }) {
+    // Get all the groups
     return this.$axios
-      .get('grading/sheets/')
-      .then(({ data }) => commit('SET_SHEETS', data))
+      .get('grading/grading-sheet-groups/')
+      .then(({ data }) => commit('SET_GROUPS', data))
   },
   retrieveSummary({ commit }, payload) {
     // Get the summary
@@ -156,11 +158,11 @@ export const actions = {
       .get(`grading/related-sheets/${id}/`)
       .then(({ data }) => commit('SET_RELATED_SHEETS', data))
   },
-  createSheet({ commit }, payload) {
-    // Create a grading sheet
+  createGroup({ commit }, payload) {
+    // Create a group
     return this.$axios
-      .post('grading/sheets/', payload)
-      .then(({ data }) => commit('ADD_SHEET', data))
+      .post('grading/grading-sheet-groups/', payload)
+      .then(({ data }) => commit('SET_CURRENT_SHEET', data.grading_sheets[0]))
   },
   createPerm({ commit }, payload) {
     // Create a permission
