@@ -1,25 +1,27 @@
 <template>
   <div class="cont w3-card-4 w3-pale-yellow" v-if="!deleting">
     <h3>{{ name }}</h3>
-    <table>
-      <tr v-for="s in sheet.grading_sheets" :key="s.id">
-        <th>
-          <nuxt-link
-            id="view-link"
-            :to="'/dashboard/sheets/' + s.id"
-            class="w3-text-blue"
-          >
-            <i class="fas fa-long-arrow-alt-right"></i>
-            <span v-show="isMAPEH">{{ s.subject }}</span>
-            {{ s.grading }} Quarter
-          </nuxt-link>
-        </th>
-        <td>
-          <span class="w3-text-green" v-if="s.publish">Done</span>
-          <span class="w3-text-orange" v-else>On Going</span>
-        </td>
-      </tr>
-    </table>
+    <div class="table-cont">
+      <table>
+        <tr v-for="s in sheet.grading_sheets" :key="s.id">
+          <th>
+            <nuxt-link
+              id="view-link"
+              :to="'/dashboard/sheets/' + s.id"
+              class="w3-text-blue"
+            >
+              <i class="fas fa-long-arrow-alt-right"></i>
+              <span v-show="isMAPEH">{{ s.subject }}</span>
+              {{ s.grading }} Quarter
+            </nuxt-link>
+          </th>
+          <td>
+            <span class="w3-text-green" v-if="s.publish">Done</span>
+            <span class="w3-text-orange" v-else>On Going</span>
+          </td>
+        </tr>
+      </table>
+    </div>
 
     <p v-if="sheet.teacher.username === username">Created by you.</p>
     <p v-else>
@@ -124,6 +126,10 @@ th {
 td {
   font-family: 'Nunito', Verdana;
   text-align: center;
+}
+
+.table-cont {
+  overflow-x: auto;
 }
 
 table {
