@@ -15,12 +15,8 @@
           >{{ s.subject }}</span
         >
         <span
-          class="w3-tag w3-round-xxlarge w3-text-blue w3-white w3-border w3-border-blue"
-          >{{ s.sem === 1 ? 'First Sem' : 'Second Sem' }}</span
-        >
-        <span
           class="w3-tag w3-round-xxlarge w3-text-purple w3-white w3-border w3-border-purple"
-          >{{ s.grading }}</span
+          >{{ s.grading }} Quarter</span
         >
       </div>
       <p class="w3-small">

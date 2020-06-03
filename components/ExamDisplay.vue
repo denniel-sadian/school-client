@@ -7,7 +7,7 @@
       <h2>{{ subject }}</h2>
       <p>
         Prepared by {{ teacher }} on {{ new Date(exam.date).toDateString() }}.
-        {{ sem }}'s {{ grading }} Quarter.
+        {{ grading }} Quarter examination.
       </p>
     </div>
   </div>
@@ -22,7 +22,6 @@ export default {
     return {
       teacher: '',
       subject: '',
-      sem: '',
       grading: '',
       doneLoading: false
     }
@@ -33,7 +32,6 @@ export default {
       this.teacher = `${addressing} ${data.first_name} ${data.last_name}`
     })
     await this.$axios.get(this.exam.sheets[0]).then(async ({ data }) => {
-      this.sem = data.sem === '1' ? 'First Semester' : 'Second Semester'
       this.grading = data.grading
       await this.$axios
         .get(data.subject)

@@ -56,13 +56,6 @@
               <option value="4th">Fourth Quarter</option>
             </select>
           </div>
-          <div v-show="isMAPEH" class="inpt">
-            <label>For Semester:</label>
-            <select v-model="sem" :disabled="creating">
-              <option value="1">First Semester</option>
-              <option value="2">Second Semester</option>
-            </select>
-          </div>
           <div class="inpt">
             <label>Written Work Percent:</label>
             <input
@@ -148,13 +141,6 @@
                 </select>
               </div>
               <div class="inpt">
-                <label>Semester:</label>
-                <select v-model="semFilter" :disabled="creating">
-                  <option value="1">First Sem</option>
-                  <option value="2">Second Sem</option>
-                </select>
-              </div>
-              <div class="inpt">
                 <label>Grading:</label>
                 <select v-model="gradingFilter" :disabled="creating">
                   <option value="1st">First Quarter</option>
@@ -204,12 +190,10 @@ export default {
       dep: '',
       sec: '',
       grading: '1st',
-      sem: '1',
       sub: '',
       depFilter: '',
       secFilter: '',
       subFilter: '',
-      semFilter: '',
       gradingFilter: '',
       ownerFilter: 'me'
     }
@@ -235,10 +219,6 @@ export default {
         .filter((s) => s.department === this.depFilter)
         .filter((s) => {
           if (this.secFilter) return s.section === this.secFilter
-          return true
-        })
-        .filter((s) => {
-          if (this.semFilter) return s.sem === this.semFilter
           return true
         })
         .filter((s) => {
@@ -280,7 +260,6 @@ export default {
         department: this.dep,
         section: this.sec,
         subject: this.sub,
-        sem: this.sem,
         grading: this.grading,
         wo_percent: this.wo,
         pt_percent: this.pt,

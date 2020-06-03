@@ -21,7 +21,7 @@
       <header class="w3-container">
         <div class="w3-content">
           <h1>{{ subject }}</h1>
-          <p>Prepared by {{ teacher }}. {{ sem }}'s {{ grading }} Quarter.</p>
+          <p>Prepared by {{ teacher }}. {{ grading }} quarter examination.</p>
         </div>
       </header>
       <div class="w3-container w3-padding">
@@ -65,7 +65,6 @@ export default {
     return {
       exam: {},
       results: {},
-      sem: '',
       grading: '',
       teacher: '',
       subject: '',
@@ -106,7 +105,6 @@ export default {
       this.teacher = `${addressing} ${data.first_name} ${data.last_name}`
     })
     await this.$axios.get(this.exam.sheets[0]).then(async ({ data }) => {
-      this.sem = data.sem === '1' ? 'First Semester' : 'Second Semester'
       this.grading = data.grading
       await this.$axios
         .get(data.subject)

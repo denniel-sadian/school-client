@@ -32,13 +32,6 @@
             </select>
           </div>
           <div class="inpt">
-            <label>Semester:</label>
-            <select v-model="semFilter">
-              <option value="1">First Semester</option>
-              <option value="2">Second Semester</option>
-            </select>
-          </div>
-          <div class="inpt">
             <label>Grading:</label>
             <select v-model="gradingFilter">
               <option value="1st">First Quarter</option>
@@ -118,7 +111,6 @@ export default {
     return {
       got: 0,
       secFilter: '',
-      semFilter: '1',
       gradingFilter: '1st',
       nameFilter: '',
 
@@ -139,10 +131,6 @@ export default {
       return this.$store.state.grading.cards
         .filter((c) => {
           if (this.secFilter) return c.student.section.url === this.secFilter
-          else return true
-        })
-        .filter((c) => {
-          if (this.semFilter) return c.sem === this.semFilter
           else return true
         })
         .filter((c) => {

@@ -13,7 +13,6 @@
           <p>Department: {{ card.student.department.name }}</p>
           <p>Section: {{ card.student.section.name }}</p>
           <p>Grading: {{ card.grading }}</p>
-          <p>Semester: {{ card.sem }}</p>
           <table>
             <tr v-for="g in card.final_grades" :key="g.url">
               <th>{{ g.subject }}</th>

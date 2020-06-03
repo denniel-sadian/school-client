@@ -11,7 +11,6 @@
           Grading sheet of {{ section }} for
           {{ subject.name }}
         </h1>
-        <p>{{ gradingSemester }}</p>
         <p>Created on {{ new Date(sheet.date).toDateString() }}</p>
         <div v-if="sheet.teacher.username === username">
           <p>Prepared by You</p>
@@ -232,7 +231,7 @@
                     <li><h4>Sister Spreadsheet</h4></li>
                     <li v-for="s in relatedSheets" :key="'related'+s.id" class="w3-hover-light-gray">
                       <nuxt-link :to="'/dashboard/sheets/' + s.id" class="w3-text-blue">
-                        <span v-show="s.id === sheet.id" class="w3-small w3-tag w3-round-xxlarge w3-green">Selected</span> {{ s.section }} _ {{ s.subject }} _ {{ s.grading }} Quarter _ {{ s.sem }} Semester
+                        <span v-show="s.id === sheet.id" class="w3-small w3-tag w3-round-xxlarge w3-green">Selected</span> {{ s.section }} _ {{ s.subject }} _ {{ s.grading }} Quarter
                       </nuxt-link>
                     </li>
                   </ul>
@@ -325,15 +324,6 @@ export default {
       let bools = []
       this.relatedSheets.forEach(s => (bools.push(s.publish)))
       return bools.includes(false) || this.relatedSheets.length < 4
-    },
-    gradingSemester() {
-      let grading
-      const jhs = ['1st', '2nd', '3rd', '4th']
-      const sem = this.sheet.sem === '1'? 'first' : 'second'
-      if (jhs.includes(this.sheet.grading))
-        grading = `${this.sheet.grading} Quarter`
-      else grading = this.sheet.grading
-      return `${grading} of ${sem} semester`
     },
     allWorks() {
       return this.sheet.works
@@ -504,7 +494,6 @@ export default {
         section: this.sheet.section,
         subject: this.sheet.subject,
         publish: this.pub,
-        sem: this.sheet.sem,
         grading: this.sheet.grading,
         wo_percent: this.wo,
         pt_percent: this.pt,
