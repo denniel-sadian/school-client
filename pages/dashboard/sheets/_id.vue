@@ -22,9 +22,6 @@
           Prepared by Teacher {{ sheet.teacher.first_name }}
           {{ sheet.teacher.last_name }}
         </p>
-        <p>
-          <button :disabled="cannotViewSummary" @click="viewSummary()" class="w3-button w3-green w3-round w3-small">View Quarterly Grades Summary</button>
-        </p>
       </header>
       <div id="sheet-cont">
         <table id="sheet">
