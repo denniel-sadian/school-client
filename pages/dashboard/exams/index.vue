@@ -12,7 +12,7 @@
         </p>
       </div>
     </header>
-    <div v-if="got < 2 + this.sheets.length * 2">
+    <div v-if="!doneLoading">
       <p class="w3-large w3-text-green w3-center">
         <i class="fas fa-spinner w3-spin"></i> Loading...
       </p>
@@ -37,7 +37,7 @@
               >
               <span
                 class="w3-tag w3-round-xxlarge w3-text-purple w3-white w3-border w3-border-purple"
-                >{{ s.grading }}</span
+                >{{ s.grading }} Quarter</span
               >
             </span>
             <input v-model="selectedSheets" :value="s.url" type="checkbox" />
@@ -80,9 +80,9 @@ export default {
   components: { Exam },
   data() {
     return {
-      got: 0,
       selectedSheets: [],
-      creating: false
+      creating: false,
+      doneLoading: false
     }
   },
   computed: {
@@ -102,6 +102,12 @@ export default {
       return sheets.filter(
         (s) => s.works.filter((w) => w.work_type === 'e').length === 0
       )
+    },
+    sections() {
+      return this.$store.state.information.sections
+    },
+    subjects() {
+      return this.$store.state.information.subjects
     },
     exams() {
       const exams = this.$store.state.exams.exams
@@ -126,18 +132,19 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('exams/retrieveExams').then(() => this.got++)
-    await this.$store.dispatch('grading/retrieveSheets').then(() => this.got++)
-    await this.sheets.forEach(async (s) => {
-      await this.getName(s.section).then(({ data }) => {
-        s.section_name = data.name
-        this.got++
-      })
-      await this.getName(s.subject).then(({ data }) => {
-        s.subject_name = data.name
-        this.got++
-      })
+    await this.$store.dispatch('information/getSections')
+    await this.$store.dispatch('information/getSubjects')
+    await this.$store.dispatch('exams/retrieveExams')
+    await this.$store.dispatch('grading/retrieveSheets')
+    this.sheets.forEach((s) => {
+      s.section_name = this.sections.filter(
+        (sec) => sec.url === s.section
+      )[0].name
+      s.subject_name = this.subjects.filter(
+        (sub) => sub.url === s.subject
+      )[0].name
     })
+    this.doneLoading = true
   }
 }
 </script>
