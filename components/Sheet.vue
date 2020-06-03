@@ -23,6 +23,14 @@
       </table>
     </div>
 
+    <button
+      :disabled="!allDone"
+      @click="viewSummary()"
+      class="w3-button w3-green w3-round w3-margin-top w3-block"
+    >
+      View Quarterly Summary
+    </button>
+
     <p v-if="sheet.teacher.username === username">Created by you.</p>
     <p v-else>
       Created by teacher {{ sheet.teacher.first_name }}
@@ -78,6 +86,11 @@ export default {
     isMAPEH() {
       return this.sheet.subject.toLowerCase() === 'mapeh'
     },
+    allDone() {
+      let bools = []
+      this.sheet.grading_sheets.forEach((s) => bools.push(s.publish))
+      return !bools.includes(false)
+    },
     name() {
       if (this.isMAPEH)
         return `${this.sheet.section} _ ${this.sheet.subject} _ ${this.sheet.grading} Quarter`
@@ -88,6 +101,14 @@ export default {
     deleteSheet() {
       this.deleting = true
       this.$store.dispatch('grading/deleteGroup', this.sheet.id)
+    },
+    async viewSummary() {
+      if (!this.allDone) return
+      const payload = { sheets: [] }
+      this.sheets.grading_sheets.forEach((s) => payload.sheets.push(s.id))
+      await this.$store
+        .dispatch('grading/retrieveSummary', payload)
+        .then(() => this.$router.push('/dashboard/sheets/summary'))
     }
   }
 }
