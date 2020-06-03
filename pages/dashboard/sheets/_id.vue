@@ -233,7 +233,8 @@
                     </li>
                   </ul>
                   <button :disabled="cannotViewSummary" @click="viewSummary()" class="w3-button w3-green w3-round w3-small">View Quarterly Grades Summary</button>
-                  <p class="w3-small w3-center" v-show="cannotViewSummary">This grading sheet is not yet done, so you cannot see its summary.</p>
+                  <p class="w3-small w3-center" v-if="cannotViewSummary">This grading sheet is not yet done, so you cannot see its summary.</p>
+                  <p v-else class="w3-small w3-center">The spreadsheets are done. Be sure that you have published them already before viewing the summary.</p>
                 </div>
                 <div class="or" v-show="canBeEdited">
                   <hr />

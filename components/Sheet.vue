@@ -105,7 +105,7 @@ export default {
     async viewSummary() {
       if (!this.allDone) return
       const payload = { sheets: [] }
-      this.sheets.grading_sheets.forEach((s) => payload.sheets.push(s.id))
+      this.sheet.grading_sheets.forEach((s) => payload.sheets.push(s.id))
       await this.$store
         .dispatch('grading/retrieveSummary', payload)
         .then(() => this.$router.push('/dashboard/sheets/summary'))
