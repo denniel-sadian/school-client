@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.5.1",
     "nuxt": "^2.0.0",
     "sass": "^1.26.5"
   },
